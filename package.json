@@ -1,0 +1,19 @@
+{
+  "name": "richard-portfolio",
+  "version": "1.0.0",
+  "description": "projects by richard nguyen",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laetic/richard-portfolio.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/laetic/richard-portfolio/issues"
+  },
+  "homepage": "https://github.com/laetic/richard-portfolio#readme"
+}
