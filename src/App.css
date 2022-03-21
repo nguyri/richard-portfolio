@@ -1,4 +1,146 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color:#1C1C1C;
+}
+
+h1 {
+    font-weight:600;
+    font-size:1.4rem;
+}
+
+p {
+    font-family:Inter;
+}
+
+.about-card {
+    display:flex;
+    
+    flex-direction:column;
+    width:50vw;
+    max-width: 400px;
+    align-items:center;
+    flex-shrink:initial;
+    margin:0px auto;
+    background-color:#F5F5F5;
+    
+    border-radius: 20px;
+    overflow:hidden;
+}
+
+.info--img >img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    margin-top:-100%;
+}
+
+.info--img {
+    position:relative;
+    width:100%;
+    padding-top:70%;
+}
+
+.info {
+    text-align:center;
+}
+
+.info > h2 {
+    
+    font-weight:300;
+    font-size:1rem;
+    color: #F47D27;
+}
+
+.info > h3 {
+    
+    font-weight:300;
+    font-size:0.8rem;
+}
+
+.info--item {
+    font-family: 'Inter', sans-serif;
+    margin:10px;
+}
+
+.about {
+    margin:20px 40px;
+    text-align:left;
+    padding:0;
+}
+
+.about--header {
+    padding:0;
+    margin:10px 0px;
+    font-weight:300;
+    font-size:1.2rem;
+    line-height:1.1rem;
+}
+
+.about--text {
+    padding:0;
+    margin:0;
+    font-weight:300;
+    font-size: 0.9rem;
+    line-height:1.0rem;
+}
+
+.interests {
+    margin:20px 40px;
+    text-align:left;
+    padding:0;
+}
+
+.interests--header {
+    padding:0;
+    margin:10px 0px;
+    font-weight:300;
+    font-size:1.2rem;
+    line-height:1.0rem;
+}
+
+.interests--text {
+    padding:0;
+    margin:0;
+    font-weight:300;
+    font-size: 0.9rem;
+    line-height:1.0rem;
+}
+
+.footer {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    padding:20px;
+}
+
+.material-icons-outlined {
+    width:40px;
+    /* justify-self:right; */
+}
+
 .App {
-    margin: 1rem;
-    font-family: Arial, Helvetica, sans-serif;
-  }
+  margin: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.demo-title {
+    font-family: 'Inter', sans-serif;
+    font-weight:600;
+    font-size:2rem;
+    color:#F5F5F5;
+ }
+
+.demo-text {
+   font-family: 'Inter', sans-serif;
+   font-weight:300;
+   color:#F5F5F5;
+}
+
+.demo-img {
+    width:50vw;
+    min-width:200px;
+}
