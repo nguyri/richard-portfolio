@@ -3,10 +3,10 @@ import React from "react";
 export default function Footer() {
     return (
     <div className="footer">
-        {/* <dispatchEvent class="material-icons-outlined">home</dispatchEvent>
-        <dispatchEvent class="material-icons-outlined">app_shortcut</dispatchEvent>
-        <dispatchEvent class="material-icons-outlined">code</dispatchEvent>
-        <dispatchEvent class="material-icons-outlined">bug_report</dispatchEvent> */}
+        <span class="material-icons-outlined">home</span>
+        <span class="material-icons-outlined">handyman</span>
+        <span class="material-icons-outlined">code</span>
+        <span class="material-icons-outlined">palette</span>
     </div>
     )
 }

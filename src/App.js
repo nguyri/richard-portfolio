@@ -1,5 +1,5 @@
 import React, { Component} from "react";
-import "./App.css";
+import css from "./App.css";
 import {hot} from "react-hot-loader";
 import img from "./imgs/assiniboine.jpg"
 import AboutCard from "./components/about-card/AboutCard"
