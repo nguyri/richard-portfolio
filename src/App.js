@@ -1,5 +1,5 @@
-import React, { Component} from "react";
-import css from "./App.css";
+import React from "react";
+import "./App.css";
 import {hot} from "react-hot-loader";
 import Entry from "./components/slate-entry/Entry"
 import data_file from "./components/slate-entry/data"
@@ -8,6 +8,13 @@ import img from "./imgs/assiniboine.jpg"
 import AboutCard from "./components/about-card/AboutCard"
 
 export default function App() {
+  const [darkMode, setDarkMode] = React.useState(false)
+  // const darkMode = true;
+
+  function toggleDarkMode() {
+    setDarkMode( (prevState) => !prevState)
+  } 
+
   let entries = data_file.map( entry => {
     return (
         <section key={entry.key}>
@@ -22,10 +29,8 @@ export default function App() {
   return(
     <div className="App">
 
-      <Header />
-      {entries}
-
-      <AboutCard/>
+      <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode}/>
+d/>
     </div>
   );
 }

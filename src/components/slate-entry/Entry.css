@@ -49,6 +49,10 @@ hr {
     color:#F9F7F0;
 }
 
+.header--dark {
+    background-color:#5a1e1e;
+}
+
 .header--icon {
     width:30px;
     font-size:27px;
