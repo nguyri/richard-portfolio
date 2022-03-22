@@ -3,7 +3,7 @@ import "./Entry.css"
 
 export default function Entry(props) {
     return (
-        <div className="entry">
+        <div className={props.darkMode ? "entry" : "entry entry--dark"}>
             <img src={props.imageUrl} className="entry--img"/>
             <div className="entry--text-col">
                 <div className="entry--location">
