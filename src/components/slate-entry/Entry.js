@@ -12,9 +12,9 @@ export default function Entry(props) {
                     <a href="{props.googleMapsUrl}"> Link to Google Maps</a>
                 </div>
                 
-                <h1 className="entry--title"> {props.title} </h1>
-                <h3 className="entry--date"> {props.startDate} - {props.endDate} </h3>
-                <p className="entry--text"> {props.description} </p>
+                <h1 className={props.darkMode ? "entry--title entry--dark" :"entry--title"}> {props.title} </h1>
+                <h3 className={props.darkMode ? "entry--date entry--dark" :"entry--date"}> {props.startDate} - {props.endDate} </h3>
+                <p className={props.darkMode ? "entry--text entry--dark" :"entry--text"}> {props.description} </p>
             </div>
         </div>
         )
