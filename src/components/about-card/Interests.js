@@ -5,7 +5,7 @@ export default function Interests() {
     <header className="interests">
         <h1 className="interests--header"> Interests </h1>
         <p className="interests--text"> I'm interested in CNC machining, 3D algorithms, and automation. 
-        I love to make things make machines that do the hard work for me! </p>
+        I've always felt that building things yourself is satisfying and CNC machines are hypnotic.</p>
     </header>        
     )
 }

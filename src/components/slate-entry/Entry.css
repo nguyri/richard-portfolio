@@ -1,0 +1,138 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    padding:0;
+    margin:0;
+    background-color:#F9F7F0;
+    font-family:Inter;
+}
+
+p {
+    padding:0;
+    margin:0;
+}
+
+h1 {
+    padding:0;
+    margin:0;
+}
+
+h2 {
+    padding:0;
+    margin:0;
+}
+
+h3 {
+    padding:0;
+    margin:0;
+}
+
+hr {
+    width:60vw;
+    text-align:center;
+    /* height:1px; */
+    /* color:blue; */
+    /* border-color:lightgrey; */
+    border-top: 1px solid lightgrey;
+}
+
+.header {
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color:#F55A5A;
+    margin:0;
+    padding:20px;
+    color:#F9F7F0;
+}
+
+.header--icon {
+    width:30px;
+    font-size:27px;
+    margin-inline:1vw;
+}
+
+.header--title {
+    font-family:Inter;
+    font-weight:600;
+}
+
+.header--subtitle {
+    font-family:Inter;
+    margin-inline:5vw;
+    font-weight:200;
+    font-size:1.1rem;
+}
+                
+.entry {
+    display:flex;
+    flex-direction:row;
+    overflow:hidden;
+    
+    margin:0 0;
+    padding:20px 0;
+}
+
+.entry--img {
+    width:40vw;
+    align-self:center;
+    flex-shrink:0;
+    min-width:20%;
+    object-fit:cover;
+    height:40vh;
+    border-radius: 30px;
+    margin:0 0;
+    padding:20px 20px;
+}
+
+.entry--text-col {
+    display:flex;
+    flex-direction:column;
+    margin:0 0;
+    padding:20px 20px;
+    justify-content: center;
+}
+
+.entry--location {
+    display:flex;
+    flex-direction:row;
+    align-items: center;
+    margin:0 0;
+    padding:10px 0;
+}
+
+.entry--location > h2{
+    font-size: 0.9rem;
+    font-weight:600;
+    letter-spacing:0.1rem;
+    
+}
+
+.entry--location > a {
+    padding-left:20px;
+    color:grey;
+}
+
+.entry--icon {
+    font-size:1.0rem;
+    padding-right:5px
+}
+
+.entry--title {
+    font-weight:700;
+    font-size:1.5rem;
+    padding-bottom:15px;
+}
+.entry--date {
+    font-weight:600;
+    font-size:1rem;
+    padding-bottom:15px;
+}
+.entry--text {
+    font-weight:400;
+    font-size:1rem;
+    padding-bottom:15px;
+}
