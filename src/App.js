@@ -10,7 +10,7 @@ import img from "./imgs/assiniboine.jpg"
 
 
 export default function App() {
-  const [darkMode, setDarkMode] = React.useState(false)
+  const [darkMode, setDarkMode] = React.useState(true)
   // const darkMode = true;
 
   function toggleDarkMode() {
@@ -18,18 +18,18 @@ export default function App() {
   } 
 
   let entries = data_file.map( entry => {
+    let data = {...entry}
+    data.darkMode = {darkMode}.darkMode
     return (
         <section key={entry.key}>
-            <Entry 
-                {...entry}
-            /> 
+            <Entry {...data} />
             <hr></hr>
         </section>
     )
   })
   
   return(  
-    <div className="App" style={{backgroundColor: darkMode ? 'black': 'white'}}>
+    <div className="App" style={{backgroundColor: darkMode ? "#1c1c1c": "#F9F7F0"}}>
       <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode}/>
       {entries}
       <AboutCard/>
