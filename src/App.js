@@ -1,12 +1,14 @@
 import React from "react";
 import "./App.css";
-import {hot} from "react-hot-loader";
+// import {hot} from "react-hot-loader";
 import Entry from "./components/slate-entry/Entry"
 import data_file from "./components/slate-entry/data"
 import AboutCard from "./components/about-card/AboutCard"
 
 import Header from "./components/header/Header"
 import img from "./imgs/assiniboine.jpg"
+
+import { Outlet, Link } from "react-router-dom";
 
 
 export default function App() {
@@ -32,7 +34,8 @@ export default function App() {
     <div className="App" style={{backgroundColor: darkMode ? "#1c1c1c": "#F9F7F0"}}>
       <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode}/>
       {entries}
-      <AboutCard/>
+      <Link to="about">About Link</Link>
+      <Outlet />
   </div>
   );
 }

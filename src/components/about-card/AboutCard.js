@@ -6,7 +6,6 @@ import Interests from "./Interests";
 import Footer from "./Footer";
 import css from "./AboutCard.css";
 
-
 export default function AboutCard() {
     return (
     <div className = "about-card">

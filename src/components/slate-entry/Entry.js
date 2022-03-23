@@ -6,6 +6,7 @@ import adlathe from "../../imgs/addlathe1.jpg"
 import raytracer from "../../imgs/raytracer1.jpg"
 import wordle from "../../imgs/wordle1.png"
 
+
 const arrTest = [
     {key: 1, text:`For what it’s worth, the MPCNC is an excellent open source CNC router for anyone 
     interested in making parts that can’t be made on a 3D printer.`},
