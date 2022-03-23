@@ -8,7 +8,7 @@ export default function Info() {
             <img src={richardo} />
         </div>
         <h1 className ="info--item info--name"> Richard Nguyen </h1>
-        <h2 className ="info--item info--title"> Software Developer </h2>
+        <h2 className ="info--item info--title"> Software Engineer </h2>
         <h3 className ="info--item info--link"> nguyr.com </h3>
     </header>        
     )

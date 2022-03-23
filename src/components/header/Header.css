@@ -3,14 +3,18 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-color:#b89af0;
+    background-color:#9c7add;
     margin:0;
     padding:20px;
     color:#F9F7F0;
 }
 
+.is-nav-open {
+    /* padding:0px; */
+}
+
 .header--dark {
-    background-color:#3e2b63;
+    background-color:#3c1f75;
 }
 
 .header--icon {
@@ -20,8 +24,9 @@
 }
 
 .header--title {
-    font-family:Inter;
+    font-family:'Signika Negative';
     font-weight:600;
+    letter-spacing: 0.1rem;
 }
 
 .header--subtitle {
@@ -40,7 +45,7 @@ nav {
     z-index: 1;
 }
 
-nav.dark {
+.nav--dark {
 }
 
 .nav--title {
@@ -60,18 +65,18 @@ nav.dark {
 .toggler--slider {
     width: 39px;
     height: 20px;
-    background-color: #2B283A;
+    background-color: #50477a;
     border-radius: 2rem;
     margin-inline: 7px;
     cursor: pointer;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    border: 1px solid black;
+    border: 1px solid rgb(94, 67, 129);
     box-sizing: content-box;
 }
 
-nav.dark .toggler--slider {
+.nav--dark .toggler--slider {
     border-color: white;
     background-color: #F5F5F5;
 }
@@ -83,26 +88,26 @@ nav.dark .toggler--slider {
     border-radius: 50%;
 }
 
-nav.dark .toggler--slider--circle {
-    background-color: black;
+.nav--dark .toggler--slider--circle {
+    background-color: #50477a;
 }
 
 .toggler--light {
-    color: #2B283A;
+    color: #45405a;
 }
 
-nav.dark .toggler--light {
-    color: #918E9B;
+.nav--dark .toggler--light {
+    color: #dfdfdf;
 }
 
 .toggler--dark {
-    color: #D5D4D8;
+    color: #403a55;
 }
 
-nav.dark .toggler-dark {
-    color: #FFFFFF;
+.nav--dark .toggler--dark {
+    color: #b8b8b8;
 }
 
-nav.dark .toggler--slider {
+.nav--dark .toggler--slider {
     justify-content: flex-end;
 }

@@ -11,6 +11,7 @@
     
     border-radius: 20px;
     overflow:hidden;
+    font-family: Inter;
 }
 
 .info--img >img {
@@ -63,7 +64,7 @@
 .about--header {
     padding:0;
     margin:10px 0px;
-    font-weight:300;
+    font-weight:600;
     font-size:1.2rem;
     line-height:1.1rem;
 }
@@ -73,7 +74,7 @@
     margin:0;
     font-weight:300;
     font-size: 0.9rem;
-    line-height:1.0rem;
+    line-height:1.1rem;
 }
 
 .interests {
@@ -85,7 +86,7 @@
 .interests--header {
     padding:0;
     margin:10px 0px;
-    font-weight:300;
+    font-weight:600;
     font-size:1.2rem;
     line-height:1.0rem;
 }
@@ -95,7 +96,7 @@
     margin:0;
     font-weight:300;
     font-size: 0.9rem;
-    line-height:1.0rem;
+    line-height:1.1rem;
 }
 
 .footer {

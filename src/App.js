@@ -10,7 +10,7 @@ import img from "./imgs/assiniboine.jpg"
 
 
 export default function App() {
-  const [darkMode, setDarkMode] = React.useState(true)
+  const [darkMode, setDarkMode] = React.useState(false)
   // const darkMode = true;
 
   function toggleDarkMode() {
