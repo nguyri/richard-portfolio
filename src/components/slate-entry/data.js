@@ -56,7 +56,8 @@ export default [
         longdescription: [
             {key: 1, text:`I've always had an interest in 3D graphics and shaders, so I decided to give a raytracer a shot and also learn a new programming language, Rust.`},
             {key: 2, text:`Rust doesn't give any particular advantages in this case, given that there's no finnicky memory management.`},
-            {key: 3, text:`It was quite nice to use the built in package manager though!`}
+            {key: 3, text:`It was quite nice to use the built in package manager though!`},
+            {key: 4, threejs: true}
             ],
         imageNum: 2
     },
