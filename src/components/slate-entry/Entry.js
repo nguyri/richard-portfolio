@@ -16,8 +16,12 @@ export default function Entry(props) {
     function smallEntry() {
         return (
             <div className={props.darkMode ? "entry entry--dark" : "entry"} onClick={() =>setEntryIsSmall(!entryIsSmall)}>
-                <img src={imgList[props.imageNum]} className="entry--img" />
-                {/* <div className="overlay"> */}
+                <div className="entry--overlay-container">
+                    <img src={imgList[props.imageNum]} className="entry--img" />
+                    <div className="entry--overlay">
+                        <span class="material-icons-round entry--overlay-icon">expand_more</span>
+                    </div>                
+                </div>
                 <div className="entry--col">
                     <h1 className={props.darkMode ? "entry--title entry--dark" : "entry--title"}> {props.title} </h1>
                     <p className={props.darkMode ? "entry--text entry--dark" : "entry--text"}> {props.description} </p>
@@ -36,7 +40,13 @@ export default function Entry(props) {
     function bigEntry() {
         return (
             <div className={props.darkMode ? "entry entry--dark" : "entry"} onClick={() =>setEntryIsSmall(!entryIsSmall)}>
-                <img src={imgList[props.imageNum]} className="entry--img entry--img-big" />
+                <div className="entry--overlay-container entry--overlay-container-big">
+                    <img src={imgList[props.imageNum]} className="entry--img" />
+                    <div className="entry--overlay">
+                        <span class="material-icons-round entry--overlay-icon">expand_less</span>
+                    </div>                
+                </div>
+                
                 <div className="entry--col">
                     <h1 className={props.darkMode ? "entry--title entry--dark" : "entry--title"}> {props.title} </h1>
                     {paragraphBigEntry(props.longdescription)}
@@ -54,14 +64,13 @@ export default function Entry(props) {
                     appear:300,
                     enter:300,
                     exit:0,}}
-                classNames="alert"
+                classNames="entry"
                 unmountOnExit
                 onEnter={() => setEntryIsSmall(false)}
                 onExited={() => setEntryIsSmall(true)}
             >
                 {bigEntry()}
             </CSSTransition>
-
         </div>
         // <Collapsible trigger={smallEntry()} triggerWhenOpen={<div>{props.title}</div>}>
         //     {bigEntry()}

@@ -13,8 +13,8 @@ export default [
         {key: 1, text:`For what it’s worth, the MPCNC is an excellent open source CNC router for anyone 
         interested in making parts that can’t be made on a 3D printer.`},
         {key: 2, text:`Admittedly, using this small garage router is more finnicky than using a rigid commercial machine
-         with a spindle measured in horsepower. One upside is that if you crash it, the tiny steppers can't possibly generate enough force to damage anything.`}, 
-        {key: 4, text:`The most common issue was with electrical connectors. Occasionally the tool could catch a wall it
+         with a spindle measured in horsepower. One upside is that if you crash it, the tiny steppers can't possibly generate enough force to damage anything other than your self esteem.`}, 
+        {key: 4, text:`The most common issue was with electrical connectors, which were simple but painstaking to fix. Occasionally the tool could catch a wall it
         was not meant to engage and dove into the material.`},
         {key: 3, text:`At the end of this project I found myself not using the router particularly often because routing
          wood was messy and took a long time. However it has turned into my CNC plasma cutter which seems like a better fit for this machine.`}

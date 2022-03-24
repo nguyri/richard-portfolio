@@ -1,24 +1,6 @@
 * {
     box-sizing: border-box;
 }
-.alert-enter {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  .alert-enter-active {
-    opacity: 1;
-    transform: translateX(0);
-    transition: opacity 300ms, transform 300ms;
-  }
-  .alert-exit {
-    opacity: 1;
-  }
-  .alert-exit-active {
-    opacity: 0;
-    transform: scale(0.9);
-    transition: opacity 300ms, transform 300ms;
-  }
-  
             
 .entry {
     display:flex;
@@ -31,30 +13,62 @@
     font-family:Inter;
 }
 
-.entry--anchor {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1;
-}
+.entry-enter {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  .entry-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 300ms, transform 300ms;
+  }
+  .entry-exit {
+    opacity: 1;
+  }
 
-.entry:hover .overlay{
-    bottom: 0;
-    height: 100%;
-}
+/* .entry:hover .entry--overlay{
+    opacity: 1;
+} */
 
-.overlay {
+.entry--overlay-container {
     position: relative;
-    bottom: 100%;
-    left: 0;
-    right: 0;
-    background-color: #008CBA;
+    display:block;
+    width:40vw;
+    max-width:600px;
+    align-self:center;
+    flex-shrink:0;
+    min-width:20%;
+    width:80%;
+    height:40vh;
+    overflow:hidden;
+    margin:20px 20px ;
+    padding:0 0;
+    border-radius: 10px;
+}
+
+.entry--overlay-icon {
+    color:#F9F7F0;
+    font-size:3rem;
+}
+
+.entry--overlay-container-big {
+    width: 20vw;
+    max-width:600px;
+    opacity: 1;
+}
+
+.entry--overlay {
+    position: absolute;
+    /* transform: rotate(45deg); */
+    right:0;
+    bottom:0;
     overflow: hidden;
-    width: 100%;
-    height:0;
-    transition: .5s ease;
+    width: 70px;
+    height: 50px;
+    /* transition: .1s ease; */
+    /* background-color: #f9f7f086; */
+    /* background: linear-gradient(to bottom right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 50%, green 50%, green 100%); */
+    border-radius:50%;
   }
 
 @media screen and (max-width: 800px) {
@@ -71,21 +85,16 @@
 }
 
 .entry--img {
-    width:40vw;
-    max-width:600px;
-    align-self:center;
-    flex-shrink:0;
-    min-width:20%;
+    width:100%;
+    height:100%;
     object-fit:cover;
-    height:40vh;
-    border-radius: 30px;
+
     margin:0 0;
-    padding:20px 20px;
+    padding:0 0;
 }
 
 .entry--img-big {
-    width: 20vw;
-    max-width:600px;
+
 }
 
 @media screen and (max-width: 800px) {
