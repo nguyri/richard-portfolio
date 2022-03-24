@@ -16,6 +16,7 @@ export default [
          with a spindle measured in horsepower. One upside is that if you crash it, the tiny steppers can't possibly generate enough force to damage anything other than your self esteem.`}, 
         {key: 4, text:`The most common issue was with electrical connectors, which were simple but painstaking to fix. Occasionally the tool could catch a wall it
         was not meant to engage and dove into the material.`},
+        {key:5, img:'test img', style:{ }, className:"entry--img-inline"},
         {key: 3, text:`At the end of this project I found myself not using the router particularly often because routing
          wood was messy and took a long time. However it has turned into my CNC plasma cutter which seems like a better fit for this machine.`}
         ],

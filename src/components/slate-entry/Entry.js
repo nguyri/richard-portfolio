@@ -32,6 +32,8 @@ export default function Entry(props) {
 
     function paragraphBigEntry(paragraphArr) {
         return (paragraphArr.map((elem) =>
+            elem.img ? 
+            <img src={mpcnc} style={elem.style} className={elem.className}/> :
             <p className={props.darkMode ? "entry--text entry--dark" : "entry--text"}> {elem.text} </p>
         )
         )
