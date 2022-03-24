@@ -6,19 +6,6 @@ import adlathe from "../../imgs/addlathe1.jpg"
 import raytracer from "../../imgs/raytracer1.jpg"
 import wordle from "../../imgs/wordle1.png"
 
-
-const arrTest = [
-    {key: 1, text:`For what it’s worth, the MPCNC is an excellent open source CNC router for anyone 
-    interested in making parts that can’t be made on a 3D printer.`},
-    {key: 2, text:`Admittedly, using this small garage router is more difficult
-     than using a rigid commercial machine with a spindle measured in horsepower. Issues are often sudden and immediately ruin the workpiece.
-      I ran into several issues with the electrical connectors. Occasionally the tool could catch a wall it
-       was not meant to engage and dove into the material.`},
-       {key: 3, text:`At the end of this project I found myself not using
-        the router particularly often because routing wood was messy and took a long time. However it has
-         turned into my CNC plasma cutter which seems like a better fit for this machine.`}
-        ]
-
 export default function Entry(props) {
     // eventually change this to webpack import
     const imgList = [mpcnc, adlathe, raytracer, wordle]

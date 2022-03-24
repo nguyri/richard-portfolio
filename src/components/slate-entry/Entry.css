@@ -46,7 +46,7 @@
 
 .entry--img {
     width:40vw;
-    max-width:500px;
+    max-width:600px;
     align-self:center;
     flex-shrink:0;
     min-width:20%;
@@ -81,26 +81,6 @@
     justify-content: center;
 }
 
-.entry--location {
-    display:flex;
-    flex-direction:row;
-    align-items: center;
-    margin:0 0;
-    padding:10px 0;
-}
-
-.entry--location > h2{
-    font-size: 0.9rem;
-    font-weight:600;
-    letter-spacing:0.1rem;
-    
-}
-
-.entry--location > a {
-    padding-left:20px;
-    color:grey;
-}
-
 .entry--icon {
     font-size:1.0rem;
     padding-right:5px
@@ -124,6 +104,7 @@
 
 .entry--text {
     font-weight:400;
-    font-size:1rem;
+    font-size:1.5rem;
+    padding-block:20px;
     padding-bottom:15px;
 }

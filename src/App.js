@@ -25,7 +25,6 @@ export default function App() {
     return (
         <section key={entry.key}>
             <Entry {...data} />
-            <hr></hr>
         </section>
     )
   })
@@ -35,7 +34,7 @@ export default function App() {
       <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode}/>
       {entries}
       <Link to="about">About Link</Link>
-      <Outlet />
+      <AboutCard/>
   </div>
   );
 }
