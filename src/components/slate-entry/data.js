@@ -12,20 +12,23 @@ export default [
         until the lumber prices during the pandemic made it more enticing to use an angle grinder.`},
         {key:3, text:`I've found that metal in general is more forgiving than wood; the cutting tools go at a lower rpm and a butt joint can simply be welded together`},
         {key: 2, subtitle:`Plasma Cutter`},
+        {key: 15, vimeo:'https://vimeo.com/675640978', },
         {key:4, text:`Plasma cutting uses a stream of plasma between the torch head and the metal to deliver enough energy to melt 
         the metal and blow it away. This is kind of unbelievable the first time you hold a plasma cutter and the sheet metal 
         under the nozzle disappears with just electricity and compressed air.`},
         {key:6, text:`I probably could have gotten away with getting a throatless shear. I reasoned it enough by thinking: I’ve 
-        got a CNC table already, why not strap a plasma cutter to it?`},
+        got a CNC table already, why not strap a plasma cutter to it?` , style: {gridColumn:"1 / span 2", paddingRight:"20px"}},
+        {key: 16, vimeo:'https://vimeo.com/692360282', style: {gridColumn:"span 3"}},
         {key:7, text:`Admittedly it took a rather long time to get to this point. A combination of poor connectors and very strong 
         electromagnetic interference (EMI) meant a lengthy process of troubleshooting to finally get it working.`},
         {key:8, text:`I had to rewire the entire CNC machine, add shielding to all the exterior cables, add an enclosure for the controllers, 
         and also replace the tiny 3d printer drivers with more noise resistant stepper drivers.`},
         {key:9, text:`Comparing this amount of work to a less noisy plasma cutter, of course it would have been a better idea to simply 
-        buy a blowback plasma from the start.`},
+        buy a blowback plasma from the start.`,},
         {key: 10, subtitle:`Welding`, style: {gridColumn:"span 3"} },
         {key: 14, imageName:'./welding1.jpg', style: {gridColumn:"1 /span 2", gridRow:"span 5"}, className:"entry--img-inline"},
-        {key: 11, text:`Welding is easy to learn and hard to master. I quite liked Steve Bleile’s welding videos.`, style: {gridColumn:"span 3"}},
+        {key: 11, text:`Welding is easy to learn and hard to master. I quite liked Steve Bleile’s welding videos. They are densely packed with information and without the 
+        embellishments of a youtube tutorial.`, style: {gridColumn:"span 3"}},
         {key:12, text:`Recently I also got myself a fun 110cuft bottle to TIG weld with.`, style: {gridColumn:"span 3"}},
         {key:13, text:`TIG is certainly less forgiving and more sensitive to a litany of new variables. 
         However, it is very satisfying to see a clean weld come out without chipping or brushing at all.`, style: {gridColumn:"span 3"}},

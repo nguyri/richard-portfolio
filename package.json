@@ -39,6 +39,7 @@
     "react-collapsible": "^2.8.4",
     "react-dom": "^16.5.2",
     "react-hot-loader": "^4.3.11",
+    "react-player": "^2.10.0",
     "react-router-dom": "^6.2.2",
     "react-transition-group": "^4.4.2",
     "three": "^0.139.0"

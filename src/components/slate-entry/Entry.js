@@ -3,6 +3,7 @@ import Collapsible from 'react-collapsible';
 import { Container, Button, Alert } from 'react-bootstrap';
 import { CSSTransition } from 'react-transition-group';
 import "./Entry.css"
+import ReactPlayer from 'react-player/lazy'
 // import ThreeScene from "../threejsdemo/Three"
 
 const images = {}
@@ -20,8 +21,6 @@ export default function Entry(props) {
         return (
             <div className={props.darkMode ? "entry entry--dark" : "entry"}>
                 <div className="entry--overlay-container" onClick={() => setEntryIsSmall(!entryIsSmall)}>
-                    {console.log(props.imageName)}
-                    {console.log(images[props.imageName])}
                     <img src={images[props.imageName] ? images[props.imageName].default : ""} className="entry--img" />
                     <div className="entry--overlay">
                         <span className="material-icons-round entry--overlay-icon">expand_more</span>
@@ -45,6 +44,11 @@ export default function Entry(props) {
             //         <ThreeScene/>
             //     )
             // }
+            else if (elem.vimeo) {
+                return <div className="entry--vimeo-fixed-aspect" style={elem.style}>
+                        <ReactPlayer url={elem.vimeo} className="entry--vimeo" width='100%' height='100%' />
+                    </div>
+            }
             else if (elem.subtitle) {
                 return <h1 key={elem.key} className={props.darkMode ? "entry--subtitle entry--dark" : "entry--subtitle"}  style={elem.style}> {elem.subtitle} </h1>
             }

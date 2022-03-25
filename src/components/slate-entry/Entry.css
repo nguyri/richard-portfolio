@@ -116,6 +116,22 @@
     padding:0 0;
 }
 
+.entry--vimeo-fixed-aspect {
+    grid-column: span 5;
+    position: relative;
+    padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+    border-radius: 10px;
+    margin:5px;
+    /* overflow:hidden; */
+}
+
+.entry--vimeo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
 .entry--img-inline {
     width:20vw;
     border-radius:10px;
@@ -127,6 +143,7 @@
     grid-template-columns: repeat(5, 1fr);
     margin:0 0;
     padding:20px 20px;
+    padding-left:40px;
     justify-content: center;
     grid-auto-flow: dense;
 }
