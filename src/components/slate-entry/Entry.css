@@ -96,8 +96,18 @@
     background-color:#333333;
     color:#cecece;
 }
-
+.entry--img-container{
+    display:flex;
+    background-color:#ebe9e6;
+    flex-direction: column;
+    justify-content: center;
+    height:auto;
+    border-radius: 10px;
+    margin:0 0;
+    padding:0 0;
+}
 .entry--img {
+    position:float;
     width:100%;
     height:100%;
     object-fit:cover;
@@ -107,19 +117,19 @@
 }
 
 .entry--img-inline {
-    width:30vw;
-    margin-block: 20px;
+    width:20vw;
     border-radius:10px;
+    grid-column: span 2;
 }
 
-@media screen and (max-width: 800px) {
-    .entry--img {
-        width:100%;
-        max-width:100%;
-        padding:0px;
-        border-radius: 10px;
-    }
-  }
+.entry--grid {
+    display:grid;
+    grid-template-columns: repeat(5, 1fr);
+    margin:0 0;
+    padding:20px 20px;
+    justify-content: center;
+    grid-auto-flow: dense;
+}
 
 .entry--col {
     display:flex;
@@ -128,12 +138,6 @@
     padding:20px 20px;
     justify-content: center;
 }
-
-@media screen and (max-width: 800px) {
-    .entry--col {
-        padding:10px 5px;
-    }
-  }
 
 .entry--row {
     display:flex;
@@ -152,6 +156,7 @@
     font-weight:700;
     font-size:1.5rem;
     padding-bottom:15px;
+    grid-column: span 5;
 }
 
 .entry--date {
@@ -169,19 +174,44 @@
     font-size:1.5rem;
     padding-block:20px;
     padding-bottom:15px;
+    grid-column: span 5;
 }
 
 .entry--subtitle {
     font-weight:700;
     font-size:1.5rem;
     padding-block:15px;
+    grid-column: span 5;
 }
 
+
 @media screen and (max-width: 800px) {
+    /* just use a column.. */
+    .entry--grid {
+        display:flex;
+        flex-direction:column;
+        margin:0 0;
+        padding:20px 20px;
+        justify-content: center;
+    }
     .entry--text {
         font-weight:400;
         font-size:1rem;
         padding-block:10px;
         padding-bottom:5px;
+    }
+    .entry--img-inline {
+        width:100%;
+        height:200px;
+        object-fit: cover;
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+
+    .entry--img {
+        width:100%;
+        max-width:100%;
+        padding:0px;
+        border-radius: 10px;
     }
   }

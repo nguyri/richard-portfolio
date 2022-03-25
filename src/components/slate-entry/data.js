@@ -23,10 +23,13 @@ export default [
         and also replace the tiny 3d printer drivers with more noise resistant stepper drivers.`},
         {key:9, text:`Comparing this amount of work to a less noisy plasma cutter, of course it would have been a better idea to simply 
         buy a blowback plasma from the start.`},
-        {key: 10, subtitle:`Welding`},
-        {key: 11, text:`Welding is easy to learn and hard to master. Welding is easy to learn and hard to master. I quite liked Steve Bleile’s welding videos.`},
-        {key:12, text:`Recently I also got myself a fun 110 bottle to TIG weld with.`},
-        {key:13, text:`TIG is certainly less forgiving and more sensitive to a litany of new variables. However, it is very satisfying to see a clean weld come out without chipping or brushing at all.`}
+        {key: 10, subtitle:`Welding`, style: {gridColumn:"span 3"} },
+        {key: 14, imageName:'./welding1.jpg', style: {gridColumn:"1 /span 2", gridRow:"span 5"}, className:"entry--img-inline"},
+        {key: 11, text:`Welding is easy to learn and hard to master. I quite liked Steve Bleile’s welding videos.`, style: {gridColumn:"span 3"}},
+        {key:12, text:`Recently I also got myself a fun 110cuft bottle to TIG weld with.`, style: {gridColumn:"span 3"}},
+        {key:13, text:`TIG is certainly less forgiving and more sensitive to a litany of new variables. 
+        However, it is very satisfying to see a clean weld come out without chipping or brushing at all.`, style: {gridColumn:"span 3"}},
+        {key: 15, imageName:'./welding2.jpg', style: {gridColumn:"3 /span 2", gridRow:"span 1", height:"15vw", overflow:"hidden", objectFit:"cover"}, className:"entry--img-inline"},
     ],
         imageName:'./plasma2.jpg',
     },

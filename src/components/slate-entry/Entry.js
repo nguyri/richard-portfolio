@@ -37,7 +37,7 @@ export default function Entry(props) {
 
     function paragraphBigEntry(paragraphArr) {
         return (paragraphArr.map((elem) => {
-            if (elem.img) {
+            if (elem.imageName) {
                 return <img key={elem.key} src={images[elem.imageName] ? images[elem.imageName].default : ""} style={elem.style} className={elem.className} />
             }
             // else if (elem.threejs) {
@@ -46,10 +46,10 @@ export default function Entry(props) {
             //     )
             // }
             else if (elem.subtitle) {
-                return <h1 key={elem.key} className={props.darkMode ? "entry--subtitle entry--dark" : "entry--subtitle"}> {elem.subtitle} </h1>
+                return <h1 key={elem.key} className={props.darkMode ? "entry--subtitle entry--dark" : "entry--subtitle"}  style={elem.style}> {elem.subtitle} </h1>
             }
             else {
-                return <p key={elem.key} className={props.darkMode ? "entry--text entry--dark" : "entry--text"}> {elem.text} </p>
+                return <p key={elem.key} className={props.darkMode ? "entry--text entry--dark" : "entry--text"} style={elem.style}>  {elem.text} </p>
             }})
         )
     }
@@ -57,14 +57,16 @@ export default function Entry(props) {
     function bigEntry() {
         return (
             <div className={props.darkMode ? "entry entry--dark" : "entry"} >
-                <div className="entry--overlay-container entry--overlay-container-big" onClick={() => setEntryIsSmall(!entryIsSmall)}>
-                    <img src={images[props.imageName] ? images[props.imageName].default : ""} className="entry--img" />
-                    <div className="entry--overlay">
-                        <span className="material-icons-round entry--overlay-icon">expand_less</span>
+                <div className="entry--img-container" onClick={() => setEntryIsSmall(!entryIsSmall)}>
+                    <div className="entry--overlay-container entry--overlay-container-big" >
+                        <img src={images[props.imageName] ? images[props.imageName].default : ""} className="entry--img" />
+                        <div className="entry--overlay">
+                            <span className="material-icons-round entry--overlay-icon">expand_less</span>
+                        </div>
                     </div>
                 </div>
 
-                <div className="entry--col">
+                <div className="entry--grid">
                     <h1 className={props.darkMode ? "entry--title entry--dark" : "entry--title"}> {props.title} </h1>
                     {paragraphBigEntry(props.longdescription)}
                 </div>
