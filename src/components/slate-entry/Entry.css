@@ -136,6 +136,8 @@
     width:20vw;
     border-radius:10px;
     grid-column: span 2;
+    /* height:30vh; */
+    object-fit: cover;
 }
 
 .entry--grid {
@@ -145,7 +147,7 @@
     padding:20px 20px;
     padding-left:40px;
     justify-content: center;
-    grid-auto-flow: dense;
+    grid-auto-flow: row;
 }
 
 .entry--col {
