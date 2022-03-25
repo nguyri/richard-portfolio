@@ -3,22 +3,23 @@ import Collapsible from 'react-collapsible';
 import { Container, Button, Alert } from 'react-bootstrap';
 import { CSSTransition } from 'react-transition-group';
 import "./Entry.css"
-import mpcnc from "../../imgs/mpcnc1.jpg"
-import adlathe from "../../imgs/addlathe1.jpg"
-import raytracer from "../../imgs/raytracer1.jpg"
-import wordle from "../../imgs/wordle1.png"
-import ThreeScene from "../threejsdemo/Three"
+// import ThreeScene from "../threejsdemo/Three"
+
+function importAll(r) {
+    return r.keys().map(r);
+}
+  
+const images = importAll(require.context('../../imgs/', false, /\.(png|jpe?g|svg)$/));
+console.log(images);
 
 export default function Entry(props) {
-    // eventually change this to webpack import
-    const imgList = [mpcnc, adlathe, raytracer, wordle]
     const [entryIsSmall, setEntryIsSmall] = React.useState(true);
 
     function smallEntry() {
         return (
             <div className={props.darkMode ? "entry entry--dark" : "entry"} onClick={() => setEntryIsSmall(!entryIsSmall)}>
                 <div className="entry--overlay-container">
-                    <img src={imgList[props.imageNum]} className="entry--img" />
+                    <img src={images[props.imageNum ? props.imageNum : 0].default} className="entry--img" />
                     <div className="entry--overlay">
                         <span className="material-icons-round entry--overlay-icon">expand_more</span>
                     </div>
@@ -34,12 +35,15 @@ export default function Entry(props) {
     function paragraphBigEntry(paragraphArr) {
         return (paragraphArr.map((elem) => {
             if (elem.img) {
-                return <img src={mpcnc} style={elem.style} className={elem.className} />
+                return <img src={images[elem.imageNum ? elem.imageNum : 0].default} style={elem.style} className={elem.className} />
             }
-            else if (elem.threejs) {
-                return (
-                    <ThreeScene/>
-                )
+            // else if (elem.threejs) {
+            //     return (
+            //         <ThreeScene/>
+            //     )
+            // }
+            else if (elem.subtitle) {
+                return <h1 className={props.darkMode ? "entry--subtitle entry--dark" : "entry--subtitle"}> {elem.subtitle} </h1>
             }
             else {
                 return <p className={props.darkMode ? "entry--text entry--dark" : "entry--text"}> {elem.text} </p>
@@ -51,7 +55,7 @@ export default function Entry(props) {
         return (
             <div className={props.darkMode ? "entry entry--dark" : "entry"} onClick={() => setEntryIsSmall(!entryIsSmall)}>
                 <div className="entry--overlay-container entry--overlay-container-big">
-                    <img src={imgList[props.imageNum]} className="entry--img" />
+                    <img src={images[props.imageNum ? props.imageNum : 0].default} className="entry--img" />
                     <div className="entry--overlay">
                         <span className="material-icons-round entry--overlay-icon">expand_less</span>
                     </div>

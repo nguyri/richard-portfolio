@@ -171,6 +171,12 @@
     padding-bottom:15px;
 }
 
+.entry--subtitle {
+    font-weight:700;
+    font-size:1.5rem;
+    padding-block:15px;
+}
+
 @media screen and (max-width: 800px) {
     .entry--text {
         font-weight:400;
