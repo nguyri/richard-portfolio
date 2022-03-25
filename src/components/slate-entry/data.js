@@ -10,7 +10,7 @@ export default [
         description: "Simply the best way to cover everything in iron oxide",
         longdescription: [{key: 1, text:`I'm pretty new to metal fabrication and welding. I have had only a vague interest in steel 
         until the lumber prices during the pandemic made it more enticing to use an angle grinder.`},
-        {key:3, text:`I've found that metal in general is more forgiving than wood; the cutting tools go slower and welds are really strong`},
+        {key:3, text:`I've found that metal in general is more forgiving than wood; the cutting tools go at a lower rpm and a butt joint can simply be welded together`},
         {key: 2, subtitle:`Plasma Cutter`},
         {key:4, text:`Plasma cutting uses a stream of plasma between the torch head and the metal to deliver enough energy to melt 
         the metal and blow it away. This is kind of unbelievable the first time you hold a plasma cutter and the sheet metal 
@@ -28,7 +28,7 @@ export default [
         {key:12, text:`Recently I also got myself a fun 110 bottle to TIG weld with.`},
         {key:13, text:`TIG is certainly less forgiving and more sensitive to a litany of new variables. However, it is very satisfying to see a clean weld come out without chipping or brushing at all.`}
     ],
-        imageNum:4,
+        imageName:'./plasma2.jpg',
     },
     {
         key: 1,
@@ -42,12 +42,12 @@ export default [
          with a spindle measured in horsepower. One upside is that if you crash it, the tiny steppers can't possibly generate enough force to damage anything other than your self esteem.`}, 
         {key: 4, text:`The most common issue was with electrical connectors, which were simple but painstaking to fix. Occasionally the tool could catch a wall it
         was not meant to engage and dove into the material.`},
-        {key:5, img:'test img', style:{ }, className:"entry--img-inline", imageNum:2},
+        {key:5, img:'test img', style:{ }, className:"entry--img-inline", imageName:'./mpcnc2.jpg'},
         {key: 3, text:`At the end of this project I found myself not using the router particularly often because routing
          wood was messy and took a long time. However it has turned into my CNC plasma cutter which seems like a better fit for this machine.`}
         ],
 
-        imageNum: 2,
+        imageName:'./mpcnc1.jpg',
             
     }, 
     {
@@ -61,7 +61,7 @@ export default [
             {key: 3, text:`I designed the mathematical basis for the cylindrical slicer and also integrated it into a popular open source slicer, Cura. 
             I also rewrote part of the display shader to display print previews with cylindrical layers.`}
             ],
-        imageNum: 0
+            imageName:'./addlathe1.jpg',
     },
     {
         key: 4,
@@ -71,7 +71,7 @@ export default [
         longdescription: [
             {key: 1, text:`React is a nice library that can make your webpages /react/ to user inputs. User inputs such as playing wordle! You can even play it -right here (not yet)-`},
         ],
-        imageNum: 12
+        imageName:'./wordle1.png',
         },
 
     {
@@ -85,7 +85,7 @@ export default [
             {key: 3, text:`It was quite nice to use the built in package manager though!`},
             // {key: 4, threejs: true}
             ],
-        imageNum: 5
+            imageName:'./raytracer1.jpg',
     },
     {
         key:6, 
@@ -95,13 +95,13 @@ export default [
         That being said I spent a very long time being bad at woodworking. Nowadays I can make some things passably. 
         I find it’s pretty nice to be surrounded by your own furniture.`},
         {key: 2, subtitle:`Chessboard`},
-        {key:5, img:'test img', style:{ }, className:"entry--img-inline", imageNum:11},
+        {key:5, img:'test img', style:{ }, className:"entry--img-inline", imageName: './wood2.jpg'},
         {key:4, text:`I decided to do this chessboard out of red oak and black walnut and I was quite pleased with it. I honestly haven’t done many projects 
         out of hardwood since I haven’t had a planer until recently. Still missing a few wood shop tools. However, simply getting the edges square on the 
         table saw is passable enough for me.`},
 
         ],
-        imageNum: 10
+        imageName:'./wood1.jpg',
     }
     
 ]
