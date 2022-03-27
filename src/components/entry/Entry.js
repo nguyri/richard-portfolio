@@ -7,14 +7,6 @@ import ReactPlayer from 'react-player/lazy'
 import {Link, Outlet} from 'react-router-dom';
 // import ThreeScene from "../threejsdemo/Three"
 
-const images = {}
-
-function importAll(r) {
-    r.keys().forEach((key) => images[key] = r(key));
-}
-  
-importAll(require.context('../../imgs/', false, /\.(png|jpe?g|svg)$/));
-
 export default function Entry(props) {
     const [entryIsSmall, setEntryIsSmall] = React.useState(true);
 
@@ -22,7 +14,7 @@ export default function Entry(props) {
         return (
             <div className={props.darkMode ? "entry entry--dark" : "entry"}>
                 <div id={props.link} className="entry--overlay-container" onClick={() => setEntryIsSmall(!entryIsSmall)}>
-                    <img src={images[props.imageName] ? images[props.imageName].default : ""} className="entry--img" />
+                    <img src={props.images[props.imageName].default ? props.images[props.imageName].default : ""} className="entry--img" />
                     <div className="entry--overlay">
                         <span className="material-icons-round entry--overlay-icon">expand_more</span>
                     </div>
@@ -38,7 +30,7 @@ export default function Entry(props) {
     function paragraphBigEntry(paragraphArr) {
         return (paragraphArr.map((elem) => {
             if (elem.imageName) {
-                return <img key={elem.key} src={images[elem.imageName] ? images[elem.imageName].default : ""} style={elem.style} className={elem.className} />
+                return <img key={elem.key} src={props.images[elem.imageName].default ? props.images[elem.imageName].default : ""} style={elem.style} className={elem.className} />
             }
             // else if (elem.threejs) {
             //     return (
@@ -64,7 +56,7 @@ export default function Entry(props) {
             <div id={props.link} className={props.darkMode ? "entry entry--dark" : "entry"} >
                 <div className="entry--img-container" onClick={() => setEntryIsSmall(!entryIsSmall)}>
                     <div className="entry--overlay-container entry--overlay-container-big" >
-                        <img src={images[props.imageName] ? images[props.imageName].default : ""} className="entry--img" />
+                        <img src={props.images[props.imageName].default ? props.images[props.imageName].default : ""} className="entry--img" />
                         <div className="entry--overlay">
                             <span className="material-icons-round entry--overlay-icon">expand_less</span>
                         </div>
