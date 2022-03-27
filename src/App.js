@@ -18,8 +18,7 @@ export default function App() {
     setDarkMode( (prevState) => !prevState)
   } 
 
-  const navigate = useNavigate();
-
+  // const navigate = useNavigate();
   // useEffect(() => {
   //   navigate('/projects');
   // }, [])
@@ -28,7 +27,7 @@ export default function App() {
     <div className="App" style={{backgroundColor: darkMode ? "#1c1c1c": "#F9F7F0"}}>
       <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode}/>
       <main>
-        <Outlet/>
+        <Outlet context={[darkMode]}/>
       </main>
   </div>
   );
