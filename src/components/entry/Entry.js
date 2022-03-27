@@ -4,7 +4,6 @@ import { Container, Button, Alert } from 'react-bootstrap';
 import { CSSTransition } from 'react-transition-group';
 import "./Entry.css"
 import ReactPlayer from 'react-player/lazy'
-import {Link, Outlet} from 'react-router-dom';
 // import ThreeScene from "../threejsdemo/Three"
 
 export default function Entry(props) {
