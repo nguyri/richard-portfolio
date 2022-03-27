@@ -20,15 +20,14 @@ export default function App() {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    navigate('/projects');
-  }, [])
+  // useEffect(() => {
+  //   navigate('/projects');
+  // }, [])
   
   return(  
     <div className="App" style={{backgroundColor: darkMode ? "#1c1c1c": "#F9F7F0"}}>
       <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode}/>
       <main>
-        {/* page navigates to /projects on init */}
         <Outlet/>
       </main>
   </div>
