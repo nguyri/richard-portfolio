@@ -32,9 +32,11 @@ export default function App() {
   return(  
     <div className="App" style={{backgroundColor: darkMode ? "#1c1c1c": "#F9F7F0"}}>
       <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode}/>
-      {entries}
-      <Link to="about">About Link</Link>
-      <AboutCard/>
+      <main>
+        {entries}
+        <Link to="/about">About Link</Link>
+        <Outlet/>
+      </main>
   </div>
   );
 }

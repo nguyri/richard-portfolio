@@ -9,6 +9,14 @@ ReactDOM.render(
         <Routes>
             <Route path="/" element={<App />} >
                 <Route path="about" element={<AboutCard />} />
+                <Route
+                    path="*"
+                    element={
+                        <main style={{ padding: "1rem" }}>
+                        <p>There's nothing here!</p>
+                        </main>
+                        }
+                    />
             </Route>
         </Routes>
     </BrowserRouter>

@@ -46,7 +46,7 @@
     border-radius: 10px;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1224px) {
     .entry--overlay-container {
         width:100%;
         margin:0 0;
@@ -63,7 +63,7 @@
     opacity: 1;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1224px) {
     .entry--overlay-container-big  {
         width:100%;
         max-width:100%;
@@ -84,7 +84,7 @@
     border-radius:50%;
   }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1224px) {
     .entry {
         display:flex;
         flex-direction:column;
@@ -204,7 +204,7 @@
 }
 
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1224px) {
     /* just use a column.. */
     .entry--grid {
         display:flex;

@@ -7,6 +7,7 @@ export default [
     {
         key:5, 
         title: "Metal Shop",
+        link: "metalshop",
         description: "Simply the best way to cover everything in iron oxide",
         longdescription: [
             {key: 1, text:`I'm pretty new to metal fabrication and welding. I have had a vague interest in steel but during 
@@ -38,6 +39,7 @@ export default [
     {
         key: 1,
         title: "Mostly Printed CNC",
+        link: "mpcnc",
         description: "For what it’s worth, the MPCNC is an excellent open source CNC router for anyone interested in making parts that can’t be made on a 3D printer.",
         longdescription: [
             {key: 1, text:`For what it’s worth, the MPCNC is an excellent open source CNC router for anyone 
@@ -58,6 +60,7 @@ export default [
     {
         key: 2,
         title: "Additive Lathe",
+        link: "addlathe",
         description: "Our capstone engineering project. This multidisciplinary project heavily modifies Cura to generate gcode. It prints onto a custom machined drum rather than a flat bed.",
         longdescription: [
             {key: 1, text:`Our capstone engineering project. This multidisciplinary project heavily modifies Cura to generate gcode. It prints onto a custom machined drum rather than a flat bed.`},
@@ -73,6 +76,7 @@ export default [
     {
         key: 4,
         title: "Wordle with React",
+        link: "wordle",
         description: "React is a nice library that can make your webpages /react/ to user inputs. User inputs such as playing wordle! You can even play it -right here (not yet)-",
         longdescription: [
             {key: 1, text:`React is a nice library that can make your webpages /react/ to user inputs. User inputs such as playing wordle! You can even play it -right here (not yet)-`},
@@ -82,6 +86,7 @@ export default [
     {
         key: 3,
         title: "Raytracer in Rust",
+        link: "raytracer",
         description: "A computer graphics classic, now memory safe!",
         longdescription: [
             {key: 1, text:`I've always had an interest in 3D graphics and shaders, so I decided to give a raytracer a shot and also learn a new programming language, Rust.`},
@@ -94,6 +99,7 @@ export default [
     {
         key:6, 
         title: "Wood Shop",
+        link: "woodshop",
         description: "Why spend money to get furniture when you can spend time and money instead?",
         longdescription: [
             {key: 1, text:`I’ve been using wood tools ever since I graduated from the box cutter and hot glue gun. 

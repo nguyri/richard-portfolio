@@ -4,6 +4,7 @@ import { Container, Button, Alert } from 'react-bootstrap';
 import { CSSTransition } from 'react-transition-group';
 import "./Entry.css"
 import ReactPlayer from 'react-player/lazy'
+import {Link, Outlet} from 'react-router-dom';
 // import ThreeScene from "../threejsdemo/Three"
 
 const images = {}
@@ -20,7 +21,7 @@ export default function Entry(props) {
     function smallEntry() {
         return (
             <div className={props.darkMode ? "entry entry--dark" : "entry"}>
-                <div className="entry--overlay-container" onClick={() => setEntryIsSmall(!entryIsSmall)}>
+                <div id={props.link} className="entry--overlay-container" onClick={() => setEntryIsSmall(!entryIsSmall)}>
                     <img src={images[props.imageName] ? images[props.imageName].default : ""} className="entry--img" />
                     <div className="entry--overlay">
                         <span className="material-icons-round entry--overlay-icon">expand_more</span>
@@ -60,7 +61,7 @@ export default function Entry(props) {
 
     function bigEntry() {
         return (
-            <div className={props.darkMode ? "entry entry--dark" : "entry"} >
+            <div id={props.link} className={props.darkMode ? "entry entry--dark" : "entry"} >
                 <div className="entry--img-container" onClick={() => setEntryIsSmall(!entryIsSmall)}>
                     <div className="entry--overlay-container entry--overlay-container-big" >
                         <img src={images[props.imageName] ? images[props.imageName].default : ""} className="entry--img" />

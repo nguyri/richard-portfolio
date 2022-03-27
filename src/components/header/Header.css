@@ -9,6 +9,7 @@
     color:#F9F7F0;
 }
 
+
 .is-nav-open {
     /* padding:0px; */
 }
@@ -69,6 +70,7 @@ nav {
     background-color: #50477a;
     border-radius: 2rem;
     margin-inline: 7px;
+    margin-block:0;
     cursor: pointer;
     display: flex;
     justify-content: flex-start;
@@ -114,3 +116,40 @@ nav {
 .nav--dark .toggler--slider {
     justify-content: flex-end;
 }
+
+
+@media screen and (max-width: 1224px) {
+    .header {
+        display:flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 5px;
+    }
+
+    .header--title {
+        margin-block:10px;
+    }
+
+    .header--subtitle {
+        font-family:'Inter';
+        font-style: italic;
+        margin-inline:5vw;
+        font-weight:200;
+        font-size:1rem;
+        text-align: center;
+    }
+    nav {
+        display: flex;
+        align-items: center;
+        padding: 0px 0px;
+        height:fit-content;
+        padding-block: 10px;
+        z-index: 1;
+    }
+
+    .toggler p {
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+  }
