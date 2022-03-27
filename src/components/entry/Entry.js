@@ -80,7 +80,7 @@ export default function Entry(props) {
     }
 
     return (
-        <div>
+        <div key={props.key}>
             {entryIsSmall && smallEntry()}
             <CSSTransition
                 in={!entryIsSmall}

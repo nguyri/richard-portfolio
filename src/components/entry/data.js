@@ -75,11 +75,13 @@ export default [
     },
     {
         key: 4,
-        title: "Wordle with React",
+        title: "Web Development",
         link: "wordle",
-        description: "React is a nice library that can make your webpages /react/ to user inputs. User inputs such as playing wordle! You can even play it -right here (not yet)-",
+        description: `Interfaces are easy to make and look great with web tools! Interfaces such as -this very website(it's responsive!)- 
+        Inside this section are some more web demonstrations: Wordle! Open Trivia! A little card!`,
         longdescription: [
             {key: 1, text:`React is a nice library that can make your webpages /react/ to user inputs. User inputs such as playing wordle! You can even play it -right here (not yet)-`},
+            {key: 2, text:`This website uses React and responsive CSS. On the backend it's built with babel and webpack. Deployment is on an nginx server running on an arch VPS.`},
         ],
         imageName:'./wordle1.png',
     },
@@ -102,15 +104,15 @@ export default [
         link: "woodshop",
         description: "Why spend money to get furniture when you can spend time and money instead?",
         longdescription: [
-            {key: 1, text:`I’ve been using wood tools ever since I graduated from the box cutter and hot glue gun. 
-            That being said I spent a very long time being bad at woodworking. Nowadays I can make some things passably. 
+            {key: 1, text:`I’ve been using wood tools ever since I graduated from the box cutter and hot glue gun, a very long time. 
+            I started off really rather bad at making stuff out of wood. Nowadays I can make some things passably. 
             I find it’s pretty nice to be surrounded by your own furniture.`},
             {key: 2, subtitle:`Chessboard`},
             {key:5, img:'test img', style: {gridColumn:"span 2", gridRow:"span 4", margin: "20px 20px 20px 0px "}, className:"entry--img-inline", imageName: './wood2.jpg'},
             {key:4, text:`I decided to do this chessboard out of red oak and black walnut and I was quite pleased with it. I honestly haven’t done many projects 
-            out of hardwood since I haven’t had a planer until recently.`, style: {gridColumn:"span 3"}},
-            {key:6, text:`It's really satisfying to square up your stock. That being said, now that I have the stock prep essentials, 
-            now I have to square up all my wood.`, style: {gridColumn:"span 3"}},
+            out of hardwood since I haven’t had a jointer and planer until recently.`, style: {gridColumn:"span 3"}},
+            {key:6, text:`It's really satisfying to square up your stock. It is quite a process however. Usually: Crosscut to an easier to handle size, rough rip to within 
+            quarter inch, jointer, planer, rip and crosscut again to the final size.`, style: {gridColumn:"span 3"}},
             {key:7, img:'test img', style: {gridColumn:"1 / span 2",  marginBottom:"20px"}, className:"entry--img-inline", imageName:'./wood3.jpg' },
             {key:8, img:'test img', style: {gridColumn:"span 3",  marginBottom:"20px"}, className:"entry--img-inline", imageName:'./wood1.jpg' },
             {key:9, img:'test img', style: {gridColumn:"1 /span 2",  marginBottom:"20px"}, className:"entry--img-inline", imageName:'./wood5.jpg' },
