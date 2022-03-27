@@ -6,12 +6,25 @@
     max-width: 400px;
     align-items:center;
     flex-shrink:initial;
-    margin:0px auto;
+    margin:40px auto;
     background-color:#F5F5F5;
     
     border-radius: 20px;
     overflow:hidden;
     font-family: Inter;
+}
+
+@media screen and (max-width: 1224px) {
+    .about-card {
+        width:80vw;
+        max-width: 80vw;
+        margin: 20px auto;
+    }
+}
+
+.about-card--dark {
+    background-color:#333333;
+    color:#cecece;
 }
 
 .info--img >img {

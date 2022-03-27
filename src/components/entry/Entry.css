@@ -13,6 +13,10 @@
     font-family:Inter;
 }
 
+.entries {
+    margin: 0 10vw;
+}
+
 .entry-enter {
     opacity: 0;
     transform: scale(0.9);
@@ -51,6 +55,8 @@
         width:100%;
         margin:0 0;
     }}
+
+
 
 .entry--overlay-icon {
     color:#F9F7F0;
@@ -232,5 +238,9 @@
         max-width:100%;
         padding:0px;
         border-radius: 10px;
+    }
+
+    .entries {
+        margin: 10px 10px;
     }
   }
