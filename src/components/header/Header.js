@@ -8,7 +8,7 @@ function homeButton () {
 
     return (
         <div className="nav--home" >
-            <p className="material-icons-round header--icon">{!isTabletOrMobile && "electric_bolt"}</p>
+            <p className="material-icons-round header--icon">{"electric_bolt"}</p>
             <h1 className="header--title">richard nguyen</h1>
         </div>
     )

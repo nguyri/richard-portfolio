@@ -53,7 +53,7 @@ export default function Entry(props) {
     function bigEntry() {
         return (
             <div id={props.link} className={props.darkMode ? "entry entry--dark" : "entry"} >
-                <div className="entry--img-container" onClick={() => setEntryIsSmall(!entryIsSmall)}>
+                <div className={props.darkMode? "entry--img-container-dark entry--img-container" : "entry--img-container"} onClick={() => setEntryIsSmall(!entryIsSmall)}>
                     <div className="entry--overlay-container entry--overlay-container-big" >
                         <img src={props.images[props.imageName].default ? props.images[props.imageName].default : ""} className="entry--img" />
                         <div className="entry--overlay">

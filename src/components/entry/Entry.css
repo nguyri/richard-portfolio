@@ -112,6 +112,10 @@
     margin:0 0;
     padding:0 0;
 }
+
+.entry--img-container-dark{
+    background-color:#474747;
+}
 .entry--img {
     position:float;
     width:100%;
