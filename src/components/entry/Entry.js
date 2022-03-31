@@ -4,7 +4,7 @@ import { Container, Button, Alert } from 'react-bootstrap';
 import { CSSTransition } from 'react-transition-group';
 import "./Entry.css"
 import ReactPlayer from 'react-player/lazy'
-// import ThreeScene from "../threejsdemo/Three"
+import ThreeScene from "../threejsdemo/Three"
 
 export default function Entry(props) {
     const [entryIsSmall, setEntryIsSmall] = React.useState(true);
@@ -31,11 +31,11 @@ export default function Entry(props) {
             if (elem.imageName) {
                 return <img key={elem.key} src={props.images[elem.imageName].default ? props.images[elem.imageName].default : ""} style={elem.style} className={elem.className} />
             }
-            // else if (elem.threejs) {
-            //     return (
-            //         <ThreeScene/>
-            //     )
-            // }
+            else if (elem.threejs) {
+                return (
+                    <ThreeScene/>
+                )
+            }
             else if (elem.vimeo) {
                 return <div className="entry--vimeo-fixed-aspect" style={elem.style}>
                         <ReactPlayer url={elem.vimeo} className="entry--vimeo" width='100%' height='100%' />

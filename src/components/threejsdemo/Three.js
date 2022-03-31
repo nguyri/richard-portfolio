@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import * as THREE from 'three';
 // demo from https://medium.com/@colesayershapiro/using-three-js-in-react-6cb71e87bdf4
+import {ThreeMFLoader} from './3MFLoader'
+import model from '../../models/lamp-base-1.3mf'
+
+//https://github.com/technohippy/3MFLoader
+// https://threejs.org/examples/webgl_loader_3mf.html
 
 class ThreeScene extends Component{
   componentDidMount(){
@@ -26,6 +31,13 @@ class ThreeScene extends Component{
     const material = new THREE.MeshBasicMaterial({ color: '#433F81'     })
     this.cube = new THREE.Mesh(geometry, material)
     this.scene.add(this.cube)
+
+    const loader = new ThreeMFLoader();
+    loader.load( 'https://github.com/3MFConsortium/3mf-samples/blob/master/examples/core/box.3mf', function ( gltf ) {
+      this.scene.add( gltf.scene );
+    }, undefined, function ( error ) {
+      console.error( error );
+    } );
 
     this.start()
   }

@@ -43,7 +43,7 @@ export default [
         description: "For what it’s worth, the MPCNC is an excellent open source CNC router for anyone interested in making parts that can’t be made on a 3D printer.",
         longdescription: [
             {key: 1, text:`For what it’s worth, the MPCNC is an excellent open source CNC router for anyone 
-            interested in making parts that can’t be made on a 3D printer.`},
+            interested in making parts that can’t be made on a 3D printer. If I were in a spot to make another CNC router, I would make a PrintNC. `},
             {key: 16, vimeo:'https://vimeo.com/612194957', style: {}},
             {key: 2, text:`Admittedly, using this small garage router is more finnicky than using a rigid commercial machine
             with a spindle measured in horsepower. One upside is that if you crash it, the tiny steppers can't possibly generate enough force to damage anything other than your self esteem.`}, 
@@ -94,7 +94,7 @@ export default [
             {key: 1, text:`I've always had an interest in 3D graphics and shaders, so I decided to give a raytracer a shot and also learn a new programming language, Rust.`},
             {key: 2, text:`Rust doesn't give any particular advantages in this case, given that there's no finnicky memory management.`},
             {key: 3, text:`It was quite nice to use the built in package manager though!`},
-            // {key: 4, threejs: true}
+            {key: 4, threejs: true}
             ],
             imageName:'./raytracer1.jpg',
     },

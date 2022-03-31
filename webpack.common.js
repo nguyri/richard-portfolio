@@ -23,6 +23,10 @@ module.exports = {
         },
         ]
       },
+      {
+        test: /\.3mf$/i,
+        use: 'raw-loader',
+      },
     ]
   },
   resolve: { extensions: ["*", ".js", ".jsx"] },

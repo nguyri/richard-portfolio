@@ -23,9 +23,6 @@ export default function Header(props) {
             <nav className={props.darkMode ? "nav--dark" : ""}>
 
                 <div className="nav--row">
-                    {/* <a href="projects" className="nav--item">projects</a>
-                    <a href="about" className="nav--item">about</a>
-                    <a href="docs" className="nav--item">docs</a> */}
                     <Link to={'projects'} className="nav--item">projects</Link>
                     <Link to={'about'} className="nav--item">about</Link>
                     {/* <Link to={'docs'} className="nav--item">docs</Link> */}
