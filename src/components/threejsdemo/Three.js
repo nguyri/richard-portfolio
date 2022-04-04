@@ -6,6 +6,10 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { ThreeMFLoader } from 'three/examples/jsm/loaders/3MFLoader.js';
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
 
+import Slider, { Range } from 'rc-slider';
+import 'rc-slider/assets/index.css';
+
+
 // import {ThreeMFLoader} from './3MFLoader2'
 import model from '../../models/lamp-base-1.3mf'
 
@@ -19,18 +23,21 @@ function importAll(r) {
 
 importAll(require.context('../../models/', false, /\.(3mf)$/));
 
-class ThreeScene extends Component{
+export default class ThreeScene extends Component{
+
   componentDidMount(){
+    this.translation = 0; 
     const width = this.mount.clientWidth
     const height = this.mount.clientHeight
     this.scene = new THREE.Scene()
-    this.camera = new THREE.PerspectiveCamera( 75, width / height, 0.1, 1000)
+    this.camera = new THREE.PerspectiveCamera( 25, width / height, 120, 200)
+    this.camera.up.set(0,0,1);
     // this.camera = new THREE.PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 1, 500 );
 
     this.pointLight = new THREE.PointLight( 0xffffff, 0.6 );
     this.pointLight.position.set( 80, 90, 200 );
-    this.camera.add( this.pointLight );
-    // this.scene.add( new THREE.AmbientLight( 0x999999 ) );
+    this.scene.add( this.pointLight );
+    this.scene.add( new THREE.AmbientLight( 0xffffff, 0.6 ) );
 
     this.camera.position.set( 80, 80, 150 );
     //ADD RENDERER
@@ -44,18 +51,21 @@ class ThreeScene extends Component{
     this.cube = new THREE.Mesh(geometry, material)
     this.scene.add(this.cube)
 
+    this.object3mf = {}
     let loader = new ThreeMFLoader();
-    loader.addExtension( ThreeMFLoader.MaterialsAndPropertiesExtension );
-    loader.load(models['./dodeca_chain_loop.3mf'].default, ( object3mf ) => {
+    // loader.addExtension( ThreeMFLoader.MaterialsAndPropertiesExtension );
+    loader.load(models['./lamp-base-1.3mf'].default, ( object3mf ) => {
       console.log(object3mf)
-      this.scene.add( object3mf);
+      this.object3mf = object3mf;
+      this.object3mf.children[0].children[0].material=new THREE.MeshDepthMaterial();
+      this.scene.add( this.object3mf);
     }, undefined, function ( error ) {
       console.error( error );
     } );
 
     let controls = new OrbitControls( this.camera, this.renderer.domElement );
     controls.addEventListener( 'change', this.render );
-    controls.target.set( 80, 80, 35 );
+    controls.target.set( 0, 0, 0 );
     controls.update();
 
     this.start()
@@ -67,6 +77,7 @@ componentWillUnmount(){
   }
 
 start = () => {
+
     if (!this.frameId) {
       this.frameId = requestAnimationFrame(this.animate)
     }
@@ -86,13 +97,21 @@ renderScene = () => {
   this.renderer.render(this.scene, this.camera)
 }
 
+setTranslation = (num) => {
+  this.translation = num;
+  this.object3mf.position.z = num;
+  // console.log(this.translation);
+}
+
 render(){
+
     return(
       <div
         style={{ width: '400px', height: '400px' }}
         ref={(mount) => { this.mount = mount }}
-      />
+      >
+        <Slider onChange={this.setTranslation}/>
+        </div>
     )
   }
 }
-export default ThreeScene
