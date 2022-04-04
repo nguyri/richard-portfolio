@@ -2,6 +2,7 @@ import React from "react";
 import Entry from "./Entry";
 import data_file from "./data"
 import { useOutletContext } from "react-router-dom";
+import ThreeScene from "../threejsdemo/Three"
 
 const images = {}
 
@@ -25,6 +26,7 @@ export default function Entries (props) {
     return (
         <div className="entries"> 
             {entries}
+            {<ThreeScene/>}
         </div>
         )
   }

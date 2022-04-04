@@ -16,17 +16,29 @@ module.exports = {
         use: ["style-loader", "css-loader"]
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
+        test: /\.(png|jpe?g|gif|3mf|gltf)$/i,
         use: [ 
         {
           loader: 'file-loader',
         },
-        ]
+      ]
       },
       {
-        test: /\.3mf$/i,
-        use: 'raw-loader',
-      },
+        test: /\.bin$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'url-loader',
+              options: {
+                encoding: false,
+                mimetype: false,
+                generator: (content) => {
+                  return content;
+                }
+              },
+            },
+          ],
+      }
     ]
   },
   resolve: { extensions: ["*", ".js", ".jsx"] },
