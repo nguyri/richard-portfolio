@@ -12,19 +12,22 @@ function importAll(r) {
   
 importAll(require.context('../../imgs/', false, /\.(png|jpe?g|svg)$/));
 
+let _key = 95
+
 export default function Entries (props) {
     const darkMode = useOutletContext();
     let entries = data_file.map( entry => {
         let data = {...entry}
         data.darkMode = darkMode
         data.images = images;
+        data.key = entry.num;
         return (
-            <Entry {...data} key={entry.key} />
+            <Entry {...data}/>
         )
         })
         
     return (
-        <div className="entries"> 
+        <div className="entries" > 
             {entries}
             {<ThreeScene/>}
         </div>

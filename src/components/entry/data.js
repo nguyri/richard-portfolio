@@ -5,7 +5,7 @@ import wordle from "../../imgs/wordle1.png"
 
 export default [
     {
-        key:5, 
+        num:5,
         title: "Metal Shop",
         link: "metalshop",
         description: "Simply the best way to cover everything in iron oxide",
@@ -37,7 +37,7 @@ export default [
         imageName:'./plasma2.jpg',
     },
     {
-        key: 1,
+        num: 1,
         title: "Mostly Printed CNC",
         link: "mpcnc",
         description: "For what it’s worth, the MPCNC is an excellent open source CNC router for anyone interested in making parts that can’t be made on a 3D printer.",
@@ -58,7 +58,7 @@ export default [
             
     }, 
     {
-        key: 2,
+        num: 2,
         title: "Additive Lathe",
         link: "addlathe",
         description: "Our capstone engineering project. This multidisciplinary project heavily modifies Cura to generate gcode. It prints onto a custom machined drum rather than a flat bed.",
@@ -74,7 +74,7 @@ export default [
             imageName:'./addlathe1.jpg',
     },
     {
-        key: 4,
+        num: 4,
         title: "Web Development",
         link: "wordle",
         description: `Interfaces are easy to make and look great with web tools! Interfaces such as -this very website(it's responsive!)- 
@@ -86,7 +86,7 @@ export default [
         imageName:'./wordle1.png',
     },
     {
-        key: 3,
+        num: 3,
         title: "Raytracer in Rust",
         link: "raytracer",
         description: "A computer graphics classic, now memory safe!",
@@ -99,7 +99,7 @@ export default [
             imageName:'./raytracer1.jpg',
     },
     {
-        key:6, 
+        num:6, 
         title: "Wood Shop",
         link: "woodshop",
         description: "Why spend money to get furniture when you can spend time and money instead?",

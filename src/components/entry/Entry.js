@@ -33,11 +33,11 @@ export default function Entry(props) {
             }
             else if (elem.threejs) {
                 return (
-                    <ThreeScene/>
+                    <ThreeScene key={elem.key}/>
                 )
             }
             else if (elem.vimeo) {
-                return <div className="entry--vimeo-fixed-aspect" style={elem.style}>
+                return < div key={elem.key} className="entry--vimeo-fixed-aspect" style={elem.style}>
                         <ReactPlayer url={elem.vimeo} className="entry--vimeo" width='100%' height='100%' />
                     </div>
             }
@@ -69,9 +69,8 @@ export default function Entry(props) {
             </div>
         )
     }
-
     return (
-        <div key={props.key}>
+        <div>
             {entryIsSmall && smallEntry()}
             <CSSTransition
                 in={!entryIsSmall}
