@@ -25,13 +25,13 @@ importAll(require.context('../../models/', false, /\.(3mf)$/));
 
 export default class ThreeScene extends Component{
 
-  loadThreeMF(loader, paths, list, scene) {
+  loadThreeMF(loader, paths, list, scene, positions) {
     // loader.addExtension( ThreeMFLoader.MaterialsAndPropertiesExtension );
 
-    paths.forEach( path => {
+    paths.forEach( (path, index) => {
       loader.load(models[path].default, ( object3mf ) => {
-        // console.log(object3mf)
         list.push(object3mf);
+        object3mf.position.set(...positions[index])
         object3mf.children[0].children[0].material=new THREE.MeshDepthMaterial();
         // object3mf.children[0].children[0].material=new THREE.MeshStandardMaterial();
         scene.add(object3mf);
@@ -39,16 +39,14 @@ export default class ThreeScene extends Component{
         console.error( error );
       } );
     })
-
   }
 
 
   componentDidMount(){
-    this.translation = 0; 
     const width = this.mount.clientWidth
     const height = this.mount.clientHeight
     this.scene = new THREE.Scene()
-    this.camera = new THREE.PerspectiveCamera( 25, width / height, 10, 500)
+    this.camera = new THREE.PerspectiveCamera( 25, width / height, 70, 500)
     this.camera.up.set(0,0,1);
     // this.camera = new THREE.PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 1, 500 );
 
@@ -72,9 +70,11 @@ export default class ThreeScene extends Component{
 
     this.object3mf = {}
     let loader = new ThreeMFLoader();
-    let modelPaths = ['./lamp-base-1.3mf','./lamp-clamp-2.3mf', './lamp-bolt-1.3mf', './lamp-finger-nut-1.3mf']
+    let modelPaths = ['./lamp-bolt-1.3mf','./lamp-base-1.3mf','./lamp-clamp-2.3mf', './lamp-finger-nut-1.3mf']
+    this.modelPositions = [[-8,0,10],[0,0,0],[0,0,-30],[0,0,-40]]
     this.modelList = []
-    this.loadThreeMF(loader, modelPaths, this.modelList, this.scene)
+    this.loadThreeMF(loader, modelPaths, this.modelList, this.scene, this.modelPositions)
+    console.log(this.modelList)
 
     let controls = new OrbitControls( this.camera, this.renderer.domElement );
     controls.addEventListener( 'change', this.render );
@@ -90,7 +90,6 @@ componentWillUnmount(){
   }
 
 start = () => {
-
     if (!this.frameId) {
       this.frameId = requestAnimationFrame(this.animate)
     }
@@ -111,19 +110,15 @@ renderScene = () => {
 }
 
 setTranslation = (num) => {
-  this.translation = num;
-  // console.log(this.modelList);
-  let unitArray = []
+  this.unitArray = []
   for(var i = this.modelList.length - 1; i >= 0; i--) {
     let step = 2/(this.modelList.length - 1)
-    unitArray.push( step * i - 1)
+    this.unitArray.push( step * i - 1)
   }
 
-  console.log(unitArray);
   this.modelList.forEach( (model, index) => {
-    model.position.z = num * unitArray[index]
+    model.position.z = this.modelPositions[index][2] + num * this.unitArray[index] 
   })
-  // console.log(this.translation);
 }
 
 render(){
@@ -132,7 +127,7 @@ render(){
         style={{ width: '400px', height: '400px' }}
         ref={(mount) => { this.mount = mount }}
       >
-        <Slider onChange={this.setTranslation}/>
+        <Slider onChange={this.setTranslation} min={0} max={50}/>
         </div>
     )
   }
