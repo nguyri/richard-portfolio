@@ -87,13 +87,16 @@ export default [
     },
     {
         num: 3,
-        title: "Raytracer in Rust",
+        title: "Graphics and ThreeJS",
         link: "raytracer",
         description: "A computer graphics classic, now memory safe!",
         longdescription: [
+            {key: 5, subtitle:`Graphics`},
             {key: 1, text:`I've always had an interest in 3D graphics and shaders, so I decided to give a raytracer a shot and also learn a new programming language, Rust.`},
-            {key: 2, text:`Rust doesn't give any particular advantages in this case, given that there's no finnicky memory management.`},
-            {key: 3, text:`It was quite nice to use the built in package manager though!`},
+            {key: 2, text:`Rust doesn't give any particular advantages in this case, given that there's no finnicky memory management. It was quite nice to use the built in package manager though!`},
+            {key: 6, subtitle:`Three JS`},
+            {key: 3, text:`I wanted to give three.js a shot. It's fascinating that WebGL is good enough that a normal browser can run these pretty cool 3D demonstrations now.`},
+            {key: 7, text:`Shown below, a sampling of models I've drawn up in Fusion360. Click and drag to orbit a little! `},
             {key: 4, threejs: true}
             ],
             imageName:'./raytracer1.jpg',

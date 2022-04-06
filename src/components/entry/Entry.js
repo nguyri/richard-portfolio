@@ -4,7 +4,7 @@ import { Container, Button, Alert } from 'react-bootstrap';
 import { CSSTransition } from 'react-transition-group';
 import "./Entry.css"
 import ReactPlayer from 'react-player/lazy'
-import ThreeScene from "../threejsdemo/Three"
+import ThreeScene from "../threejsdemo/ThreeScene"
 
 export default function Entry(props) {
     const [entryIsSmall, setEntryIsSmall] = React.useState(true);

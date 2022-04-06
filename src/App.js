@@ -9,6 +9,7 @@ import Header from "./components/header/Header"
 import img from "./imgs/assiniboine.jpg"
 
 import { Outlet, Link, useNavigate } from "react-router-dom";
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 export default function App() {
   const [darkMode, setDarkMode] = React.useState(false)

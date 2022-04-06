@@ -1,0 +1,33 @@
+.threescene--div {
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    background-color: #f7f4ec; /* #F9F7F0; */
+    padding-block:20px;
+    margin:auto;
+}
+
+.threescene--title {
+    font-family:Inter;
+    font-weight:700;
+    font-size:1.5rem;
+    margin:0 0;
+}
+
+.threescene--button {
+    margin:5px 5px;
+    padding:8px 8px;
+    font-size:1.5 rem;
+}
+
+.threescene--slider-div {
+    display: flex;
+    flex-direction:row;
+    width: 8vw; 
+    align-content:center;
+    justify-content: center;
+    transform: scale(2); 
+    transform-origin:top center;
+    margin-block: 0px; 
+    margin-bottom:15px;
+}
