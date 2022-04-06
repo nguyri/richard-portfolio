@@ -9,6 +9,7 @@ import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
 import Slider, { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import modelData from './modelData'
+import Button from 'react-bootstrap/Button'
 
 
 // import {ThreeMFLoader} from './3MFLoader2'
@@ -31,10 +32,10 @@ export default class ThreeScene extends Component{
     // console.log(modelData)
     modelData.forEach((modelGroup, modelIndex) => {
       console.log(modelGroup)
-      modelShown = modelIndex;
+      let loadedGroup = []
       modelGroup.files.forEach( (path, index) => {
       loader.load(models[path].default, ( object3mf ) => {
-        list.push(object3mf);
+        loadedGroup.push(object3mf);
         object3mf.position.set(...modelGroup.positions[index])
         // object3mf.children[0].children[0].material.color.set(0xAFFFFF)
         // console.log(object3mf.children[0].children[0].material)
@@ -45,15 +46,27 @@ export default class ThreeScene extends Component{
 
         // object3mf.material=new THREE.MeshStandardMaterial();
         // object3mf.children[0].children[0].material=new THREE.MeshLambertMaterial({color:'0xffffff'});
-
-        scene.add(object3mf);
+        if(modelIndex == modelShown)
+          scene.add(object3mf);
       }, undefined, function ( error ) {
         console.error( error );
-      } );
-    })
+      }); // loader.load
+    }); //modelGroup.files.forEach 
+    list.push(loadedGroup);
   })
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      modelShown: 0
+    }
+  }
+
+  changeModelShown = (num) => {
+    this.setState({modelShown: num})
+    console.log('model shown', this.state.modelShown)
+  }
 
   componentDidMount(){
     const width = this.mount.clientWidth
@@ -89,9 +102,8 @@ export default class ThreeScene extends Component{
     // this.object3mf = {}
     let loader = new ThreeMFLoader();
     this.modelList = [];
-    this.modelShown = 0;
-    this.loadThreeMF(loader, modelData, this.modelList, this.modelShown, this.scene)
-    // console.log(this.modelList)
+    this.loadThreeMF(loader, modelData, this.modelList, this.state.modelShown, this.scene)
+    console.log(this.modelList)
 
     let controls = new OrbitControls( this.camera, this.renderer.domElement );
     controls.addEventListener( 'change', this.render );
@@ -129,13 +141,13 @@ renderScene = () => {
 
 setTranslation = (num) => {
   this.unitArray = []
-  for(var i = this.modelList.length - 1; i >= 0; i--) {
-    let step = 2/(this.modelList.length - 1)
+  for(var i = this.modelList[this.state.modelShown].length - 1; i >= 0; i--) {
+    let step = 2/(this.modelList[this.state.modelShown].length - 1)
     this.unitArray.push( step * i - 1)
   }
-  // console.log(this.modelList)
-  this.modelList.forEach( (model, index) => {
-    model.position.z = modelData[this.modelShown].positions[index][2] + num * this.unitArray[index] 
+  console.log(this.modelList)
+  this.modelList[this.state.modelShown].forEach( (model, index) => {
+    model.position.z = modelData[this.state.modelShown].positions[index][2] + num * this.unitArray[index] 
     // if(index == 0)
     //   console.log(model.position.z)
   })
@@ -150,6 +162,8 @@ render(){
       >
         <div style = {{width: '15vw', transform: 'scale(2)', transformOrigin:'top left', margin:'30px 10px'}}>
           <Slider onChange={this.setTranslation} min={1} max={30} />
+          <Button variant="primary" onClick={() => this.state.modelShown > 0 && this.changeModelShown(this.state.modelShown-1)}>Prev</Button>
+          <Button variant="primary" onClick={() => this.state.modelShown < this.modelList.length && this.changeModelShown(this.state.modelShown+1)}>Next Assembly</Button>
           </div>
         </div>
     )
