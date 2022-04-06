@@ -37,11 +37,13 @@ export default class ThreeScene extends Component{
       loader.load(models[path].default, ( object3mf ) => {
         loadedGroup.push(object3mf);
         object3mf.position.set(...modelGroup.positions[index])
+        object3mf.rotation.set(...modelGroup.rotations[index])
         // object3mf.children[0].children[0].material.color.set(0xAFFFFF)
         // console.log(object3mf.children[0].children[0].material)
         const material = new THREE.MeshPhongMaterial({ flatShading:'false', color: new THREE.Color(0xafafaf)});
         // material.color='0xefefef'
         object3mf.children[0].children[0].material=material;
+        
         // console.log(object3mf.children[0].children[0].material)
 
         // object3mf.material=new THREE.MeshStandardMaterial();
@@ -64,8 +66,18 @@ export default class ThreeScene extends Component{
   }
 
   changeModelShown = (num) => {
+    console.log('model shown', num)
     this.setState({modelShown: num})
     console.log('model shown', this.state.modelShown)
+    this.modelList.forEach((modelGroup, index) => {
+      modelGroup.forEach((model) => {
+        if(index == num) {
+          this.scene.add(model)
+        } else {
+          this.scene.remove(model)
+        }
+      })
+    })
   }
 
   componentDidMount(){
@@ -145,13 +157,14 @@ setTranslation = (num) => {
     let step = 2/(this.modelList[this.state.modelShown].length - 1)
     this.unitArray.push( step * i - 1)
   }
-  console.log(this.modelList)
+  // console.log(this.modelList, this.state.modelShown)
   this.modelList[this.state.modelShown].forEach( (model, index) => {
     model.position.z = modelData[this.state.modelShown].positions[index][2] + num * this.unitArray[index] 
     // if(index == 0)
     //   console.log(model.position.z)
   })
-  
+  this.camera.zoom = 5.4 - num/20;  
+  this.camera.updateProjectionMatrix();
 }
 
 render(){
@@ -163,7 +176,10 @@ render(){
         <div style = {{width: '15vw', transform: 'scale(2)', transformOrigin:'top left', margin:'30px 10px'}}>
           <Slider onChange={this.setTranslation} min={1} max={30} />
           <Button variant="primary" onClick={() => this.state.modelShown > 0 && this.changeModelShown(this.state.modelShown-1)}>Prev</Button>
-          <Button variant="primary" onClick={() => this.state.modelShown < this.modelList.length && this.changeModelShown(this.state.modelShown+1)}>Next Assembly</Button>
+          <Button variant="primary" onClick={
+            () => {
+            this.state.modelShown < this.modelList.length - 1 && this.changeModelShown(this.state.modelShown+1)
+            }}>Next Assembly</Button>
           </div>
         </div>
     )
