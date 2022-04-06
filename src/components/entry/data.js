@@ -32,7 +32,7 @@ export default [
             embellishments of a youtube tutorial.`, style: {gridColumn:"span 3"}},
             {key:13, text:`Recently I also got myself a fun 110cuft bottle to TIG weld with. TIG is certainly less forgiving and more sensitive to a litany of new variables. 
             However, it is very satisfying to see a clean weld come out without chipping or brushing at all.`, style: {gridColumn:"span 3"}},
-            {key: 15, imageName:'./welding2.jpg', style: {gridColumn:"1 /span 4", gridRow:"span 4", width:"40vw", height:"20vw", overflow:"hidden", objectFit:"cover"}, className:"entry--img-inline"},
+            {key: 16, imageName:'./welding2.jpg', style: {gridColumn:"1 /span 4", gridRow:"span 4", width:"40vw", height:"20vw", overflow:"hidden", objectFit:"cover"}, className:"entry--img-inline"},
     ],
         imageName:'./plasma2.jpg',
     },
@@ -116,7 +116,7 @@ export default [
             {key:7, img:'test img', style: {gridColumn:"1 / span 2",  marginBottom:"20px"}, className:"entry--img-inline", imageName:'./wood3.jpg' },
             {key:8, img:'test img', style: {gridColumn:"span 3",  marginBottom:"20px"}, className:"entry--img-inline", imageName:'./wood1.jpg' },
             {key:9, img:'test img', style: {gridColumn:"1 /span 2",  marginBottom:"20px"}, className:"entry--img-inline", imageName:'./wood5.jpg' },
-            {key:9, img:'test img', style: {gridColumn:"span 3",  marginBottom:"20px"}, className:"entry--img-inline", imageName:'./wood9.jpg' },
+            {key:10, img:'test img', style: {gridColumn:"span 3",  marginBottom:"20px"}, className:"entry--img-inline", imageName:'./wood9.jpg' },
             ],
         imageName:'./wood10.jpg',
     }

@@ -8,6 +8,7 @@ import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
 
 import Slider, { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
+import modelData from './modelData'
 
 
 // import {ThreeMFLoader} from './3MFLoader2'
@@ -25,20 +26,32 @@ importAll(require.context('../../models/', false, /\.(3mf)$/));
 
 export default class ThreeScene extends Component{
 
-  loadThreeMF(loader, paths, list, scene, positions) {
+  loadThreeMF(loader, modelData, list, modelShown, scene) {
     // loader.addExtension( ThreeMFLoader.MaterialsAndPropertiesExtension );
-
-    paths.forEach( (path, index) => {
+    // console.log(modelData)
+    modelData.forEach((modelGroup, modelIndex) => {
+      console.log(modelGroup)
+      modelShown = modelIndex;
+      modelGroup.files.forEach( (path, index) => {
       loader.load(models[path].default, ( object3mf ) => {
         list.push(object3mf);
-        object3mf.position.set(...positions[index])
-        object3mf.children[0].children[0].material=new THREE.MeshDepthMaterial();
-        // object3mf.children[0].children[0].material=new THREE.MeshStandardMaterial();
+        object3mf.position.set(...modelGroup.positions[index])
+        // object3mf.children[0].children[0].material.color.set(0xAFFFFF)
+        // console.log(object3mf.children[0].children[0].material)
+        const material = new THREE.MeshPhongMaterial({ flatShading:'false', color: new THREE.Color(0xafafaf)});
+        // material.color='0xefefef'
+        object3mf.children[0].children[0].material=material;
+        // console.log(object3mf.children[0].children[0].material)
+
+        // object3mf.material=new THREE.MeshStandardMaterial();
+        // object3mf.children[0].children[0].material=new THREE.MeshLambertMaterial({color:'0xffffff'});
+
         scene.add(object3mf);
       }, undefined, function ( error ) {
         console.error( error );
       } );
     })
+  })
   }
 
 
@@ -46,8 +59,14 @@ export default class ThreeScene extends Component{
     const width = this.mount.clientWidth
     const height = this.mount.clientHeight
     this.scene = new THREE.Scene()
-    this.camera = new THREE.PerspectiveCamera( 25, width / height, 70, 500)
+    this.camera = new THREE.OrthographicCamera(width / -2, width /2, height/2, height /-2, 0, 2000)//( 10, width / height, 50, 800)
+    // this.camera = new THREE.PerspectiveCamera( 5, width / height, 50, 2000)
+    this.camera.zoom = 5.4
     this.camera.up.set(0,0,1);
+    this.camera.position.set( 664, 622, 464 );
+    this.camera.lookAt(0,0,0)
+    this.camera.updateProjectionMatrix();
+
     // this.camera = new THREE.PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 1, 500 );
 
     this.pointLight = new THREE.PointLight( 0xffffff, 0.6 );
@@ -55,26 +74,24 @@ export default class ThreeScene extends Component{
     this.scene.add( this.pointLight );
     this.scene.add( new THREE.AmbientLight( 0xffffff, 0.6 ) );
 
-    this.camera.position.set( 106, 132, 84 );
-    this.camera.rotation.set(-1.15,0.499, 2.93)
+
     //ADD RENDERER
     this.renderer = new THREE.WebGLRenderer({ antialias: true })
-    this.renderer.setClearColor('#999999')
+    this.renderer.setClearColor('#FFFFFF', 0) //#F9F7F0
     this.renderer.setSize(width, height)
     this.mount.appendChild(this.renderer.domElement)
     //ADD CUBE
-    const geometry = new THREE.BoxGeometry(10, 10, 10)
-    const material = new THREE.MeshBasicMaterial({ color: '#433F81'     })
-    this.cube = new THREE.Mesh(geometry, material)
-    this.scene.add(this.cube)
+    // const geometry = new THREE.BoxGeometry(10, 10, 10)
+    // const material = new THREE.MeshBasicMaterial({ color: '#433F81'     })
+    // this.cube = new THREE.Mesh(geometry, material)
+    // this.scene.add(this.cube)
 
-    this.object3mf = {}
+    // this.object3mf = {}
     let loader = new ThreeMFLoader();
-    let modelPaths = ['./lamp-bolt-1.3mf','./lamp-base-1.3mf','./lamp-clamp-2.3mf', './lamp-finger-nut-1.3mf']
-    this.modelPositions = [[-8,0,10],[0,0,0],[0,0,-30],[0,0,-40]]
-    this.modelList = []
-    this.loadThreeMF(loader, modelPaths, this.modelList, this.scene, this.modelPositions)
-    console.log(this.modelList)
+    this.modelList = [];
+    this.modelShown = 0;
+    this.loadThreeMF(loader, modelData, this.modelList, this.modelShown, this.scene)
+    // console.log(this.modelList)
 
     let controls = new OrbitControls( this.camera, this.renderer.domElement );
     controls.addEventListener( 'change', this.render );
@@ -99,14 +116,15 @@ stop = () => {
   }
 
 animate = () => {
-   this.cube.rotation.x += 0.01
-   this.cube.rotation.y += 0.01
+  //  this.cube.rotation.x += 0.01
+  //  this.cube.rotation.y += 0.01
    this.renderScene()
    this.frameId = window.requestAnimationFrame(this.animate)
  }
 
 renderScene = () => {
   this.renderer.render(this.scene, this.camera)
+    // console.log( this.camera.zoom, this.camera.getWorldPosition(new THREE.Vector3(0,0,0)))
 }
 
 setTranslation = (num) => {
@@ -115,19 +133,24 @@ setTranslation = (num) => {
     let step = 2/(this.modelList.length - 1)
     this.unitArray.push( step * i - 1)
   }
-
+  // console.log(this.modelList)
   this.modelList.forEach( (model, index) => {
-    model.position.z = this.modelPositions[index][2] + num * this.unitArray[index] 
+    model.position.z = modelData[this.modelShown].positions[index][2] + num * this.unitArray[index] 
+    // if(index == 0)
+    //   console.log(model.position.z)
   })
+  
 }
 
 render(){
     return(
       <div
-        style={{ width: '400px', height: '400px' }}
+        style={{ width: '30vw', height: '30vw', display:'flex', flexDirection:'column'}}
         ref={(mount) => { this.mount = mount }}
       >
-        <Slider onChange={this.setTranslation} min={0} max={50}/>
+        <div style = {{width: '15vw', transform: 'scale(2)', transformOrigin:'top left', margin:'30px 10px'}}>
+          <Slider onChange={this.setTranslation} min={1} max={30} />
+          </div>
         </div>
     )
   }
