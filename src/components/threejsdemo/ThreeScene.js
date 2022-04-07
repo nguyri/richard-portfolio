@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import * as THREE from 'three';
 // demo from https://medium.com/@colesayershapiro/using-three-js-in-react-6cb71e87bdf4
 // import {ThreeMFLoader} from './3MFLoader'
@@ -11,15 +11,14 @@ import 'rc-slider/assets/index.css';
 import modelData from './modelData'
 import Button from 'react-bootstrap/Button'
 import './ThreeScene.css'
-
-
+import { useMediaQuery } from 'react-responsive'
 
 // import {ThreeMFLoader} from './3MFLoader2'
 import model from '../../models/lamp-base-1.3mf'
 
 //https://github.com/technohippy/3MFLoader/blob/master/app/index.html
 
-const models = {}
+const models = {};
 
 function importAll(r) {
   r.keys().forEach((key) => models[key] = r(key));
@@ -31,7 +30,8 @@ export default class ThreeScene extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modelShown: 0
+      modelShown: 0,
+      // isTabletOrMobile: useMediaQuery({query: '(max-width: 1224px)'})
     }
   }
 
@@ -85,6 +85,7 @@ export default class ThreeScene extends Component {
   componentDidMount() {
     const width = this.mount.clientWidth
     const height = this.mount.clientHeight
+    // this.isTabletOrMobile = useMediaQuery({query: '(max-width: 1224px)'})
     this.scene = new THREE.Scene()
     this.camera = new THREE.OrthographicCamera(width / -2, width / 2, height / 2, height / -2, 0, 2000)//( 10, width / height, 50, 800)
     // this.camera = new THREE.PerspectiveCamera( 5, width / height, 50, 2000)
@@ -190,8 +191,11 @@ export default class ThreeScene extends Component {
             this.state.modelShown < this.modelList.length - 1 && this.changeModelShown(this.state.modelShown + 1)}>Next Model</Button>
         </div>
         <div
-          style={{ width: '30vw', height: '30vw' }}
-          ref={(mount) => { this.mount = mount }}
+          // style={this.state.isTabletOrMobile() ? { width: '100vw', height: '100vw' } : { width: '30vw', height: '30vw' } }
+          style = {{ width: '30vw', height: '30vw' }}
+          ref={(mount) => { 
+            // this.mount.props.children[0].className='threescene-scene'
+            this.mount = mount; }}
         >
         </div>
       </div>

@@ -5,9 +5,11 @@ import { CSSTransition } from 'react-transition-group';
 import "./Entry.css"
 import ReactPlayer from 'react-player/lazy'
 import ThreeScene from "../threejsdemo/ThreeScene"
+import { useMediaQuery } from 'react-responsive'
 
 export default function Entry(props) {
     const [entryIsSmall, setEntryIsSmall] = React.useState(true);
+    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
 
     function smallEntry() {
         return (
@@ -20,7 +22,7 @@ export default function Entry(props) {
                 </div>
                 <div className="entry--col">
                     <h1 className={props.darkMode ? "entry--title entry--dark" : "entry--title"}> {props.title} </h1>
-                    <p className={props.darkMode ? "entry--text entry--dark" : "entry--text"}> {props.reactDescription ? props.reactDescription.html : props.description} </p>
+                    <div className={props.darkMode ? "entry--text entry--dark" : "entry--text"}> {props.reactDescription ? props.reactDescription.html : props.description} </div>
                 </div>
             </div>
         )
@@ -33,7 +35,7 @@ export default function Entry(props) {
             }
             else if (elem.threejs) {
                 return (
-                    <ThreeScene key={elem.key}/>
+                    <div key={elem.key}> {isTabletOrMobile ? <div>ThreeScene not yet supported on mobile</div> : <ThreeScene/>} </div>
                 )
             }
             else if (elem.vimeo) {
@@ -45,7 +47,7 @@ export default function Entry(props) {
                 return <h1 key={elem.key} className={props.darkMode ? "entry--subtitle entry--dark" : "entry--subtitle"}  style={elem.style}> {elem.subtitle} </h1>
             }
             else {
-                return <p key={elem.key} className={props.darkMode ? "entry--text entry--dark" : "entry--text"} style={elem.style}>  {elem.text} </p>
+                return <div key={elem.key} className={props.darkMode ? "entry--text entry--dark" : "entry--text"} style={elem.style}>  {elem.text} </div>
             }})
         )
     }

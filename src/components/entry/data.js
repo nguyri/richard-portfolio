@@ -10,6 +10,8 @@ export default [
         title: "Metal Shop",
         link: "metalshop",
         description: "Simply the best way to cover everything in iron oxide",
+        reactDescription:{html:<div>I'm pretty new to metal fabrication and welding.
+        To start with, a lot of things can be made with <b>sheet metal</b> and plain <b>welded steel tubing</b> without a lot of tooling. </div>},
         longdescription: [
             {key: 1, text:`I'm pretty new to metal fabrication and welding. I have had a vague interest in steel but during 
             the pandemic lumber prices made it more enticing to pick up an angle grinder.`},
@@ -42,9 +44,11 @@ export default [
         title: "Mostly Printed CNC",
         link: "mpcnc",
         description: "For what it’s worth, the MPCNC is an excellent open source CNC router for anyone interested in making parts that can’t be made on a 3D printer.",
+        reactDescription:{html:<div>For what it’s worth, the MPCNC is an excellent open source CNC router that can be used for <b>routing </b> 
+         2D parts in soft material, <b>plasma</b>, or <b>laser cutting.</b></div>},
         longdescription: [
             {key: 1, text:`For what it’s worth, the MPCNC is an excellent open source CNC router for anyone 
-            interested in making parts that can’t be made on a 3D printer. If I were in a spot to make another CNC router, I would make a PrintNC. `},
+            interested in making parts that can’t be made on a 3D printer. If I were to make another CNC router, I would make a PrintNC. `},
             {key: 16, vimeo:'https://vimeo.com/612194957', style: {}},
             {key: 2, text:`Admittedly, using this small garage router is more finnicky than using a rigid commercial machine
             with a spindle measured in horsepower. One upside is that if you crash it, the tiny steppers can't possibly generate enough force to damage anything other than your self esteem.`}, 
@@ -63,6 +67,8 @@ export default [
         title: "Additive Lathe",
         link: "addlathe",
         description: "Our capstone engineering project. This multidisciplinary project heavily modifies Cura to generate gcode. It prints onto a custom machined drum rather than a flat bed.",
+        reactDescription: {html:<div>"Our capstone engineering project. This multidisciplinary project heavily modifies the <b>open source slicer Cura </b>to generate gcode.
+        It prints onto a custom machined drum rather than a flat bed. </div>},
         longdescription: [
             {key: 1, text:`Our capstone engineering project. This multidisciplinary project heavily modifies Cura to generate gcode. It prints onto a custom machined drum rather than a flat bed.`},
             {key: 16, vimeo:'https://vimeo.com/692393001', style: {}},
@@ -119,7 +125,7 @@ export default [
             I find it’s pretty nice to be surrounded by your own furniture.`},
             {key: 2, subtitle:`Chessboard`},
             {key:5, img:'test img', style: {gridColumn:"span 2", gridRow:"span 4", margin: "20px 20px 20px 0px "}, className:"entry--img-inline", imageName: './wood2.jpg'},
-            {key:4, text:`I decided to do this chessboard out of red oak and black walnut and I was quite pleased with it. I honestly haven’t done many projects 
+            {key:4, text:`I decided to do this chessboard out of red oak and black walnut and I was quite pleased with it. I haven’t done many projects 
             out of hardwood since I haven’t had a jointer and planer until recently.`, style: {gridColumn:"span 3"}},
             {key:6, text:`It's really satisfying to square up your stock. It is quite a process however. Usually: Crosscut to an easier to handle size, rough rip to within 
             quarter inch, jointer, planer, rip and crosscut again to the final size.`, style: {gridColumn:"span 3"}},

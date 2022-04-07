@@ -18,7 +18,7 @@ export default function Header(props) {
     return (
         <div className={props.darkMode ? "header header--dark" : "header is-nav-open"}>
             <Link to={'projects'} style={{textDecoration:"none"}}>{homeButton()}</Link>
-            <h2 className="header--subtitle"> putting the magic smoke into wood, metal, and other questionable mediums</h2>
+            <h2 className="header--subtitle"> putting the magic smoke into wood, steel, and anything else.</h2>
 
             <nav className={props.darkMode ? "nav--dark" : ""}>
 

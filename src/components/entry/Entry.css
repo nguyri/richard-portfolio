@@ -131,7 +131,8 @@
     position: relative;
     padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
     border-radius: 10px;
-    margin:5px;
+    margin:5px 0px;
+    justify-content: left;
     /* overflow:hidden; */
 }
 
@@ -140,6 +141,9 @@
     top: 0;
     left: 0;
     z-index: 1;
+    padding:0 0;
+    margin:0 0;
+    padding-bottom:20px;
 }
 
 .entry--img-inline {
@@ -247,5 +251,12 @@
 
     .entries {
         margin: 10px 10px;
+    }
+
+    .entry--title {
+        font-weight:700;
+        font-size:1.5rem;
+        padding-bottom:0px;
+        grid-column: span 5;
     }
   }
