@@ -39,10 +39,11 @@ export default class ThreeScene extends Component {
     // loader.addExtension( ThreeMFLoader.MaterialsAndPropertiesExtension );
     // console.log(modelData)
     modelData.forEach((modelGroup, modelIndex) => {
-      console.log(modelGroup)
+      // console.log(modelGroup)
       let loadedGroup = []
       modelGroup.files.forEach((path, index) => {
         loader.load(models[path].default, (object3mf) => {
+          console.log(path);
           loadedGroup.push(object3mf);
           object3mf.position.set(...modelGroup.positions[index])
           object3mf.rotation.set(...modelGroup.rotations[index])

@@ -2,6 +2,7 @@ import mpcnc from "../../imgs/mpcnc1.jpg"
 import adlathe from "../../imgs/addlathe1.jpg"
 import raytracer from "../../imgs/raytracer1.jpg"
 import wordle from "../../imgs/wordle1.png"
+import React from 'react'
 
 export default [
     {
@@ -77,8 +78,10 @@ export default [
         num: 4,
         title: "Web Development",
         link: "wordle",
-        description: `Interfaces are easy to make and look great with web tools! Interfaces such as -this very website(it's responsive!)- 
+        description: `Interfaces are easy to make and look great with web tools! Interfaces such as this website (it's responsive!)- 
         Inside this section are some more web demonstrations: Wordle! Open Trivia! A little card!`,
+        reactDescription: {html:<div>Interfaces are easy to make and look great with web tools! Interfaces such as <b>this website</b> (it's responsive!)
+        and a <b>wordle demo</b>; sorry, not yet! </div>},
         longdescription: [
             {key: 1, text:`React is a nice library that can make your webpages /react/ to user inputs. User inputs such as playing wordle! You can even play it -right here (not yet)-`},
             {key: 2, text:`This website uses React and responsive CSS. On the backend it's built with babel and webpack. Deployment is on an nginx server running on an arch VPS.`},
@@ -87,15 +90,19 @@ export default [
     },
     {
         num: 3,
-        title: "Graphics and ThreeJS",
+        title: "Graphics",
         link: "raytracer",
-        description: "A computer graphics classic, now memory safe!",
+        description: `Raytracing, a computer graphics classic and a three.js demo`,
+        reactDescription: {html:<div>A computer graphics classic: <b>raytracing</b>,  and a <b>three.js</b> demo </div>},
         longdescription: [
             {key: 5, subtitle:`Graphics`},
             {key: 1, text:`I've always had an interest in 3D graphics and shaders, so I decided to give a raytracer a shot and also learn a new programming language, Rust.`},
             {key: 2, text:`Rust doesn't give any particular advantages in this case, given that there's no finnicky memory management. It was quite nice to use the built in package manager though!`},
+            {key: 8, text:`The raytracer was based off of Raytracing in One Weekend by Peter Shirley. Simply put, trace a line (ray) from a camera to every point on a screen. If the ray hits something, change the color. 
+            If the ray hits something that absorbs, reflects, or refracts the light... now you're raytracing!`},
             {key: 6, subtitle:`Three JS`},
-            {key: 3, text:`I wanted to give three.js a shot. It's fascinating that WebGL is good enough that a normal browser can run these pretty cool 3D demonstrations now.`},
+            {key: 3, text:`There are a bunch of really cool WebGL demos online and I wanted to give three.js a shot. 
+            It's fascinating that web browsers and WebGL are good enough that pretty cool 3D demonstrations work just fine in browser.`},
             {key: 7, text:`Shown below, a sampling of models I've drawn up in Fusion360. Click and drag to orbit a little! `},
             {key: 4, threejs: true}
             ],

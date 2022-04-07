@@ -20,7 +20,7 @@ export default function Entry(props) {
                 </div>
                 <div className="entry--col">
                     <h1 className={props.darkMode ? "entry--title entry--dark" : "entry--title"}> {props.title} </h1>
-                    <p className={props.darkMode ? "entry--text entry--dark" : "entry--text"}> {props.description} </p>
+                    <p className={props.darkMode ? "entry--text entry--dark" : "entry--text"}> {props.reactDescription ? props.reactDescription.html : props.description} </p>
                 </div>
             </div>
         )
