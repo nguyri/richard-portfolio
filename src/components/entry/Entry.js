@@ -31,7 +31,7 @@ export default function Entry(props) {
     function paragraphBigEntry(paragraphArr) {
         return (paragraphArr.map((elem) => {
             if (elem.imageName) {
-                return <img key={elem.key} src={props.images[elem.imageName].default ? props.images[elem.imageName].default : ""} style={elem.style} className={elem.className} />
+                return <img key={elem.key} src={props.images[elem.imageName].default ? props.images[elem.imageName].default : ""} style={isTabletOrMobile ? {} : elem.style} className={elem.className} />
             }
             else if (elem.threejs) {
                 return (
