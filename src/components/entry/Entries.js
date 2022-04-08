@@ -1,5 +1,5 @@
 import React from "react";
-import Entry from "./Entry";
+import LongEntry from "./LongEntry";
 import ShortEntry from "./ShortEntry";
 import { getEntries } from "./data"
 import { Link, Outlet, useOutletContext } from "react-router-dom";
@@ -31,7 +31,7 @@ export default function Entries (props) {
         
     return (
         <div className="entries" > 
-            <Outlet />
+            <Outlet context={darkMode}/>
             {entries}
             {/* <ThreeScene /> */}
         </div>

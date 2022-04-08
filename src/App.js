@@ -25,7 +25,7 @@ export default function App() {
   // }, [])
   
   return(  
-    <div className="App" style={{backgroundColor: darkMode ? "#1c1c1c": "#F9F7F0"}}>
+    <div className={darkMode? "App App--dark" : "App"}>
       <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode}/>
       <main>
         <Outlet context={darkMode}/>

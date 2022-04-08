@@ -57,6 +57,11 @@ main {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0 0;
   padding:0 0;
+  background-color: #f5f5f5;
+}
+
+.App--dark {
+    background-color: #1c1c1c;
 }
 
 .demo-title {

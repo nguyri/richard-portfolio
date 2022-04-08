@@ -11,7 +11,6 @@ export default function ShortEntry(props) {
 
     return (
         <div className={props.darkMode ? "entry entry--dark" : "entry"}>
-            {console.log(props)}
             {/* <h1>{params.projectlink}</h1> */}
             
             {/* <Outlet /> */}

@@ -3,7 +3,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-color:#88bea0;
+    background-color:#a7cdbd;
     margin:0 0;
     padding:20px;
     color:#F9F7F0;
@@ -14,7 +14,7 @@
 }
 
 .header--dark {
-    background-color:#32694b;
+    background-color:#1d3227;
 }
 
 .header--icon {
@@ -29,6 +29,11 @@
     font-weight:600;
     letter-spacing: 0.1rem;
     margin-block:0;
+    color:#506c61;
+}
+
+.header--title-dark {
+    color:#ffffff;
 }
 
 .header--subtitle {
@@ -36,8 +41,13 @@
     font-style: italic;
     margin-block:0;
     margin-inline:5vw;
-    font-weight:200;
+    font-weight:400;
     font-size:1.4rem;
+    color:#506c61;
+}
+
+.header--subtitle-dark {
+    color:#ffffff;
 }
 
 nav {
@@ -52,8 +62,12 @@ nav {
 .nav--home {
     display:flex;
     flex-direction: row;
-    color:#ffffff;
+    color:#506c61;
     align-items: center;
+}
+
+.nav--home-dark {
+    color:#ffffff;
 }
 
 .nav--row {
@@ -66,9 +80,13 @@ nav {
 .nav--item {
     padding:20px 20px;
     font-family: Inter;
-    color:#ffffff;
+    color: #506c61;
     font-size:1.5rem;
     font-weight:500;
+}
+
+.nav--item-dark {
+    color:#ffffff;
 }
 
 .nav--item:hover {
@@ -99,7 +117,7 @@ nav {
 .toggler--slider {
     width: 39px;
     height: 20px;
-    background-color: #5f958d;
+    background-color: #386b63;
     border-radius: 2rem;
     margin-inline: 7px;
     margin-block:0;
@@ -107,7 +125,7 @@ nav {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    border: 1px solid #5f958d;
+    border: 1px solid #386b63;
     box-sizing: content-box;
 }
 
@@ -124,11 +142,11 @@ nav {
 }
 
 .nav--dark .toggler--slider--circle {
-    background-color: #5f958d;
+    background-color: #386b63;
 }
 
 .toggler--light {
-    color: #ffffff;
+    color: #506c61;
     /* color: #45405a; */
 }
 
@@ -137,7 +155,7 @@ nav {
 }
 
 .toggler--dark {
-    color: #f5f5f5;
+    color: #506c61;
     /* color: #403a55; */
 }
 

@@ -6,33 +6,14 @@ import "./Entry.css"
 import ReactPlayer from 'react-player/lazy'
 import ThreeScene from "../threejsdemo/ThreeScene"
 import { useMediaQuery } from 'react-responsive'
-import { useParams } from "react-router-dom";
+import { useParams, useOutletContext } from "react-router-dom";
 import { getEntry, getImage } from './data'
 
-export default function Entry(props) {
+export default function LongEntry() {
     const [entryIsSmall, setEntryIsSmall] = React.useState(true);
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
     let params = useParams();
-    props = getEntry(params.projectlink)
-
-    function smallEntry() {
-        return (
-            <div className={props.darkMode ? "entry entry--dark" : "entry"}>
-                {console.log(props)}
-                <h1>{params.projectlink}</h1>
-                <div id={props.link} className="entry--overlay-container" onClick={() => setEntryIsSmall(!entryIsSmall)}>
-                    <img src={getImage(props.imageName).default ? getImage(props.imageName).default : ""} className="entry--img" />
-                    <div className="entry--overlay">
-                        <span className="material-icons-round entry--overlay-icon">expand_more</span>
-                    </div>
-                </div>
-                <div className="entry--col">
-                    <h1 className={props.darkMode ? "entry--title entry--dark" : "entry--title"}> {props.title} </h1>
-                    <div className={props.darkMode ? "entry--text entry--dark" : "entry--text"}> {props.reactDescription ? props.reactDescription.html : props.description} </div>
-                </div>
-            </div>
-        )
-    }
+    let entryData = {...getEntry(params.projectlink), darkMode:useOutletContext()}
 
     function paragraphBigEntry(paragraphArr) {
         return (paragraphArr.map((elem) => {
@@ -50,22 +31,21 @@ export default function Entry(props) {
                     </div>
             }
             else if (elem.subtitle) {
-                return <h1 key={elem.key} className={props.darkMode ? "entry--subtitle entry--dark" : "entry--subtitle"}  style={elem.style}> {elem.subtitle} </h1>
+                return <h1 key={elem.key} className={entryData.darkMode ? "entry--subtitle entry--dark" : "entry--subtitle"}  style={elem.style}> {elem.subtitle} </h1>
             }
             else {
-                return <div key={elem.key} className={props.darkMode ? "entry--text entry--dark" : "entry--text"} style={elem.style}>  {elem.text} </div>
+                return <div key={elem.key} className={entryData.darkMode ? "entry--text entry--dark" : "entry--text"} style={elem.style}>  {elem.text} </div>
             }})
         )
     }
 
     function bigEntry() {
-        console.log('scrolling')
         window.scrollTo(0,0)
         return (
-            <div id={props.link} className={props.darkMode ? "entry entry--dark" : "entry"} >
-                <div className={props.darkMode? "entry--img-container-dark entry--img-container" : "entry--img-container"} onClick={() => setEntryIsSmall(!entryIsSmall)}>
+            <div id={entryData.link} className={entryData.darkMode ? "entry entry--dark" : "entry"} >
+                <div className={entryData.darkMode? "entry--img-container-dark entry--img-container" : "entry--img-container"} onClick={() => setEntryIsSmall(!entryIsSmall)}>
                     <div className="entry--overlay-container entry--overlay-container-big" >
-                        <img src={getImage(props.imageName).default ? getImage(props.imageName).default : ""} className="entry--img" />
+                        <img src={getImage(entryData.imageName).default ? getImage(entryData.imageName).default : ""} className="entry--img" />
                         <div className="entry--overlay">
                             <span className="material-icons-round entry--overlay-icon">expand_less</span>
                         </div>
@@ -73,8 +53,8 @@ export default function Entry(props) {
                 </div>
 
                 <div className="entry--grid">
-                    <h1 className={props.darkMode ? "entry--title entry--dark" : "entry--title"}> {props.title} </h1>
-                    {paragraphBigEntry(props.longdescription)}
+                    <h1 className={entryData.darkMode ? "entry--title entry--dark" : "entry--title"}> {entryData.title} </h1>
+                    {paragraphBigEntry(entryData.longdescription)}
                 </div>
             </div>
         )
