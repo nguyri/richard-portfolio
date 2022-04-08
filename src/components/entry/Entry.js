@@ -59,6 +59,8 @@ export default function Entry(props) {
     }
 
     function bigEntry() {
+        console.log('scrolling')
+        window.scrollTo(0,0)
         return (
             <div id={props.link} className={props.darkMode ? "entry entry--dark" : "entry"} >
                 <div className={props.darkMode? "entry--img-container-dark entry--img-container" : "entry--img-container"} onClick={() => setEntryIsSmall(!entryIsSmall)}>
@@ -79,7 +81,7 @@ export default function Entry(props) {
     }
     return (
         <div>
-            {entryIsSmall && smallEntry()}
+            {/* {entryIsSmall && smallEntry()}
             <CSSTransition
                 in={!entryIsSmall}
                 timeout={{
@@ -91,9 +93,9 @@ export default function Entry(props) {
                 unmountOnExit
                 onEnter={() => setEntryIsSmall(false)}
                 onExited={() => setEntryIsSmall(true)}
-            >
+            > */}
                 {bigEntry()}
-            </CSSTransition>
+            {/* </CSSTransition> */}
         </div>
         // <Collapsible trigger={smallEntry()} triggerWhenOpen={<div>{props.title}</div>}>
         //     {bigEntry()}

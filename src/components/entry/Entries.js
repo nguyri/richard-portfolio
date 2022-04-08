@@ -1,5 +1,6 @@
 import React from "react";
 import Entry from "./Entry";
+import ShortEntry from "./ShortEntry";
 import { getEntries } from "./data"
 import { Link, Outlet, useOutletContext } from "react-router-dom";
 import ThreeScene from "../threejsdemo/ThreeScene"
@@ -22,16 +23,16 @@ export default function Entries (props) {
         data.key = entry.num;
         return (
             <div key={data.key}>
-                {/* <Entry {...data}/> */}
-                <Link to={`/projects/${entry.link}`} > {entry.title} </Link>
+                <ShortEntry {...data}/>
+                {/* <Link to={`/projects/${entry.link}`} > {entry.title} </Link> */}
             </div>
         )
         })
         
     return (
         <div className="entries" > 
-            {entries}
             <Outlet />
+            {entries}
             {/* <ThreeScene /> */}
         </div>
         )
