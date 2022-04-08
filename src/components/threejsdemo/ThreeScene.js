@@ -11,7 +11,7 @@ import 'rc-slider/assets/index.css';
 import modelData from './modelData'
 import Button from 'react-bootstrap/Button'
 import './ThreeScene.css'
-import { useMediaQuery } from 'react-responsive'
+import MediaQuery from 'react-responsive'
 
 // import {ThreeMFLoader} from './3MFLoader2'
 import model from '../../models/lamp-base-1.3mf'
@@ -168,13 +168,19 @@ export default class ThreeScene extends Component {
           <Button variant="primary" size='lg' className={'threescene--button'} onClick={() =>
             this.state.modelShown < this.modelList.length - 1 && this.changeModelShown(this.state.modelShown + 1)}>Next Model</Button>
         </div>
-        <div
-          style = {{ width: '30vw', height: '30vw' }}
-          ref={(mount) => { 
-            // this.mount.props.children[0].className='threescene-scene'
-            this.mount = mount; }}
-        >
-        </div>
+        <MediaQuery minWidth={1224} >
+          {(matches) => 
+          matches ? 
+          <div
+            style = {{ width: '30vw', height: '30vw' }}
+            ref={(mount) => { this.mount = mount; }} >
+          </div> : 
+          <div
+            style = {{ width: '100vw', height: '100vw' }}
+            ref={(mount) => { this.mount = mount; }} >
+          </div>
+          } 
+        </MediaQuery>
       </div>
     )
   }

@@ -35,7 +35,7 @@ export default function Entry(props) {
             }
             else if (elem.threejs) {
                 return (
-                    <div key={elem.key}> {isTabletOrMobile ? <div>ThreeScene not yet supported on mobile</div> : <ThreeScene/>} </div>
+                    <div key={elem.key}> <ThreeScene/> </div>
                 )
             }
             else if (elem.vimeo) {

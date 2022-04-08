@@ -29,7 +29,7 @@ export default function Entries (props) {
     return (
         <div className="entries" > 
             {entries}
-            <ThreeScene />
+            {/* <ThreeScene /> */}
         </div>
         )
   }
