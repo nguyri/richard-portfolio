@@ -2,37 +2,71 @@ import React from "react"
 import "./Header.css"
 import { useMediaQuery } from 'react-responsive'
 import { Link } from "react-router-dom";
+import useBreadcrumbs from 'use-react-router-breadcrumbs';
 
-function homeButton (props) {
-    const isTabletOrMobile = useMediaQuery({query: '(max-width: 1224px)'})
+const Breadcrumbs = (darkMode) => {
+  const breadcrumbs = useBreadcrumbs();
+
+  return (
+    <React.Fragment>
+      {breadcrumbs.map(({ breadcrumb }) => {
+        // console.log(breadcrumb)
+        return <Link to={breadcrumb.key} className={`nav--item nav--item-shrink ${darkMode && `nav--item-dark`}`} onClick={() => window.scrollTo(0, 0)}> {breadcrumb} </Link>;
+        })}
+    </React.Fragment>
+  );
+}
+
+function homeButton(darkMode, shrinkHeader) {
+    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
 
     return (
-        <div className={props.darkMode ? "nav--home nav--home-dark" : "nav--home"} >
-            <p className={props.darkMode ? "header--icon header--icon-dark material-icons-round" : "header--icon material-icons-round"}>{"electric_bolt"}</p>
-            <h1 className={props.darkMode ? "header--title header--title-dark" : "header--title"} >richard nguyen</h1>
+        <div className={`nav--home ${darkMode && `nav--home-dark`}`} >
+            <p className={`header--icon material-icons-round ${darkMode && `header--icon-dark`}`} >{"electric_bolt"}</p>
+            <h1 className={`header--title ${darkMode && `header--title-dark`} ${shrinkHeader && `header--title-shrink`}`} >richard nguyen</h1>
         </div>
     )
 }
 
 export default function Header(props) {
+    const [shrinkHeader, setShrinkHeader] = React.useState(false);
+    const handleScroll = () => {
+        const position = window.pageYOffset;
+        setShrinkHeader(position > 200);
+    };
+
+    React.useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+
     return (
-        <div className={props.darkMode ? "header header--dark" : "header is-nav-open"}>
-            <Link to={'projects'} style={{textDecoration:"none"}} >{homeButton(props)}</Link>
-            <h2 className={props.darkMode ? "header--subtitle header--subtitle-dark" : "header--subtitle"}> putting the magic smoke into code, wood, and steel.</h2>
+        <div className={`header ${props.darkMode && `header--dark`} ${shrinkHeader && `header--shrink`}`}>
+            <Link to={'projects'} style={{ textDecoration: "none" }} >{homeButton(props.darkMode, shrinkHeader)}</Link>
+            <h2 className={
+                `header--subtitle 
+                ${props.darkMode && `header--subtitle-dark`}`}>
+                {!shrinkHeader && `putting the magic smoke into code, wood, and steel.`}
+                {shrinkHeader && Breadcrumbs(props.darkMode)
+            }
+            </h2>
 
             <nav className={props.darkMode ? "nav--dark" : ""}>
 
                 <div className="nav--row">
-                    <Link to={'projects'} className={props.darkMode ? "nav--item nav--item-dark" : "nav--item"}>projects</Link>
-                    <Link to={'about'} className={props.darkMode ? "nav--item nav--item-dark" : "nav--item"}>about</Link>
+                    {!shrinkHeader && <Link to={'projects'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>projects</Link>}
+                    <Link to={'about'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>about</Link>
                     {/* <Link to={'docs'} className="nav--item">docs</Link> */}
                     <div className="toggler">
                         <p className="toggler--light">light</p>
-                        <div  className="toggler--slider" onClick={props.toggleDarkMode} >
+                        <div className="toggler--slider" onClick={props.toggleDarkMode} >
                             <div className="toggler--slider--circle"></div>
                         </div>
                         <p className="toggler--dark">dark</p>
-                    </div>  
+                    </div>
                 </div>
             </nav>
         </div>

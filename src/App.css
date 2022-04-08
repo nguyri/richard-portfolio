@@ -45,6 +45,7 @@ body {
 }
 
 main {
+    padding-top:100px; 
     margin: 0 0;
 }
 
@@ -52,6 +53,7 @@ main {
   /* padding: 10vw;
   padding-block: 2vh; */
   /* display:inline-block; */
+  position:relative;
   width:100%;
   height:minmax(100vh, 200vh);
   font-family: Arial, Helvetica, sans-serif;
