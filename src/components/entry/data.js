@@ -4,7 +4,27 @@ import raytracer from "../../imgs/raytracer1.jpg"
 import wordle from "../../imgs/wordle1.png"
 import React from 'react'
 
-export default [
+const images = {}
+
+function importAll(r) {
+    r.keys().forEach((key) => images[key] = r(key));
+}
+  
+importAll(require.context('../../imgs/', false, /\.(png|jpe?g|svg)$/));
+
+export function getEntries() {
+    return entries
+}
+
+export function getImage(path) {
+    return images[path];
+}
+
+export function getEntry(link) {
+    return entries.find(elem => elem.link == link)
+}
+
+let entries = [
     {
         num:5,
         title: "Metal Shop",

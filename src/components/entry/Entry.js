@@ -6,16 +6,22 @@ import "./Entry.css"
 import ReactPlayer from 'react-player/lazy'
 import ThreeScene from "../threejsdemo/ThreeScene"
 import { useMediaQuery } from 'react-responsive'
+import { useParams } from "react-router-dom";
+import { getEntry, getImage } from './data'
 
 export default function Entry(props) {
     const [entryIsSmall, setEntryIsSmall] = React.useState(true);
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
+    let params = useParams();
+    props = getEntry(params.projectlink)
 
     function smallEntry() {
         return (
             <div className={props.darkMode ? "entry entry--dark" : "entry"}>
+                {console.log(props)}
+                <h1>{params.projectlink}</h1>
                 <div id={props.link} className="entry--overlay-container" onClick={() => setEntryIsSmall(!entryIsSmall)}>
-                    <img src={props.images[props.imageName].default ? props.images[props.imageName].default : ""} className="entry--img" />
+                    <img src={getImage(props.imageName).default ? getImage(props.imageName).default : ""} className="entry--img" />
                     <div className="entry--overlay">
                         <span className="material-icons-round entry--overlay-icon">expand_more</span>
                     </div>
@@ -31,7 +37,7 @@ export default function Entry(props) {
     function paragraphBigEntry(paragraphArr) {
         return (paragraphArr.map((elem) => {
             if (elem.imageName) {
-                return <img key={elem.key} src={props.images[elem.imageName].default ? props.images[elem.imageName].default : ""} style={isTabletOrMobile ? {} : elem.style} className={elem.className} />
+                return <img key={elem.key} src={getImage(elem.imageName).default ? getImage(elem.imageName).default : ""} style={isTabletOrMobile ? {} : elem.style} className={elem.className} />
             }
             else if (elem.threejs) {
                 return (
@@ -57,7 +63,7 @@ export default function Entry(props) {
             <div id={props.link} className={props.darkMode ? "entry entry--dark" : "entry"} >
                 <div className={props.darkMode? "entry--img-container-dark entry--img-container" : "entry--img-container"} onClick={() => setEntryIsSmall(!entryIsSmall)}>
                     <div className="entry--overlay-container entry--overlay-container-big" >
-                        <img src={props.images[props.imageName].default ? props.images[props.imageName].default : ""} className="entry--img" />
+                        <img src={getImage(props.imageName).default ? getImage(props.imageName).default : ""} className="entry--img" />
                         <div className="entry--overlay">
                             <span className="material-icons-round entry--overlay-icon">expand_less</span>
                         </div>
