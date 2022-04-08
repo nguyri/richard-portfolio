@@ -1,5 +1,7 @@
 * {
     box-sizing: border-box;
+    --entry-dark-text: #000000;
+    --entry-light-text: #ffffff;
 }
             
 .entry {
@@ -52,7 +54,7 @@
 }
 
 .entry--overlay-icon {
-    color:#F9F7F0;
+    color:var(--entry-light-text);
     font-size:3rem;
 }
 
@@ -78,7 +80,7 @@
 
 .entry--dark {
     background-color:#333333;
-    color:#cecece;
+    color:var(--entry-light-text);
 }
 .entry--img-container{
     display:flex;
@@ -169,6 +171,11 @@
     font-size:1.8rem;
     padding-bottom:15px;
     grid-column: span 5;
+    color:var(--entry-dark-text);
+}
+
+.entry--title-dark {
+    color:var(--entry-light-text);
 }
 
 .entry--date {

@@ -32,6 +32,7 @@ export default function Entries (props) {
     return (
         <div className="entries" > 
             <Outlet context={darkMode}/>
+            {/* {console.log(createBrowserHistory())} */}
             {entries}
             {/* <ThreeScene /> */}
         </div>

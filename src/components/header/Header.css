@@ -1,3 +1,8 @@
+* {
+    --header-dark-text:#506c61;
+    --header-light-text:#dff1eb;
+}
+
 .header {
     display:flex;
     flex-direction: row;
@@ -6,7 +11,7 @@
     background-color:#a7cdbd;
     margin:0 0;
     padding:20px;
-    color:#F9F7F0;
+    color:var(--header-light-text);
 }
 
 .is-nav-open {
@@ -29,11 +34,11 @@
     font-weight:600;
     letter-spacing: 0.1rem;
     margin-block:0;
-    color:#506c61;
+    color:var(--header-dark-text);
 }
 
 .header--title-dark {
-    color:#ffffff;
+    color:var(--header-light-text);
 }
 
 .header--subtitle {
@@ -43,11 +48,11 @@
     margin-inline:5vw;
     font-weight:400;
     font-size:1.4rem;
-    color:#506c61;
+    color:var(--header-dark-text);
 }
 
 .header--subtitle-dark {
-    color:#ffffff;
+    color:var(--header-light-text);
 }
 
 nav {
@@ -62,12 +67,12 @@ nav {
 .nav--home {
     display:flex;
     flex-direction: row;
-    color:#506c61;
+    color:var(--header-dark-text);
     align-items: center;
 }
 
 .nav--home-dark {
-    color:#ffffff;
+    color:var(--header-light-text);
 }
 
 .nav--row {
@@ -80,13 +85,13 @@ nav {
 .nav--item {
     padding:20px 20px;
     font-family: Inter;
-    color: #506c61;
+    color: var(--header-dark-text);
     font-size:1.5rem;
     font-weight:500;
 }
 
 .nav--item-dark {
-    color:#ffffff;
+    color:var(--header-light-text);
 }
 
 .nav--item:hover {
@@ -97,7 +102,6 @@ nav {
 }
 
 .nav--title {
-    color: #DEEBF8;
 }
 
 .toggler {
@@ -130,14 +134,14 @@ nav {
 }
 
 .nav--dark .toggler--slider {
-    border-color: white;
-    background-color: #F5F5F5;
+    border-color: var(--header-light-text);
+    background-color: var(--header-light-text);
 }
 
 .toggler--slider--circle {
     height: 19px;
     width: 19px;
-    background-color: white;
+    background-color: var(--header-light-text);
     border-radius: 50%;
 }
 
@@ -146,21 +150,21 @@ nav {
 }
 
 .toggler--light {
-    color: #506c61;
+    color: var(--header-dark-text);
     /* color: #45405a; */
 }
 
 .nav--dark .toggler--light {
-    color: #dfdfdf;
+    color: var(--header-light-text);
 }
 
 .toggler--dark {
-    color: #506c61;
+    color: var(--header-dark-text);
     /* color: #403a55; */
 }
 
 .nav--dark .toggler--dark {
-    color: #b8b8b8;
+    color: var(--header-light-text);
 }
 
 .nav--dark .toggler--slider {

@@ -53,7 +53,7 @@ export default function LongEntry() {
                 </div>
 
                 <div className="entry--grid">
-                    <h1 className={entryData.darkMode ? "entry--title entry--dark" : "entry--title"}> {entryData.title} </h1>
+                    <h1 className={entryData.darkMode ? "entry--title entry--title-dark" : "entry--title"}> {entryData.title} </h1>
                     {paragraphBigEntry(entryData.longdescription)}
                 </div>
             </div>
