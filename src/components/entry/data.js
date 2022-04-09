@@ -134,7 +134,7 @@ let entries = [
             {key: 3, text:`There are a bunch of really cool WebGL demos online and I wanted to give three.js a shot. 
             It's fascinating that web browsers and WebGL are good enough that pretty cool 3D demonstrations work just fine in browser.`},
             {key: 7, text:`Shown below, a sampling of models I've drawn up in Fusion360. Click and drag to orbit a little! `},
-            {key: 4, threejs: true}
+            {key: 4, threejs: true,}
             ],
             imageName:'./raytracer1.jpg',
     },

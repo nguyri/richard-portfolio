@@ -59,13 +59,13 @@ export default function Header(props) {
                         code {<div className="material-icons-round" style={{marginInline:"15px", width:'25px'}}>terminal</div>} 
                         steel {<div className="material-icons-round" style={{marginInline:"15px", width:'20px'}}> precision_manufacturing</div>} </div> }
                         {/* h_mobiledata */} 
-                    { ((shrinkHeader && !isTabletOrMobile)) && Breadcrumbs(props.darkMode) }
+                    { Breadcrumbs(props.darkMode) }
                 </h2>   
 
             <nav className={props.darkMode ? "nav--dark" : ""}>
                 <div className="nav--row">
-                    { !shrinkHeader && <Link to={'projects'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>projects</Link>}
-                    <Link to={'about'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>about</Link>
+                    { (!shrinkHeader && isTabletOrMobile) && <Link to={'projects'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>projects</Link>}
+                    { (!shrinkHeader && isTabletOrMobile) && <Link to={'about'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>about</Link>}
                     {/* <Link to={'docs'} className="nav--item">docs</Link> */}
                     <div className="toggler">
                         <p className="toggler--light">light</p>

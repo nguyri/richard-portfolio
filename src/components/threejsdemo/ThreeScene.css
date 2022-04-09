@@ -5,11 +5,12 @@
     background-color: #f7f4ec; /* #F9F7F0; */
     padding-block:20px;
     margin:auto;
+    width:30vw;
 }
 
 .threescene--scene {
-    width: '30vw';
-    height: '30vw';
+    width: 30vw;
+    height: 30vw;
 }
 
 .threescene--title {
@@ -39,7 +40,15 @@
 
 @media screen and (max-width: 1224px) {
     .threescene--scene {
-        width: '100vw';
-        height: '100vw';
+        width: 90vw;
+        height: 90vw;
+    }
+
+    .threescene--slider-div {
+        width:30vw;
+    }
+
+    .threescene--div {
+        width:90vw;
     }
 }

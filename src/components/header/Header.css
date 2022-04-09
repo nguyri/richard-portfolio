@@ -225,6 +225,7 @@ nav {
         display:flex;
         align-items:center;
         flex-direction: row;
+        padding-left:10px
     }
 
     nav {
@@ -244,7 +245,7 @@ nav {
     }
 
     .nav--item-shrink {
-        font-size:1.0rem;
+        font-size:0.8rem;
     }
 
     .toggler p {
