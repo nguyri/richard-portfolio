@@ -148,15 +148,15 @@ let entries = [
             I started off really rather bad at making stuff out of wood. Nowadays I can make some things passably. 
             I find it’s pretty nice to be surrounded by your own furniture.`},
             {key: 2, subtitle:`Chessboard`},
-            {key:5, img:'test img', style: {gridColumn:"span 2", gridRow:"span 4", margin: "20px 20px 20px 0px "}, className:"entry--img-inline", imageName: './wood2.jpg'},
+            {key:5, img:'test img', style: {gridColumn:"span 2", gridRow:"span 4", margin: "20px 20px 20px 0px ", width:'20vw'}, className:"entry--img-inline", imageName: './wood2.jpg'},
             {key:4, text:`I decided to do this chessboard out of red oak and black walnut and I was quite pleased with it. I haven’t done many projects 
             out of hardwood since I haven’t had a jointer and planer until recently.`, style: {gridColumn:"span 3"}},
             {key:6, text:`It's really satisfying to square up your stock. It is quite a process however. Usually: Crosscut to an easier to handle size, rough rip to within 
             quarter inch, jointer, planer, rip and crosscut again to the final size.`, style: {gridColumn:"span 3"}},
-            {key:7, img:'test img', style: {gridColumn:"1 / span 2",  marginBottom:"20px"}, className:"entry--img-inline", imageName:'./wood3.jpg' },
-            {key:8, img:'test img', style: {gridColumn:"span 3",  marginBottom:"20px"}, className:"entry--img-inline", imageName:'./wood1.jpg' },
-            {key:9, img:'test img', style: {gridColumn:"1 /span 2",  marginBottom:"20px"}, className:"entry--img-inline", imageName:'./wood5.jpg' },
-            {key:10, img:'test img', style: {gridColumn:"span 3",  marginBottom:"20px"}, className:"entry--img-inline", imageName:'./wood9.jpg' },
+            {key:7, img:'test img', style: {gridColumn:"1 / span 2",  marginBottom:"20px", width:'20vw', height:'40vh'}, className:"entry--img-inline", imageName:'./wood3.jpg' },
+            {key:8, img:'test img', style: {gridColumn:"span 3",  marginBottom:"20px", width:'30vw', height:'40vh'}, className:"entry--img-inline", imageName:'./wood1.jpg' },
+            {key:9, img:'test img', style: {gridColumn:"1 /span 2",  marginBottom:"20px", width:'20vw', height:'40vh'}, className:"entry--img-inline", imageName:'./wood5.jpg' },
+            {key:10, img:'test img', style: {gridColumn:"span 3",  marginBottom:"20px", width:'30vw', height:'40vh'}, className:"entry--img-inline", imageName:'./wood9.jpg' },
             ],
         imageName:'./wood10.jpg',
     }
