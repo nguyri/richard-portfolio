@@ -16,9 +16,9 @@ export default function ShortEntry(props) {
             {/* <Outlet /> */}
             <div id={props.link} className="entry--overlay-container">
                 <img src={getImage(props.imageName).default ? getImage(props.imageName).default : ""} className="entry--img" />
-                <div className="entry--overlay">
+                {/* <div className="entry--overlay">
                     <span className="material-icons-round entry--overlay-icon">expand_more</span>
-                </div>
+                </div> */}
             </div>
             <div className="entry--col">
                 <Link to={`/projects/${props.link}`} className={props.darkMode ? "entry--title entry--title-dark" : "entry--title"} > {props.title} </Link>

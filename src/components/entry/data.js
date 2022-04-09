@@ -35,7 +35,7 @@ let entries = [
         longdescription: [
             {key: 1, text:`I'm pretty new to metal fabrication and welding. I have had a vague interest in steel but during 
             the pandemic lumber prices made it more enticing to pick up an angle grinder.`},
-            {key:3, text:`I've found that metal in general is more forgiving than wood; the cutting tools go at a lower rpm and a butt joint can simply be welded together`},
+            {key:3, text:`I've found that metal in general is more forgiving than wood. The cutting tools go at a lower rpm and if you make a mistake, it can be welded back together`},
             {key: 2, subtitle:`Plasma Cutter`},
             {key: 15, vimeo:'https://vimeo.com/675640978', },
             {key:4, text:`Plasma cutting uses a stream of plasma between the torch head and the metal to deliver enough energy to melt 
@@ -45,8 +45,8 @@ let entries = [
             {key: 16, vimeo:'https://vimeo.com/692360282', style: {gridColumn:"span 3"}},
             {key:7, text:`Admittedly it took a rather long time to get to this point. A combination of poor connectors and very strong 
             electromagnetic interference (EMI) meant a lengthy process of troubleshooting to finally get it working.`},
-            {key:8, text:`I had to rewire the entire CNC machine, add shielding to all the exterior cables, add an enclosure for the controllers, 
-            and also replace the tiny 3d printer drivers with more noise resistant stepper drivers.`},
+            {key:8, text:`Reducing EMI meant rewiring the entire CNC machine, shielding to all the exterior cables, adding an enclosure for the controllers, 
+            and also replacing the tiny 3d printer drivers with more noise resistant stepper drivers.`},
             {key:9, text:`Comparing this amount of work to a less noisy plasma cutter, of course it would have been a better idea to simply 
             buy a blowback plasma from the start.`,},
             {key: 14, imageName:'./welding1.jpg', style: {gridColumn:"1 /span 2", gridRow:"span 4", margin:"20px 20px", marginLeft:"0"}, className:"entry--img-inline"},
@@ -73,8 +73,10 @@ let entries = [
             {key: 2, text:`Admittedly, using this small garage router is more finnicky than using a rigid commercial machine
             with a spindle measured in horsepower. One upside is that if you crash it, the tiny steppers can't possibly generate enough force to damage anything other than your self esteem.`}, 
             {key:5, img:'test img', style: {gridColumn:"span 2", gridRow:"span 3", margin:"20px 20px", marginLeft:"0"}, className:"entry--img-inline",  imageName:'./mpcnc2.jpg'},
-            {key: 4, text:`The most common issue was with electrical connectors, which were simple but painstaking to fix. Occasionally the tool could catch a wall it
-            was not meant to engage and dove into the material.`, style: {gridColumn:"span 3"}},
+            {key: 4, text:`The most common issue was with electrical connectors, which were simple but painstaking to fix. To make maintenance easier, all the wires can be disconnected at the controller box,
+            at the machine frame, and even next to the stepper motor. Stepper power goes through no less than 6 connectors and each stepper motor has 4 cables. Not my favorite wiring job.`, style: {gridColumn:"span 3"}},
+            {key: 6, text:`Occasionally a tool would catch a wall it was not meant to. The full engagement of the 
+            flutes could overpower the machine, making the tool dive. Keeping away from the wall until a very light finishing pass cleared up that issue.`, style: {gridColumn:"span 3"}},
             {key: 3, text:`At the end of this project I found myself not using the router particularly often because routing
             wood was messy and took a long time. However it has turned into my CNC plasma cutter which seems like a better fit for this machine.`, style: {gridColumn:"span 3"}}
         ],
@@ -85,7 +87,7 @@ let entries = [
     {
         num: 2,
         title: "Additive Lathe",
-        link: "addlathe",
+        link: "additivelathe",
         description: "Our capstone engineering project. This multidisciplinary project heavily modifies Cura to generate gcode. It prints onto a custom machined drum rather than a flat bed.",
         reactDescription: {html:<div>"Our capstone engineering project. This multidisciplinary project heavily modifies the <b>open source slicer Cura </b>to generate gcode.
         It prints onto a custom machined drum rather than a flat bed. </div>},
@@ -103,21 +105,23 @@ let entries = [
     {
         num: 4,
         title: "Web Development",
-        link: "wordle",
+        link: "web",
         description: `Interfaces are easy to make and look great with web tools! Interfaces such as this website (it's responsive!)- 
         Inside this section are some more web demonstrations: Wordle! Open Trivia! A little card!`,
         reactDescription: {html:<div>Interfaces are easy to make and look great with web tools! Interfaces such as <b>this website</b> (it's responsive!)
         and a <b>wordle demo</b>; sorry, not yet! </div>},
         longdescription: [
             {key: 1, text:`React is a nice library that can make your webpages /react/ to user inputs. User inputs such as playing wordle! You can even play it -right here (not yet)-`},
-            {key: 2, text:`This website uses React and responsive CSS. On the backend it's built with babel and webpack. Deployment is on an nginx server running on an arch VPS.`},
+            {key: 2, text:`This website uses React and responsive CSS with more and more react packages. This includes: react-router, rc-slider, three.js, 
+            react-player, react-responsive, and use-react-router-breadcrumbs.
+            On the backend it's built with babel and webpack. Deployment is on an nginx server running on an arch VPS.`},
         ],
         imageName:'./wordle1.png',
     },
     {
         num: 3,
         title: "Graphics",
-        link: "raytracer",
+        link: "graphics",
         description: `Raytracing, a computer graphics classic and a three.js demo`,
         reactDescription: {html:<div>A computer graphics classic: <b>raytracing</b>,  and a <b>three.js</b> demo </div>},
         longdescription: [

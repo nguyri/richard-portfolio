@@ -4,36 +4,28 @@ import { useMediaQuery } from 'react-responsive'
 import { Link } from "react-router-dom";
 import useBreadcrumbs from 'use-react-router-breadcrumbs';
 
-const Breadcrumbs = (darkMode) => {
-  const breadcrumbs = useBreadcrumbs();
-
-  return (
-    <React.Fragment>
-      {breadcrumbs.map(({ breadcrumb }) => {
-        // console.log(breadcrumb)
-        return <Link to={breadcrumb.key} className={`nav--item nav--item-shrink ${darkMode && `nav--item-dark`}`} onClick={() => window.scrollTo(0, 0)}> {breadcrumb} </Link>;
-        })}
-    </React.Fragment>
-  );
-}
-
-function homeButton(darkMode, shrinkHeader) {
-    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
-
-    return (
-        <div className={`nav--home ${darkMode && `nav--home-dark`}`} >
-            <p className={`header--icon material-icons-round ${darkMode && `header--icon-dark`}`} >{"electric_bolt"}</p>
-            <h1 className={`header--title ${darkMode && `header--title-dark`} ${shrinkHeader && `header--title-shrink`}`} >richard nguyen</h1>
-        </div>
-    )
-}
-
 export default function Header(props) {
     const [shrinkHeader, setShrinkHeader] = React.useState(false);
     const handleScroll = () => {
         const position = window.pageYOffset;
-        setShrinkHeader(position > 200);
+        setShrinkHeader(position > 100);
     };
+
+    const Breadcrumbs = (darkMode) => {
+        const breadcrumbs = useBreadcrumbs();
+        return ( <>
+                {breadcrumbs.map(({ breadcrumb }) => {
+                    return <React.Fragment key={breadcrumb.key}> {!shrinkHeader ? '' : '/'} <Link
+                        to={breadcrumb.key}
+                        className={`nav--item nav--item-shrink ${darkMode && `nav--item-dark`}`}
+                        onClick={() => window.scrollTo(0, 0)} >
+                        {/* {breadcrumb} */}
+                        {!shrinkHeader ? '' : breadcrumb.props.children.toLowerCase()}
+                    </Link>
+                    </React.Fragment>
+                })}  </>
+        );
+    }
 
     React.useEffect(() => {
         window.addEventListener("scroll", handleScroll);
@@ -43,19 +35,28 @@ export default function Header(props) {
         };
     }, []);
 
+    function homeButton() {
+        const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
+
+        return (
+            <div className={`nav--home ${props.darkMode && `nav--home-dark`}` } onClick={() => window.scrollTo(0, 0)}>
+                <p className={`header--icon material-icons-round ${props.darkMode && `header--icon-dark`}`} >{"electric_bolt"}</p>
+                <h1 className={`header--title ${props.darkMode && `header--title-dark`} ${shrinkHeader && `header--title-shrink`}`} >richard nguyen</h1>
+            </div>
+        )
+    }
+
     return (
         <div className={`header ${props.darkMode && `header--dark`} ${shrinkHeader && `header--shrink`}`}>
-            <Link to={'projects'} style={{ textDecoration: "none" }} >{homeButton(props.darkMode, shrinkHeader)}</Link>
+            <Link to={'projects'} style={{ textDecoration: "none" }} >{homeButton()}</Link>
             <h2 className={
                 `header--subtitle 
                 ${props.darkMode && `header--subtitle-dark`}`}>
                 {!shrinkHeader && `putting the magic smoke into code, wood, and steel.`}
-                {shrinkHeader && Breadcrumbs(props.darkMode)
-            }
+                {Breadcrumbs(props.darkMode)}
             </h2>
 
             <nav className={props.darkMode ? "nav--dark" : ""}>
-
                 <div className="nav--row">
                     {!shrinkHeader && <Link to={'projects'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>projects</Link>}
                     <Link to={'about'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>about</Link>

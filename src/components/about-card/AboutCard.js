@@ -24,7 +24,8 @@ export default function AboutCard() {
         <header className="interests">
             <h1 className="interests--header"> Interests </h1>
             <p className="interests--text"> I'm interested in CNC machining, 3D algorithms, and automation. 
-            I've always felt that building things yourself is satisfying and CNC machines are hypnotic.</p>
+            For software I've been mostly interested in game development and 3D printer software. Increasingly I've been 
+            working on web development. </p>
         </header>       
         <Footer />
     </div>

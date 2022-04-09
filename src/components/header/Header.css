@@ -1,7 +1,6 @@
 * {
     --header-dark-text:#506c61;
     --header-light-text:#dff1eb;
-    transition:0.4s;
 }
 
 .header {
@@ -18,7 +17,7 @@
     margin:0 0;
     padding:20px;
     color:var(--header-light-text);
-
+    transition:0.4s;
 }
 
 .header--shrink {
@@ -49,7 +48,7 @@
 }
 
 .header--title-shrink {
-    font-size:2rem;
+    font-size:1.5rem;
 }
 
 .header--title-dark {

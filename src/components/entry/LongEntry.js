@@ -1,5 +1,4 @@
 import React from "react"
-import Collapsible from 'react-collapsible';
 import { Container, Button, Alert } from 'react-bootstrap';
 import { CSSTransition } from 'react-transition-group';
 import "./Entry.css"
@@ -60,7 +59,7 @@ export default function LongEntry() {
         )
     }
     return (
-        <div>
+        <div style={{display:'flex', flexDirection:'column', alignItems:'center'}}>
             {/* {entryIsSmall && smallEntry()}
             <CSSTransition
                 in={!entryIsSmall}
@@ -75,6 +74,7 @@ export default function LongEntry() {
                 onExited={() => setEntryIsSmall(true)}
             > */}
                 {bigEntry()}
+                <hr></hr>
             {/* </CSSTransition> */}
         </div>
         // <Collapsible trigger={smallEntry()} triggerWhenOpen={<div>{props.title}</div>}>

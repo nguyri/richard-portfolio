@@ -1,6 +1,6 @@
 * {
     box-sizing: border-box;
-    --entry-dark-text: #000000;
+    --dark-text: #000000;
     --entry-light-text: #ffffff;
 }
             
@@ -17,7 +17,7 @@
 }
 
 .entries {
-    margin: 20px 10vw;
+    margin: 10px 10vw;
 }
 
 .entry-enter {
@@ -89,8 +89,8 @@
     justify-content: center;
     height:auto;
     border-radius: 10px;
-    margin:0 0;
-    padding:0 0;
+    margin:0 0 20px 0;
+    padding:0 0 ;
 }
 
 .entry--img-container-dark{
@@ -138,7 +138,7 @@
 .entry--grid {
     display:grid;
     grid-template-columns: repeat(5, 1fr);
-    margin:0 0;
+    margin:0 0 20px 0;
     padding:20px 20px;
     padding-left:40px;
     justify-content: center;
@@ -171,7 +171,7 @@
     font-size:1.8rem;
     padding-bottom:15px;
     grid-column: span 5;
-    color:var(--entry-dark-text);
+    color:var(--dark-text);
 }
 
 .entry--title-dark {
