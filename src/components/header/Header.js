@@ -50,9 +50,14 @@ export default function Header(props) {
         <div className={`header ${props.darkMode && `header--dark`} ${shrinkHeader && `header--shrink`}`}>
             <Link to={'projects'} style={{ textDecoration: "none" }} >{homeButton()}</Link>
             <h2 className={
-                `header--subtitle 
-                ${props.darkMode && `header--subtitle-dark`}`}>
-                {!shrinkHeader && `putting the magic smoke into code, wood, and steel.`}
+                `header--subtitle ${props.darkMode && `header--subtitle-dark`} ${shrinkHeader && `header--subtitle-shrink`}`}>
+                {!shrinkHeader && <div style={{display: "flex", flexDirection: "row", alignItems:"center",}}>
+                    putting the magic smoke 
+                    into {<div class="material-icons-round" style={{marginInline:"15px", width:'20px'}}> auto_fix_normal</div>} 
+                    wood {<div class="material-icons-round" style={{marginInline:"15px", width:'20px'}}> park</div>} 
+                    code {<div class="material-icons-round" style={{marginInline:"15px", width:'25px'}}>terminal</div>} 
+                    steel {<div class="material-icons-round" style={{marginInline:"15px", width:'20px'}}> precision_manufacturing</div>} </div>} 
+                    {/* h_mobiledata */}
                 {Breadcrumbs(props.darkMode)}
             </h2>
 
