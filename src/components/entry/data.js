@@ -108,9 +108,10 @@ let entries = [
         description: `Interfaces are easy to make and look great with web tools! Interfaces such as this website (it's responsive!)- 
         Inside this section are some more web demonstrations: Wordle! Open Trivia! A little card!`,
         reactDescription: {html:<div>Interfaces are easy to make and look great with web tools! Interfaces such as <b>this website</b> (it's responsive!)
-        and a <b>wordle demo</b>; sorry, not yet! </div>},
+        and a <b>wordle</b> demo</div>},
         longdescription: [
-            {key: 1, text:`React is a nice library that can make your webpages /react/ to user inputs. User inputs such as playing wordle! You can even play it -right here (not yet)-`},
+            {key: 1, text:`React is a nice library that can make your webpages /react/ to user inputs. User inputs such as playing wordle! You can even play it -right here-`},
+            {key: 3, wordle: true},
             {key: 2, text:`This website uses React and responsive CSS with more and more react packages. This includes: react-router, rc-slider, three.js, 
             react-player, react-responsive, and use-react-router-breadcrumbs.
             On the backend it's built with babel and webpack. Deployment is on an nginx server running on an arch VPS.`},

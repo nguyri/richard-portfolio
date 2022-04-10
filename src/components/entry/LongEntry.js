@@ -4,6 +4,7 @@ import { CSSTransition } from 'react-transition-group';
 import "./Entry.css"
 import ReactPlayer from 'react-player/lazy'
 import ThreeScene from "../threejsdemo/ThreeScene"
+import Wordle from "../wordle/Wordle"
 import { useMediaQuery } from 'react-responsive'
 import { useParams, useOutletContext } from "react-router-dom";
 import { getEntry, getImage } from './data'
@@ -28,6 +29,9 @@ export default function LongEntry() {
                 return < div key={elem.key} className="entry--vimeo-fixed-aspect" style={elem.style}>
                         <ReactPlayer url={elem.vimeo} className="entry--vimeo" width='100%' height='100%' />
                     </div>
+            }
+            else if (elem.wordle) {
+                return <div key ={elem.key}> <Wordle/> </div>
             }
             else if (elem.subtitle) {
                 return <h1 key={elem.key} className={entryData.darkMode ? "entry--subtitle entry--dark" : "entry--subtitle"}  style={elem.style}> {elem.subtitle} </h1>
