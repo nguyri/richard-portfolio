@@ -16,11 +16,12 @@ export default function Header(props) {
         const breadcrumbs = useBreadcrumbs();
         return ( <>
                 {breadcrumbs.map(({ breadcrumb }) => {
-                    return <React.Fragment key={breadcrumb.key}> {!shrinkHeader ? '' : '/'} <Link
+                    return <React.Fragment key={breadcrumb.key}> {!shrinkHeader ? '' : '/'} 
+                    <Link
                         to={breadcrumb.key}
                         className={`nav--item nav--item-shrink ${darkMode && `nav--item-dark`}`}
-                        onClick={() => window.scrollTo(0, 0)} >
-                        {/* {breadcrumb} */}
+                        onClick={() => {window.scrollTo(0,0)}}
+                        >
                         {!shrinkHeader ? '' : breadcrumb.props.children.toLowerCase()}
                     </Link>
                     </React.Fragment>
@@ -38,7 +39,7 @@ export default function Header(props) {
 
     function homeButton() {
         return (
-            <div className={`nav--home ${props.darkMode && `nav--home-dark`}` } onClick={() => window.scrollTo(0, 0)}>
+            <div className={`nav--home ${props.darkMode && `nav--home-dark`}`} onClick={() => {window.scrollTo(0,0)}}>
                 <p className={`header--icon material-icons-round ${props.darkMode && `header--icon-dark`}`} >{"electric_bolt"}</p>
                 <h1 className={`header--title ${props.darkMode && `header--title-dark`} ${shrinkHeader && `header--title-shrink`}`} >richard nguyen</h1>
             </div>
@@ -64,8 +65,10 @@ export default function Header(props) {
 
             <nav className={props.darkMode ? "nav--dark" : ""}>
                 <div className="nav--row">
-                    { (!shrinkHeader && isTabletOrMobile) && <Link to={'projects'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>projects</Link>}
-                    { (!shrinkHeader && isTabletOrMobile) && <Link to={'about'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>about</Link>}
+                    { ((!shrinkHeader && isTabletOrMobile) || (!isTabletOrMobile)) && 
+                        <Link to={'projects'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>projects</Link>}
+                    { ((!shrinkHeader && isTabletOrMobile || (!isTabletOrMobile))) && 
+                        <Link to={'about'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>about</Link>}
                     {/* <Link to={'docs'} className="nav--item">docs</Link> */}
                     <div className="toggler">
                         <p className="toggler--light">light</p>

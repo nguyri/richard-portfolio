@@ -21,7 +21,7 @@ export default function ShortEntry(props) {
                 </div> */}
             </div>
             <div className="entry--col">
-                <Link to={`/projects/${props.link}`} className={props.darkMode ? "entry--title entry--title-dark" : "entry--title"} > {props.title} </Link>
+                <Link to={`/projects/${props.link}`} className={`entry--title  ${props.darkMode && `entry--title-dark`}`} > {props.title} </Link>
                 {/* <h1 className={props.darkMode ? "entry--title entry--dark" : "entry--title"}> {props.title} </h1> */}
                 <div className={props.darkMode ? "entry--text entry--dark" : "entry--text"}> {props.reactDescription ? props.reactDescription.html : props.description} </div>
             </div>

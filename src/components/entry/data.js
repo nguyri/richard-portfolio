@@ -40,8 +40,8 @@ let entries = [
             {key: 15, vimeo:'https://vimeo.com/675640978', },
             {key:4, text:`Plasma cutting uses a stream of plasma between the torch head and the metal to deliver enough energy to melt 
             the metal and blow it away. It's also fast!`},
-            {key:6, text:`I probably could have gotten away with getting a throatless shear. I reasoned it enough by thinking: I’ve 
-            got a CNC table already, why not strap a plasma cutter to it?` , style: {gridColumn:"1 / span 2", paddingRight:"20px"}},
+            {key:6, text:`Another good option for cutting sheel metal is a throatless shear or nibbler. Since the MPCNC axes are not particularly rigid,  
+            I figured a plasma cutter or laser would be a good fit.` , style: {gridColumn:"1 / span 2", paddingRight:"20px"}},
             {key: 16, vimeo:'https://vimeo.com/692360282', style: {gridColumn:"span 3"}},
             {key:7, text:`Admittedly it took a rather long time to get to this point. A combination of poor connectors and very strong 
             electromagnetic interference (EMI) meant a lengthy process of troubleshooting to finally get it working.`},
@@ -73,10 +73,11 @@ let entries = [
             {key: 2, text:`Admittedly, using this small garage router is more finnicky than using a rigid commercial machine
             with a spindle measured in horsepower. One upside is that if you crash it, the tiny steppers can't possibly generate enough force to damage anything other than your self esteem.`}, 
             {key:5, img:'test img', style: {gridColumn:"span 2", gridRow:"span 3", margin:"20px 20px", marginLeft:"0", width:"20vw"}, className:"entry--img-inline",  imageName:'./mpcnc2.jpg'},
-            {key: 4, text:`The most common issue was with electrical connectors, which were simple but painstaking to fix. To make maintenance easier, all the wires can be disconnected at the controller box,
-            at the machine frame, and even next to the stepper motor. Stepper power goes through no less than 6 connectors and each stepper motor has 4 cables. Not my favorite wiring job.`, style: {gridColumn:"span 3"}},
+            {key: 4, text:`The most common issue was with electrical connectors, which were simple but painstaking to fix. Generic 'dupont' or 0.1mm connectors
+            will do the job for breadboarding, but for constant motion dedicated wire to wire or wire to panel connectors are needed. `, style: {gridColumn:"span 3"}},
             {key: 6, text:`Occasionally a tool would catch a wall it was not meant to. The full engagement of the 
-            flutes could overpower the machine, making the tool dive. Keeping away from the wall until a very light finishing pass cleared up that issue.`, style: {gridColumn:"span 3"}},
+            flutes could overpower the machine, making the tool dive. This was easy enough to fix in the CAM process, just
+            keep away from the wall until a very light finishing pass.`, style: {gridColumn:"span 3"}},
             {key: 3, text:`At the end of this project I found myself not using the router particularly often because routing
             wood was messy and took a long time. However it has turned into my CNC plasma cutter which seems like a better fit for this machine.`, style: {gridColumn:"span 3"}}
         ],
@@ -102,6 +103,28 @@ let entries = [
             imageName:'./addlathe1.jpg',
     },
     {
+        num: 3,
+        title: "Graphics and ThreeJS",
+        link: "graphics",
+        description: `Raytracing, a computer graphics classic and a three.js demo`,
+        reactDescription: {html:<div>A computer graphics classic: <b>raytracing</b>,  and a <b>three.js</b> demo </div>},
+        longdescription: [
+            {key: 5, subtitle:`Graphics`},
+            {key: 1, text:`I've always had an interest in 3D graphics and shaders. One of the classic computer graphics demonstrations is a raytracer. I also wanted to learn a new programming language, Rust.`},
+            {key: 2, text:`Rust doesn't give any particular advantages in this case, given that there's no finnicky memory management. It was quite nice to use the built in package manager though!`},
+            {key: 8, text:`The raytracer was based off of Raytracing in One Weekend by Peter Shirley. Simply put, trace a line (ray) from a camera to every point on a screen. If the ray hits something, change the color. 
+            If the ray hits something that absorbs, reflects, or refracts the light... now you're raytracing!`},
+            {key:9, img:'rt2', style: {gridColumn:"1",gridRow:"span 5", margin: "20px 20px 20px 0px " , width:"55w", height:"40vh"}, className:"entry--img-inline", imageName:'./raytracer2.jpg'},
+            {key:10, img:'rt1', style: {gridColumn:"1",gridRow:"span 5", margin: "20px 20px 20px 0px " , width:"55vw"}, className:"entry--img-inline", imageName:'./raytracer1.jpg'},
+            {key: 6, subtitle:`Three JS`},
+            {key: 3, text:`There are a bunch of really cool WebGL demos online and I wanted to give three.js a shot. 
+            It's fascinating that web browsers and WebGL are good enough that 3D demonstrations work just fine in the browser.`},
+            {key: 7, text:`Shown below, a sampling of models I've drawn up in Fusion360. Click and drag to orbit! `},
+            {key: 4, threejs: true,}
+        ],
+        imageName:'./raytracer1.jpg',
+    },
+    {
         num: 4,
         title: "Web Development",
         link: "web",
@@ -116,29 +139,7 @@ let entries = [
             react-player, react-responsive, and use-react-router-breadcrumbs.
             On the backend it's built with babel and webpack. Deployment is on an nginx server running on an arch VPS.`},
         ],
-        imageName:'./wordle1.png',
-    },
-    {
-        num: 3,
-        title: "Graphics and ThreeJS",
-        link: "graphics",
-        description: `Raytracing, a computer graphics classic and a three.js demo`,
-        reactDescription: {html:<div>A computer graphics classic: <b>raytracing</b>,  and a <b>three.js</b> demo </div>},
-        longdescription: [
-            {key: 5, subtitle:`Graphics`},
-            {key: 1, text:`I've always had an interest in 3D graphics and shaders, so I decided to give a raytracer a shot and also learn a new programming language, Rust.`},
-            {key: 2, text:`Rust doesn't give any particular advantages in this case, given that there's no finnicky memory management. It was quite nice to use the built in package manager though!`},
-            {key: 8, text:`The raytracer was based off of Raytracing in One Weekend by Peter Shirley. Simply put, trace a line (ray) from a camera to every point on a screen. If the ray hits something, change the color. 
-            If the ray hits something that absorbs, reflects, or refracts the light... now you're raytracing!`},
-            {key:9, img:'rt2', style: {gridColumn:"1",gridRow:"span 5", margin: "20px 20px 20px 0px " , width:"55w", height:"40vh"}, className:"entry--img-inline", imageName:'./raytracer2.jpg'},
-            {key:10, img:'rt1', style: {gridColumn:"1",gridRow:"span 5", margin: "20px 20px 20px 0px " , width:"55vw"}, className:"entry--img-inline", imageName:'./raytracer1.jpg'},
-            {key: 6, subtitle:`Three JS`},
-            {key: 3, text:`There are a bunch of really cool WebGL demos online and I wanted to give three.js a shot. 
-            It's fascinating that web browsers and WebGL are good enough that 3D demonstrations work just fine in the browser.`},
-            {key: 7, text:`Shown below, a sampling of models I've drawn up in Fusion360. Click and drag to orbit! `},
-            {key: 4, threejs: true,}
-            ],
-            imageName:'./raytracer1.jpg',
+        imageName:'./wordle2.png',
     },
     {
         num:6, 
@@ -150,14 +151,14 @@ let entries = [
             I started off really rather bad at making stuff out of wood. Nowadays I can make some things passably. 
             I find it’s pretty nice to be surrounded by your own furniture.`},
             {key: 2, subtitle:`Chessboard`},
-            {key:5, img:'test img', style: {gridColumn:"span 2", gridRow:"span 4", margin: "20px 20px 20px 0px ", width:'20vw'}, className:"entry--img-inline", imageName: './wood2.jpg'},
+            {key:5, img:'test img', style: {gridColumn:"span 2", gridRow:"span 4", margin: "20px 20px 20px 0px ", width:'25vw'}, className:"entry--img-inline", imageName: './wood2.jpg'},
             {key:4, text:`I decided to do this chessboard out of red oak and black walnut and I was quite pleased with it. I haven’t done many projects 
             out of hardwood since I haven’t had a jointer and planer until recently.`, style: {gridColumn:"span 3"}},
             {key:6, text:`It's really satisfying to square up your stock. It is quite a process however. Usually: Crosscut to an easier to handle size, rough rip to within 
             quarter inch, jointer, planer, rip and crosscut again to the final size.`, style: {gridColumn:"span 3"}},
-            {key:7, img:'test img', style: {gridColumn:"1 / span 2",  marginBottom:"20px", width:'20vw', height:'40vh'}, className:"entry--img-inline", imageName:'./wood3.jpg' },
+            {key:7, img:'test img', style: {gridColumn:"1 / span 2",  marginBottom:"20px", width:'25vw', height:'40vh'}, className:"entry--img-inline", imageName:'./wood3.jpg' },
             {key:8, img:'test img', style: {gridColumn:"span 3",  marginBottom:"20px", width:'30vw', height:'40vh'}, className:"entry--img-inline", imageName:'./wood1.jpg' },
-            {key:9, img:'test img', style: {gridColumn:"1 /span 2",  marginBottom:"20px", width:'20vw', height:'40vh'}, className:"entry--img-inline", imageName:'./wood5.jpg' },
+            {key:9, img:'test img', style: {gridColumn:"1 /span 2",  marginBottom:"20px", width:'25vw', height:'40vh'}, className:"entry--img-inline", imageName:'./wood5.jpg' },
             {key:10, img:'test img', style: {gridColumn:"span 3",  marginBottom:"20px", width:'30vw', height:'40vh'}, className:"entry--img-inline", imageName:'./wood9.jpg' },
             ],
         imageName:'./wood10.jpg',

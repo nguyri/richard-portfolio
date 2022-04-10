@@ -47,6 +47,7 @@ body {
 main {
     padding-top:100px; 
     margin: 0 0;
+    margin-bottom:-50px;
 }
 
 .App {

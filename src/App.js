@@ -13,7 +13,6 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 export default function App() {
   const [darkMode, setDarkMode] = React.useState(false)
-  // const darkMode = true;
 
   function toggleDarkMode() {
     setDarkMode( (prevState) => !prevState)
