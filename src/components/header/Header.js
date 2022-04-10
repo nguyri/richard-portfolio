@@ -9,7 +9,7 @@ export default function Header(props) {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
     const handleScroll = () => {
         const position = window.pageYOffset;
-        setShrinkHeader(position > 100);
+        setShrinkHeader(position > 10);
     };
 
     const Breadcrumbs = (darkMode) => {

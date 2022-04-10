@@ -42,12 +42,9 @@ export default function LongEntry() {
         window.scrollTo(0,0)
         return (
             <div id={entryData.link} className={entryData.darkMode ? "entry entry--dark" : "entry"} >
-                <div className={entryData.darkMode? "entry--img-container-dark entry--img-container" : "entry--img-container"} onClick={() => setEntryIsSmall(!entryIsSmall)}>
+                <div className={entryData.darkMode? "entry--img-container-dark entry--img-container" : "entry--img-container"}>
                     <div className="entry--overlay-container entry--overlay-container-big" >
                         <img src={getImage(entryData.imageName).default ? getImage(entryData.imageName).default : ""} className="entry--img" />
-                        <div className="entry--overlay">
-                            <span className="material-icons-round entry--overlay-icon">expand_less</span>
-                        </div>
                     </div>
                 </div>
 

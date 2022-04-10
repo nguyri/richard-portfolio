@@ -49,7 +49,7 @@ let entries = [
             and also replacing the tiny 3d printer drivers with more noise resistant stepper drivers.`},
             {key:9, text:`Comparing this amount of work to a less noisy plasma cutter, of course it would have been a better idea to simply 
             buy a blowback plasma from the start.`,},
-            {key: 14, imageName:'./welding1.jpg', style: {gridColumn:"1 /span 2", gridRow:"span 4", margin:"20px 20px", marginLeft:"0"}, className:"entry--img-inline"},
+            {key: 14, imageName:'./welding1.jpg', style: {gridColumn:"1 /span 2", gridRow:"span 4", margin:"20px 20px", marginLeft:"0", width:"20vw"}, className:"entry--img-inline"},
             {key: 10, subtitle:`Welding`, style: {gridColumn:"3 / span 3"} },
             {key: 11, text:`Welding is easy to learn and hard to master. I quite liked Steve Bleile’s welding videos. They are densely packed with information and without the 
             embellishments of a youtube tutorial.`, style: {gridColumn:"span 3"}},
@@ -72,7 +72,7 @@ let entries = [
             {key: 16, vimeo:'https://vimeo.com/612194957', style: {}},
             {key: 2, text:`Admittedly, using this small garage router is more finnicky than using a rigid commercial machine
             with a spindle measured in horsepower. One upside is that if you crash it, the tiny steppers can't possibly generate enough force to damage anything other than your self esteem.`}, 
-            {key:5, img:'test img', style: {gridColumn:"span 2", gridRow:"span 3", margin:"20px 20px", marginLeft:"0"}, className:"entry--img-inline",  imageName:'./mpcnc2.jpg'},
+            {key:5, img:'test img', style: {gridColumn:"span 2", gridRow:"span 3", margin:"20px 20px", marginLeft:"0", width:"20vw"}, className:"entry--img-inline",  imageName:'./mpcnc2.jpg'},
             {key: 4, text:`The most common issue was with electrical connectors, which were simple but painstaking to fix. To make maintenance easier, all the wires can be disconnected at the controller box,
             at the machine frame, and even next to the stepper motor. Stepper power goes through no less than 6 connectors and each stepper motor has 4 cables. Not my favorite wiring job.`, style: {gridColumn:"span 3"}},
             {key: 6, text:`Occasionally a tool would catch a wall it was not meant to. The full engagement of the 
@@ -94,11 +94,10 @@ let entries = [
         longdescription: [
             {key: 1, text:`Our capstone engineering project. This multidisciplinary project heavily modifies Cura to generate gcode. It prints onto a custom machined drum rather than a flat bed.`},
             {key: 16, vimeo:'https://vimeo.com/692393001', style: {}},
-            {key:5, img:'test img', style: {gridColumn:"span 2", gridRow:"span 3", margin: "20px 20px 20px 0px "}, className:"entry--img-inline", imageName:'./addlathe2.jpg'},
             {key: 3, text:`I designed the mathematical basis for the cylindrical slicer and also integrated it into a popular open source slicer, Cura. 
-            I also rewrote part of the display shader to display print previews with cylindrical layers.`, style: {gridColumn:"span 3"}},
-            {key: 2, text:`The project won first place in the 2019 Schulich School of Engineering Capstone Fair as well as 2019 CSME National Design Competition Best Overall Design.`, style: {gridColumn:"span 3"}},
-            
+            I also rewrote part of the display shader to display print previews with cylindrical layers.`, style: {gridRow:"span 5"}},
+            {key: 2, text:`The project won first place in the 2019 Schulich School of Engineering Capstone Fair as well as 2019 CSME National Design Competition Best Overall Design.`, style: {gridRow:"span 5"}},
+            {key:5, img:'test img', style: {gridRow:"span 5", margin: "20px 20px 20px 0px " , width:"40vw"}, className:"entry--img-inline", imageName:'./addlathe2.jpg'},
             ],
             imageName:'./addlathe1.jpg',
     },
@@ -120,7 +119,7 @@ let entries = [
     },
     {
         num: 3,
-        title: "Graphics",
+        title: "Graphics and ThreeJS",
         link: "graphics",
         description: `Raytracing, a computer graphics classic and a three.js demo`,
         reactDescription: {html:<div>A computer graphics classic: <b>raytracing</b>,  and a <b>three.js</b> demo </div>},
@@ -130,10 +129,12 @@ let entries = [
             {key: 2, text:`Rust doesn't give any particular advantages in this case, given that there's no finnicky memory management. It was quite nice to use the built in package manager though!`},
             {key: 8, text:`The raytracer was based off of Raytracing in One Weekend by Peter Shirley. Simply put, trace a line (ray) from a camera to every point on a screen. If the ray hits something, change the color. 
             If the ray hits something that absorbs, reflects, or refracts the light... now you're raytracing!`},
+            {key:9, img:'rt2', style: {gridColumn:"1",gridRow:"span 5", margin: "20px 20px 20px 0px " , width:"55w", height:"40vh"}, className:"entry--img-inline", imageName:'./raytracer2.jpg'},
+            {key:10, img:'rt1', style: {gridColumn:"1",gridRow:"span 5", margin: "20px 20px 20px 0px " , width:"55vw"}, className:"entry--img-inline", imageName:'./raytracer1.jpg'},
             {key: 6, subtitle:`Three JS`},
             {key: 3, text:`There are a bunch of really cool WebGL demos online and I wanted to give three.js a shot. 
-            It's fascinating that web browsers and WebGL are good enough that pretty cool 3D demonstrations work just fine in browser.`},
-            {key: 7, text:`Shown below, a sampling of models I've drawn up in Fusion360. Click and drag to orbit a little! `},
+            It's fascinating that web browsers and WebGL are good enough that 3D demonstrations work just fine in the browser.`},
+            {key: 7, text:`Shown below, a sampling of models I've drawn up in Fusion360. Click and drag to orbit! `},
             {key: 4, threejs: true,}
             ],
             imageName:'./raytracer1.jpg',
