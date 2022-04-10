@@ -74,10 +74,10 @@ let entries = [
             with a spindle measured in horsepower. One upside is that if you crash it, the tiny steppers can't possibly generate enough force to damage anything other than your self esteem.`}, 
             {key:5, img:'test img', style: {gridColumn:"span 2", gridRow:"span 3", margin:"20px 20px", marginLeft:"0", width:"20vw"}, className:"entry--img-inline",  imageName:'./mpcnc2.jpg'},
             {key: 4, text:`The most common issue was with electrical connectors, which were simple but painstaking to fix. Generic 'dupont' or 0.1mm connectors
-            will do the job for breadboarding, but for constant motion dedicated wire to wire or wire to panel connectors are needed. `, style: {gridColumn:"span 3"}},
+            will do the job for breadboarding, but for constant motion dedicated wire to wire or wire to panel connectors are better. `, style: {gridColumn:"span 3"}},
             {key: 6, text:`Occasionally a tool would catch a wall it was not meant to. The full engagement of the 
-            flutes could overpower the machine, making the tool dive. This was easy enough to fix in the CAM process, just
-            keep away from the wall until a very light finishing pass.`, style: {gridColumn:"span 3"}},
+            flutes could overpower the machine, making the tool dive. This was easy enough to fix in the CAM process, by
+            keeping away from the wall until a light finishing pass.`, style: {gridColumn:"span 3"}},
             {key: 3, text:`At the end of this project I found myself not using the router particularly often because routing
             wood was messy and took a long time. However it has turned into my CNC plasma cutter which seems like a better fit for this machine.`, style: {gridColumn:"span 3"}}
         ],
@@ -90,7 +90,7 @@ let entries = [
         title: "Additive Lathe",
         link: "additivelathe",
         description: "Our capstone engineering project. This multidisciplinary project heavily modifies Cura to generate gcode. It prints onto a custom machined drum rather than a flat bed.",
-        reactDescription: {html:<div>"Our capstone engineering project. This multidisciplinary project heavily modifies the <b>open source slicer Cura </b>to generate gcode.
+        reactDescription: {html:<div>Our capstone engineering project. This multidisciplinary project heavily modifies the <b>open source slicer Cura </b>to generate gcode.
         It prints onto a custom machined drum rather than a flat bed. </div>},
         longdescription: [
             {key: 1, text:`Our capstone engineering project. This multidisciplinary project heavily modifies Cura to generate gcode. It prints onto a custom machined drum rather than a flat bed.`},
@@ -111,7 +111,8 @@ let entries = [
         longdescription: [
             {key: 5, subtitle:`Graphics`},
             {key: 1, text:`I've always had an interest in 3D graphics and shaders. One of the classic computer graphics demonstrations is a raytracer. I also wanted to learn a new programming language, Rust.`},
-            {key: 2, text:`Rust doesn't give any particular advantages in this case, given that there's no finnicky memory management. It was quite nice to use the built in package manager though!`},
+            {key: 2, html:<div>Rust doesn't give any particular advantages in this case, given that there's no finnicky memory management. 
+                It was quite nice to use the built in package manager though! <a href="https://github.com/laetic/rustTracer"> The rustTracer repo is available on Github.</a> </div>},
             {key: 8, text:`The raytracer was based off of Raytracing in One Weekend by Peter Shirley. Simply put, trace a line (ray) from a camera to every point on a screen. If the ray hits something, change the color. 
             If the ray hits something that absorbs, reflects, or refracts the light... now you're raytracing!`},
             {key:9, img:'rt2', style: {gridColumn:"1",gridRow:"span 5", margin: "20px 20px 20px 0px " , width:"55w", height:"40vh"}, className:"entry--img-inline", imageName:'./raytracer2.jpg'},
@@ -135,8 +136,8 @@ let entries = [
         longdescription: [
             {key: 1, text:`React is a nice library that can make your webpages /react/ to user inputs. User inputs such as playing wordle! You can even play it -right here-`},
             {key: 3, wordle: true},
-            {key: 2, text:`This website uses React and responsive CSS with more and more react packages. This includes: react-router, rc-slider, three.js, 
-            react-player, react-responsive, and use-react-router-breadcrumbs.
+            {key: 2, text:`This website uses React and responsive CSS with some great react packages. The packages include: react-router, rc-slider, three.js, 
+            react-player, and many more. 
             On the backend it's built with babel and webpack. Deployment is on an nginx server running on an arch VPS.`},
         ],
         imageName:'./wordle2.png',
@@ -154,7 +155,7 @@ let entries = [
             {key:5, img:'test img', style: {gridColumn:"span 2", gridRow:"span 4", margin: "20px 20px 20px 0px ", width:'25vw'}, className:"entry--img-inline", imageName: './wood2.jpg'},
             {key:4, text:`I decided to do this chessboard out of red oak and black walnut and I was quite pleased with it. I haven’t done many projects 
             out of hardwood since I haven’t had a jointer and planer until recently.`, style: {gridColumn:"span 3"}},
-            {key:6, text:`It's really satisfying to square up your stock. It is quite a process however. Usually: Crosscut to an easier to handle size, rough rip to within 
+            {key:6, text:`It's really satisfying to square up your stock. It is quite a process however. Usually: Crosscut to an easy to handle size, oversize rip to within 
             quarter inch, jointer, planer, rip and crosscut again to the final size.`, style: {gridColumn:"span 3"}},
             {key:7, img:'test img', style: {gridColumn:"1 / span 2",  marginBottom:"20px", width:'25vw', height:'40vh'}, className:"entry--img-inline", imageName:'./wood3.jpg' },
             {key:8, img:'test img', style: {gridColumn:"span 3",  marginBottom:"20px", width:'30vw', height:'40vh'}, className:"entry--img-inline", imageName:'./wood1.jpg' },
