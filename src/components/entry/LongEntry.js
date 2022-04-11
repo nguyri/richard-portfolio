@@ -22,7 +22,7 @@ export default function LongEntry() {
             }
             else if (elem.threejs) {
                 return (
-                    <div key={elem.key}> <ThreeScene/> </div>
+                    <div key={elem.key}> <ThreeScene zoom={isTabletOrMobile? 4.0 : 5.4}/> </div>
                 )
             }
             else if (elem.vimeo) {

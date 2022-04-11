@@ -31,7 +31,9 @@ export default class ThreeScene extends Component {
     super(props);
     this.state = {
       modelShown: 0,
+      zoom: props.zoom,
     }
+    console.log('zoom',this.state.zoom)
   }
 
   loadThreeMF(loader, modelData, list, modelShown, scene) {
@@ -79,7 +81,7 @@ export default class ThreeScene extends Component {
     this.scene = new THREE.Scene()
     this.camera = new THREE.OrthographicCamera(width / -2, width / 2, height / 2, height / -2, 0, 2000)//( 10, width / height, 50, 800)
     // this.camera = new THREE.PerspectiveCamera( 5, width / height, 50, 2000)
-    this.camera.zoom = 5.4
+    this.camera.zoom = this.state.zoom
     this.camera.up.set(0, 0, 1);
     this.camera.position.set(200, 200, 200);
     this.camera.lookAt(0, 0, 0)
@@ -151,7 +153,7 @@ export default class ThreeScene extends Component {
       // if(index == 0)
       //   console.log(model.position.z)
     })
-    this.camera.zoom = 5.4 - num / 20;
+    this.camera.zoom = this.state.zoom - num / 20;
     this.camera.updateProjectionMatrix();
   }
 
