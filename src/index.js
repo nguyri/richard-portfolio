@@ -10,7 +10,7 @@ ReactDOM.render(
     <BrowserRouter>
         <Routes>
             <Route path="/" element={<App />} >
-                <Route path ="" element = {<Entries />}/>
+                <Route index element = {<Entries />}/>
                 <Route path="projects" element={<Entries />}>
                     <Route path=":projectlink" element ={ <LongEntry />} />
                 </Route>
@@ -24,6 +24,7 @@ ReactDOM.render(
                         }
                     />
             </Route>
+            <Route path="*" element={<App />}/>
         </Routes>
     </BrowserRouter>
     , document.getElementById("root"));
