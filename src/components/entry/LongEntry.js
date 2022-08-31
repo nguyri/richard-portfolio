@@ -5,6 +5,7 @@ import "./Entry.css"
 import ReactPlayer from 'react-player/lazy'
 import ThreeScene from "../threejsdemo/ThreeScene"
 import Wordle from "../wordle/Wordle"
+import NotFound from "../errordocs/NotFound"
 import { useMediaQuery } from 'react-responsive'
 import { useParams, useOutletContext } from "react-router-dom";
 import { getEntry, getImage } from './data'
@@ -47,6 +48,10 @@ export default function LongEntry() {
 
     function bigEntry() {
         window.scrollTo(0,0)
+        console.log(entryData);
+        if(!entryData.num) {
+            return <NotFound />
+        }
         return (
             <div id={entryData.link} className={entryData.darkMode ? "entry entry--dark" : "entry"} >
                 <div className={entryData.darkMode? "entry--img-container-dark entry--img-container" : "entry--img-container"}>
