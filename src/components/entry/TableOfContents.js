@@ -2,9 +2,9 @@ import React from "react";
 
 const TableOfContents = () => {
     return (
-        <nav className="tableOfContents">
+        <div className="table-of-contents">
             Hello world!
-        </nav>
+        </div>
     );
 };
 
