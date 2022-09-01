@@ -2,6 +2,7 @@ import React from "react";
 import LongEntry from "./LongEntry";
 import ShortEntry from "./ShortEntry";
 import { getEntries } from "./data"
+import TableOfContents from "./TableOfContents";
 import { Link, Outlet, useOutletContext } from "react-router-dom";
 import ThreeScene from "../threejsdemo/ThreeScene"
 
