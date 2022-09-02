@@ -1,6 +1,6 @@
 * {
-    --header-dark-text:#506c61;
-    --header-light-text:#dff1eb;
+    --header-dark-text:#3a683a;
+    --header-light-text:#dff1df;
 }
 
 .header {
@@ -13,7 +13,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    background-color:#a7cdbd;
+    background-color:#bedfc5;
     margin:0 0;
     padding:20px;
     color:var(--header-light-text);
@@ -29,7 +29,7 @@
 }
 
 .header--dark {
-    background-color:#1d3227;
+    background-color:#294436;
 }
 
 .header--icon {
@@ -43,8 +43,10 @@
     font-family:'Signika Negative';
     font-weight:600;
     letter-spacing: 0.1rem;
-    margin-block:0;
+    margin-block:0px;
+    margin-left:15px;
     color:var(--header-dark-text);
+    display:flex;
 }
 
 .header--title-shrink {

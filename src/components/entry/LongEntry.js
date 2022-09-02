@@ -36,7 +36,7 @@ export default function LongEntry() {
                 return <div key ={elem.key}> <Wordle/> </div>
             }
             else if (elem.subtitle) {
-                return <h3 key={elem.key} className={entryData.darkMode ? "entry--subtitle entry--dark" : "entry--subtitle"}  style={elem.style}> {elem.subtitle} </h3>
+                return <h3 id={elem.key} key={elem.key} className={entryData.darkMode ? "entry--subtitle entry--dark" : "entry--subtitle"}  style={elem.style}> {elem.subtitle} </h3>
             }
             else if (elem.html) {
                 return <div key={elem.key} className={entryData.darkMode ? "entry--text entry--dark" : "entry--text"} style={elem.style}> {elem.html}</div >;
@@ -63,7 +63,7 @@ export default function LongEntry() {
                 <TableOfContents props={entryData}/>
 
                 <div className="entry--grid">
-                    <h2 className={entryData.darkMode ? "entry--title entry--title-dark" : "entry--title"}> {entryData.title} </h2>
+                    <h2 className={entryData.darkMode ? "entry--title entry--title-dark" : "entry--title"} id={entryData.num}> {entryData.title} </h2>
                     {paragraphBigEntry(entryData.longdescription)}
                 </div>
                 
