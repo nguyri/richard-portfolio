@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App.js";
 import EntriesLayout from "./components/entry/EntriesLayout"
+import Entries from "./components/entry/Entries"
 import LongEntry from "./components/entry/LongEntry"
 import NotFound from "./components/errordocs/NotFound"
 import { BrowserRouter, Routes, Route, Redirect } from "react-router-dom";
@@ -13,6 +14,7 @@ ReactDOM.render(
             <Route path="/" element={<App />} >
                 <Route index element = {<EntriesLayout />}/>
                 <Route path="projects" element={<EntriesLayout />}>
+                    <Route index element = {<Entries />}/>    
                     <Route path=":projectlink" element ={ <LongEntry />} />
                     <Route path="*" element={<NotFound />}/>
                 </Route>

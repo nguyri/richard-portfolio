@@ -60,7 +60,7 @@ export default function LongEntry() {
                         <img src={getImage(entryData.imageName).default ? getImage(entryData.imageName).default : ""} className="entry--img" />
                     </div>
                 </div> */}
-                {/* <TableOfContents props={entryData}/> */}
+                <TableOfContents props={entryData}/>
 
                 <div className="entry--grid">
                     <h2 className={entryData.darkMode ? "entry--title entry--title-dark" : "entry--title"}> {entryData.title} </h2>
