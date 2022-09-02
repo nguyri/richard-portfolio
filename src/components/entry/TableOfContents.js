@@ -10,6 +10,7 @@ const TableOfContents = (props) => {
     return (
         <div className="table-of-contents">
             <TOCHeadings props={data_file}/>
+            {/* <TOCHeadings props={props.props}/> */}
         </div>
     );
 };

@@ -9,6 +9,7 @@ import NotFound from "../errordocs/NotFound"
 import { useMediaQuery } from 'react-responsive'
 import { useParams, useOutletContext } from "react-router-dom";
 import { getEntry, getImage } from './data'
+import TableOfContents from "./TableOfContents"
 
 export default function LongEntry() {
     const [entryIsSmall, setEntryIsSmall] = React.useState(true);
@@ -48,22 +49,25 @@ export default function LongEntry() {
 
     function bigEntry() {
         window.scrollTo(0,0)
-        console.log(entryData);
+        // console.log(entryData);
         if(!entryData.num) {
             return <NotFound />
         }
         return (
             <div id={entryData.link} className={entryData.darkMode ? "entry entry--dark" : "entry"} >
-                <div className={entryData.darkMode? "entry--img-container-dark entry--img-container" : "entry--img-container"}>
+                {/* <div className={entryData.darkMode? "entry--img-container-dark entry--img-container" : "entry--img-container"}>
                     <div className="entry--overlay-container entry--overlay-container-big" >
                         <img src={getImage(entryData.imageName).default ? getImage(entryData.imageName).default : ""} className="entry--img" />
                     </div>
-                </div>
+                </div> */}
+                {/* <TableOfContents props={entryData}/> */}
 
                 <div className="entry--grid">
                     <h2 className={entryData.darkMode ? "entry--title entry--title-dark" : "entry--title"}> {entryData.title} </h2>
                     {paragraphBigEntry(entryData.longdescription)}
                 </div>
+                
+                
             </div>
         )
     }

@@ -42,11 +42,19 @@ module.exports = {
     ]
   },
   resolve: { extensions: ["*", ".js", ".jsx"] },
+  
   output: {
     path: path.resolve(__dirname, "dist/"),
     publicPath: "/dist/",
     filename: "bundle.js"
   },
+  // plugins: [
+  //   new HtmlWebpackPlugin({
+  //   favicon: "./src/imgs/favicon.png",
+  //   filename: "index.html",
+  //   template: "./public/index.html",
+  // })
+  // ],
 };
 
 // const TerserPlugin = require('terser-webpack-plugin');
