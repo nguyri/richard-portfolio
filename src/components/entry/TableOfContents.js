@@ -1,9 +1,15 @@
 import React from "react";
+import { getEntries } from './data'
+import { useParams, useOutletContext } from "react-router-dom";
+import TOCHeadings from './TOCHeadings'
 
-const TableOfContents = () => {
+const TableOfContents = (props) => {
+    let params = useParams();
+    let data_file = getEntries();
+
     return (
         <div className="table-of-contents">
-            Hello world!
+            <TOCHeadings props={data_file}/>
         </div>
     );
 };
