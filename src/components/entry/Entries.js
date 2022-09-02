@@ -23,10 +23,10 @@ export default function Entries (props) {
         data.images = images;
         data.key = entry.num;
         return (
-            <div key={data.key}>
+            // <div key={data.key}>
                 <ShortEntry {...data}/>
-                {/* <Link to={`/projects/${entry.link}`} > {entry.title} </Link> */}
-            </div>
+                // {/* <Link to={`/projects/${entry.link}`} > {entry.title} </Link> */}
+            // </div>
         )
         })
         

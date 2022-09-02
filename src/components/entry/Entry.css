@@ -8,25 +8,35 @@
     display:flex;
     flex-direction:row;
     
-    width:80vw;
-    margin:0 0 10px 0;
-    padding:0 0;
+    max-width:90vw;
+    margin:0 0 10px 10vw;
+    padding:0 10vw 0 0;
     background-color: #f7f7f700;
     /* background-color: #F9F7F0; */
     font-family:Inter;
     overflow:hidden;
-    /* max-height: calc(100vh - 40px);
-    overflow:auto; */
+    /* position:sticky; */
+    max-height: calc(100vh - 40px);
+    overflow:auto;
 }
 
 .entries {
-    margin: 10px 0vw 10px 0vw;
+    margin: 10px 10vw 10px 10vw;
+    width:90vw;
 }
 
 .entries-layout {
     display:flex;
     flex-direction:row;
+    justify-content: center;
     position: sticky;
+    max-height: calc(100vh - 100px);
+    overflow-y:auto;
+    overflow-x:hidden;
+}
+
+.entries-outlet {
+    position:sticky;
 }
 
 .table-of-contents {
@@ -34,11 +44,11 @@
     position: sticky;
     position: -webkit-sticky; /* For Safari */
     top: 24px; /* How far down the page you want your ToC to live */
-    margin: 10px 0vw 10px 0vw;
+    margin: 10px 0vw 10px 5vw;
     padding: 10px;
     /* Give table of contents a scrollbar */
     max-height: calc(100vh - 40px);
-    width:15vw;
+    width:20vw;
     overflow: auto;
 }
 
@@ -171,8 +181,8 @@
     /* grid-template-columns: masonry; */
     grid-template-columns: repeat(5, 1fr);
     margin:0 0 20px 0;
-    padding:20px 20px;
-    padding-left:40px;
+    padding:20px 20px 0 0;
+    /* padding-left:0px; */
     justify-content: space-evenly;
     grid-auto-flow: row;
 }
