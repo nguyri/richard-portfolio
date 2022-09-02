@@ -1,6 +1,6 @@
 import React from "react";
 
-const TOCHeadings = ({props}) => (
+const TOCHeadings = (props) => {
     // <ul>
     //     {console.log("in tocheadings", props, props.longdescription)}
     //     {
@@ -21,17 +21,35 @@ const TOCHeadings = ({props}) => (
     //         ))
     //     }
     // </ul>
+    let heading = props.props;
+    return (
     <ul>
-        {console.log("in tocheadings", props, props.longdescription)}
+        {/* {console.log("in tocheadings", heading, heading.longdescription)} */}
         {
-            <li key={props.num} className="headings-li">
-                <a href={`#${props.num}`}>{props.title}</a>
-                { props.longdescription.length > 0 && (
+            <li key={heading.num} className="headings-li">
+                <a 
+                    href={`#${heading.num}`}
+                    // onClick={(e) => {
+                    //     e.preventDefault();
+                    //     document.querySelector(`#${heading.num}`).scrollIntoView({
+                    //       behavior: "smooth"
+                    //     });
+                    //   }}
+                    >{heading.title}</a>
+                { heading.longdescription.length > 0 && (
                     <ul>
-                    { props.longdescription.map((item) => (
+                    { heading.longdescription.map((item) => (
                         item.subtitle && 
-                            <li key={props.num} className="headings-li"> 
-                                <a href={`#${item.key}`}>{item.subtitle}</a> 
+                            <li key={item.key} className="headings-li"> 
+                                <a 
+                                    href={`#${item.key}`}
+                                    // onClick={(e) => {
+                                    // e.preventDefault();
+                                    // document.querySelector(`#${item.key}`).scrollIntoView({
+                                    //     behavior: "smooth"
+                                    // });
+                                    // }}
+                                >{item.subtitle}</a> 
                             </li>
                     ))}
                     </ul>
@@ -39,6 +57,7 @@ const TOCHeadings = ({props}) => (
             </li>
         }
     </ul>
-);
+    );
+}
 
 export default TOCHeadings;
