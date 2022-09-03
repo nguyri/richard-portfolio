@@ -21,34 +21,22 @@ const TOCHeadings = (props) => {
     //         ))
     //     }
     // </ul>
-    let heading = props.props;
+    let heading = props.entrydata;
+    let activeId = props.activeId;
     return (
-    <ul>
-        {/* {console.log("in tocheadings", heading, heading.longdescription)} */}
+    <ul >
         {
-            <li key={heading.num} className="headings-li">
-                <a 
+            <li key={heading.num} className={heading.num == activeId ? "headings-li-active" : "headings-li"}>
+                <a id="toc" 
                     href={`#${heading.num}`}
-                    // onClick={(e) => {
-                    //     e.preventDefault();
-                    //     document.querySelector(`#${heading.num}`).scrollIntoView({
-                    //       behavior: "smooth"
-                    //     });
-                    //   }}
                     >{heading.title}</a>
                 { heading.longdescription.length > 0 && (
                     <ul>
                     { heading.longdescription.map((item) => (
                         item.subtitle && 
-                            <li key={item.key} className="headings-li"> 
-                                <a 
+                            <li key={item.key} className={item.key == activeId ? "headings-li-active" : "headings-li"}> 
+                                <a id="toc" 
                                     href={`#${item.key}`}
-                                    // onClick={(e) => {
-                                    // e.preventDefault();
-                                    // document.querySelector(`#${item.key}`).scrollIntoView({
-                                    //     behavior: "smooth"
-                                    // });
-                                    // }}
                                 >{item.subtitle}</a> 
                             </li>
                     ))}

@@ -58,6 +58,13 @@
     margin: 10px 0vw 10px 0vw;
     font-weight:700;
     font-size:1.5rem;
+    list-style:none;
+}
+
+.headings-li-active {
+    font-size:2rem;
+    color:fuchsia;
+    list-style:none;
 }
 
 .entry-enter {

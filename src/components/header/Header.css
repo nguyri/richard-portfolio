@@ -12,7 +12,7 @@
     display:flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     background-color:#bedfc5;
     margin:0 0;
     padding:20px;
@@ -47,10 +47,11 @@
     margin-left:15px;
     color:var(--header-dark-text);
     display:flex;
+    font-size:2rem;
 }
 
 .header--title-shrink {
-    font-size:1.5rem;
+    font-size:1.4rem;
 }
 
 .header--title-dark {
@@ -63,7 +64,7 @@
     margin-block:0;
     margin-inline:5vw;
     font-weight:400;
-    font-size:1.4rem;
+    font-size:1.2rem;
     line-height:0px;
     padding-top:5px;
     color:var(--header-dark-text);
@@ -112,7 +113,7 @@ h2,h3 {
     padding:20px 20px;
     font-family: Inter;
     color: var(--header-dark-text);
-    font-size:1.5rem;
+    font-size:1.2rem;
     font-weight:500;
 }
 
