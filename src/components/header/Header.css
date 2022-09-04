@@ -1,6 +1,8 @@
 * {
     --header-dark-text:#3a683a;
+    --header-highlight-dark-text:#70a64f;
     --header-light-text:#dff1df;
+    --header-highlight-light-text:#9dbf88;
 }
 
 .header {

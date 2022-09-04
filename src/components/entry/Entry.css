@@ -61,10 +61,15 @@
     list-style:none;
 }
 
-.headings-li-active {
-    font-size:2rem;
-    color:fuchsia;
+.headings-a {
+    color:var(--dark-text);
     list-style:none;
+}
+
+.headings-a-active {
+    color:var(--header-highlight-dark-text);
+    list-style:none;
+    text-decoration:dotted;
 }
 
 .entry-enter {

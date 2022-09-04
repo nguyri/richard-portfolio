@@ -26,16 +26,17 @@ const TOCHeadings = (props) => {
     return (
     <ul >
         {
-            <li key={heading.num} className={heading.num == activeId ? "headings-li-active" : "headings-li"}>
-                <a id="toc" 
+            <li key={heading.num} className={"headings-li"}>
+                <a
                     href={`#${heading.num}`}
+                    className={heading.num == activeId ? "headings-a-active" : "headings-a"}
                     >{heading.title}</a>
                 { heading.longdescription.length > 0 && (
                     <ul>
                     { heading.longdescription.map((item) => (
                         item.subtitle && 
-                            <li key={item.key} className={item.key == activeId ? "headings-li-active" : "headings-li"}> 
-                                <a id="toc" 
+                            <li key={item.key} className={"headings-li"}> 
+                                <a className={item.key == activeId ? "headings-a-active" : "headings-a" }
                                     href={`#${item.key}`}
                                 >{item.subtitle}</a> 
                             </li>

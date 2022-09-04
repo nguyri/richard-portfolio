@@ -7,8 +7,11 @@ import useBreadcrumbs from 'use-react-router-breadcrumbs';
 export default function Header(props) {
     const [shrinkHeader, setShrinkHeader] = React.useState(false);
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
+    const entriesLayout = document.querySelector(".entries-layout");
+    console.log(entriesLayout);
     const handleScroll = () => {
-        const position = window.pageYOffset;
+        const position = entriesLayout.scrollTop;
+        console.log(position);
         setShrinkHeader(position > 10);
     };
 
@@ -30,10 +33,10 @@ export default function Header(props) {
     }
 
     React.useEffect(() => {
-        window.addEventListener("scroll", handleScroll);
-
+        entriesLayout && entriesLayout.addEventListener("scroll", handleScroll);
+        console.log("in useeffect");
         return () => {
-            window.removeEventListener("scroll", handleScroll);
+            entriesLayout && entriesLayout.removeEventListener("scroll", handleScroll);
         };
     }, []);
 

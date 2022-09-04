@@ -10,22 +10,6 @@ html {
     margin: 0 0;
 }
 
-#toc {
-    color: red;
-}
-
-#toc:link {
-    color:blue;
-}
-
-#toc:hover {
-    color:green;
-}
-
-#toc:hover .headings-li-active {
-    color:pink;
-}
-
 p {
     padding:0;
     margin:0;
