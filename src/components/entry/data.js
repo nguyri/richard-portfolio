@@ -2,6 +2,7 @@ import mpcnc from "../../imgs/mpcnc1.jpg"
 import adlathe from "../../imgs/addlathe1.jpg"
 import raytracer from "../../imgs/raytracer1.jpg"
 import wordle from "../../imgs/wordle1.png"
+import { nanoid } from 'nanoid'
 import React from 'react'
 
 const images = {}
@@ -33,10 +34,11 @@ let entries = [
         reactDescription:{html:<div>I'm pretty new to metal fabrication and welding.
         To start with, a lot of things can be made with <b>sheet metal</b> and plain <b>welded steel tubing</b> without a lot of tooling. </div>},
         longdescription: [
+            {key: 'metal-shop', title:`Metal Shop`},
             {key: 1, text:`I'm pretty new to metal fabrication and welding. I have had a vague interest in steel but during 
             the pandemic lumber prices made it more enticing to pick up an angle grinder.`},
             {key:3, text:`I've found that metal in general is more forgiving than wood. The cutting tools go at a lower rpm and if you make a mistake, it can be welded back together`},
-            {key: 2, subtitle:`Plasma Cutter`},
+            {key: 'plasma-cutter', title:`Plasma Cutter`},
             {key: 15, vimeo:'https://vimeo.com/675640978', },
             {key:4, text:`Plasma cutting uses a stream of plasma between the torch head and the metal to deliver enough energy to melt 
             the metal and blow it away. It's also fast!`},
@@ -49,8 +51,17 @@ let entries = [
             and also replacing the tiny 3d printer drivers with more noise resistant stepper drivers.`},
             {key:9, text:`Comparing this amount of work to a less noisy plasma cutter, of course it would have been a better idea to simply 
             buy a blowback plasma from the start.`,},
+            {key: 'upgrading-the-controller', subtitle:`Upgrading the Controller`},
+            {key:nanoid(), text:`The raspberry pi and arduino are more suitable as prototyping tools and not particularly noise-resistant. I had relatively few faults with my raspberry pi 3 running 
+            cnc.js, however the arduino often reset itself when a plasma arc was started.`,},
+            {key:nanoid(), text:`Options exist for "industrial" arduinos. However, for the same price it's possible to get a very cheap Mach3 controller. `,},
+            {key: 'mach3', subtitle:`Mach3`},
+            {key:nanoid(), text:`Perhaps you've lived a post Web2.0 life, in a garden of minimalist, rounded cornered responsive webpages. Long gone are the days of 
+            geocities and marquees. Mach3 revives the dotcom bubble into its eye-squintingly cluttered user interface. It's a small price to pay for the reliability of an 
+            ethernet connection however.`,},
+            {key:nanoid(), text:`The control channels are all photo-isolated as well.`,},
             {key: 14, imageName:'./welding1.jpg', style: {gridColumn:"1 /span 2", gridRow:"span 4", margin:"20px 20px", marginLeft:"0", width:"20vw"}, className:"entry--img-inline"},
-            {key: 10, subtitle:`Welding`, style: {gridColumn:"3 / span 3"} },
+            {key: 10, title:`Welding`, style: {gridColumn:"3 / span 3"} },
             {key: 11, text:`Welding is easy to learn and hard to master. I quite liked Steve Bleile’s welding videos. They are densely packed with information and without the 
             embellishments of a youtube tutorial.`, style: {gridColumn:"span 3"}},
             {key:13, text:`Recently I also got myself a fun 110cuft bottle to TIG weld with. TIG is certainly less forgiving and more sensitive to a litany of new variables. 

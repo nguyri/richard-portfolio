@@ -21,32 +21,49 @@ const TOCHeadings = (props) => {
     //         ))
     //     }
     // </ul>
-    let heading = props.entrydata;
+    let longDescription = props.longdescription;
     let activeId = props.activeId;
+    console.log(longDescription);
     return (
-    <ul >
-        {
-            <li key={heading.num} className={"headings-li"}>
-                <a
-                    href={`#${heading.num}`}
-                    className={heading.num == activeId ? "headings-a-active" : "headings-a"}
-                    >{heading.title}</a>
-                { heading.longdescription.length > 0 && (
+        <ul>
+            { longDescription.map((item) => 
+                item.title ?
+                <li key={item.key} className={"headings-li"}>
+                    <a
+                        href={`#${item.key}`}
+                        className={item.key == activeId ? "headings-a-active" : "headings-a"}
+                        >{item.title}</a>
+                </li> :
+                item.subtitle && 
+                <li key={item.key} className={"headings-li"}>
+                    <a
+                        href={`#${item.key}`}
+                        className={item.key == activeId ? "headings-a-active" : "headings-a"}
+                        >{item.subtitle}</a>
+                </li>
+            )}
+        </ul>
+        );
+    }
+
+export default TOCHeadings;
+
+                //children toc headings
+                /* { heading.longdescription.length > 0 && (
                     <ul>
                     { heading.longdescription.map((item) => (
-                        item.subtitle && 
+                        item.subtitle ?  
                             <li key={item.key} className={"headings-li"}> 
                                 <a className={item.key == activeId ? "headings-a-active" : "headings-a" }
                                     href={`#${item.key}`}
                                 >{item.subtitle}</a> 
-                            </li>
+                            </li> :
+                        item.title &&
+                        <li key={item.key} className={"headings-li"}> 
+                            <a className={item.key == activeId ? "headings-a-active" : "headings-a" }
+                                href={`#${item.key}`}
+                            >{item.title}</a> 
+                        </li>
                     ))}
                     </ul>
-                )}
-            </li>
-        }
-    </ul>
-    );
-}
-
-export default TOCHeadings;
+                )} */

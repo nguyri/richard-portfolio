@@ -55,7 +55,7 @@ const TableOfContents = (props) => {
     return (
         <div className="table-of-contents">
             {/* <TOCHeadings props={data_file}/> */}
-            <TOCHeadings entrydata={props.entrydata} activeId={activeId} />
+            <TOCHeadings longdescription={props.entrydata.longdescription} activeId={activeId} />
             
         </div>
     );
