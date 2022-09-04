@@ -23,23 +23,38 @@ const TOCHeadings = (props) => {
     // </ul>
     let longDescription = props.longdescription;
     let activeId = props.activeId;
-    console.log(longDescription);
+    let nestedHeadings = [];
+
+    for(let i = 0; i < longDescription.length; i++) {
+        if(longDescription[i].title) {
+            nestedHeadings.push({...longDescription[i], subtitles:[]});
+        } else if (longDescription[i].subtitle) {
+            nestedHeadings[nestedHeadings.length - 1].subtitles.push(longDescription[i]);
+        }
+    }
+
+    // console.log(longDescription);
+    // console.log(nestedHeadings);
     return (
         <ul>
-            { longDescription.map((item) => 
-                item.title ?
-                <li key={item.key} className={"headings-li"}>
+            { nestedHeadings.map((titleItem) => 
+                <li key={titleItem.key} className={"headings-li"}>
                     <a
-                        href={`#${item.key}`}
-                        className={item.key == activeId ? "headings-a-active" : "headings-a"}
-                        >{item.title}</a>
-                </li> :
-                item.subtitle && 
-                <li key={item.key} className={"headings-li"}>
-                    <a
-                        href={`#${item.key}`}
-                        className={item.key == activeId ? "headings-a-active" : "headings-a"}
-                        >{item.subtitle}</a>
+                        href={`#${titleItem.key}`}
+                        className={titleItem.key == activeId ? "headings-a-active" : "headings-a"}
+                        >{titleItem.title}</a>
+                    { titleItem.subtitles.length > 0 && 
+                        <ul>
+                        {titleItem.subtitles.map((subtitleItem) => 
+                            <li key={subtitleItem.key} className={"headings-li"}>
+                                <a
+                                    href={`#${subtitleItem.key}`}
+                                    className={subtitleItem.key == activeId ? "headings-a-active" : "headings-a"}
+                                    >{subtitleItem.subtitle}</a>
+                            </li>
+                            )}
+                        </ul>
+                        }
                 </li>
             )}
         </ul>

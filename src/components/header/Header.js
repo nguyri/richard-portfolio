@@ -8,7 +8,7 @@ export default function Header(props) {
     const [shrinkHeader, setShrinkHeader] = React.useState(false);
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
     const entriesLayout = document.querySelector(".entries-layout");
-    console.log(entriesLayout);
+    // console.log(entriesLayout);
     const handleScroll = () => {
         const position = entriesLayout.scrollTop;
         console.log(position);
