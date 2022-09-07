@@ -120,6 +120,6 @@
 }
 
 .material-icons-round {
-    width:40px;
+    max-width:40px;
     /* justify-self:right; */
 }

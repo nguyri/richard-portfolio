@@ -57,12 +57,12 @@ export default function Header(props) {
              <h2 className={
                     `header--subtitle  ${props.darkMode && `header--subtitle-dark`}  ${shrinkHeader && `header--subtitle-shrink`}`}>
                     { ((!shrinkHeader && !isTabletOrMobile)) &&
-                     <div style={{display: "flex", flexDirection: "row", alignItems:"center",}}>
+                     <div style={{display: "flex", flexDirection: "row", alignItems:"center", paddingInline:"20px",}}>
                         putting the magic smoke 
-                        into {<div className="material-icons-round" style={{marginInline:"15px", width:'20px'}}> auto_fix_normal</div>} 
-                        wood {<div className="material-icons-round" style={{marginInline:"15px", width:'20px'}}> park</div>} 
-                        code {<div className="material-icons-round" style={{marginInline:"15px", width:'25px'}}>terminal</div>} 
-                        steel {<div className="material-icons-round" style={{marginInline:"15px", width:'20px'}}> precision_manufacturing</div>} </div> }
+                        into {<div className="material-icons-round header--icon" style={ {width:'20px'}}> auto_fix_normal</div>} 
+                        wood {<div className="material-icons-round header--icon" style={ {width:'20px'}}> park</div>} 
+                        code {<div className="material-icons-round header--icon" style={ {width:'25px'}}>terminal</div>} 
+                        steel {<div className="material-icons-round header--icon" style={{width:'20px'}}> precision_manufacturing</div>} </div> }
                         {/* h_mobiledata */} 
                     { Breadcrumbs(props.darkMode) }
                 </h2>   
