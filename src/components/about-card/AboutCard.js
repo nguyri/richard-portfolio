@@ -5,7 +5,7 @@ import { useOutletContext } from "react-router-dom";
 import richardo from "../../imgs/richardo1.jpg"
 
 export default function AboutCard() {
-    const darkMode = useOutletContext();
+    const darkMode = useOutletContext()[0];
     return (
     <div className = {darkMode ? "about-card--dark about-card " : "about-card"}>
         <header className="info">
