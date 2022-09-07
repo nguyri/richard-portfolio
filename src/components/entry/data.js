@@ -32,7 +32,7 @@ let entries = [
         link: "metalshop",
         description: "Simply the best way to cover everything in iron oxide",
         reactDescription:{html:<div>I'm pretty new to metal fabrication and welding.
-        To start with, a lot of things can be made with <b>sheet metal</b> and plain <b>welded steel tubing</b> without a lot of tooling. </div>},
+        To start with, a lot of things can be made with <b>sheet metal</b> and plain<b> steel tubing</b> without a lot of tooling. </div>},
         longdescription: [
             {key: 'metal-shop', title:`Metal Shop`},
             {key: 1, text:`I'm pretty new to metal fabrication and welding. I have had a vague interest in steel but during 
