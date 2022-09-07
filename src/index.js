@@ -12,7 +12,9 @@ ReactDOM.render(
     <BrowserRouter>
         <Routes>
             <Route path="/" element={<App />} >
-                <Route index element = {<Entries />}/>
+                <Route path="/" element = {<EntriesLayout />}>
+                    <Route index element = {<Entries />}/>  
+                </Route>
                 <Route path="projects" element={<EntriesLayout />}>
                     <Route index element = {<Entries />}/>    
                     <Route path=":projectlink" element ={ <LongEntry />} />
