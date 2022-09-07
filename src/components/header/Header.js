@@ -5,15 +5,15 @@ import { Link } from "react-router-dom";
 import useBreadcrumbs from 'use-react-router-breadcrumbs';
 
 export default function Header(props) {
-    const [shrinkHeader, setShrinkHeader] = React.useState(false);
-    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
     const entriesLayout = document.querySelector(".entries-layout");
-    // console.log(entriesLayout);
-    const handleScroll = () => {
-        const position = entriesLayout.scrollTop;
-        console.log(position);
-        setShrinkHeader(position > 10);
-    };
+    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
+    const shrinkHeader = props.shrinkHeader;
+
+    // const handleScroll = () => {
+    //     const position = entriesLayout.scrollTop;
+    //     console.log(position);
+    //     setShrinkHeader(position > 10);
+    // };
 
     const Breadcrumbs = (darkMode) => {
         const breadcrumbs = useBreadcrumbs();
@@ -31,14 +31,14 @@ export default function Header(props) {
                 })}  </>
         );
     }
-
-    React.useEffect(() => {
-        entriesLayout && entriesLayout.addEventListener("scroll", handleScroll);
-        console.log("in useeffect");
-        return () => {
-            entriesLayout && entriesLayout.removeEventListener("scroll", handleScroll);
-        };
-    }, []);
+    // React.useEffect(() => {}, [shrinkHeader]);
+    // React.useEffect(() => {
+    //     entriesLayout && entriesLayout.addEventListener("scroll", handleScroll);
+    //     console.log("in useeffect", entriesLayout);
+    //     return () => {
+    //         entriesLayout && entriesLayout.removeEventListener("scroll", handleScroll);
+    //     };
+    // }, []);
 
     function homeButton() {
         return (

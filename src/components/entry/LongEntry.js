@@ -15,8 +15,8 @@ export default function LongEntry() {
     const [entryIsSmall, setEntryIsSmall] = React.useState(true);
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
     let params = useParams();
-    let entryData = {...getEntry(params.projectlink), darkMode:useOutletContext()}
-
+    let entryData = {...getEntry(params.projectlink), darkMode:useOutletContext()[0]};
+   
     function paragraphBigEntry(paragraphArr) {
         return (paragraphArr.map((elem) => {
             if (elem.imageName) {

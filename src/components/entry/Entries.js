@@ -15,7 +15,7 @@ function importAll(r) {
 importAll(require.context('../../imgs/', false, /\.(png|jpe?g|svg)$/));
 
 export default function Entries (props) {
-    const darkMode = useOutletContext();
+    const darkMode = useOutletContext()[0];
     let data_file = getEntries();
     let entries = data_file.map( entry => {
         let data = {...entry}

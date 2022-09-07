@@ -15,8 +15,8 @@
     /* background-color: #F9F7F0; */
     font-family:Inter;
     /* position:sticky; */
-    max-height: calc(100vh - 40px);
-    overflow:auto;
+    /* max-height: calc(100vh - 40px); */
+    height:auto;
 }
 
 .entries {
@@ -32,6 +32,7 @@
     max-height: calc(100vh - 100px);
     overflow-y:auto;
     overflow-x:hidden;
+    padding-top:100px;
 }
 
 .entries-outlet {
@@ -194,6 +195,7 @@
     /* padding-left:0px; */
     justify-content: space-evenly;
     grid-auto-flow: row;
+    height:auto;
 }
 
 .entry--col {
@@ -277,7 +279,7 @@
         flex-direction:column;
         overflow:hidden;
         width:90vw;
-        max-height: 100vh;
+        /* max-height: 100vh; */
         overflow:auto;
     }
 

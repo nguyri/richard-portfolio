@@ -71,15 +71,15 @@ let entries = [
             {key: 'pierce-timing', subtitle:`Pierce Timing`},
             {key:nanoid(), text:`I had problems with getting a pierce delay of under 1 second, which resulted in a splattery pierce hole that's larger than the rest of the cut. It's possible to 
             pierce outside the part and then bring the tool to the cut line so I didn't spend too long on it.`},
-            {key: 14, imageName:'./welding1.jpg', style: {gridColumn:"1 /span 2", gridRow:"span 4", margin:"20px 20px", marginLeft:"0", width:"20vw"}, className:"entry--img-inline"},
+            {key:nanoid(), imageName:'./welding1.jpg', style: {gridColumn:"1 /span 2", gridRow:"span 4", margin:"20px 20px", marginLeft:"0", width:"20vw"}, className:"entry--img-inline"},
             {key: 'welding', title:`Welding`, style: {gridColumn:"3 / span 3"} },
-            {key: 11, text:`Welding is easy to learn and hard to master. I quite liked Steve Bleile’s welding videos. They are densely packed with information and without the 
+            {key:nanoid(), text:`Welding is easy to learn and hard to master. I quite liked Steve Bleile’s welding videos. They are densely packed with information and without the 
             embellishments of a youtube tutorial.`, style: {gridColumn:"span 3"}},
-            {key:13, text:`Recently I also got myself a fun 110cuft bottle to TIG weld with. TIG is certainly less forgiving and more sensitive to a litany of new variables. 
+            {key:nanoid(), text:`Recently I also got myself a fun 110cuft bottle to TIG weld with. TIG is certainly less forgiving and more sensitive to a litany of new variables. 
             However, it is very satisfying to see a clean weld come out without chipping or brushing at all.`, style: {gridColumn:"span 3"}},
-            {key: 17, imageName:'./welding2.jpg', style: {gridColumn:"1 /span 4", gridRow:"span 4", width:"40vw", height:"20vw", overflow:"hidden", objectFit:"cover"}, className:"entry--img-inline"},
+            {key:nanoid(), imageName:'./welding2.jpg', style: {gridColumn:"1 /span 4", gridRow:"span 4", width:"40vw", height:"20vw", overflow:"hidden", objectFit:"cover"}, className:"entry--img-inline"},
             {key: 'getting-started', subtitle:`Getting Started`},
-            {key:13, text:`I started off with a Forney 140MP, a fine little starter machine which does enough for me. When I first got the machine I thought it would be a stick or gasless MIG box. 
+            {key:nanoid(), text:`I started off with a Forney 140MP, a fine little starter machine which does enough for me. When I first got the machine I thought it would be a stick or gasless MIG box. 
             In fact, running pure CO2 MIG offers another relatively easy point of entry. The money saved from the standard MIG wire compared to gasless can easily afford a 
             bottle of CO2 for sparkling water or paintball, and the weld quality is certainly better than gasless.`},
     ],

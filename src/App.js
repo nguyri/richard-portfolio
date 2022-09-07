@@ -12,7 +12,8 @@ import { Outlet, Link, useNavigate } from "react-router-dom";
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 export default function App() {
-  const [darkMode, setDarkMode] = React.useState(false)
+  const [darkMode, setDarkMode] = React.useState(false);
+  const [shrinkHeader, setShrinkHeader] = React.useState(false);
 
   function toggleDarkMode() {
     setDarkMode( (prevState) => !prevState)
@@ -25,9 +26,9 @@ export default function App() {
   
   return(  
     <div className={darkMode? "App App--dark" : "App"}>
-      <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode}/>
+      <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} shrinkHeader ={shrinkHeader}/>
       <main>
-        <Outlet context={darkMode}/>
+        <Outlet context={[darkMode, setShrinkHeader]}/>
       </main>
   </div>
   );
