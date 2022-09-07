@@ -54,21 +54,34 @@ let entries = [
             {key: 'upgrading-the-controller', subtitle:`Upgrading the Controller`},
             {key:nanoid(), text:`The raspberry pi and arduino are more suitable as prototyping tools and not particularly noise-resistant. I had relatively few faults with my raspberry pi 3 running 
             cnc.js, however the arduino often reset itself when a plasma arc was started.`,},
-            {key:nanoid(), text:`Options exist for "industrial" arduinos. However, for the same price it's possible to get a very cheap Mach3 controller with ethernet connection. 
+            {key:nanoid(), text:`Options exist for "industrial" arduinos. It's also possible to get a very cheap Mach3 controller with ethernet connection. 
             The ethernet connection offers a huge bonus with error detection and correction, so I opted for the inexpensive NVEM2 controller.`,},
+            {key:nanoid(), text:`The control channels are all photo-isolated as well. The documentation is unclear about whether a current limiting resistor is needed for these photodiodes, 
+            so I just some in.`,},
             {key: 'mach3', subtitle:`Mach3`},
             {key:nanoid(), text:`Perhaps you've lived a post Web2.0 life, in a garden of minimalist, rounded cornered responsive webpages. Long gone are the days of 
             geocities and marquees. Mach3 revives the dotcom bubble into its eye-squintingly cluttered user interface. It's a small price to pay for the reliability of an 
             ethernet connection however.`,},
-            {key:nanoid(), text:`The control channels are all photo-isolated as well. The documentation is unclear about whether a current limiting resistor is needed for these photodiodes, 
-            so I just threw some in.`,},
+            {key:nanoid(), text:`Aside from the inscrutable density of buttons, if you only interact with the load g-code and run g-code buttons of Mach3 it does a reliable job of getting 
+            through the g-code.`,},
+            {key: 'initial-setup', subtitle:`Initial Setup`},
+            {key:nanoid(), text:`The initial setup of the electronics was mostly unremarkable, simply follow the labelling on the NVEM card. Getting the settings to work in Mach3 was 
+            more of a head-scratcher. The documentation did offer some useful screenshots to copy from but did not make any particular effort to explain any settings. So setting up anything
+            that wasn't exactly photographed in the manual trial and error. The trigger for the plasma for instance took quite a lot of bench time before the right signal would come out of the right place.`},
+            {key: 'pierce-timing', subtitle:`Pierce Timing`},
+            {key:nanoid(), text:`I had problems with getting a pierce delay of under 1 second, which resulted in a splattery pierce hole that's larger than the rest of the cut. It's possible to 
+            pierce outside the part and then bring the tool to the cut line so I didn't spend too long on it.`},
             {key: 14, imageName:'./welding1.jpg', style: {gridColumn:"1 /span 2", gridRow:"span 4", margin:"20px 20px", marginLeft:"0", width:"20vw"}, className:"entry--img-inline"},
-            {key: 10, title:`Welding`, style: {gridColumn:"3 / span 3"} },
+            {key: 'welding', title:`Welding`, style: {gridColumn:"3 / span 3"} },
             {key: 11, text:`Welding is easy to learn and hard to master. I quite liked Steve Bleile’s welding videos. They are densely packed with information and without the 
             embellishments of a youtube tutorial.`, style: {gridColumn:"span 3"}},
             {key:13, text:`Recently I also got myself a fun 110cuft bottle to TIG weld with. TIG is certainly less forgiving and more sensitive to a litany of new variables. 
             However, it is very satisfying to see a clean weld come out without chipping or brushing at all.`, style: {gridColumn:"span 3"}},
             {key: 17, imageName:'./welding2.jpg', style: {gridColumn:"1 /span 4", gridRow:"span 4", width:"40vw", height:"20vw", overflow:"hidden", objectFit:"cover"}, className:"entry--img-inline"},
+            {key: 'getting-started', subtitle:`Getting Started`},
+            {key:13, text:`I started off with a Forney 140MP, a fine little starter machine which does enough for me. When I first got the machine I thought it would be a stick or gasless MIG box. 
+            In fact, running pure CO2 MIG offers another relatively easy point of entry. The money saved from the standard MIG wire compared to gasless can easily afford a 
+            bottle of CO2 for sparkling water or paintball, and the weld quality is certainly better than gasless.`},
     ],
         imageName:'./plasma2.jpg',
     },
