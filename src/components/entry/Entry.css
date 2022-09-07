@@ -14,7 +14,6 @@
     background-color: #f7f7f700;
     /* background-color: #F9F7F0; */
     font-family:Inter;
-    overflow:hidden;
     /* position:sticky; */
     max-height: calc(100vh - 40px);
     overflow:auto;
@@ -43,12 +42,13 @@
     display:block;
     position: sticky;
     position: -webkit-sticky; /* For Safari */
-    top: 24px; /* How far down the page you want your ToC to live */
-    margin: 10px 0vw 10px 5vw;
+    top: 24px; 
+    margin: 10px 50px 10px 5vw;
     padding: 10px;
     /* Give table of contents a scrollbar */
     max-height: calc(100vh - 40px);
     width:20vw;
+    max-width:300px;
     overflow: auto;
 }
 
@@ -97,7 +97,7 @@
     flex-shrink:0;
     min-width:20%;
     width:60%;
-    height:40vh;
+    height:350px;
     overflow:hidden;
     margin:10px 20px ;
     padding:0 0;
@@ -160,10 +160,11 @@
 .entry--vimeo-fixed-aspect {
     grid-column: span 5;
     position: relative;
-    padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+    padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720)  */
     border-radius: 10px;
-    margin:5px 0px;
+    margin:0px 0px;
     justify-content: left;
+    margin-bottom:20px;
     /* overflow:hidden; */
 }
 
@@ -172,9 +173,6 @@
     top: 0;
     left: 0;
     z-index: 1;
-    padding:0 0;
-    margin:0 0;
-    padding-bottom:20px;
 }
 
 .entry--img-inline {
@@ -265,6 +263,11 @@
 
     .entry--overlay-container {
         width:100%;
+        height:100%;
+        margin:0 0;
+    }
+
+    .entries-layout {
         margin:0 0;
     }
 
@@ -272,7 +275,11 @@
         display:flex;
         flex-direction:column;
         overflow:hidden;
+        width:90vw;
+        max-height: 100vh;
+        overflow:auto;
     }
+
     /* just use a column.. */
     .entry--grid {
         display:flex;
@@ -280,6 +287,7 @@
         margin:0 0;
         padding:20px 20px;
         justify-content: center;
+        width:90vw;
     }
     .entry--text {
         font-weight:400;
@@ -296,14 +304,16 @@
     }
 
     .entry--img {
-        width:60%;
-        max-width:60%;
+        width:100%;
+        max-width:100%;
+        max-height:30vh;
         padding:0px;
         border-radius: 10px;
     }
 
     .entries {
         margin: 10px 10px;
+        max-width:90vw;
     }
 
     .entry--title {

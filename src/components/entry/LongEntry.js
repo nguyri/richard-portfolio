@@ -29,7 +29,7 @@ export default function LongEntry() {
             }
             else if (elem.vimeo) {
                 return < div key={elem.key} className="entry--vimeo-fixed-aspect" style={elem.style}>
-                        <ReactPlayer url={elem.vimeo} className="entry--vimeo" width='100%' height='100%' />
+                        <ReactPlayer url={elem.vimeo} className="entry--vimeo" width='100%' height='100%' style={{justifyContent:'left'}}/>
                     </div>
             }
             else if (elem.wordle) {
@@ -63,8 +63,7 @@ export default function LongEntry() {
                         <img src={getImage(entryData.imageName).default ? getImage(entryData.imageName).default : ""} className="entry--img" />
                     </div>
                 </div> */}
-                <TableOfContents entrydata={entryData}/>
-
+                {!isTabletOrMobile && <TableOfContents entrydata={entryData}/>}
                 <div className="entry--grid">
                     {/* <h2 className={entryData.darkMode ? "entry--title entry--title-dark" : "entry--title"} id={entryData.num}> {entryData.title} </h2> */}
                     {paragraphBigEntry(entryData.longdescription)}
