@@ -118,6 +118,24 @@ let entries = [
         imageName:'./raytracer1.jpg',
     },
     {
+        num: 2,
+        title: "Additive Lathe",
+        link: "additivelathe",
+        description: "Our capstone engineering project. This multidisciplinary project based on Cura to generates cylindrical g-code. It prints onto a custom machined drum rather than a flat bed.",
+        reactDescription: {html:<div>Our capstone engineering project. This multidisciplinary project heavily modifies the <b>open source slicer Cura </b>to generate gcode.
+        It prints onto a custom machined drum rather than a flat bed. </div>},
+        longdescription: [
+            {key:'additivelathe', title:'Additive Lathe'},
+            {key: 1, text:`Our capstone engineering project. This multidisciplinary project heavily modifies Cura to generate gcode. It prints onto a custom machined drum rather than a flat bed.`},
+            {key: 16, vimeo:'https://vimeo.com/692393001', style: {}},
+            {key: 3, text:`I designed the mathematical basis for the cylindrical slicer and also integrated it into a popular open source slicer, Cura. 
+            I also rewrote part of the display shader to display print previews with cylindrical layers.`, style: {gridRow:"span 5"}},
+            {key: 2, text:`The project won first place in the 2019 Schulich School of Engineering Capstone Fair as well as 2019 CSME National Design Competition Best Overall Design.`, style: {gridRow:"span 5"}},
+            {key:5, img:'test img', style: {gridRow:"span 5", margin: "20px 20px 20px 0px "}, className:"entry--img-inline", imageName:'./addlathe2.jpg'},
+        ],
+        imageName:'./addlathe1.jpg',
+    },
+    {
         num: 4,
         title: "Web Development",
         link: "web",
@@ -135,24 +153,6 @@ let entries = [
             On the backend it's built with babel and webpack. Deployment is on an nginx server running on an arch VPS.`},
         ],
         imageName:'./wordle2.png',
-    },
-    {
-        num: 2,
-        title: "Additive Lathe",
-        link: "additivelathe",
-        description: "Our capstone engineering project. This multidisciplinary project based on Cura to generates cylindrical g-code. It prints onto a custom machined drum rather than a flat bed.",
-        reactDescription: {html:<div>Our capstone engineering project. This multidisciplinary project heavily modifies the <b>open source slicer Cura </b>to generate gcode.
-        It prints onto a custom machined drum rather than a flat bed. </div>},
-        longdescription: [
-            {key:'additivelathe', title:'Additive Lathe'},
-            {key: 1, text:`Our capstone engineering project. This multidisciplinary project heavily modifies Cura to generate gcode. It prints onto a custom machined drum rather than a flat bed.`},
-            {key: 16, vimeo:'https://vimeo.com/692393001', style: {}},
-            {key: 3, text:`I designed the mathematical basis for the cylindrical slicer and also integrated it into a popular open source slicer, Cura. 
-            I also rewrote part of the display shader to display print previews with cylindrical layers.`, style: {gridRow:"span 5"}},
-            {key: 2, text:`The project won first place in the 2019 Schulich School of Engineering Capstone Fair as well as 2019 CSME National Design Competition Best Overall Design.`, style: {gridRow:"span 5"}},
-            {key:5, img:'test img', style: {gridRow:"span 5", margin: "20px 20px 20px 0px "}, className:"entry--img-inline", imageName:'./addlathe2.jpg'},
-        ],
-        imageName:'./addlathe1.jpg',
     },
     {
         num: 1,
