@@ -20,7 +20,10 @@ export default function LongEntry() {
     function paragraphBigEntry(paragraphArr) {
         return (paragraphArr.map((elem) => {
             if (elem.imageName) {
-                return <img key={elem.key} src={getImage(elem.imageName).default ? getImage(elem.imageName).default : ""} style={isTabletOrMobile ? {} : elem.style} className={elem.className} />
+                return <img key={elem.key} src={getImage(elem.imageName).default ? getImage(elem.imageName).default : ""} style={isTabletOrMobile ? {} : elem.style} className={elem.className} />;
+                // return <div style={{maxWidth:100, height:'auto'}}>
+                //     <img key={elem.key} src={getImage(elem.imageName).default ? getImage(elem.imageName).default : ""} style={isTabletOrMobile ? {} : elem.style} className={elem.className} />
+                //     </div>
             }
             else if (elem.threejs) {
                 return (
@@ -33,10 +36,10 @@ export default function LongEntry() {
                     </div>
             }
             else if (elem.wordle) {
-                return <div key ={elem.key}> <Wordle/> </div>
+                return <Wordle key={elem.key}/>
             }
             else if (elem.title) {
-                return <h2 id={elem.key} key={elem.key} className={entryData.darkMode ? "entry--subtitle entry--dark" : "entry--subtitle"}  style={elem.style}> {elem.title} </h2>
+                return <h2 id={elem.key} key={elem.key} className={entryData.darkMode ? "entry--title entry--dark" : "entry--title"}  style={elem.style}> {elem.title} </h2>
             }
             else if (elem.subtitle) {
                 return <h3 id={elem.key} key={elem.key} className={entryData.darkMode ? "entry--subtitle entry--dark" : "entry--subtitle"}  style={elem.style}> {elem.subtitle} </h3>
