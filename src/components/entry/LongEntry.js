@@ -39,10 +39,10 @@ export default function LongEntry() {
                 return <Wordle key={elem.key}/>
             }
             else if (elem.title) {
-                return <h2 id={elem.key} key={elem.key} className={entryData.darkMode ? "entry--title entry--dark" : "entry--title"}  style={elem.style}> {elem.title} </h2>
+                return <h2 id={elem.key} key={elem.key} className={entryData.darkMode ? "entry--title entry--title-dark" : "entry--title"}  style={elem.style}> {elem.title} </h2>
             }
             else if (elem.subtitle) {
-                return <h3 id={elem.key} key={elem.key} className={entryData.darkMode ? "entry--subtitle entry--dark" : "entry--subtitle"}  style={elem.style}> {elem.subtitle} </h3>
+                return <h3 id={elem.key} key={elem.key} className={entryData.darkMode ? "entry--subtitle entry--subtitle-dark" : "entry--subtitle"}  style={elem.style}> {elem.subtitle} </h3>
             }
             else if (elem.html) {
                 return <div key={elem.key} className={entryData.darkMode ? "entry--text entry--dark" : "entry--text"} style={elem.style}> {elem.html}</div >;

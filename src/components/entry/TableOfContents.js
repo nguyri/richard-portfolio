@@ -51,13 +51,15 @@ const TableOfContents = (props) => {
     const [activeId, setActiveId] = React.useState();
     let params = useParams();
     let data_file = getEntries();
+    const darkMode = useOutletContext()[0];
+    console.log(darkMode);
 
     useIntersectionObserver(setActiveId);
 
     return (
         <div className="table-of-contents">
             {/* <TOCHeadings props={data_file}/> */}
-            <TOCHeadings longdescription={props.entrydata.longdescription} activeId={activeId} />
+            <TOCHeadings longdescription={props.entrydata.longdescription} activeId={activeId} darkMode={darkMode} />
             
         </div>
     );

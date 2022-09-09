@@ -24,6 +24,7 @@ const TOCHeadings = (props) => {
     let longDescription = props.longdescription;
     let activeId = props.activeId;
     let nestedHeadings = [];
+    let darkMode = props.darkMode;
 
     for(let i = 0; i < longDescription.length; i++) {
         if(longDescription[i].title) {
@@ -41,7 +42,9 @@ const TOCHeadings = (props) => {
                 <li key={titleItem.key} className={"headings-li"}>
                     <a
                         href={`#${titleItem.key}`}
-                        className={titleItem.key == activeId ? "headings-a-active" : "headings-a"}
+                        className={darkMode ? 
+                            titleItem.key == activeId ? "headings-a-active-dark" : "headings-a-dark" :
+                            titleItem.key == activeId ? "headings-a-active" : "headings-a"}
                         >{titleItem.title}</a>
                     { titleItem.subtitles.length > 0 && 
                         <ul>
@@ -49,7 +52,10 @@ const TOCHeadings = (props) => {
                             <li key={subtitleItem.key} className={"headings-li"}>
                                 <a
                                     href={`#${subtitleItem.key}`}
-                                    className={subtitleItem.key == activeId ? "headings-a-active" : "headings-a"}
+                                    className={darkMode ? 
+                                        subtitleItem.key == activeId ? "headings-a-active-dark" : "headings-a-dark":
+                                        subtitleItem.key == activeId ? "headings-a-active" : "headings-a"
+                                        }
                                     >{subtitleItem.subtitle}</a>
                             </li>
                             )}

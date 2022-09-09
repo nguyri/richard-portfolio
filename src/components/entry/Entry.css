@@ -67,6 +67,17 @@
     text-decoration:dotted;
 }
 
+.headings-a-dark {
+    color:var(--light-text);
+    list-style:none;
+}
+
+.headings-a-active-dark {
+    color:var(--header-highlight-light-text);
+    list-style:none;
+    text-decoration:dotted;
+}
+
 .entry-enter {
     opacity: 0;
     transform: scale(0.9);

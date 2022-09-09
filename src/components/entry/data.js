@@ -142,7 +142,7 @@ let entries = [
             {key: 3, text:`I designed the cylindrical slicer and also integrated it into a popular open source slicer, Cura. 
             I also rewrote part of the display shader to display print previews with cylindrical layers.`, style: {gridRow:"span 5"}},
             {key: 2, text:`The project won first place in the 2019 Schulich School of Engineering Capstone Fair as well as 2019 CSME National Design Competition Best Overall Design.`, style: {gridRow:"span 5"}},
-            {key:5, img:'test img', style: {gridRow:"span 5", margin: "20px 20px 20px 0px "}, className:"entry--img-inline", imageName:'./addlathe2.jpg'},
+            {key:5, img:'test img', style: {gridColumn:"span 5", margin: "20px 20px 20px 0px "}, className:"entry--img-inline", imageName:'./addlathe2.jpg'},
         ],
         imageName:'./addlathe1.jpg',
         imageStyle:{style: {objectPosition:'right 0 bottom 200px'}}
