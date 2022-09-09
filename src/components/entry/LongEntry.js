@@ -4,6 +4,7 @@ import { CSSTransition } from 'react-transition-group';
 import "./Entry.css"
 import ReactPlayer from 'react-player/lazy'
 import ThreeScene from "../threejsdemo/ThreeScene"
+import Three from "../threejsdemo/Three"
 import Wordle from "../wordle/Wordle"
 import NotFound from "../errordocs/NotFound"
 import { useMediaQuery } from 'react-responsive'
@@ -27,7 +28,7 @@ export default function LongEntry() {
             }
             else if (elem.threejs) {
                 return (
-                    <div key={elem.key}> <ThreeScene zoom={isTabletOrMobile? 4.0 : 5.4}/> </div>
+                    <div key={elem.key}> <Three zoom={isTabletOrMobile? 4.0 : 5.4}/> </div>
                 )
             }
             else if (elem.vimeo) {

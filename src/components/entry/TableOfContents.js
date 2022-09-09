@@ -52,7 +52,7 @@ const TableOfContents = (props) => {
     let params = useParams();
     let data_file = getEntries();
     const darkMode = useOutletContext()[0];
-    console.log(darkMode);
+    // console.log(darkMode);
 
     useIntersectionObserver(setActiveId);
 
