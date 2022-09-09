@@ -11,8 +11,8 @@ export default function EntriesLayout(props) {
     const handleScroll = () => {
         setShrinkHeader(myRef.current.scrollTop > 50) ;
     };
-
     return (
+        
         <div className="entries-layout" ref={myRef} onScroll={handleScroll}>
             {/* <link rel="icon" type="image/x-icon" src={getImage('./favicon.png') ? getImage('./favicon.png') : ""}></link>
             {console.log(getImage('./favicon.png'))} */}
