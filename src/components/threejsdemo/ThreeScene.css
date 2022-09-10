@@ -38,6 +38,10 @@
     margin-bottom:15px;
 }
 
+.three {
+    height: 20vh;
+}
+
 @media screen and (max-width: 1224px) {
     .threescene--scene {
         width: 90vw;
