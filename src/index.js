@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import App from "./App.js";
 import EntriesLayout from "./components/entry/EntriesLayout"
 import Entries from "./components/entry/Entries"
@@ -8,7 +8,8 @@ import NotFound from "./components/errordocs/NotFound"
 import { BrowserRouter, Routes, Route, Redirect } from "react-router-dom";
 import AboutCard from "./components/about-card/AboutCard"
 
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
     <BrowserRouter>
         <Routes>
             <Route path="/" element={<App />} >
@@ -26,4 +27,4 @@ ReactDOM.render(
             <Route path="*" element={<NotFound />}/>
         </Routes>
     </BrowserRouter>
-    , document.getElementById("root"));
+    );
