@@ -73,9 +73,16 @@ let entries = [
             The documentation did offer some useful screenshots to copy from but did not make any particular effort to explain any settings. Setting up anything
             that wasn't exactly photographed in the manual was trial and error. For instance, the plasma trigger pulse.`},
             {key: 'pierce-timing', subtitle:`Pierce Timing`},
-            {key:nanoid(), text:`I had problems with getting a pierce delay of under 1 second, which resulted in a splattery pierce hole that's larger than the rest of the cut. It's possible to 
-            pierce outside the part and then bring the tool to the cut line so I didn't spend too long on it.`},
-            {key: nanoid(), vimeo:'https://vimeo.com/675640978', }, 
+            {key: nanoid(), vimeo:'https://vimeo.com/748961985', }, 
+            {key:nanoid(), text:`I had problems with getting a pierce delay of under 1 second, which resulted in a splattery pierce hole that's larger than the rest of the cut. `},
+            {key:nanoid(), text:`It is ok to pierce outside the part and then bring the tool to the cut line so I didn't spend too long on it. In the latest video you can see
+            the plasma head is moving much slower and the pierce sits for a full second.`},
+            {key: 'dross', subtitle:`Dross`},
+            {key:nanoid(), text:`A note on dross, which is the liquefied metal directly under the plasma head. Ideally it's blown away and leaves a perfectly clean 
+            cut, but more often than not you'll have to chip it away for mild steel. `},
+            {key:nanoid(), text:`On stainless I've found it is much more sticky and has to be ground off. It's possible
+            to get drossless cuts with this setup but not consistently.`},
+            {key:nanoid(), imageName:'./plasma3.jpg', style: {gridColumn:"1 /span 5", gridRow:"span 1", overflow:"hidden", objectFit:"cover", paddingBottom:"20px", height:"300px"}, className:"entry--img-inline"},
             {key: 'welding', title:`Welding` },
             {key:nanoid(), text:`Welding is easy to learn and hard to master. I quite liked Steve Bleile’s welding videos. They are densely packed with information and without the 
             embellishments of a youtube tutorial.`},
@@ -85,7 +92,7 @@ let entries = [
             {key:nanoid(), html: <div>In fact, running <b>pure CO<sub>2</sub> MIG</b> offers another relatively easy point of entry. The money saved from the standard MIG wire compared to gasless can easily afford a 
             bottle of CO2 for sparkling water or paintball, and the weld quality is certainly better than gasless. </div>, style: {gridColumn:"span 3"}},
             {key:nanoid(), text:`Either way, the principles of controlling your weld puddle apply no matter what style you choose to begin with.`, style: {gridColumn:"span 3"}},
-            {key: 'welding', subtitle:`TIG Welding` },
+            {key: 'tig-welding', subtitle:`TIG Welding` },
             {key:nanoid(), text:`Recently I also got myself a 110cuft bottle to TIG weld with. TIG is certainly less forgiving and more sensitive to a litany of new variables. 
             However, it is very satisfying to see a clean weld come out without chipping or brushing at all.`},
             {key:nanoid(), imageName:'./welding1.jpg', style: {gridColumn:"1 /span 5", gridRow:"span 1", marginBottom:"20px", height:"300px"}, className:"entry--img-inline"},
@@ -141,31 +148,41 @@ let entries = [
             {key: 16, vimeo:'https://vimeo.com/692393001', style: {}},
             {key: 3, text:`I designed the cylindrical slicer and also integrated it into a popular open source slicer, Cura. 
             I also rewrote part of the display shader to display print previews with cylindrical layers.`, style: {gridRow:"span 5"}},
-            {key: 'slicermodifications', title:'Slicer Modifications'},
+            {key: 'slicer-modifications', subtitle:'Slicer Modifications'},
             {key: nanoid(), text:`The goal of the slicer is to create toolpaths that recreate the 3D model in cylindrical coordinates.
-            This differs from traditional cartesian printers because the X axis is replaced with a rotating (theta or B) axis. 
             There are many new challenges to slicing cylindrically, particularly due to the layer geometry changing from flat 
-            planes to round tubes.`},
-            {key:5, img:'test img', style: {gridColumn:"span 5", marginBottom: "30px", height:"300px"}, className:"entry--img-inline", imageName:'./addlathe2.jpg'},
-            {key: 'geometrymodifications', subtitle:'Geometry Modifications'},
+            planes to round tubes.` , style: {gridColumn:"1 / span 2", gridRow:"span 3"}},
+            {key: nanoid(), vimeo:'https://vimeo.com/748967884', vimeo_auto:'true', 
+                style: {gridColumn:"3 / span 3", gridRow:"span 1", }},
+            {key: 'cartesian-to-cylindrical', subtitle:'Cartesian to Cylindrical', style: {gridRow:"span 5"}},
             {key:nanoid(), text:`Here a cylinder with a window is sliced cylindrically. Note that the window remains perpendicular 
-            to the drum, so it's an overhanging feature due to the smaller angular size as the layers increase in radius.`},
+            to the drum, so it's an overhanging feature due to the smaller angular size as the layers increase in radius.
+            `, style: {gridColumn:"4 / span 2", gridRow:"span 3"}},
+            {key: nanoid(), vimeo:'https://vimeo.com/748967901', vimeo_auto:'true', style: {gridColumn:"1 / span 3", gridRow:"span 1", }},
             {key:nanoid(), text:`Once the model is in an STL file the cartesian coordinates are 'baked in'. That is, decoding 
             the STL file gives you a list of XYZ coordinates and not angle, radius and height dimensions. It was eventually decided
             that writing the cartesian to cylindrical converter inside the slicer would be the best course of action. `},
-            {key:nanoid(), text:`For simplicity, a seam was added from 0 to pi so each layer was a "closed shape". You can see the 
-            artifact in this is an animation of one of the infill layers. The slicer is unsatified when an open shape is created
-            when slicing because this is usually an input geometry fault. However, two separate rings can make an enclosed shell
-            in cylindrical coordinates, that would simply be a cylinder. This feature was avoided for the time being.`,},
+            {key:'closed-shell', subtitle:'Closed Shells'},
+            {key:nanoid(), text:`For simplicity, a seam was added from 0 to pi so each "shell" was closed. The shell is the outmost outline
+            on each print layer. You can see the artifact in this is an animation of one of the infill layers.`,},
+            {key: nanoid(), vimeo:'https://vimeo.com/748967875', vimeo_auto:'true' , style: {gridColumn:"3 / span 3", gridRow:" 24 / span 3"}},
+            {key:nanoid(), text:`The slicer is unsatified when an open outline is created when slicing because this is usually an input geometry fault. 
+            However, two separate rings can make an enclosed shell in cylindrical coordinates, that would simply be a cylinder. 
+            This feature was avoided for the time being.` , style: {gridColumn:"1 / span 2", gridRow:"24 / span 3"}},
             {key:nanoid(), text:``,},
             {key:nanoid(), text:``,},
             {key: 'hardware', title:'Hardware'},
             {key:nanoid(), text:`The project is based on the excellent Zaribo upgrade for Prusa MK2 printers. This upgrade replaces
             the sheet panel frame with aluminum extrusion, as well as directly coupled Z lead screws and other organizational
             improvements. `,},
+            {key:nanoid(), text:`The bed is replaced with a plate aluminum that supports the rotating drum.`,},
+            {key:nanoid(), img:'test img', style: {gridColumn:"span 5", marginBottom: "30px", height:"300px"}, className:"entry--img-inline", imageName:'./addlathe5.png'},
             {key:nanoid(), text:`The frame is paired with a Duet 2 control board, which has an excellent user interface, ethernet 
             connection, and dual extruder outputs.`,},
+            {key:5, img:'test img', style: {gridColumn:"span 5", marginBottom: "30px", height:"300px"}, className:"entry--img-inline", imageName:'./addlathe2.jpg'},
             {key: 2, text:`The project won first place in the 2019 Schulich School of Engineering Capstone Fair as well as 2019 CSME National Design Competition Best Overall Design.`, style: {gridRow:"span 5"}},
+            {key: 'poster', title:'Poster'},
+            {key:5, img:'test img', style: {gridColumn:"span 5", marginBottom: "30px", height:"440px"}, className:"entry--img-inline", imageName:'./addlathe4.jpg'},
             
         ],
         imageName:'./addlathe1.jpg',
@@ -204,7 +221,7 @@ let entries = [
             {key: 16, vimeo:'https://vimeo.com/612194957', style: {}},
             {key: 2, text:`Admittedly, using this small garage router is more finnicky than using a rigid commercial machine
             with a spindle measured in horsepower. One upside is that if you crash it, the tiny steppers can't possibly generate enough force to damage anything other than your self esteem.`}, 
-            {key:'commontroubleshooting', subtitle:'Common Troubleshooting'},
+            {key:'common-troubleshooting', subtitle:'Common Troubleshooting'},
             {key:5, img:'test img', style: {gridColumn:"span 3", gridRow:"span 3", marginBottom:"30px"}, className:"entry--img-inline",  imageName:'./mpcnc2.jpg'},
             {key: 4, text:`The most common issue was with electrical connectors, which were simple but painstaking to fix. Generic 'dupont' or 0.1mm connectors
             will do the job for breadboarding, but for constant motion dedicated wire to wire or wire to panel connectors are better. `, style: {gridColumn:"span 2"}},
@@ -213,7 +230,7 @@ let entries = [
             {key: nanoid(), text:`At the end of this project I found myself not using the router particularly often because routing
             wood was messy and takes a long time. `},
             {key: nanoid(), text:`The laser is simpler to setup than plasma, requiring only power and optional air assist. Unfortunately, paper or plastic are most suitable for the laser cutter which smell terrible when vaporized. Even running it in an open garage it is quite stinky. `},
-            {key: nanoid(), vimeo:'https://vimeo.com/612194957', style: {}},
+            {key: nanoid(), vimeo:'https://vimeo.com/748947623', style: {}},
         ],
         
         imageName:'./mpcnc1.jpg',
@@ -233,11 +250,11 @@ let entries = [
             {key:nanoid(), text:`Starting with woods requires a healthy fear of wood tooling. Wood tools move faster and store more energy than (equivalently sized) metal ones due to the higher RPM needed to sever wood fibers.`},
             {key:nanoid(), html:<div>Kickback occurs when the cutter enters the material in an uncontrolled manner, usually throwing or destroying the workpiece. In a 2011 report by the CPSC, <a href="https://cpsc.gov/s3fs-public/statsaws.pdf">available at this link</a>, nearly 80000 injuries occuried in the US between 2007 and 2009. </div>},
             {key:nanoid(), text:`Don't do anything sketchy on the table saw. When you do end up doing something sketchy, stop moving and turn off the saw until is fully stops.`},
-            {key: 'woodgrain', subtitle:`Wood Grain`},
+            {key: 'wood-grain', subtitle:`Wood Grain`},
             {key:nanoid(), text:`The next fundametal of wood is working with the grain. Most people start off with a mitre or table saw which are in fact, fairly grain agnostic.`},
             {key:nanoid(), text:`The jointer and planer prefer going down grain however, and if you're ever hand-planed a piece of wood against the grain you'll know it's difficult and by ripping out groups of fibers it ruins the flatness of the board. `},
             {key:nanoid(), text:`Take some time to examine the grain of your wood, it'll save you time and effort later on.`},
-            {key: 'flatandsquare', subtitle:`Flat and Square`},
+            {key: 'flat-and-square', subtitle:`Flat and Square`},
             {key:6, text:`Once you equip your shop with a jointer, planer, table and mitre saw you can make square and flat wood safely and with ease. Flat and square wood is required to get consistent results`},
             {key:nanoid(), text: `It does take quite a few steps. Usually, crosscut to an easy-to-handle size, oversize rip, jointer, planer, rip and crosscut again to the final size. `},
             {key:nanoid(), html: <div>

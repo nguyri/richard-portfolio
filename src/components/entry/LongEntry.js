@@ -32,7 +32,10 @@ export default function LongEntry() {
             }
             else if (elem.vimeo) {
                 return < div key={elem.key} className="entry--vimeo-fixed-aspect" style={elem.style}>
-                        <ReactPlayer url={elem.vimeo} className="entry--vimeo" width='100%' height='100%' style={{justifyContent:'left'}}/>
+                        <ReactPlayer url={elem.vimeo} className="entry--vimeo" width='100%' height='100%' style={{justifyContent:'left'}}
+                            volume={elem.vimeo_auto ? 0 : null} muted={elem.vimeo_auto ? true: false} controls={elem.vimeo_auto ? true:false}
+                            playing={elem.vimeo_auto ? true: false} loop={elem.vimeo_auto ? true: false}
+                        />
                     </div>
             }
             else if (elem.wordle) {
