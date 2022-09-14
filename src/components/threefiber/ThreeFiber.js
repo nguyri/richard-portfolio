@@ -1,6 +1,7 @@
 import { createRoot } from 'react-dom/client'
 import React, { useRef, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
+import './ThreeFiber.css'
 
 function Box(props) {
   // This reference will give us direct access to the mesh
@@ -25,11 +26,25 @@ function Box(props) {
   )
 }
 
-createRoot(document.getElementById('root')).render(
-  <Canvas>
-    <ambientLight />
-    <pointLight position={[10, 10, 10]} />
-    <Box position={[-1.2, 0, 0]} />
-    <Box position={[1.2, 0, 0]} />
-  </Canvas>,
-)
+const ThreeFiber = () => {
+  return (
+    <div className="threefiber--div">
+    <Canvas>
+      <ambientLight />
+      <pointLight position={[10, 10, 10]} />
+      <Box position={[-1.2, 0, 0]} />
+      <Box position={[1.2, 0, 0]} />
+    </Canvas>
+    </div>
+  )};
+
+export default ThreeFiber;
+
+// createRoot(document.getElementById('root')).render(
+//   <Canvas>
+//     <ambientLight />
+//     <pointLight position={[10, 10, 10]} />
+//     <Box position={[-1.2, 0, 0]} />
+//     <Box position={[1.2, 0, 0]} />
+//   </Canvas>,
+// )
