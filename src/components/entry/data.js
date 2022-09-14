@@ -49,7 +49,7 @@ let entries = [
             {key: 'electronics-setup', subtitle:`Electronics Setup`},
             {key:nanoid(), text:`For electronics, an Arduino Uno running GRBL with four TB6600 stepper modules turns the g-code into stepper motor power. A raspberry pi 3 running cnc.js
             provides a great way to preview and control GRBL and load g-code over wifi.`},
-            {key:nanoid(), imageName:'./welding2.jpg', style: {marginBottom:"20px", gridRow:"span 5", overflow:"hidden", height:"250px"}},
+            {key:nanoid(), imageName:'./plasma4.jpg', style: {gridColumn:"1 /span 5", gridRow:"span 1", overflow:"hidden", objectFit:"cover", paddingBottom:"20px", height:"300px"}, className:"entry--img-inline"},
             {key:7, text:`Unfortunately this setup was plagued by electronics issues for a while. A combination of poor connectors and very strong 
             electromagnetic interference (EMI) took a lot of troubleshooting. After crimping an endless number of 2.54mm 'dupont' connectors, I replaced them all with locking JST-SM ones.`},
             {key:8, text:`Reducing EMI meant rewiring the entire CNC machine, shielding to all the exterior cables, adding an enclosure for the controllers, 
@@ -114,7 +114,7 @@ let entries = [
             {key: 2, html:<div>Rust doesn't give any particular advantages in this case, given that there's no finnicky memory management. 
                 It was quite nice to use the built in package manager though! <a href="https://github.com/laetic/rustTracer"> The rustTracer repo is available on Github.</a> </div>},
             {key: 8, html:<div>The raytracer was based off of Raytracing in One Weekend by Peter Shirley, <a href="https://raytracing.github.io/">freely available at this link.</a>  Simply put, trace a line (ray) from a camera to every point on a screen. If the ray hits something, change the color. 
-            If the ray hits something that absorbs, reflects, or refracts the light... now you're raytracing</div>},
+            If the ray hits something that absorbs, reflects, or refracts the light... now you're raytracing.</div>},
             {key:'diffuse-materials', subtitle:'Diffuse Materials'},
             {key:nanoid(), text:`After establishing a camera, geometry and basic vector math, the diffuse material makes the raytracer feel 
             much more substantial. The material reflects light in a random direction, which causes
