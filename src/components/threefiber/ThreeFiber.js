@@ -1,7 +1,12 @@
 import { createRoot } from 'react-dom/client'
+import * as THREE from 'three'
 import React, { useRef, useState } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { Physics, useSphere, Canvas, useFrame, extend } from '@react-three/fiber'
+import {shaderMaterial} from '@react-three/drei'
 import './ThreeFiber.css'
+import MyMaterial from './MyMaterial'
+
+extend({ MyMaterial});
 
 function Box(props) {
   // This reference will give us direct access to the mesh
@@ -21,7 +26,7 @@ function Box(props) {
       onPointerOver={(event) => setHover(true)}
       onPointerOut={(event) => setHover(false)}>
       <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
+      <myMaterial/>
     </mesh>
   )
 }
@@ -34,6 +39,7 @@ const ThreeFiber = () => {
       <pointLight position={[10, 10, 10]} />
       <Box position={[-1.2, 0, 0]} />
       <Box position={[1.2, 0, 0]} />
+      
     </Canvas>
     </div>
   )};
