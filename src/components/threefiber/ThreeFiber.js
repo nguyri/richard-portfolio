@@ -42,7 +42,7 @@ const Fragment = (props) => {
   return (
     <mesh ref={mesh} position={[0, 0, 0]} scale={props.scale}>
       <planeGeometry args={[1, 1, 32, 32]} />
-      <myMaterial color="blue" time={time}/>
+      <myMaterial u_color="blue" u_time={time} />
     </mesh>
   );
 };
