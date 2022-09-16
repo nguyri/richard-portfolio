@@ -8,7 +8,7 @@ export default function ShortEntry(props) {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
     // let params = useParams();
     // props = getEntry(params.projectlink)
-    console.log(props);
+    // console.log(props);
 
     return (
         <div className={props.darkMode ? "entry entry--dark" : "entry"}>

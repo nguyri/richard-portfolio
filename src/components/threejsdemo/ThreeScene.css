@@ -38,10 +38,6 @@
     margin-bottom:15px;
 }
 
-.threefiber {
-    height: 20vh;
-}
-
 @media screen and (max-width: 1224px) {
     .threescene--scene {
         width: 90vw;

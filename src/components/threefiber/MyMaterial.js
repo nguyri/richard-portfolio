@@ -1,4 +1,5 @@
 import {shaderMaterial} from "@react-three/drei"
+import * as THREE from "three"
 
 const vertexShader = /*glsl*/`
 void main() {
@@ -7,8 +8,10 @@ void main() {
 `;
 
 const fragmentShader = /*glsl*/`
+uniform float time;
+uniform vec3 color; 
 void main() {
-  gl_FragColor = vec4(0.0, 0.0, 1.0, 1.0);
+  gl_FragColor = vec4(vec3(abs(sin(time)), 0.0, 0.0) + color, 1.0);
 }
 `;
 
@@ -19,13 +22,7 @@ const uniforms = {
 }
 
 const MyMaterial = shaderMaterial(
-  {
-    effectFactor: 1.2,
-    dispFactor: 0,
-    tex: undefined,
-    tex2: undefined,
-    disp: undefined
-  },
+  {time: 0, color: new THREE.Color(0.0, 0.0, 0.0)},
   vertexShader,
   fragmentShader,
 );
