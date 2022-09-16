@@ -2,7 +2,7 @@ import { createRoot } from 'react-dom/client'
 import * as THREE from 'three'
 import React, { useRef, useState } from 'react'
 import { Physics, useSphere, Canvas, useFrame, extend } from '@react-three/fiber'
-import {shaderMaterial} from '@react-three/drei'
+import {Plane, Text, shaderMaterial} from '@react-three/drei'
 import './ThreeFiber.css'
 import MyMaterial from './MyMaterial'
 
@@ -34,15 +34,30 @@ function Box(props) {
   )
 }
 
+const Fragment = (props) => {
+  // This reference will give us direct access to the mesh
+  const mesh = useRef();
+  const [time, setTime] = useState(0);
+  useFrame((state, delta) => (setTime(time + 0.01)))
+  return (
+    <mesh ref={mesh} position={[0, 0, 0]} scale={props.scale}>
+      <planeGeometry args={[1, 1, 32, 32]} />
+      <myMaterial color="blue" time={time}/>
+    </mesh>
+  );
+};
+
 const ThreeFiber = () => {
+  const [time, setTime] = useState(0);
   return (
     <div className="threefiber--div">
     <Canvas>
-      <ambientLight />
+      {/* <ambientLight />
       <pointLight position={[10, 10, 10]} />
       <Box position={[-1.2, 0, 0]} />
       <Box position={[1.2, 0, 0]} />
-      <myMaterial/>
+      <myMaterial/> */}
+      <Fragment scale={4}/>
     </Canvas>
     </div>
   )};
