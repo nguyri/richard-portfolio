@@ -5,6 +5,7 @@ import { Physics, useSphere, Canvas, useFrame, extend } from '@react-three/fiber
 import {Plane, Text, shaderMaterial} from '@react-three/drei'
 import './ThreeFiber.css'
 import MyMaterial from './MyMaterial'
+import MovingPlane from './MovingPlane'
 
 extend({ MyMaterial});
 
@@ -38,6 +39,7 @@ const Fragment = (props) => {
   // This reference will give us direct access to the mesh
   const mesh = useRef();
   const [time, setTime] = useState(0);
+
   useFrame((state, delta) => (setTime(time + 0.01)))
   return (
     <mesh ref={mesh} position={[0, 0, 0]} scale={props.scale}>
@@ -48,16 +50,16 @@ const Fragment = (props) => {
 };
 
 const ThreeFiber = () => {
-  const [time, setTime] = useState(0);
   return (
     <div className="threefiber--div">
-    <Canvas>
+    <Canvas camera={{ fov: 45, position: [1.0, 1.8, 1.0] }}>
       {/* <ambientLight />
       <pointLight position={[10, 10, 10]} />
       <Box position={[-1.2, 0, 0]} />
       <Box position={[1.2, 0, 0]} />
       <myMaterial/> */}
-      <Fragment scale={4}/>
+      <axesHelper />
+      <MovingPlane />
     </Canvas>
     </div>
   )};

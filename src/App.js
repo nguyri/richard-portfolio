@@ -29,7 +29,6 @@ export default function App() {
     <div className={darkMode? "App App--dark" : "App"}>
       <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} shrinkHeader ={shrinkHeader}/>
       <main>
-        <ThreeFiber/> 
         <Outlet context={[darkMode, setShrinkHeader]}/>
       </main>
   </div>

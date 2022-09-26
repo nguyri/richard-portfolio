@@ -10,6 +10,7 @@ import { useMediaQuery } from 'react-responsive'
 import { useParams, useOutletContext } from "react-router-dom";
 import { getEntry, getImage } from './data'
 import TableOfContents from "./TableOfContents"
+import ThreeFiber from "../threefiber/ThreeFiber";
 
 export default function LongEntry() {
     const [entryIsSmall, setEntryIsSmall] = React.useState(true);
@@ -27,7 +28,10 @@ export default function LongEntry() {
             }
             else if (elem.threejs) {
                 return (
-                    <div key={elem.key}> <ThreeScene zoom={isTabletOrMobile? 4.0 : 5.4}/> </div>
+                    <div key={elem.key} style={{width:"40vw"}}> 
+                        <ThreeScene zoom={isTabletOrMobile? 4.0 : 5.4}/> 
+                        <ThreeFiber /> 
+                    </div>
                 )
             }
             else if (elem.vimeo) {
