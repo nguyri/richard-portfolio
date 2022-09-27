@@ -12,6 +12,9 @@ import { getEntry, getImage } from './data'
 import TableOfContents from "./TableOfContents"
 import ThreeFiber from "../threefiber/ThreeFiber";
 
+import ImageTransitionCanvas from "../threefiber/ImageTransition";
+// import ImageTransitionCanvas from "../threefiber/ImageTransition";
+
 export default function LongEntry() {
     const [entryIsSmall, setEntryIsSmall] = React.useState(true);
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
@@ -31,6 +34,8 @@ export default function LongEntry() {
                     <div key={elem.key} style={{width:"40vw"}}> 
                         <ThreeScene zoom={isTabletOrMobile? 4.0 : 5.4}/> 
                         <ThreeFiber /> 
+                        {/* <ImageTransition/> */}
+                        {/* <ImageTransitionCanvas/> */}
                     </div>
                 )
             }
