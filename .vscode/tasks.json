@@ -8,6 +8,13 @@
 			"problemMatcher": [],
 			"label": "npm: dev-build",
 			"detail": "webpack --config webpack.dev.js"
+		},
+		{
+			"type": "npm",
+			"script": "server",
+			"problemMatcher": [],
+			"label": "npm: server",
+			"detail": "./node_modules/.bin/webpack-dev-server --config webpack.dev.js"
 		}
 	]
 }

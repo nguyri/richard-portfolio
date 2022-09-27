@@ -6,6 +6,7 @@ import {Plane, Text, shaderMaterial} from '@react-three/drei'
 import './ThreeFiber.css'
 import MyMaterial from './MyMaterial'
 import MovingPlane from './MovingPlane'
+import ImageTransition from './ImageTransition'
 
 extend({ MyMaterial});
 
@@ -52,15 +53,23 @@ const Fragment = (props) => {
 const ThreeFiber = () => {
   return (
     <div className="threefiber--div">
-    <Canvas camera={{ fov: 45, position: [1.0, 1.8, 1.0] }}>
-      {/* <ambientLight />
-      <pointLight position={[10, 10, 10]} />
-      <Box position={[-1.2, 0, 0]} />
-      <Box position={[1.2, 0, 0]} />
-      <myMaterial/> */}
-      <axesHelper />
-      <MovingPlane />
-    </Canvas>
+      <div>
+        <Canvas camera={{ fov: 45, position: [1.0, 1.8, 1.0] }}>
+          {/* <ambientLight />
+          <pointLight position={[10, 10, 10]} />
+          <Box position={[-1.2, 0, 0]} />
+          <Box position={[1.2, 0, 0]} />
+          <myMaterial/> */}
+          <axesHelper />
+          <MovingPlane />
+        </Canvas>
+      </div>
+      <div>
+        <Canvas camera={{ fov: 45, position: [1.0, 1.8, 1.0] }}>
+          <axesHelper/>
+          <ImageTransition/>
+        </Canvas>
+      </div>
     </div>
   )};
 
