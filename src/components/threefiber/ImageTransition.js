@@ -2,6 +2,7 @@ import React from 'react'
 import { useTexture, Box, shaderMaterial, axesHelper } from '@react-three/drei';
 import { extend, Canvas, useFrame } from '@react-three/fiber'
 import { getImage } from '../entry/data'
+import * as THREE from 'three'
 
 
 const ImageFadeMaterial =
@@ -25,7 +26,9 @@ shaderMaterial (
         vec2 uv = vUv;
         vec4 _tex1 = texture2D(tex1, uv);
         vec4 _tex2 = texture2D(tex2, uv);
-        vec4 finalTexture = mix(_tex1, _tex2, dispFactor);
+        vec4 _black = vec4(0.0, 0.0, 0.0, 1.0);
+        vec4 _white = vec4(1.0, 1.0, 1.0, 1.0);
+        vec4 finalTexture = mix(_black, _white, dispFactor);
         gl_FragColor = finalTexture;
     }
     `
@@ -35,7 +38,7 @@ extend({ImageFadeMaterial});
 const ImageTransition = () => {
     const img1 = getImage("./addlathe1.jpg").default;
     const img2 = getImage("./addlathe2.jpg").default;
-    const ref = React.useRef();
+    const matRef = React.useRef();
     // console.log(img1.default);
     // const colorMap = useLoader(TextureLoader, img1.default)
 
@@ -44,13 +47,13 @@ const ImageTransition = () => {
     const [hover, setHover] = React.useState(false);
 
     useFrame(() => {
-        ref.current = hover ? 0.0 : 1.0;
+        matRef.current.dispFactor = THREE.MathUtils.lerp ( matRef.current.dispFactor, hover ? 0.0 : 1.0, 0.075);
     })
 
     return  (
         <mesh onPointerOver={(e) => setHover(true)} onPointerOut={(e) => setHover(false)}>
             <planeGeometry args={[1, 1, 32, 32]} />
-            <imageFadeMaterial tex1={texture1} tex2={texture2} dispFactor={ref.current}/>
+            <imageFadeMaterial ref={matRef} tex1={texture1} tex2={texture2}/>
         </mesh>
     );
 }
