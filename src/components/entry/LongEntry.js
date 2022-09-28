@@ -10,7 +10,7 @@ import { useMediaQuery } from 'react-responsive'
 import { useParams, useOutletContext } from "react-router-dom";
 import { getEntry, getImage } from './data'
 import TableOfContents from "./TableOfContents"
-import ThreeFiber from "../threefiber/ThreeFiber";
+import MovingPlaneCanvas from "../threefiber/MovingPlaneCanvas";
 
 import ImageTransitionCanvas from "../threefiber/ImageTransition";
 // import ImageTransitionCanvas from "../threefiber/ImageTransition";
@@ -33,9 +33,9 @@ export default function LongEntry() {
                 return (
                     <div key={elem.key} style={{width:"40vw"}}> 
                         <ThreeScene zoom={isTabletOrMobile? 4.0 : 5.4}/> 
-                        <ThreeFiber /> 
+                        <MovingPlaneCanvas /> 
                         {/* <ImageTransition/> */}
-                        {/* <ImageTransitionCanvas/> */}
+                        <ImageTransitionCanvas/>
                     </div>
                 )
             }

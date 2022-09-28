@@ -53,14 +53,16 @@ const ImageTransition = () => {
     );
 }
 
-// const ImageTransitionCanvas = () => {
-//     return (
-//         <Canvas camera={{ fov: 45, position: [1.0, 1.8, 1.0] }}>
-//             {/* <axesHelper/> */}
-//             <ImageTransition/>
-//         </Canvas>
-//     );
-// }
+const ImageTransitionCanvas = () => {
+    return (
+        <div className={"threefiber--div"}>
+        <Canvas camera={{ fov: 45, position: [1.0, 1.8, 1.0] }}>
+            {/* <axesHelper/> */}
+            <ImageTransition/>
+        </Canvas>           
+        </div>
+    );
+}
 
+export default ImageTransitionCanvas;
 // export default ImageTransition;
-export default ImageTransition;

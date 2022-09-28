@@ -50,10 +50,9 @@ const Fragment = (props) => {
   );
 };
 
-const ThreeFiber = () => {
+const MovingPlaneCanvas = () => {
   return (
     <div className="threefiber--div">
-      <div>
         <Canvas camera={{ fov: 45, position: [1.0, 1.8, 1.0] }}>
           {/* <ambientLight />
           <pointLight position={[10, 10, 10]} />
@@ -63,17 +62,10 @@ const ThreeFiber = () => {
           <axesHelper />
           <MovingPlane />
         </Canvas>
-      </div>
-      <div>
-        <Canvas camera={{ fov: 45, position: [1.0, 1.8, 1.0] }}>
-          <axesHelper/>
-          <ImageTransition/>
-        </Canvas>
-      </div>
     </div>
   )};
 
-export default ThreeFiber;
+export default MovingPlaneCanvas;
 
 // createRoot(document.getElementById('root')).render(
 //   <Canvas>

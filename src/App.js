@@ -4,7 +4,6 @@ import "./App.css";
 import Entries from "./components/entry/Entries"
 import data_file from "./components/entry/data"
 import AboutCard from "./components/about-card/AboutCard"
-import ThreeFiber from "./components/threefiber/ThreeFiber"
 
 import Header from "./components/header/Header"
 import img from "./imgs/assiniboine.jpg"
