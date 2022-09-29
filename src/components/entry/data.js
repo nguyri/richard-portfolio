@@ -107,7 +107,6 @@ let entries = [
         reactDescription: {html:<div>A computer graphics classic: <b>raytracing</b>,  and a <b>three.js</b> demo </div>},
         longdescription: [
             {key: 'graphics', title:`Graphics`},
-            {key: nanoid(), threejs: true,},
             {key:nanoid(), text:`I've always had an interest in graphics and shaders. I quite like visual thinking and
             the beauty of graphics is apparent even without in-depth knowledge.`},
             {key: 'raytracer', title:`Raytracer`},
@@ -132,6 +131,7 @@ let entries = [
             {key: 3, text:`There are a lot of neat WebGL demos online and I wanted to give it a shot. I got started with three.js.
             It's fascinating that web browsers and WebGL are good enough that 3D demonstrations work just fine in the browser.`},
             {key: 7, text:`Shown below, a sampling of models I've drawn up in Fusion360. Click and drag to orbit! `},
+            {key: nanoid(), threejs: true,},
         ],
         imageName:'./raytracer1.jpg',
     },

@@ -9,8 +9,10 @@ const ImageFadeMaterial =
 shaderMaterial (
     {tex1:undefined,
     tex2:undefined,
-    disp:undefined,
-    dispFactor:0.0},
+    noise:undefined,
+    noise2:undefined,
+    dispFactor:0.0,
+    u_time:0.0},
     `
     varying vec2 vUv;
     void main() {
@@ -20,40 +22,53 @@ shaderMaterial (
     ` varying vec2 vUv;
     uniform sampler2D tex1;
     uniform sampler2D tex2;
-    uniform sampler2D disp;
+    uniform sampler2D noise;
+    uniform sampler2D noise2;
+    uniform float u_time;
     uniform float dispFactor;
     void main() {
         vec2 uv = vUv;
-        vec4 _tex1 = texture2D(tex1, uv);
-        vec4 _tex2 = texture2D(tex2, uv);
-        vec4 _black = vec4(0.0, 0.0, 0.0, 1.0);
-        vec4 _white = vec4(1.0, 1.0, 1.0, 1.0);
-        vec4 finalTexture = mix(_black, _white, dispFactor);
+        vec4 disp = texture(noise, uv);
+        vec4 disp2 = texture(noise2, uv);
+        vec2 distortedPosition = vec2(uv.x + dispFactor * (disp.r*1.0) , uv.y);
+        vec2 distortedPosition2 = vec2(uv.x + (1.0 - dispFactor) * (disp.r*1.0) , uv.y);
+        vec4 _tex1 = texture(tex1, distortedPosition);
+        vec4 _tex2 = texture(tex2, distortedPosition2);
+        vec2 _boilPos1 = vec2(uv.x + (sin(u_time * 0.2) + 0.5 ) * 0.3 * (1.0 - dispFactor) * (disp2.r*0.8) , uv.y);
+        vec2 _boilPos2 = vec2(uv.x + (sin(u_time * 0.2) + 0.5 ) * 0.3 * (dispFactor) * (disp2.r*0.8) , uv.y);
+        vec4 _boilTex1 = texture(tex1, mix(_boilPos1, distortedPosition, dispFactor));
+        vec4 _boilTex2 = texture(tex2, mix(_boilPos2, distortedPosition2, (1.0 - dispFactor)));
+        vec4 finalTexture = mix(_boilTex1, _boilTex2, dispFactor);
         gl_FragColor = finalTexture;
+        #include <tonemapping_fragment>
+        #include <encodings_fragment>
     }
     `
 )
 extend({ImageFadeMaterial});
 
 const ImageTransition = () => {
-    const img1 = getImage("./addlathe1.jpg").default;
-    const img2 = getImage("./addlathe2.jpg").default;
+    const img1 = getImage("./abstract3.jpg").default;
+    const img2 = getImage("./abstract2.jpg").default;
+    const noise = getImage("./noise1.jpg").default;
+    const noise2 = getImage("./noise2.jpg").default;
     const matRef = React.useRef();
     // console.log(img1.default);
     // const colorMap = useLoader(TextureLoader, img1.default)
 
     // const [texture1, texture2] = useTexture([img1, img2]);
-    const [texture1, texture2] = useTexture([img1, img2]);
+    const [texture1, texture2, noisetex, noisetex2] = useTexture([img1, img2, noise, noise2]);
     const [hover, setHover] = React.useState(false);
 
-    useFrame(() => {
-        matRef.current.dispFactor = THREE.MathUtils.lerp ( matRef.current.dispFactor, hover ? 0.0 : 1.0, 0.075);
+    useFrame(({clock}) => {
+        matRef.current.dispFactor = THREE.MathUtils.lerp ( matRef.current.dispFactor, hover ? 0.0 : 1.0, 0.025);
+        matRef.current.u_time = clock.getElapsedTime();
     })
 
     return  (
         <mesh onPointerOver={(e) => setHover(true)} onPointerOut={(e) => setHover(false)}>
             <planeGeometry args={[1, 1, 32, 32]} />
-            <imageFadeMaterial ref={matRef} tex1={texture1} tex2={texture2}/>
+            <imageFadeMaterial ref={matRef} tex1={texture1} tex2={texture2} noise={noisetex} noise2={noisetex2}/>
         </mesh>
     );
 }
