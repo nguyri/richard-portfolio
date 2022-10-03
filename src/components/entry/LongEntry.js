@@ -29,15 +29,14 @@ export default function LongEntry() {
                 //     <img key={elem.key} src={getImage(elem.imageName).default ? getImage(elem.imageName).default : ""} style={isTabletOrMobile ? {} : elem.style} className={elem.className} />
                 //     </div>
             }
-            else if (elem.threejs) {
-                return (
-                    <div key={elem.key} style={{width:"40vw"}}> 
-                        <ThreeScene zoom={isTabletOrMobile? 4.0 : 5.4}/> 
-                        <MovingPlaneCanvas /> 
-                        {/* <ImageTransition/> */}
-                        <ImageTransitionCanvas/>
-                    </div>
-                )
+            else if (elem.giveComponent) {
+                return elem.giveComponent();
+                    // <div key={elem.key} style={{width:"40vw"}}> 
+                    //     <elem.component/>
+                    //     {/* <ThreeScene zoom={isTabletOrMobile? 4.0 : 5.4}/> 
+                    //     <MovingPlaneCanvas /> 
+                    //     <ImageTransitionCanvas/> */}
+                    // </div>
             }
             else if (elem.vimeo) {
                 return < div key={elem.key} className="entry--vimeo-fixed-aspect" style={elem.style}>
