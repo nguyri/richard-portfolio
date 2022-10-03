@@ -1,8 +1,8 @@
 import { nanoid } from 'nanoid'
 import React from 'react'
-import ImageTransitionCanvas from '../threefiber/ImageTransition';
 import ThreeScene from '../threejsdemo/ThreeScene';
-import MovingPlaneCanvas from '../threefiber/MovingPlane';
+import MovingPlaneCanvas from '../threefiber/MovingPlaneCanvas';
+import ImageTransitionCanvas from '../threefiber/ImageTransition';
 
 const images = {}
 
@@ -129,11 +129,11 @@ let entries = [
             {key: 'threejs', title:`Three JS`},
             {key: 3, text:`There are a lot of neat WebGL demos online and I wanted to give it a shot. I got started with three.js.
             It's fascinating that web browsers and WebGL are good enough that 3D demonstrations work just fine in the browser.`},
-            // {key:nanoid(), giveComponent: () => <ThreeScene style={{width:"40vw"}} zoom={4.0} key={nanoid()}/>},
-            // {key:'Waves', subtitle:`MovingPlaneCanvas`},
-            {key:nanoid(), component: () => <MovingPlaneCanvas /> },
-            // {key:'Fluid Transition', subtitle:`ImageTransitionCanvas`},
-            // {key:nanoid(),giveComponent: () => <ImageTransitionCanvas/>},
+            {key:nanoid(), component: <ThreeScene style={{width:"40vw"}} zoom={4.0} key={nanoid()}/>},
+            {key:'Waves', subtitle:`MovingPlaneCanvas`},
+            {key:nanoid(), component: <MovingPlaneCanvas /> },
+            {key:'Fluid Transition', subtitle:`ImageTransitionCanvas`},
+            {key:nanoid(), component: <ImageTransitionCanvas/>},
             {key: 7, text:`Shown below, a sampling of models I've drawn up in Fusion360. Click and drag to orbit! `},
             {key: nanoid(), threejs: true,},
         ],

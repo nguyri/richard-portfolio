@@ -11,6 +11,7 @@ import { useParams, useOutletContext } from "react-router-dom";
 import { getEntry, getImage } from './data'
 import TableOfContents from "./TableOfContents"
 import MovingPlaneCanvas from "../threefiber/MovingPlaneCanvas";
+import { Canvas } from "@react-three/fiber";
 
 import ImageTransitionCanvas from "../threefiber/ImageTransition";
 // import ImageTransitionCanvas from "../threefiber/ImageTransition";
@@ -29,14 +30,14 @@ export default function LongEntry() {
                 //     <img key={elem.key} src={getImage(elem.imageName).default ? getImage(elem.imageName).default : ""} style={isTabletOrMobile ? {} : elem.style} className={elem.className} />
                 //     </div>
             }
-            else if (elem.giveComponent) {
-                return elem.giveComponent();
-                    // <div key={elem.key} style={{width:"40vw"}}> 
-                    //     <elem.component/>
-                    //     {/* <ThreeScene zoom={isTabletOrMobile? 4.0 : 5.4}/> 
-                    //     <MovingPlaneCanvas /> 
-                    //     <ImageTransitionCanvas/> */}
-                    // </div>
+            // <div key={elem.key} style={{width:"40vw"}}> 
+            //     <elem.component/>
+            //     {/* <ThreeScene zoom={isTabletOrMobile? 4.0 : 5.4}/> 
+            //     <MovingPlaneCanvas /> 
+            //     <ImageTransitionCanvas/> */}
+            // </div>
+            else if (elem.component) {
+                return elem.component;
             }
             else if (elem.vimeo) {
                 return < div key={elem.key} className="entry--vimeo-fixed-aspect" style={elem.style}>
