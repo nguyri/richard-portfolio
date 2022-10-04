@@ -33,7 +33,7 @@ export default class ThreeScene extends Component {
       modelShown: 0,
       zoom: props.zoom,
     }
-    console.log('zoom',this.state.zoom)
+    // console.log('zoom',this.state.zoom)
   }
 
   loadThreeMF(loader, modelData, list, modelShown, scene) {
@@ -45,13 +45,19 @@ export default class ThreeScene extends Component {
         loader.load(models[path].default, (object3mf) => {
           object3mf.name = path
           loadedGroup[index]=(object3mf);
-          object3mf.position.set(...modelGroup.positions[index])
-          object3mf.rotation.set(...modelGroup.rotations[index])
+          object3mf.position.set(...modelGroup.positions[index]);
+          object3mf.rotation.set(...modelGroup.rotations[index]);
           const material = new THREE.MeshPhongMaterial({ flatShading: 'false', color: new THREE.Color(0xafafaf) });
           object3mf.children[0].children[0].material = material;
-
-          if (modelIndex == modelShown)
+          // const geo = object3mf.children[0].children[0].geometry;
+          const geo = new THREE.BoxGeometry( 20, 20, 20 );
+          const mat = new THREE.MeshBasicMaterial({color:'black', wireframe:true});
+          const mesh = new THREE.Mesh(geo, mat);
+          // console.log(object3mf.children[0].children[0]);
+          if (modelIndex == modelShown) {
             scene.add(object3mf);
+            scene.add(mesh);
+          }
         }, undefined, function (error) {
           console.error(error);
         }); // loader.load
@@ -93,7 +99,6 @@ export default class ThreeScene extends Component {
     this.pointLight.position.set(80, 90, 200);
     this.scene.add(this.pointLight);
     this.scene.add(new THREE.AmbientLight(0xffffff, 0.6));
-
 
     this.renderer = new THREE.WebGLRenderer({ antialias: true })
     this.renderer.setClearColor('#FFFFFF', 0) //#F9F7F0

@@ -129,17 +129,17 @@ let entries = [
             {key: 'threejs', title:`Three JS`},
             {key: 3, text:`There are a lot of neat WebGL/OpenGL demos online and I wanted to give it a shot. I got started with three.js and react-three-fiber.
             I grew up in the era of flash websites so it's pretty satisfying seeing the mathematically perfect graphics that you can do with three.js.`},
-            {key:'threejs', subtitle:`Assembly Viewer`},
+            {key:'assembly-viewer', subtitle:`Assembly Viewer`},
             {key: 7, text:`A few models I've drawn up in Fusion360. Slider for exploded-view. Click and drag to pan! `},
             {key:nanoid(), component: <ThreeScene style={{width:"40vw"}} zoom={4.0} key={nanoid()}/>},
             {key:'waves', subtitle:`Waves`},
             {key:nanoid(), text: `A little waves demo. The vertex shader moves the points of the plane into a 
             wavey shape, while a stepped color function gives different blues in the fragment shader.`},
-            {key:nanoid(), component: <MovingPlaneCanvas /> },
+            {key:nanoid(), component: <MovingPlaneCanvas key={nanoid()}/> },
             {key:'fluid-transition', subtitle:`Fluid Transition`},
             {key:nanoid(), text: `A fun math trick creates the smooth transition animation with a single lerp. Add in a 
             little displacement and the effect is very fluid.`},
-            {key:nanoid(), component: <ImageTransitionCanvas/>},
+            {key:nanoid(), component: <ImageTransitionCanvas key={nanoid()}/>},
             {key: nanoid(), threejs: true,},
         ],
         imageName:'./raytracer1.jpg',
