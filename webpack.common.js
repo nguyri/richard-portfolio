@@ -48,13 +48,13 @@ module.exports = {
     publicPath: "/dist/",
     filename: "bundle.js"
   },
-  // plugins: [
-  //   new HtmlWebpackPlugin({
-  //   favicon: "./src/imgs/favicon.png",
-  //   filename: "index.html",
-  //   template: "./public/index.html",
-  // })
-  // ],
+  plugins: [
+    new HtmlWebpackPlugin({
+    favicon: "./src/imgs/favicon.png",
+    // filename: "index.html",
+    // template: "./public/index.html",
+  })
+  ],
 };
 
 // const TerserPlugin = require('terser-webpack-plugin');
