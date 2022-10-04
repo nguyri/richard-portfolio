@@ -49,14 +49,12 @@ export default class ThreeScene extends Component {
           object3mf.rotation.set(...modelGroup.rotations[index]);
           const material = new THREE.MeshPhongMaterial({ flatShading: 'false', color: new THREE.Color(0xafafaf) });
           object3mf.children[0].children[0].material = material;
-          // const geo = object3mf.children[0].children[0].geometry;
-          const geo = new THREE.BoxGeometry( 20, 20, 20 );
-          const mat = new THREE.MeshBasicMaterial({color:'black', wireframe:true});
-          const mesh = new THREE.Mesh(geo, mat);
-          // console.log(object3mf.children[0].children[0]);
+          // const geo = new THREE.EdgesGeometry( object3mf.children[0].children[0].geometry );
+          // const mat = new THREE.LineBasicMaterial({ color:'black', linewidth: 1 });
+          // const wireframe = new THREE.LineSegments(geo, mat);
+          // object3mf.children[0].children[0].add(wireframe);
           if (modelIndex == modelShown) {
             scene.add(object3mf);
-            scene.add(mesh);
           }
         }, undefined, function (error) {
           console.error(error);
