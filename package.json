@@ -37,6 +37,8 @@
     "@react-three/drei": "^9.32.11",
     "@react-three/fiber": "^8.8.9",
     "bootstrap": "^5.2.2",
+    "favicons": "^7.0.1",
+    "favicons-webpack-plugin": "^6.0.0-alpha.1",
     "fflate": "^0.7.4",
     "html-webpack-plugin": "^5.5.0",
     "nanoid": "^4.0.0",

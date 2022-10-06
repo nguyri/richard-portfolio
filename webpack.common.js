@@ -1,5 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
+const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
@@ -50,12 +51,12 @@ module.exports = {
     filename: "bundle.js"
   },
   plugins: [
-    new HtmlWebpackPlugin({
-    favicon: path.join(__dirname, "public", "favicon.png"),
-    template: path.join(__dirname, "public", "index.html"),
-    // filename: "index.html",
-    // template: "./public/index.html",
-  })
+      new HtmlWebpackPlugin({
+        // template: './dist/template.html',
+        favicon: './dist/assets/favicon.png',
+        filename: './index.html',
+      }),
+    new FaviconsWebpackPlugin("./src/imgs/favicon.png"),
   ],
 };
 
