@@ -102,8 +102,8 @@ let entries = [
         num: 3,
         title: "Graphics and ThreeJS",
         link: "graphics",
-        description: `Raytracing, a computer graphics classic and a three.js demo`,
-        reactDescription: {html:<div>A computer graphics classic: <b>raytracing</b>,  and a <b>three.js</b> demo </div>},
+        description: `Raytracing, a computer graphics classic and a few three.js demos`,
+        reactDescription: {html:<div>A computer graphics classic: <b>raytracing</b>,  and a few <b>three.js</b> demos </div>},
         longdescription: [
             {key: 'graphics', title:`Graphics`},
             {key:nanoid(), text:`I've always had an interest in graphics and shaders. I quite like visual thinking and
@@ -149,7 +149,7 @@ let entries = [
         title: "Additive Lathe",
         link: "additivelathe",
         description: "Our capstone engineering project. This multidisciplinary project based on Cura to generates cylindrical g-code. It prints onto a custom machined drum rather than a flat bed.",
-        reactDescription: {html:<div>Our capstone engineering project. This multidisciplinary project heavily modifies the <b>open source slicer Cura </b>to generate gcode.
+        reactDescription: {html:<div>Our capstone engineering project. This multidisciplinary project modifies the <b>open source slicer Cura </b>to generate gcode.
         It prints onto a custom machined drum rather than a flat bed. </div>},
         longdescription: [
             {key:'additivelathe', title:'Additive Lathe'},
@@ -249,7 +249,7 @@ let entries = [
         num:6, 
         title: "Wood Shop",
         link: "woodshop",
-        description: "Why spend money to get furniture when you can spend time and money instead?",
+        description: "Wood is great for making furniture and other objects that need a less industrial feel.",
         longdescription: [
             {key:'woodshop', title:`Woodshop`},
             {key: 1, text:`I’ve been using wood tools for a very long time. 

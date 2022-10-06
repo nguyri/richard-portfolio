@@ -1,6 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
-const HtmlWebpackPlugin = require("html-webpack-plugin")
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.js",
@@ -51,9 +51,10 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-    favicon: "./src/imgs/favicon.png",
-    filename: "index.html",
-    template: "./public/index.html",
+    favicon: `./src/imgs/favicon.png`,
+    template: path.join(__dirname, "public", "index.html"),
+    // filename: "index.html",
+    // template: "./public/index.html",
   })
   ],
 };
