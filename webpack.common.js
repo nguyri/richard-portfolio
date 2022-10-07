@@ -1,7 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
-const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+// const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
+// const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.js",
@@ -19,11 +19,11 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|3mf|gltf)$/i,
-        use: [ 
-        {
-          loader: 'file-loader',
-        },
-      ]
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ]
       },
       {
         test: /\.bin$/,
@@ -31,32 +31,33 @@ module.exports = {
         use: [
           {
             loader: 'url-loader',
-              options: {
-                encoding: false,
-                mimetype: false,
-                generator: (content) => {
-                  return content;
-                }
-              },
+            options: {
+              encoding: false,
+              mimetype: false,
+              generator: (content) => {
+                return content;
+              }
             },
-          ],
+          },
+        ],
       }
     ]
   },
   resolve: { extensions: ["*", ".js", ".jsx"] },
-  
+
   output: {
     path: path.resolve(__dirname, "dist/"),
     publicPath: "/dist/",
     filename: "bundle.js"
   },
   plugins: [
-      new HtmlWebpackPlugin({
-        // template: './dist/template.html',
-        favicon: './dist/assets/favicon.png',
-        filename: './index.html',
-      }),
-    new FaviconsWebpackPlugin("./src/imgs/favicon.png"),
+    // new HtmlWebpackPlugin({
+    //   template: './{dist/template.html',
+    //   favicon: './dist/assets/favicon.png',
+    //   filename: './index.html',
+    // }),
+    // new FaviconsWebpackPlugin({logo:"./src/imgs/favicon.png", inject:true}),
+    // new FaviconsWebpackPlugin()
   ],
 };
 
