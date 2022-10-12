@@ -10,7 +10,7 @@ export default function AboutCard() {
     <div className="entries-layout">
         <div className = {darkMode ? "about-card--dark about-card " : "about-card"}>
             <header className="info">
-                <div className="info--img">
+                <div className={darkMode ? "info--img-dark info--img" : "info--img"}>
                     <img src={richardo} />
                 </div>
                 <h1 className ="info--item info--name"> Richard Nguyen </h1>
@@ -19,7 +19,7 @@ export default function AboutCard() {
             </header>        
             <header className="about">
                 <h1 className="about--header"> About </h1>
-                <p className="about--text"> I am a software developer and electrical engineer. 
+                <p className="about--text"> Hello, I'm a software developer and electrical engineer. 
                 I try to learn new things all the time! </p>
             </header>
             <header className="interests">

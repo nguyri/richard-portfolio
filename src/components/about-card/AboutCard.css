@@ -8,7 +8,7 @@
     
     flex-direction:column;
     width:50vw;
-    max-width: 400px;
+    max-width: 800px;
     align-items:center;
     margin:0 auto 50px auto;
     flex-shrink:initial;
@@ -33,26 +33,36 @@
 .about-card--dark {
     background-color:#333333;
     color:#cecece;
-    box-shadow: 0px 0px 40px rgb(94, 94, 94);
+    box-shadow: 0px 0px 40px rgb(32, 32, 32);
 }
 
 .info--img >img {
     width:100%;
     object-fit:cover;
-    margin-top:-80%;
+    overflow:hidden;
+    margin-top:-40%;
     margin-bottom:-20%;
 }
 
 .info--img {
     position:relative;
     width:100%;
-    padding-top:50%;
+    padding-top:20px;
     overflow:hidden;
     border-radius:20px;
+    box-shadow: 0px 0px 40px rgb(205, 205, 205);
+}
+
+.info--img-dark {
+    box-shadow: 0px 0px 40px rgb(32, 32, 32);
 }
 
 .info {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
     text-align:center;
+    padding-top:20px;
 }
 
 .info--name {

@@ -35,8 +35,8 @@ let entries = [
         longdescription: [
             {key: 'metal-shop', title:`Metal Shop`},
             {key: 1, text:`I'm pretty new to metal fabrication and welding. I have had a vague interest in steel but during 
-            the pandemic lumber prices made it more enticing to pick up an angle grinder.`},
-            {key:3, text:`I've found that metal in general is more forgiving than wood. The cutting tools go at a lower rpm and if you make a mistake, it can be welded back together`},
+            the pandemic high lumber prices made it more enticing to pick up an angle grinder.`},
+            {key:3, text:`I've found that metal can be more forgiving than wood. The cutting tools go at a lower rpm and if you make a mistake, it can be welded back together`},
             {key: 'plasma-cutter', title:`Plasma Cutter`},
             {key: 15, vimeo:'https://vimeo.com/675640978', },
             {key:4, text:`Plasma cutting uses a stream of plasma between the torch head and the metal to deliver enough energy to melt 
@@ -60,6 +60,7 @@ let entries = [
             cnc.js, however the arduino often reset itself when a plasma arc started.`,},
             {key:nanoid(), text:`Options exist for "industrial" arduinos. It's also possible to get a very cheap Mach3 controller with ethernet connection. 
             The ethernet connection offers a huge bonus with error detection and correction, so I opted for the inexpensive NVEM2 controller.`,},
+            {key:nanoid(), text:`Another option I have not looked into is skipping the Arduino altogether and using LinuxCNC, with a raspberry pi and FPGA to generate step pulses.`,},
             {key: 'mach3', subtitle:`Mach3`},
             {key:nanoid(), text:`Perhaps you've lived a post Web2.0 life, in a garden of minimalist, rounded cornered responsive webpages. Mach3 revives the geocities era
              into its eye-squintingly cluttered user interface. It's a small price to pay for the reliability of an ethernet connection however.`,},
@@ -153,7 +154,7 @@ let entries = [
         It prints onto a custom machined drum rather than a flat bed. </div>},
         longdescription: [
             {key:'additivelathe', title:'Additive Lathe'},
-            {key: 1, text:`Our capstone engineering project. This multidisciplinary project heavily modifies Cura to generate gcode. It prints onto a custom machined drum rather than a flat bed.`},
+            {key: 1, text:`Our capstone engineering project. This multidisciplinary project modifies Cura to generate gcode. It prints onto a custom machined drum rather than a flat bed.`},
             {key: 16, vimeo:'https://vimeo.com/692393001', style: {}},
             {key: 3, text:`I designed the cylindrical slicer and also integrated it into a popular open source slicer, Cura. 
             I also rewrote part of the display shader to display print previews with cylindrical layers.`, style: {gridRow:"span 5"}},
