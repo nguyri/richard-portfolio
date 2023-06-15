@@ -298,8 +298,7 @@ let entries = [
             {key: 'blendingmodes', title:`Blending Modes`},
             {key: nanoid(), text:`Coming from the photography era, lighting modes are effects that change a base layer according to an effect layer by performing some
             mathematical expression on the base and effect.`},
-            {key: nanoid(), text:`This allows for a risk free approach to light and shadow, where you can try out different brightnesses and colours without committing 
-            to each operation the way traditional paint would require. Here are my notes on my favorite blending modes.`},
+            {key: nanoid(), text:`This allows for a risk free approach to light and shadow, where you can try out different brightnesses and colours without the commitment of traditional paint. Here are my favorite blending modes and how to use them.`},
             {key: 'whylearn', title:`Why learn the blending modes?`},
             {key: nanoid(), html: <div>
             <b>Color constancy.</b> Your brain will just make up colors depending on the surrounding color context, 
@@ -308,7 +307,7 @@ let entries = [
             <b>Big lighting decisions.</b> It's easiest to establish your lighting at the beginning and then render as needed. 
             Just like it's easiest to make a rough sketch, then refine it as you go along. If you need to add a big area of light or shadow, 
             you can add it all at once with a screen or multiply.<br></br><br></br>
-            <b>Separate color from the light.</b> Instead of having to work in one layer, a separate blending layer gives you some room 
+            <b>Separate color from value.</b> Instead of having to work in one layer, a separate blending layer gives you some room 
             to play around with the forms before you commit to a lighting scheme. If you use multiply and screen separately, 
             you can also separate light from shadow. In some cases discussed later, you might use an overlay to do light and shadow in one layer. <br></br><br></br>
             <b>Small variations.</b> Sometimes, the difference between two shadows or two lit areas is tiny. It's actually impractical 
@@ -325,7 +324,7 @@ let entries = [
             {key: nanoid(), text:`You can also multiply with a color to make the ever beloved hue shift. 
             Varying the hue with respect to brightness is called a hue shift. 
             Hatsune's hair is more yellow where it's lit on top, and more blue in the shadow. 
-            This is achieved with multiplying a blue in the shadow and screening a yellow for light.`},
+            This is achieved with multiplying a blue in the shadow and screening a yellow for light.`, style:{paddingTop:'20px'}},
 
             {key: 'overlay', subtitle:`Overlay`},
             {key: nanoid(), text:`Overlay allows you to brighten and darken in a single layer. 
@@ -386,7 +385,7 @@ let entries = [
             {key: 'cutnsmooth', subtitle:'Cut & Smooth'},
             {key: nanoid(), text:`Forms can be broken down into hard planes, imagine a "lopoly" appearance. The line between these planes makes a cut. Some planes smoothly transition into the next plane, called a smooth. I learned from Sinix's painting like a sculptor video which helps to get convincing forms in your painting. `, style: {gridColumn:"1 / span 2"}},
             {key:nanoid(), imageName:'./art6.jpg', style: {gridColumn:"3 /span 3", gridRow:"span 1", height:"400px", overflow:"hidden", objectFit:"cover", paddingBottom:"20px", borderRadius:"10px"}, picStyle:{scale:"1.6", objectPosition:"50% 60px", textAlign:"center"}, className:"entry--img-inline"},
-            {key: nanoid(), text:`Often, one side of a plane will be cut and the other will be smoothed. Look at the belly button or the folds in the clothing. Sometimes all smooth will look best, like the round of the shoulder where the sheer material makes a uniform shadow all the way around. Be careful with all smooth transitions. It's easy to do too much smudging, and you'll have blobby shadows. Make sure to add cuts to define the form.`, style: {paddingTop:"20px"}},
+            {key: nanoid(), text:`Often, one side of a plane will be cut and the other will be smoothed. Look at the navel or the folds in the clothing. Again, cuts and smooths are tools that can be misused. It's easy to do too much smudging and end up with blobby shadows. Make sure to add cuts to define the form.`, style: {paddingTop:"20px"}},
             {key: 'onai', title:`On AI`},
             {key: nanoid(), text:`In the same period ChatGPT became the fastest-growing user base, 100 million in 2 months, the initial model 
             of Stable Diffusion (SD) was released. Notably, it was able to run it's text-to-image model on most consumer hardware with a moderate graphics card. `},
