@@ -148,7 +148,7 @@ export default function Wordle() {
                 </div>
             }
             {!wordle && 
-            <p> Guess the 5 letter word! You know how it goes.</p>}
+            <p> Guess the 5 letter word! </p>}
             <div className="grid">
                 {<Grid rows={rows}/>}
             </div>

@@ -208,8 +208,8 @@ let entries = [
         and a <b>wordle</b> demo</div>},
         longdescription: [
             {key:'wordle', title:`Wordle`},
-            {key: 1, html:<div>React is a nice library that can make your webpages <i><b>react</b></i> to user inputs. 
-            User inputs such as playing wordle!</div>},
+            {key: 1, html:<div>React is great at making easy to work with components 
+                and adds a virtual DOM that can make your webpages <i><b>react</b></i> to user inputs. </div>},
             {key: 3, wordle: true},
             {key: 2, text:`This website is written in Javascript and CSS with some great packages. Some of the more popular ones 
             are react, react-router, and react-three-fiber. 
@@ -287,5 +287,88 @@ let entries = [
         ],
         imageName:'./wood10.jpg',
         imageStyle:{style: {objectPosition:'right 0 bottom 200px'}}
+    },
+    {
+        num:7,
+        title: "Digital Art",
+        link: "digitalart",
+        description:`"I have learned that what I have not drawn I have never really seen, and that when I start drawing an ordinary thing, I realize how extraordinary it is, sheer miracle."`,
+        longdescription: [
+            {key:'digitalart', title:`Digital Art`},
+            {key: 'blendingmodes', title:`Blending Modes`},
+            {key: nanoid(), text:`Coming from the photography era, lighting modes are effects that change a base layer according to an effect layer by performing some
+            mathematical expression on the base and effect.`},
+            {key: nanoid(), text:`This allows for a risk free approach to light and shadow, where you can try out different brightnesses and colours without committing 
+            to each operation the way traditional paint would require. Here are my notes on my favorite blending modes.`},
+            {key: 'whylearn', title:`Why learn the blending modes?`},
+            {key: nanoid(), html: <div>
+            <b>Color constancy.</b> Your brain will just make up colors depending on the surrounding color context, 
+            so it can be very difficult to pick the right color every time. Blending modes give you a way to approach the color 
+            you want without having to get it exactly right the first try. <br></br><br></br>
+            <b>Big lighting decisions.</b> It's easiest to establish your lighting at the beginning and then render as needed. 
+            Just like it's easiest to make a rough sketch, then refine it as you go along. If you need to add a big area of light or shadow, 
+            you can add it all at once with a screen or multiply.<br></br><br></br>
+            <b>Separate color from the light.</b> Instead of having to work in one layer, a separate blending layer gives you some room 
+            to play around with the forms before you commit to a lighting scheme. If you use multiply and screen separately, 
+            you can also separate light from shadow. In some cases discussed later, you might use an overlay to do light and shadow in one layer. <br></br><br></br>
+            <b>Small variations.</b> Sometimes, the difference between two shadows or two lit areas is tiny. It's actually impractical 
+            to pick different color on the color wheel. In procreate color picking is confused with a disc: the triangle allows for a clear direction in each axis. Instead, adding a very light blending layer is easier.
+            Once you learn blending modes you'll wonder how you lived without them and you can turn your rendering time from 1 hour to well over 10.</div>},
+            {key: 'multiply', subtitle:`Multiply`},
+            {key:nanoid(), imageName:'./art4.jpg', style: {gridColumn:"1 /span 3", gridRow:"span 1", overflow:"hidden", objectFit:"cover", paddingBottom:"20px", borderRadius:"10px"}, picStyle:{scale:"1.4", objectPosition:"50% 40px", textAlign:"center"}, className:"entry--img-inline"},
+            {key: nanoid(), text:`Multiply is the go to blending mode for shadows. If you only use one blending mode use multiply.
+            Multiply creates a less saturated color compared to overlay or burn. This is usually helpful since it naturally desaturates your shadows while drawing attention to the brighter, 
+            more saturated areas. Here multiply is used over the entire face and torso, before taking out the chest and nose area to create a highlight.`, style: {gridColumn:"span 2"}},
+            {key: nanoid(), text:`You can also multiply with a color to make the ever beloved hue shift. Varying the hue with respect to brightness is called a hue shift. 
+            Hatsune's hair is more yellow where it's lit on top, and more blue in the shadow. This is achieved with multiplying a blue in the shadow and screening a yellow for light.`},
+            {key: 'overlay', subtitle:`Overlay`},
+            {key: nanoid(), text:`Overlay allows you to brighten and darken in a single layer. In procreate, the overlay tends to be slightly more saturated than a comparable screen or multiply when blending with a grey. Especially on skin if you want a more grey shadow multiply is easiest, but a warmer shadow is easier to control with an overlay.`, style: {gridColumn:"1 / span 2"}},
+            {key:nanoid(), imageName:'./art11.jpg', style: {gridColumn:"3 /span 3", gridRow:"span 1", height:"400px", overflow:"hidden", objectFit:"cover", paddingBottom:"20px", borderRadius:"10px"}, picStyle:{scale:"2.0", objectPosition:"50% 50px", textAlign:"center"}, className:"entry--img-inline"},
+            {key: 'overlayrecolor', subtitle:`Overlay Recolor`},
+            {key: nanoid(), text:`Another use for overlay is adding color to a highlight or shadow. This is very common to see at the edge of a shadow, where the edge will have a rich red tint before turning into the shadow on skin. The physical reason for this is called subsurface scattering, but it's often just used everywhere in anime art for stylistic reasons. It's fun and easy, just add a neutral red-ish overlay to the edges of your lit areas and erase/smudge the color into the right spot. This is how the light on the legs is achieved.`},
+            {key: nanoid(), text:`I say neutral red because overlay has grey as a "neutral color", meaning overlaying with 50% grey produces the exact same base color. Looks like nothing happened. A red that's roughly the same brightness as 50% grey will add color but not brightness. You could use a color blending mode for this.. but color is so extremely strict that it tends to be lifeless.`},
+            {key: 'opacity', subtitle:'Opacity'},
+            {key: nanoid(), text:`You might think if opaque clothing is 100% opacity, just turn the opacity down and you'll have see through clothing. This is actually shooting yourself in the foot. `},
+            {key: nanoid(), text:`Blending modes lose their shading power and color picking picks up the layer underneath with a low opacity layer. It is better to overlay, multiply and screen like you normally would, but your "shadow" is the darkest part of the clothing and the "light" is the most see through part of the clothing.`},
+            {key: nanoid(), text:`Where the sleeve hangs off of the arm but is still sheer, you'll need a different "light" which is not skin tone but the background color. Takes a bit of time but I prefer that to dealing with opacity.`},
+            {key: 'colordodge', subtitle:'Color Dodge'},
+            {key: nanoid(), text:`Color dodge is a powerful tool for creating intense, saturated, variated light. Unlike screen it saturates colors and shifts the color towards the blend color. This can create interesting color variation, like the orange around the edges of the sword glint. However, once you start dodging it can be difficult to stop dodging. Color dodging is a great way to add saturation to your image, but too much saturation makes your picture look unnatural.`},
+            {key: nanoid(), text:`Anyways it's like the smudge tool. If you smudge too much your painting will be a blobby formless mess. If you dodge too much your painting will look like the surface of the sun.`},
+            {key: 'backgrounds', subtitle:'Backgrounds'},
+            {key: nanoid(), text:`If you're a "character artist" like me eventually you'll have spent a whole session rendering and realize you have no background to speak of. Unfortunately the background is very important, establishes the color and lighting of the image, and can help balance your picture overall. You could just forget about this background business, go full flat anime color and live a happy life. Or, you can use blending modes to achieve depth and the subtle shadow variations that occur on large flat surfaces (like walls).`},
+            {key: nanoid(), text:`The frustrating thing about walls is that they are so big the nature of light changes from one side to the other. This is one instance where I say smudge to your heart's content, walls are usually flat and formless. Watch the occlusion shadows in the corners, which are subtle and spread over the whole corner. A crisp line with the right perspective is necessary in the corners to establish the roominess.`},
+            {key: nanoid(), text:`Generally for wider shot backgrounds, the foreground is darker than the background. It can be useful to layer up multiply layers as you get closer to the foreground, which is how this background was built up.`},
+            {key: nanoid(), text:`All of this is to say I usually just cram the background in as an afterthought at the end.`},
+            {key: 'normal', subtitle:'Normal'},
+            {key: nanoid(), text:`Don't underestimate normal. Once you know how to apply multiply, screen and overlay you will use them constantly. But it's possible to have too much variation in light and shadow. To consolidate areas of light and shadow, use - normal - which can flatten an area that has too much going on. Traditional painters love this, they're always trying to group areas of shadow to just create the impression of form without literally having to paint every detail.`},
+            {key: nanoid(), text:`Occlusion shadows: look at the size of the occlusion shadows on the arm and leg. In a brightly lit scene where light is getting in everywhere, the occlusion is tiny. However, it adds a lot of depth to have occlusion shadows, and they are very dark, even at the small size.`},
+            {key: 'screen', subtitle:'Screen'},
+            {key: nanoid(), text:`Screen can lighten an area although its usage usually has to be combined with overlay and multiply to get a full range of light. You can multiply a whole layer and it will look like it's in shadow, but screen will not make everything look lighter. Generally good when you want to add a less saturated light than overlay, or a rim light that's not as saturated as color dodge.`},
+            {key: nanoid(), text:`Here you can see the neutral white-ish light coming in from the top with a screen, and a red overlay to highlight the shadow on the arms and legs.`},
+            {key: 'cutnsmooth', subtitle:'Cut & Smooth'},
+            {key: nanoid(), text:`I learnt this from Sinix's painting like a sculptor video. A useful concept to keep in mind to get convincing forms in your painting. Generally, you can start with hard planes to define areas of light and shadow, like the sleeves in this picture. You could say there is a cut between these planes, because it is a sharp transition. Some planes smoothly transition into the next plane, called a smooth.`},
+            {key: nanoid(), text:`Often, one side of a plane will be cut and the other will be smoothed. Look at the belly button or the folds in the clothing. Rarely, all smooth will look best, like the round of the shoulder where the sheer material makes a uniform shadow all the way around. Be careful with all smooth transitions. It's easy to do too much smudging, and you'll have blobby shadows. Make sure to add cuts to define the form. It's usually better to start out with too many cuts than too much smoothing.`},
+            {key: nanoid(), text:``},
+            {key: nanoid(), text:``},
+            {key: nanoid(), text:``},
+            {key: 'onai', title:`On AI`},
+            {key: nanoid(), text:`In the same period ChatGPT became the fastest-growing user base, 100 million in 2 months, the initial model 
+            of Stable Diffusion (SD) was released. Notably, it was able to run it's text-to-image model on most consumer hardware with a moderate graphics card. `},
+            {key: nanoid(), text:`It did not take long before generative AI for images became a threat instead of a novelty.
+             Lawsuits were started due to training images being scraped from the internet without artist or owner permission.`},
+            {key: nanoid(), text:`Why was such backlash not seen for ChatGPT? SD allows for end-user tuning, by embeddings, hypernetworks, or DreamBooth. 
+            While the initial training of SD took 150,000 GPU hours, tuning only required a handful of hours on a moderate server.`},
+            {key: nanoid(), text:`This allowed for users to train models in the style of particular artists instead of the rather generic output of plain SD. 
+            Although these artist trained models weren't the subject of lawsuits, they drew enough attention to get some sort of legal action moving against Stability AI.`},
+            {key: nanoid(), text:`Either way, there would be no lawsuit if the technology was not startlingly good. 
+            It does seem to be a "sheer miracle" that after so many training hours this model that the output is any good at all. I dabbed a little into 
+            DreamBooth and did not get very far after a few hours of training.`},
+            {key: nanoid(), text:`Personally, it's fun to see the hornets nest get stirred up. Artists are angry, programmers are self righteous, I
+            think the whole thing is fascinating. There is so many interesting observations from the technological and artistic sides. The tools for artists 
+            and programmers have never been more powerful.`},
+            {key: nanoid(), text:``},
+        ],
+        imageName:'./art1.jpg',
+        imageStyle:{style: {objectPosition:'right 0px top -20px', transform:'scale(1.2)'}}
     },
 ]

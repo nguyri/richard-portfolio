@@ -25,10 +25,10 @@ export default function LongEntry() {
     function paragraphBigEntry(paragraphArr) {
         return (paragraphArr.map((elem) => {
             if (elem.imageName) {
-                return <img key={elem.key} src={getImage(elem.imageName).default ? getImage(elem.imageName).default : ""} style={isTabletOrMobile ? {} : elem.style} className={elem.className} />;
-                // return <div style={{maxWidth:100, height:'auto'}}>
-                //     <img key={elem.key} src={getImage(elem.imageName).default ? getImage(elem.imageName).default : ""} style={isTabletOrMobile ? {} : elem.style} className={elem.className} />
-                //     </div>
+                // return <img key={elem.key} src={getImage(elem.imageName).default ? getImage(elem.imageName).default : ""} style={isTabletOrMobile ? {} : elem.style} className={elem.className} />;
+                return <div key={elem.key} style={isTabletOrMobile ? {} : elem.style}>
+                    <img src={getImage(elem.imageName).default ? getImage(elem.imageName).default : ""} style={isTabletOrMobile ? {} : elem.picStyle} className={elem.className} />
+                    </div>
             }
             // <div key={elem.key} style={{width:"40vw"}}> 
             //     <elem.component/>
