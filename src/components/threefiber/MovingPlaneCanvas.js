@@ -4,11 +4,8 @@ import React, { useRef, useState } from 'react'
 import { Physics, useSphere, Canvas, useFrame, extend } from '@react-three/fiber'
 import {Plane, Text, shaderMaterial} from '@react-three/drei'
 import './ThreeFiber.css'
-import MyMaterial from './MyMaterial'
 import MovingPlane from './MovingPlane'
 import ImageTransition from './ImageTransition'
-
-extend({ MyMaterial});
 
 function Box(props) {
   // This reference will give us direct access to the mesh
@@ -31,7 +28,7 @@ function Box(props) {
       onPointerOver={(event) => setHover(true)}
       onPointerOut={(event) => setHover(false)}>
       <boxGeometry args={[1, 1, 1]} />
-      <myMaterial color="blue" time={time}/>
+      {/* <myMaterial color="blue" time={time}/> */}
     </mesh>
   )
 }
@@ -45,7 +42,7 @@ const Fragment = (props) => {
   return (
     <mesh ref={mesh} position={[0, 0, 0]} scale={props.scale}>
       <planeGeometry args={[1, 1, 32, 32]} />
-      <myMaterial u_color="blue" u_time={time} />
+      {/* <myMaterial u_color="blue" u_time={time} /> */}
     </mesh>
   );
 };
