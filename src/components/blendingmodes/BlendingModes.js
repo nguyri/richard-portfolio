@@ -1,8 +1,10 @@
 import React from 'react'
 import Slider from 'rc-slider'
-import { Stage, Layer, Rect, Text } from 'react-konva';
+import { Stage, Layer, Rect, Text, Image } from 'react-konva';
 import {MathJax, MathJaxContext } from 'better-react-mathjax'
 import Konva from 'konva';
+import { getEntry, getImage } from '../entry/data'
+import useImage from 'use-image';
 
 
 export default function BlendingModes(props) {
@@ -10,6 +12,10 @@ export default function BlendingModes(props) {
   const [slider, setSlider] = React.useState(() => 1);
   const [color, setColor] = React.useState('green');
   const [eqn, setEqn] = React.useState(baseEqn + '\\)');
+  const url = 'https://konvajs.github.io/assets/yoda.jpg';
+  // const [image] = useImage(url);
+  // console.log(getImage('./art1.jpg'));
+  const [image] = useImage(getImage('./art1.jpg').default);
   const config = {
     loader: { load: ["input/asciimath"] },
     asciimath: {
@@ -27,7 +33,6 @@ export default function BlendingModes(props) {
     let colorStr = 'rgb(' + change + ',255,0)';
     setColor(colorStr);
     setEqn(baseEqn + ' test ' + slider + '\\)');
-    console.log(eqn);
   }, [slider])
 
   const ColoredRect = () => {
@@ -38,7 +43,8 @@ export default function BlendingModes(props) {
     };
 
     return (
-      <Rect x={0} y={0} width={200} height={50} fill={color} shadowBlur={5} shadowColor={"#cccccc"} onClick={handleClick}
+      <Rect x={0} y={0} width={200} height={50} cornerRadius={5} fill={color}
+       shadowBlur={5} shadowColor={"#eeeeee"} onClick={handleClick} margin = {10}
       />
     );
   };
@@ -46,17 +52,18 @@ export default function BlendingModes(props) {
   return (
     <div style={props.style}>
       <MathJaxContext config={config}>
+      <MathJax >{`$f(a,b) = a * b$`}</MathJax>
         <MathJax inline dynamic>
-            An example is the equation <span>{`$${slider}x^4 = 100$`}</span>
-          </MathJax>{" "}
-      </MathJaxContext>
-      <Stage width={200} height={50} >
+      <Stage width={400} height={400} >
         <Layer>
+          <Image image={image}/>
           <ColoredRect />
         </Layer>
       </Stage>
-      Value:{slider} 
-      <Slider onChange={setSlider} min={1} max={255}/>
+            <span >{`$f(a,${slider}) = a * ${slider}$`}</span>
+          </MathJax>{" "}
+      </MathJaxContext>
+      <Slider onChange={setSlider} min={1} max={255} step={1}/>
     </div>
   )
 }
