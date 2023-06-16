@@ -12,9 +12,6 @@ export default function BlendingModes(props) {
   const [slider, setSlider] = React.useState(() => 1);
   const [color, setColor] = React.useState('green');
   const [eqn, setEqn] = React.useState(baseEqn + '\\)');
-  const url = 'https://konvajs.github.io/assets/yoda.jpg';
-  // const [image] = useImage(url);
-  // console.log(getImage('./art1.jpg'));
   const [image] = useImage(getImage('./art1.jpg'));
   const config = {
     loader: { load: ["input/asciimath"] },
@@ -43,7 +40,8 @@ export default function BlendingModes(props) {
     };
 
     return (
-      <Rect x={0} y={0} width={200} height={50} cornerRadius={5} fill={color}
+      <Rect x={0} y={0} width={200} height={80} cornerRadius={5} fillPatternImage={image}
+      fillPatternScale={{x:0.3,y:0.3}} fillPatternRepeat='no-repeat' opacity={(256 - slider)/255}
        shadowBlur={5} shadowColor={"#eeeeee"} onClick={handleClick} margin = {10}
       />
     );
@@ -54,9 +52,10 @@ export default function BlendingModes(props) {
       <MathJaxContext config={config}>
       <MathJax >{`$f(a,b) = a * b$`}</MathJax>
         <MathJax inline dynamic>
-      <Stage width={400} height={400} >
+      <Stage width={200} height={80} >
         <Layer>
-          <Image image={image}/>
+          {/* <Image image={image}/> */}
+          <Rect x={0} y={0} width={200} height={80} cornerRadius={5} fill={color} shadowBlur={5} shadowColor={"#eeeeee"} margin = {10}/>
           <ColoredRect />
         </Layer>
       </Stage>
