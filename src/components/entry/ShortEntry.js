@@ -16,7 +16,7 @@ export default function ShortEntry(props) {
             
             {/* <Outlet /> */}
             <div id={props.link} className="entry--overlay-container">
-                <img src={getImage(props.imageName).default ? getImage(props.imageName).default : ""} 
+                <img src={getImage(props.imageName) ? getImage(props.imageName) : ""} 
                     className="entry--img" 
                     style={props.imageStyle ? props.imageStyle.style : {}} />
                 {/* <div className="entry--overlay">

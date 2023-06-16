@@ -48,13 +48,13 @@ shaderMaterial (
 extend({ImageFadeMaterial});
 
 const ImageTransition = () => {
-    const img1 = getImage("./abstract3.jpg").default;
-    const img2 = getImage("./abstract2.jpg").default;
-    const noise = getImage("./noise1.jpg").default;
-    const noise2 = getImage("./noise2.jpg").default;
+    const img1 = getImage("./abstract3.jpg");
+    const img2 = getImage("./abstract2.jpg");
+    const noise = getImage("./noise1.jpg");
+    const noise2 = getImage("./noise2.jpg");
     const matRef = React.useRef();
-    // console.log(img1.default);
-    // const colorMap = useLoader(TextureLoader, img1.default)
+    // console.log(img1);
+    // const colorMap = useLoader(TextureLoader, img1)
 
     // const [texture1, texture2] = useTexture([img1, img2]);
     const [texture1, texture2, noisetex, noisetex2] = useTexture([img1, img2, noise, noise2]);

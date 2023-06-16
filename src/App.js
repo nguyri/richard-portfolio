@@ -25,11 +25,11 @@ export default function App() {
   // useEffect(() => {
   //   navigate('/projects');
   // }, [])
-  // console.log(getImage('./favicon.png').default);
+  // console.log(getImage('./favicon.png'));
 
   return(  
       <div className={darkMode? "App App--dark" : "App"}>
-        <Favicon url={getImage('./favicon.png').default} />
+        <Favicon url={getImage('./favicon.png')} />
         <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} shrinkHeader ={shrinkHeader}/>
         <main>
           <Outlet context={[darkMode, setShrinkHeader]}/>

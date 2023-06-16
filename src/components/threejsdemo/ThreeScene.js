@@ -42,7 +42,7 @@ export default class ThreeScene extends Component {
     modelData.forEach((modelGroup, modelIndex) => {
       let loadedGroup = []
       modelGroup.files.forEach((path, index) => {
-        loader.load(models[path].default, (object3mf) => {
+        loader.load(models[path], (object3mf) => {
           object3mf.name = path
           loadedGroup[index]=(object3mf);
           object3mf.position.set(...modelGroup.positions[index]);

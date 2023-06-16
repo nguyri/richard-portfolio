@@ -18,7 +18,7 @@ export function getEntries() {
 }
 
 export function getImage(path) {
-    return images[path];
+    return images[path].default;
 }
 
 export function getEntry(link) {

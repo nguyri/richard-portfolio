@@ -25,9 +25,9 @@ export default function LongEntry() {
     function paragraphBigEntry(paragraphArr) {
         return (paragraphArr.map((elem) => {
             if (elem.imageName) {
-                // return <img key={elem.key} src={getImage(elem.imageName).default ? getImage(elem.imageName).default : ""} style={isTabletOrMobile ? {} : elem.style} className={elem.className} />;
+                // return <img key={elem.key} src={getImage(elem.imageName) ? getImage(elem.imageName) : ""} style={isTabletOrMobile ? {} : elem.style} className={elem.className} />;
                 return <div key={elem.key} style={isTabletOrMobile ? {} : elem.style}>
-                    <img src={getImage(elem.imageName).default ? getImage(elem.imageName).default : ""} style={isTabletOrMobile ? {} : elem.picStyle} className={elem.className} />
+                    <img src={getImage(elem.imageName) ? getImage(elem.imageName) : ""} style={isTabletOrMobile ? {} : elem.picStyle} className={elem.className} />
                     </div>
             }
             // <div key={elem.key} style={{width:"40vw"}}> 
@@ -75,7 +75,7 @@ export default function LongEntry() {
             <div id={entryData.link} className={entryData.darkMode ? "entry entry--dark" : "entry"} >
                 {/* <div className={entryData.darkMode? "entry--img-container-dark entry--img-container" : "entry--img-container"}>
                     <div className="entry--overlay-container entry--overlay-container-big" >
-                        <img src={getImage(entryData.imageName).default ? getImage(entryData.imageName).default : ""} className="entry--img" />
+                        <img src={getImage(entryData.imageName) ? getImage(entryData.imageName) : ""} className="entry--img" />
                     </div>
                 </div> */}
                 {!isTabletOrMobile && <TableOfContents entrydata={entryData}/>}

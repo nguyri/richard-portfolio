@@ -15,7 +15,7 @@ export default function BlendingModes(props) {
   const url = 'https://konvajs.github.io/assets/yoda.jpg';
   // const [image] = useImage(url);
   // console.log(getImage('./art1.jpg'));
-  const [image] = useImage(getImage('./art1.jpg').default);
+  const [image] = useImage(getImage('./art1.jpg'));
   const config = {
     loader: { load: ["input/asciimath"] },
     asciimath: {
