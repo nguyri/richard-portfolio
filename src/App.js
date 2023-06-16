@@ -28,12 +28,12 @@ export default function App() {
   // console.log(getImage('./favicon.png').default);
 
   return(  
-    <div className={darkMode? "App App--dark" : "App"}>
-      <Favicon url={getImage('./favicon.png').default} />
-      <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} shrinkHeader ={shrinkHeader}/>
-      <main>
-        <Outlet context={[darkMode, setShrinkHeader]}/>
-      </main>
-  </div>
+      <div className={darkMode? "App App--dark" : "App"}>
+        <Favicon url={getImage('./favicon.png').default} />
+        <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} shrinkHeader ={shrinkHeader}/>
+        <main>
+          <Outlet context={[darkMode, setShrinkHeader]}/>
+        </main>
+      </div>
   );
 }

@@ -296,7 +296,7 @@ let entries = [
         description:`"I have learned that what I have not drawn I have never really seen, and that when I start drawing an ordinary thing, I realize how extraordinary it is, sheer miracle."`,
         longdescription: [
             {key:'digitalart', title:`Digital Art`},
-            {key: 'multiplyslider', component: <BlendingModes key={nanoid()} style={{gridColumn:"1 / span 3"}}/>},
+            {key: 'multiplyslider', component: <BlendingModes key={nanoid()} style={{gridColumn:"1 / span 1", scale:"2", transformOrigin:"left", marginBlock:"100px"}}/>},
             {key: 'blendingmodes', title:`Blending Modes`},
             {key: nanoid(), text:`Coming from the photography era, lighting modes are effects that change a base layer according to an effect layer by performing some
             mathematical expression on the base and effect.`},
