@@ -13,6 +13,7 @@ export default function BlendingModes(props) {
   const [color, setColor] = React.useState('green');
   const [eqn, setEqn] = React.useState(baseEqn + '\\)');
   const [image] = useImage(getImage('./art1.jpg'));
+  const imageRef = React.useRef();
   const config = {
     loader: { load: ["input/asciimath"] },
     asciimath: {
@@ -32,6 +33,20 @@ export default function BlendingModes(props) {
     setEqn(baseEqn + ' test ' + slider + '\\)');
   }, [slider])
 
+  React.useEffect( () => {
+    if(image) {
+      console.log(imageRef.current);
+      imageRef.current.cache();
+    }
+  }, [image, slider])
+
+  var MultiplyFilter = function (imageData) {
+    var nPixels = imageData.data.length;
+    for (var i = 3; i < nPixels; i += 4) {
+      imageData.data[i] *= 2;
+    }
+  };
+
   const ColoredRect = () => {
 
     const handleClick = () => {
@@ -41,8 +56,10 @@ export default function BlendingModes(props) {
 
     return (
       <Rect x={0} y={0} width={200} height={80} cornerRadius={5} fillPatternImage={image}
-      fillPatternScale={{x:0.3,y:0.3}} fillPatternRepeat='no-repeat' opacity={(256 - slider)/255}
-       shadowBlur={5} shadowColor={"#eeeeee"} onClick={handleClick} margin = {10}
+      fillPatternScale={{x:0.3,y:0.3}} fillPatternRepeat='no-repeat' // opacity={(256 - slider)/255}
+      //  shadowBlur={5} shadowColor={"#eeeeee"} onClick={handleClick} margin = {10}
+      filters={[Konva.Filters.Blur]} blurRadius={slider}
+      ref={imageRef}
       />
     );
   };
@@ -55,7 +72,7 @@ export default function BlendingModes(props) {
       <Stage width={200} height={80} >
         <Layer>
           {/* <Image image={image}/> */}
-          <Rect x={0} y={0} width={200} height={80} cornerRadius={5} fill={color} shadowBlur={5} shadowColor={"#eeeeee"} margin = {10}/>
+          {/* <Rect x={0} y={0} width={200} height={80} cornerRadius={5} fill={color} shadowBlur={5} shadowColor={"#eeeeee"} margin = {10}/> */}
           <ColoredRect />
         </Layer>
       </Stage>
