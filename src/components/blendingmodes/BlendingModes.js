@@ -26,12 +26,12 @@ export default function BlendingModes(props) {
   };
   
 
-  React.useEffect( () => {
-    let change = slider;
-    let colorStr = 'rgb(' + change + ',255,0)';
-    setColor(colorStr);
-    setEqn(baseEqn + ' test ' + slider + '\\)');
-  }, [slider])
+  // React.useEffect( () => {
+  //   let change = slider;
+  //   let colorStr = 'rgb(' + change + ',255,0)';
+  //   setColor(colorStr);
+  //   setEqn(baseEqn + ' test ' + slider + '\\)');
+  // }, [slider])
 
   React.useEffect( () => {
     if(image) {
@@ -41,26 +41,20 @@ export default function BlendingModes(props) {
     //   imageRef.current.cache();
     // }
   // }, )
-  }, [image])
+  }, [])
+
+  React.useEffect( () => {
+    imageRef.current.cache();
+  }, [slider])
 
   var MultiplyFilter = function (imageData) {
     var nPixels = imageData.data.length;
-    for (var i = 3; i < nPixels; i += 4) {
-      imageData.data[i] *= slider;
+    for (var i = 0; i < nPixels - 4; i += 4) {
+      imageData.data[i] *= slider / 120; // red
+      imageData.data[i + 1] *= slider / 120; // green
+      imageData.data[i + 2] *= slider / 120; // blue
     }
   };
-  // lets define a custom filter:
-var ColorReplaceFilter = function (imageData) {
-  var nPixels = imageData.data.length;
-  for (var i = 0; i < nPixels - 4; i += 4) {
-    const isDark = imageData.data[i] + imageData.data[i+2] + imageData.data[i+3] < 600;
-    if (isDark) {
-      imageData.data[i] = 90;
-      imageData.data[i + 1] = 149;
-      imageData.data[i + 2] = slider;
-    }
-  }
-};
 
   const ColoredRect = () => {
 
@@ -73,7 +67,7 @@ var ColorReplaceFilter = function (imageData) {
       <Rect x={0} y={0} width={200} height={80} cornerRadius={5} fillPatternImage={image}
       fillPatternScale={{x:0.3,y:0.3}} fillPatternRepeat='no-repeat' // opacity={(256 - slider)/255}
       //  shadowBlur={5} shadowColor={"#eeeeee"} onClick={handleClick} margin = {10}
-      filters={[ColorReplaceFilter]} blurRadius={slider}
+      filters={[MultiplyFilter]} blurRadius={slider}
       ref={imageRef}
       />
     );
