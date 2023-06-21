@@ -37,14 +37,6 @@ export default function BlendingModes(props) {
     if(image) {
       imageRef.current.cache();
     }
-    // return () => {
-    //   imageRef.current.cache();
-    // }
-  // }, )
-  }, [])
-
-  React.useEffect( () => {
-    imageRef.current.cache();
   }, [slider])
 
   var MultiplyFilter = function (imageData) {
@@ -66,8 +58,8 @@ export default function BlendingModes(props) {
     return (
       <Rect x={0} y={0} width={200} height={80} cornerRadius={5} fillPatternImage={image}
       fillPatternScale={{x:0.3,y:0.3}} fillPatternRepeat='no-repeat' // opacity={(256 - slider)/255}
-      //  shadowBlur={5} shadowColor={"#eeeeee"} onClick={handleClick} margin = {10}
-      filters={[MultiplyFilter]} blurRadius={slider}
+       shadowBlur={5} shadowColor={"#eeeeee"} onClick={handleClick} margin = {10}
+      filters={[MultiplyFilter]} 
       ref={imageRef}
       />
     );
@@ -88,7 +80,7 @@ export default function BlendingModes(props) {
             <span >{`$f(a,${slider}) = a * ${slider}$`}</span>
           </MathJax>{" "}
       </MathJaxContext>
-      <Slider onChange={setSlider} min={1} max={255} step={1}/>
+      <Slider onChange={setSlider} min={1} max={255} defaultValue={120} step={1}/>
     </div>
   )
 }
