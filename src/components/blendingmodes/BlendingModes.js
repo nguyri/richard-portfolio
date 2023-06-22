@@ -9,8 +9,18 @@ import './BlendingModes.css'
 
 export default function BlendingModes(props) {
   const baseEqn = "\\(f(a,b) = ab";
-  const [image] = useImage(getImage('./art1.jpg'));
-  const [screenImage] = useImage(getImage('./art2.jpg'));
+  const mode = {
+    multiply: {
+      image: './art1.jpg',
+
+    },
+    screen: {
+      image: './art2.jpg',
+
+    }
+  }
+  const [image] = useImage(getImage(mode[props.mode].image));
+  const [screenImage] = useImage(getImage(mode[props.mode].image));
   const imageRef = React.useRef();
   const screenRef = React.useRef();
   const [slider, setSlider] = React.useState(() => 256);
