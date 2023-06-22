@@ -1,7 +1,8 @@
 .formula {
+    width:fit-content;
     background: lightgrey;
-    border-radius: 5px;
-    padding: 8px;
+    border-radius: 10px;
+    padding: 5px 7px 7px 5px;
     margin-block: 10px;
     scale: 1.2;
     transform-origin: left top;

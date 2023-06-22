@@ -26,18 +26,9 @@ export default function BlendingModes(props) {
     }
   };
   const width = 400, height = 200, heightFraction = 5;
-
-  React.useEffect(() => {
-    if (image) {
-      imageRef.current.cache();
-    }
-
-    let colorStr = `rgb(${slider},${slider},${slider})`;
-    // let colorStr = 'blue';
-    console.log(colorStr);
-    setColor(colorStr);
-  }, [slider, color])
-
+  const formulas = {
+    multiply: [`$f(a,b) = a * b//256 = a * hat b$`, `$f(a,\color{${color}}${slider}) = a * \color{${color}} ${((slider) / 256).toFixed(2)}$`]
+  }
   var MultiplyFilter = function (imageData) {
     var nPixels = imageData.data.length;
     for (var i = 0; i < nPixels - 4; i += 4) {
@@ -46,6 +37,35 @@ export default function BlendingModes(props) {
       imageData.data[i + 2] *= slider / 256; // blue
     }
   };
+  const multiply = () => {
+    return (
+      <Layer >
+        {/* <Image image={image}/> */}
+        <Rect x={0} y={0} width={width / 2} height={height / heightFraction} cornerRadius={0}
+          fillPatternImage={image} fillPatternScale={{ x: 0.4, y: 0.4 }} fillPatternOffsetY={130} />
+        <Rect x={height} y={0} width={width / 2} height={height / heightFraction} cornerRadius={0} fill={color} />
+        <Rect x={0} y={height / heightFraction} width={width} height={height} cornerRadius={0} fillPatternImage={image}
+          fillPatternOffsetY={50} fillPatternScale={{ x: 0.6, y: 0.6 }} fillPatternRepeat='no-repeat'
+          //  shadowBlur={5} shadowColor={"#eeeeee"} onClick={handleClick} margin = {10}
+          filters={[MultiplyFilter]}
+          ref={imageRef} />
+      </Layer>
+    )
+  }
+  const layers = {
+    multiply: multiply(),
+  }
+
+  React.useEffect(() => {
+    if (image) {
+      imageRef.current.cache();
+    }
+
+    let colorStr = `rgb(${slider},${slider},${slider})`;
+    // let colorStr = 'blue';
+    // console.log(colorStr);
+    setColor(colorStr);
+  }, [slider, color])
 
   const ColoredRect = () => {
 
@@ -59,30 +79,22 @@ export default function BlendingModes(props) {
 
   return (
     <div style={props.style}>
-      <div style={{ marginBlock: "30px", display: "flex", flexDirection: "column" }}>
+      <div style={{ marginBlock: "30px", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
         <MathJaxContext config={config}>
-          <MathJax class="formula">
-            <span style={{ display: "flex", flexDirection: "row" }}>{`$f(a,b) = a * b//256 = a * hat b$`}</span>
+          <MathJax className="formula">
+            <span>{formulas[props.mode][0]}</span>
           </MathJax>
-          <Stage width={width} height={height} cornerRadius={20}>
-            <Layer >
-              {/* <Image image={image}/> */}
-              <Rect x={0} y={0} width={width / 2} height={height / heightFraction} cornerRadius={0}
-                fillPatternImage={image} fillPatternScale={{ x: 0.4, y: 0.4 }} fillPatternOffsetY={130} />
-              <Rect x={height} y={0} width={width / 2} height={height / heightFraction} cornerRadius={0} fill={color} />
-              <Rect x={0} y={height/heightFraction} width={width} height={height} cornerRadius={0} fillPatternImage={image}
-                fillPatternOffsetY={50} fillPatternScale={{ x: 0.6, y: 0.6 }} fillPatternRepeat='no-repeat'
-                //  shadowBlur={5} shadowColor={"#eeeeee"} onClick={handleClick} margin = {10}
-                filters={[MultiplyFilter]}
-                ref={imageRef} />
-            </Layer>
-          </Stage>
-          <MathJax inline dynamic class="formula">
-            <span >{`$f(a,\color{${color}}${slider}) = a * \color{${color}} ${((slider) / 256).toFixed(2)}$`}</span>
+          <div style={{ display: "block", }}>
+            <Stage width={width} height={height} cornerRadius={20} style={{ marginTop: "10px", overflow: "hidden", borderRadius: "10px" }}>
+              {layers[props.mode]}
+            </Stage>
+          </div>
+          <MathJax inline dynamic className="formula">
+            <span >{formulas[props.mode][1]}</span>
           </MathJax>{" "}
         </MathJaxContext>
-        <Slider onChange={setSlider} reverse={true} min={1} max={255} defaultValue={255} step={1} 
-        style={{ paddingBlock: '10px', scale: "2", transformOrigin: "left top", width:"25%" }} />
+        <Slider onChange={setSlider} reverse={true} min={1} max={255} defaultValue={255} step={1}
+          style={{ paddingBlock: '10px', scale: "2", transformOrigin: "left top", width: "25%" }} />
       </div>
     </div>
   )
