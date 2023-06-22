@@ -296,8 +296,9 @@ let entries = [
         description:`"I have learned that what I have not drawn I have never really seen, and that when I start drawing an ordinary thing, I realize how extraordinary it is, sheer miracle."`,
         longdescription: [
             {key:'digitalart', title:`Digital Art`},
-            {key: 'multiplyslider', component: <BlendingModes key={nanoid()} mode="multiply" style={{gridColumn:"1 / span 3", minWidth:"0"}}/>},
             {key: 'blendingmodes', title:`Blending Modes`},
+            {key: 'blendingdemo', component: <BlendingModes key={nanoid()} mode="multiply" style={{gridColumn:"1 / span 3", minWidth:"0"}}/>},
+            {key: 'blendingscreen', component: <BlendingModes key={nanoid()} mode="screen" style={{gridColumn:"1 / span 3", minWidth:"0"}}/>},
             {key: nanoid(), text:`Coming from the photography era, lighting modes are effects that change a base layer according to an effect layer by performing some
             mathematical expression on the base and effect.`},
             {key: nanoid(), text:`This allows for a risk free approach to light and shadow, where you can try out different brightnesses and colours without the commitment of traditional paint. Here are my favorite blending modes and how to use them.`},
@@ -326,7 +327,10 @@ let entries = [
             {key: nanoid(), text:`You can also multiply with a color to make the ever beloved hue shift. 
             Varying the hue with respect to brightness is called a hue shift. 
             Hatsune's hair is more yellow where it's lit on top, and more blue in the shadow. 
-            This is achieved with multiplying a blue in the shadow and screening a yellow for light.`, style:{paddingTop:'20px'}},
+            This is achieved with multiplying a blue in the shadow and screening a yellow for light.`, style: {paddingTop:"10px"}},
+            {key: nanoid(), text:`The formula for multiply is in the name: multiply the colours together. To gt more sensible behaviour 
+            the effects layer is normalized from 0 to 1, notated with the caret. Colours have been abbreviated to a single channel.`, style:{paddingTop:'20px', gridColumn:"span 2"}},
+            {key: 'multiplyslider', component: <BlendingModes key={nanoid()} mode="multiply" style={{gridColumn:"3 / span 3", minWidth:"0"}}/>},
 
             {key: 'overlay', subtitle:`Overlay`},
             {key: nanoid(), text:`Overlay allows you to brighten and darken in a single layer. 
