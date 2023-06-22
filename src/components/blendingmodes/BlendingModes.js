@@ -5,6 +5,7 @@ import { MathJax, MathJaxContext } from 'better-react-mathjax'
 import Konva from 'konva';
 import { getEntry, getImage } from '../entry/data'
 import useImage from 'use-image';
+import './BlendingModes.css'
 
 
 export default function BlendingModes(props) {
@@ -60,7 +61,7 @@ export default function BlendingModes(props) {
     <div style={props.style}>
       <div style={{ marginBlock: "30px", display: "flex", flexDirection: "column" }}>
         <MathJaxContext config={config}>
-          <MathJax style={{ display: "inlineblock", background: "lightgrey", borderRadius: "5px", padding: "8px", marginBlock: "10px", scale: "1.2", transformOrigin: "left top" }}>
+          <MathJax class="formula">
             <span style={{ display: "flex", flexDirection: "row" }}>{`$f(a,b) = a * b//256 = a * hat b$`}</span>
           </MathJax>
           <Stage width={width} height={height} cornerRadius={20}>
@@ -76,7 +77,7 @@ export default function BlendingModes(props) {
                 ref={imageRef} />
             </Layer>
           </Stage>
-          <MathJax inline dynamic style={{ background: "lightgrey", borderRadius: "5px", padding: "8px", marginBlock: "10px", scale: "1.2", transformOrigin: "left top" }}>
+          <MathJax inline dynamic class="formula">
             <span >{`$f(a,\color{${color}}${slider}) = a * \color{${color}} ${((slider) / 256).toFixed(2)}$`}</span>
           </MathJax>{" "}
         </MathJaxContext>

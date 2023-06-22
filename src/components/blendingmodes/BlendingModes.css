@@ -1,0 +1,8 @@
+.formula {
+    background: lightgrey;
+    border-radius: 5px;
+    padding: 8px;
+    margin-block: 10px;
+    scale: 1.2;
+    transform-origin: left top;
+}
