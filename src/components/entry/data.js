@@ -299,6 +299,8 @@ let entries = [
             {key: 'blendingmodes', title:`Blending Modes`},
             {key: 'blendingdemo', component: <BlendingModes key={nanoid()} mode="multiply" style={{gridColumn:"1 / span 3", minWidth:"0"}}/>},
             {key: 'blendingscreen', component: <BlendingModes key={nanoid()} mode="screen" style={{gridColumn:"1 / span 3", minWidth:"0"}}/>},
+            {key: 'blendingscreen', component: <BlendingModes key={nanoid()} mode="overlay" style={{gridColumn:"1 / span 3", minWidth:"0"}}/>},
+            {key: 'blendingscreen', component: <BlendingModes key={nanoid()} mode="dodge" style={{gridColumn:"1 / span 3", minWidth:"0"}}/>},
             {key: nanoid(), text:`Coming from the photography era, lighting modes are effects that change a base layer according to an effect layer by performing some
             mathematical expression on the base and effect.`},
             {key: nanoid(), text:`This allows for a risk free approach to light and shadow, where you can try out different brightnesses and colours without the commitment of traditional paint. Here are my favorite blending modes and how to use them.`},

@@ -8,7 +8,7 @@ import useImage from 'use-image';
 import './BlendingModes.css'
 
 export default function BlendingModes(props) {
-  const [slider, setSlider] = React.useState(() => 256);
+  const [slider, setSlider] = React.useState(() => 128);
   let color = `rgb(${slider},${slider},${slider})`;
   var MultiplyFilter = function (imageData) {
     var nPixels = imageData.data.length;
@@ -26,12 +26,36 @@ export default function BlendingModes(props) {
       imageData.data[i + 2] =  256*(1 - (1 - imageData.data[i + 2]/256) * (1 - slider/256)); // blue
     }
   };
+  var OverlayFilter = function (imageData) {
+    var nPixels = imageData.data.length;
+    for (var i = 0; i < nPixels - 4; i += 4) {
+      // let r = imageData.data[i], g = imageData.data[i + 1], b = imageData.data[i + 2];
+      if (slider < 128) {
+        imageData.data[i] *= slider / 256; // red
+        imageData.data[i + 1] *= slider / 256; // green
+        imageData.data[i + 2] *= slider / 256; // blue
+      } else {
+        imageData.data[i] = 256 * (1 - (1 - imageData.data[i]/256) * (1 - slider/256));
+        imageData.data[i + 1] = 256 * (1 - (1 - imageData.data[i + 1]/256) * (1 - slider/256));
+        imageData.data[i + 2] = 256 * (1 - (1 - imageData.data[i + 2]/256) * (1 - slider/256));
+      }
+    }
+  };
+  var DodgeFilter = function (imageData) {
+    var nPixels = imageData.data.length;
+    for (var i = 0; i < nPixels - 4; i += 4) {
+      imageData.data[i] /= (1 - slider/256) ; // red
+      imageData.data[i + 1] /= (1 - slider/256) ; // green
+      imageData.data[i + 2] /= (1 - slider/256) ; // blue
+    }
+  };
   const modes = {
     multiply: {
       image: './art1.jpg',
       origPatternOffsetY: 130,
       filtPatternOffsetY: 50,
       sliderReverse: true,
+      sliderDefault: 256,
       staticFormula:`$f(a,b) = a * b//256 = a * hat b$`,
       dynamicFormula:`$f(a,\color{${color}}${slider}) = a * \color{${color}} ${((slider) / 256).toFixed(2)}$`,
       filter: MultiplyFilter
@@ -41,10 +65,31 @@ export default function BlendingModes(props) {
       origPatternOffsetY: 250,
       filtPatternOffsetY: 200,
       sliderReverse:false,
-      staticFormula: `$f(a,b) = 1 - (1 - a) * (1 - b)$`,
+      sliderDefault:1,
+      staticFormula: `$f(a,b) = 1 - (1 - a) * (1 - hat b)$`,
       dynamicFormula: `$f(a,\color{${color}}${slider}) = a * \color{${color}} ${((slider) / 256).toFixed(2)}$`,    
       filter: ScreenFilter
-    }
+    },
+    overlay: {
+      image: './art3.jpg',
+      origPatternOffsetY: 120,
+      filtPatternOffsetY: 80,
+      sliderReverse:false,
+      sliderDefault:128,
+      staticFormula: `$f(a,b) = {(a hat b, hat b > 0.5), (1 - (1 - a) * (1 - hat b), hat b < 0.5):}$`,
+      dynamicFormula: `$f(a,\color{${color}}${slider}) = a * \color{${color}} ${((slider) / 256).toFixed(2)}$`,    
+      filter: OverlayFilter
+    },
+    dodge: {
+      image: './art6.jpg',
+      origPatternOffsetY: 80,
+      filtPatternOffsetY: 40,
+      sliderReverse:false,
+      sliderDefault:1,
+      staticFormula: `$f(a,b) = a / ( 1 - hat b ) $`,
+      dynamicFormula: `$f(a,\color{${color}}${slider}) = a * \color{${color}} ${((slider) / 256).toFixed(2)}$`,    
+      filter: DodgeFilter
+    },
   }
   const [image] = useImage(getImage(modes[props.mode].image));
   const imageRef = React.useRef();
@@ -103,7 +148,7 @@ export default function BlendingModes(props) {
           </MathJax>{" "}
         </MathJaxContext>
         <Slider onChange={setSlider} min={1} max={255}  step={1}
-        reverse={modes[props.mode].sliderReverse} defaultValue={modes[props.mode].sliderReverse ? 256 : 1} 
+        reverse={modes[props.mode].sliderReverse} defaultValue={modes[props.mode].sliderDefault} 
          style={{ paddingBlock: '10px', scale: "2", transformOrigin: "left top", width: "25%" }} />
       </div>
     </div>
