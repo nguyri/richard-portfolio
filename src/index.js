@@ -7,6 +7,7 @@ import LongEntry from "./components/entry/LongEntry"
 import NotFound from "./components/errordocs/NotFound"
 import { BrowserRouter, Routes, Route, Redirect } from "react-router-dom";
 import AboutCard from "./components/about-card/AboutCard"
+import Gallery from "./components/gallery/Gallery"
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -22,6 +23,7 @@ root.render(
                     <Route path="*" element={<NotFound />}/>
                 </Route>
                 <Route path="about" element={<AboutCard />} />
+                <Route path="gallery" element={<Gallery />} />
                 <Route path="*" element={<NotFound />}/>
             </Route>
             <Route path="*" element={<NotFound />}/>
