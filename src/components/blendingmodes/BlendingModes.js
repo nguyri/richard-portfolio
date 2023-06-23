@@ -30,10 +30,14 @@ export default function BlendingModes(props) {
   const modes = {
     multiply: {
       image: './art1.jpg',
+      origPatternOffsetY: 130,
+      filtPatternOffsetY: 50,
       filter: MultiplyFilter
     },
     screen: {
       image: './art2.jpg',
+      origPatternOffsetY: 250,
+      filtPatternOffsetY: 200,
       filter: ScreenFilter
     }
   }
@@ -67,56 +71,36 @@ export default function BlendingModes(props) {
   // React.useEffect(() => {
   //   if (image) {
   //     imageRef.current.cache();
-  //     layerRef.current.cache();
+  //     imageRef.current.getLayer().batchDraw();
   //   }
   // }, [image]);
 
   React.useEffect(() => {
-    console.log("in effect")
-    let colorStr = `rgb(${slider},${slider},${slider})`;
-    // console.log(colorStr);
-    setColor(colorStr);
+    // setColor(colorStr);
+    if(image){
+      imageRef.current.cache();
+    }
+    // const canvas = layerRef.current.getCanvas()._canvas;
+    // canvas.style.filter = `brightness(${(slider /256) * 100}%)`;
+
   }, [slider])
 
-  React.useEffect(() => {
-    imageRef.current.cache();
-    // console.log("updating cache");
-  }, [color]); // infinite.. but the image doesn't refresh otherwise
 
   const BlendingLayer = () => {
     return (
       <Layer ref={layerRef}>
         {/* <Image x={0} y = {0} width={300} height = {300} image={image} onClick={handleClick} ref={imageRef} blurRadius={blur} filters={[Konva.Filters.Blur]} /> */}
         <Rect x={0} y={0} width={width / 2} height={height / heightFraction} cornerRadius={0}
-          fillPatternImage={image} fillPatternScale={{ x: 0.4, y: 0.4 }} fillPatternOffsetY={130} />
-        <Rect x={height} y={0} width={width / 2} height={height / heightFraction} cornerRadius={0} fill={color} />
+          fillPatternImage={image} fillPatternScale={{ x: 0.4, y: 0.4 }} fillPatternOffsetY={modes[props.mode].origPatternOffsetY} />
+        <Rect x={height} y={0} width={width / 2} height={height / heightFraction} cornerRadius={0} fill={`rgb(${slider},${slider},${slider})`} />
         <Rect x={0} y={height / heightFraction} width={width} height={height} cornerRadius={0} fillPatternImage={image}
-          fillPatternOffsetY={50} fillPatternScale={{ x: 0.6, y: 0.6 }} fillPatternRepeat='no-repeat'
-          //  shadowBlur={5} shadowColor={"#eeeeee"} onClick={handleClick} margin = {10}
-          // filters={[Konva.Filters.Blur]}
+          fillPatternOffsetY={modes[props.mode].filtPatternOffsetY} fillPatternScale={{ x: 0.6, y: 0.6 }} fillPatternRepeat='no-repeat'
           filters={[modes[props.mode].filter]}
-          // blurRadius={slider}
           ref={imageRef}
           />
-
       </Layer>
     )
   }
-  // const screen = () => {
-  //   return (
-  //     <Layer >
-  //       {/* <Image image={image}/> */}
-  //       <Rect x={0} y={0} width={width / 2} height={height / heightFraction} cornerRadius={0}
-  //       fillPatternImage={screenImage} fillPatternScale={{ x: 0.4, y: 0.4 }} fillPatternOffsetY={250} />
-  //     <Rect x={height} y={0} width={width / 2} height={height / heightFraction} cornerRadius={0} fill={color} />
-  //     <Rect x={0} y={height / heightFraction} width={width} height={height} cornerRadius={0} fillPatternImage={image}
-  //       fillPatternOffsetY={150} fillPatternScale={{ x: 0.6, y: 0.6 }} fillPatternRepeat='no-repeat'
-  //       //  shadowBlur={5} shadowColor={"#eeeeee"} onClick={handleClick} margin = {10}
-  //       filters={[ScreenFilter]}
-  //       ref={screenRef} />
-  //     </Layer>
-  //   )
-  // }
 
 
 
