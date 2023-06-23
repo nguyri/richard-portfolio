@@ -9,9 +9,25 @@ import './BlendingModes.css'
 
 export default function BlendingModes(props) {
   const baseEqn = "\\(f(a,b) = ab";
-  function* MultiplyFilter(imageData) {};
-  function* ScreenFilter(imageData) {};
-  const mode = {
+  // function* MultiplyFilter(imageData) {};
+  // function* ScreenFilter(imageData) {};
+  var MultiplyFilter = function (imageData) {
+    var nPixels = imageData.data.length;
+    for (var i = 0; i < nPixels - 4; i += 4) {
+      imageData.data[i] *= slider / 256; // red
+      imageData.data[i + 1] *= slider / 256; // green
+      imageData.data[i + 2] *= slider / 256; // blue
+    }
+  };
+  var ScreenFilter = function (imageData) {
+    var nPixels = imageData.data.length;
+    for (var i = 0; i < nPixels - 4; i += 4) {
+      imageData.data[i] = 256*(1 - (1 - imageData.data[i]/256) * (1 - slider/256)); // red
+      imageData.data[i + 1] = 256*(1 - (1 - imageData.data[i + 1]/256) * (1 - slider/256)); // green
+      imageData.data[i + 2] =  256*(1 - (1 - imageData.data[i + 2]/256) * (1 - slider/256)); // blue
+    }
+  };
+  const modes = {
     multiply: {
       image: './art1.jpg',
       filter: MultiplyFilter
@@ -21,9 +37,10 @@ export default function BlendingModes(props) {
       filter: ScreenFilter
     }
   }
-  const [image] = useImage(getImage(mode[props.mode].image));
+  const [image] = useImage(getImage(modes[props.mode].image));
   // const [screenImage] = useImage(getImage(mode[props.mode].image));
   const imageRef = React.useRef();
+  const layerRef = React.useRef();
   // const screenRef = React.useRef();
   const [slider, setSlider] = React.useState(() => 256);
   // const [screenSlider, setScreenSlider] = React.useState(() => 1);
@@ -46,69 +63,41 @@ export default function BlendingModes(props) {
     multiply: [`$f(a,b) = a * b//256 = a * hat b$`, `$f(a,\color{${color}}${slider}) = a * \color{${color}} ${((slider) / 256).toFixed(2)}$`],
     screen: [`$f(a,b) = 1 - (1 - a) * (1 - b)$`, `$f(a,\color{${color}}${slider}) = a * \color{${color}} ${((slider) / 256).toFixed(2)}$`]
   }
-  var MultiplyFilter = function (imageData) {
-    var nPixels = imageData.data.length;
-    for (var i = 0; i < nPixels - 4; i += 4) {
-      imageData.data[i] *= slider / 256; // red
-      imageData.data[i + 1] *= slider / 256; // green
-      imageData.data[i + 2] *= slider / 256; // blue
-    }
-  };
-  var ScreenFilter = function (imageData) {
-    var nPixels = imageData.data.length;
-    for (var i = 0; i < nPixels - 4; i += 4) {
-      imageData.data[i] = 256*(1 - (1 - imageData.data[i]/256) * (1 - screenSlider/256)); // red
-      imageData.data[i + 1] = 256*(1 - (1 - imageData.data[i + 1]/256) * (1 - screenSlider/256)); // green
-      imageData.data[i + 2] =  256*(1 - (1 - imageData.data[i + 2]/256) * (1 - screenSlider/256)); // blue
-    }
-  };
+
+  // React.useEffect(() => {
+  //   if (image) {
+  //     imageRef.current.cache();
+  //     layerRef.current.cache();
+  //   }
+  // }, [image]);
+
   React.useEffect(() => {
-    if (image) {
-      imageRef.current.cache();
-    }
     console.log("in effect")
-    // let colorStr = `rgb(${slider},${slider},${slider})`;
-    // let colorStr = 'blue';
+    let colorStr = `rgb(${slider},${slider},${slider})`;
     // console.log(colorStr);
-    // setColor(colorStr);
-  // }, [image, slider]);
-
-  }, [image]);
+    setColor(colorStr);
+  }, [slider])
 
   React.useEffect(() => {
     imageRef.current.cache();
-    console.log("updating cache");
-  }); // apparently infinite.. but not
-  // console.log(mode[props.mode].filter)
-
-  const handleClick = () => {
-    console.log(blur);
-    setBlur(blur+10
-      // , () => {
-      //   // recache shape when we updated it
-      //   console.log(blur);
-      //   imageRef.current.cache();
-      //   }
-      );
-    imageRef.current.cache();
-  };
+    // console.log("updating cache");
+  }, [color]); // infinite.. but the image doesn't refresh otherwise
 
   const BlendingLayer = () => {
     return (
-      <Layer >
-        <Image x={0} y = {0} width={300} height = {300} image={image} onClick={handleClick} ref={imageRef} blurRadius={blur} filters={[Konva.Filters.Blur]} />
-        {/* <Rect x={0} y={0} width={width / 2} height={height / heightFraction} cornerRadius={0}
+      <Layer ref={layerRef}>
+        {/* <Image x={0} y = {0} width={300} height = {300} image={image} onClick={handleClick} ref={imageRef} blurRadius={blur} filters={[Konva.Filters.Blur]} /> */}
+        <Rect x={0} y={0} width={width / 2} height={height / heightFraction} cornerRadius={0}
           fillPatternImage={image} fillPatternScale={{ x: 0.4, y: 0.4 }} fillPatternOffsetY={130} />
         <Rect x={height} y={0} width={width / 2} height={height / heightFraction} cornerRadius={0} fill={color} />
         <Rect x={0} y={height / heightFraction} width={width} height={height} cornerRadius={0} fillPatternImage={image}
           fillPatternOffsetY={50} fillPatternScale={{ x: 0.6, y: 0.6 }} fillPatternRepeat='no-repeat'
           //  shadowBlur={5} shadowColor={"#eeeeee"} onClick={handleClick} margin = {10}
-          filters={[Konva.Filters.Blur]}
-          blurRadius={blur}
-          ref={imageRef} 
-          // filters={[mode[props.mode].filter]}
-          onClick={handleClick}
-          /> */}
+          // filters={[Konva.Filters.Blur]}
+          filters={[modes[props.mode].filter]}
+          // blurRadius={slider}
+          ref={imageRef}
+          />
 
       </Layer>
     )
