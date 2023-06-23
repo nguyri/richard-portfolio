@@ -8,6 +8,8 @@ import useImage from 'use-image';
 import './BlendingModes.css'
 
 export default function BlendingModes(props) {
+  const [slider, setSlider] = React.useState(() => 256);
+  let color = `rgb(${slider},${slider},${slider})`;
   var MultiplyFilter = function (imageData) {
     var nPixels = imageData.data.length;
     for (var i = 0; i < nPixels - 4; i += 4) {
@@ -29,19 +31,24 @@ export default function BlendingModes(props) {
       image: './art1.jpg',
       origPatternOffsetY: 130,
       filtPatternOffsetY: 50,
+      sliderReverse: true,
+      staticFormula:`$f(a,b) = a * b//256 = a * hat b$`,
+      dynamicFormula:`$f(a,\color{${color}}${slider}) = a * \color{${color}} ${((slider) / 256).toFixed(2)}$`,
       filter: MultiplyFilter
     },
     screen: {
       image: './art2.jpg',
       origPatternOffsetY: 250,
       filtPatternOffsetY: 200,
+      sliderReverse:false,
+      staticFormula: `$f(a,b) = 1 - (1 - a) * (1 - b)$`,
+      dynamicFormula: `$f(a,\color{${color}}${slider}) = a * \color{${color}} ${((slider) / 256).toFixed(2)}$`,    
       filter: ScreenFilter
     }
   }
   const [image] = useImage(getImage(modes[props.mode].image));
   const imageRef = React.useRef();
   const layerRef = React.useRef();
-  const [slider, setSlider] = React.useState(() => 256);
   const config = {
     loader: { load: ["input/asciimath"] },
     asciimath: {
@@ -53,10 +60,6 @@ export default function BlendingModes(props) {
     }
   };
   const width = 400, height = 200, heightFraction = 5;
-  const formulas = {
-    multiply: [`$f(a,b) = a * b//256 = a * hat b$`, `$f(a,\color{${color}}${slider}) = a * \color{${color}} ${((slider) / 256).toFixed(2)}$`],
-    screen: [`$f(a,b) = 1 - (1 - a) * (1 - b)$`, `$f(a,\color{${color}}${slider}) = a * \color{${color}} ${((slider) / 256).toFixed(2)}$`]
-  }
 
   React.useEffect(() => {
     if(image){
@@ -88,7 +91,7 @@ export default function BlendingModes(props) {
       <div style={{ paddingBottom: "0px", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
         <MathJaxContext config={config}>
           <MathJax className="formula">
-            <span>{formulas[props.mode][0]}</span>
+            <span>{modes[props.mode].staticFormula}</span>
           </MathJax>
           <div style={{ display: "block", }}>
             <Stage width={width} height={height} cornerRadius={20} style={{ marginTop: "10px", overflow: "hidden", borderRadius: "10px" }}>
@@ -96,11 +99,12 @@ export default function BlendingModes(props) {
             </Stage>
           </div>
           <MathJax inline dynamic className="formula">
-            <span >{formulas[props.mode][1]}</span>
+            <span >{modes[props.mode].dynamicFormula}</span>
           </MathJax>{" "}
         </MathJaxContext>
-        <Slider onChange={setSlider} min={1} max={255} defaultValue={1} step={1}
-          style={{ paddingBlock: '10px', scale: "2", transformOrigin: "left top", width: "25%" }} />
+        <Slider onChange={setSlider} min={1} max={255}  step={1}
+        reverse={modes[props.mode].sliderReverse} defaultValue={modes[props.mode].sliderReverse ? 256 : 1} 
+         style={{ paddingBlock: '10px', scale: "2", transformOrigin: "left top", width: "25%" }} />
       </div>
     </div>
   )
