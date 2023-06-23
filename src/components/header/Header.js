@@ -70,9 +70,11 @@ export default function Header(props) {
             <nav className={props.darkMode ? "nav--dark" : ""}>
                 <div className="nav--row">
                     { ((!shrinkHeader && isTabletOrMobile) || (!isTabletOrMobile)) && 
-                        <Link to={'projects'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>projects</Link>}
-                    { ((!shrinkHeader && isTabletOrMobile || (!isTabletOrMobile))) && 
-                        <Link to={'about'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>about</Link>}
+                        <React.Fragment>
+                            <Link to={'projects'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>projects</Link>
+                            <Link to={'about'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>about</Link>
+                            <Link to={'gallery'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>gallery</Link>
+                        </React.Fragment>}
                     {/* <Link to={'docs'} className="nav--item">docs</Link> */}
                     <div className="toggler">
                         <p className="toggler--light">light</p>
