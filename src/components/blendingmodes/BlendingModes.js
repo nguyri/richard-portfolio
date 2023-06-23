@@ -8,9 +8,6 @@ import useImage from 'use-image';
 import './BlendingModes.css'
 
 export default function BlendingModes(props) {
-  const baseEqn = "\\(f(a,b) = ab";
-  // function* MultiplyFilter(imageData) {};
-  // function* ScreenFilter(imageData) {};
   var MultiplyFilter = function (imageData) {
     var nPixels = imageData.data.length;
     for (var i = 0; i < nPixels - 4; i += 4) {
@@ -42,16 +39,9 @@ export default function BlendingModes(props) {
     }
   }
   const [image] = useImage(getImage(modes[props.mode].image));
-  // const [screenImage] = useImage(getImage(mode[props.mode].image));
   const imageRef = React.useRef();
   const layerRef = React.useRef();
-  // const screenRef = React.useRef();
   const [slider, setSlider] = React.useState(() => 256);
-  // const [screenSlider, setScreenSlider] = React.useState(() => 1);
-  const [color, setColor] = React.useState('white');
-  // const [screenColor, setScreenColor] = React.useState('black');
-  const [eqn, setEqn] = React.useState(baseEqn + '\\)');
-  const [blur, setBlur] = React.useState(10);
   const config = {
     loader: { load: ["input/asciimath"] },
     asciimath: {
@@ -68,15 +58,7 @@ export default function BlendingModes(props) {
     screen: [`$f(a,b) = 1 - (1 - a) * (1 - b)$`, `$f(a,\color{${color}}${slider}) = a * \color{${color}} ${((slider) / 256).toFixed(2)}$`]
   }
 
-  // React.useEffect(() => {
-  //   if (image) {
-  //     imageRef.current.cache();
-  //     imageRef.current.getLayer().batchDraw();
-  //   }
-  // }, [image]);
-
   React.useEffect(() => {
-    // setColor(colorStr);
     if(image){
       imageRef.current.cache();
     }
@@ -89,8 +71,7 @@ export default function BlendingModes(props) {
   const BlendingLayer = () => {
     return (
       <Layer ref={layerRef}>
-        {/* <Image x={0} y = {0} width={300} height = {300} image={image} onClick={handleClick} ref={imageRef} blurRadius={blur} filters={[Konva.Filters.Blur]} /> */}
-        <Rect x={0} y={0} width={width / 2} height={height / heightFraction} cornerRadius={0}
+           <Rect x={0} y={0} width={width / 2} height={height / heightFraction} cornerRadius={0}
           fillPatternImage={image} fillPatternScale={{ x: 0.4, y: 0.4 }} fillPatternOffsetY={modes[props.mode].origPatternOffsetY} />
         <Rect x={height} y={0} width={width / 2} height={height / heightFraction} cornerRadius={0} fill={`rgb(${slider},${slider},${slider})`} />
         <Rect x={0} y={height / heightFraction} width={width} height={height} cornerRadius={0} fillPatternImage={image}
@@ -101,35 +82,6 @@ export default function BlendingModes(props) {
       </Layer>
     )
   }
-
-
-
-
-  // React.useEffect(() => {
-  //   if (screenImage) {
-  //     screenRef.current.cache();
-  //   }
-
-  //   let screenColor = `rgb(${slider},${slider},${slider})`;
-  //   // let colorStr = 'blue';
-  //   // console.log(colorStr);
-  //   setColor(screenColor);
-  // }, [screenSlider, screenColor])
-
-  // const sliders = {
-  //   multiply: setSlider,
-  //   screen: setScreenSlider
-  // }
-
-  // const ColoredRect = () => {
-
-  //   const handleClick = () => {
-  //     // setColor(Konva.Util.getRandomColor());
-  //     // setColor(color);
-  //   };
-
-  //   return;
-  // };
 
   return (
     <div style={props.style}>
