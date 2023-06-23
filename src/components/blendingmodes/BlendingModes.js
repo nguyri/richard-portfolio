@@ -133,7 +133,7 @@ export default function BlendingModes(props) {
 
   return (
     <div style={props.style}>
-      <div style={{ paddingBottom: "0px", display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
+      <div style={{ paddingBottom: "0px", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems:"flex-start" }}>
         <MathJaxContext config={config}>
           <MathJax className="formula">
             <span>{modes[props.mode].staticFormula}</span>
