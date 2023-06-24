@@ -1,0 +1,5 @@
+.gallery--image{
+    width:20vw;
+    column-span: span 1;
+    row: span 1;
+}
