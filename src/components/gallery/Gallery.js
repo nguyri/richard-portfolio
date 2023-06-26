@@ -9,24 +9,33 @@ export default function Gallery (props) {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
     const galleryRef = React.useRef();
     const [darkMode, setShrinkHeader] = useOutletContext();
+    const images = [
+        {path: "./art1.jpg", backgroundSize:"120%", backgroundPosition:"-5% -10%"},
+        {path: "./art2.jpg", backgroundSize:"120%", backgroundPosition:"-5% -10%"},
+        {path: "./art4.jpg", backgroundSize:"120%", backgroundPosition:"-5% -10%"},
+        {path: "./art5.jpg", backgroundSize:"120%", backgroundPosition:"-5% -10%"},
+        {path: "./art6.jpg", backgroundSize:"120%", backgroundPosition:"-5% -10%"},
+        {path: "./art7.jpg", backgroundSize:"120%", backgroundPosition:"-5% -10%"},
+        {path: "./art8.jpg", backgroundSize:"120%", backgroundPosition:"-5% -10%"},
+        {path: "./art9.jpg", backgroundSize:"120%", backgroundPosition:"-5% -10%"},
+        {path: "./art10.jpg", backgroundSize:"120%", backgroundPosition:"-5% -10%"},
+        {path: "./art11.jpg", backgroundSize:"120%", backgroundPosition:"-5% -10%"},
+    ]
 
     const handleScroll = () => {
         setShrinkHeader(galleryRef.current.scrollTop > 50) ;
     };
+    console.log(`${getImage("./art2.jpg")}`);
+
     return (
         <div ref = {galleryRef} onScroll={handleScroll} style={{display:"flex", flexDirection:"row", justifyContent:"center", height:"90vh"}}>
-        <div style={{display:"grid", width:"60vw", gridTemplateColumns: "repeat(3, 1fr)",
+        <div style={{display:"grid", width:"70vw", gridTemplateColumns: "repeat(3, 1fr)",
             margin:"0", gap: "5px", padding:"20px 30px 20px 30px", justifyContent: "space-evenly",
             gridAutoFlow: "row", height:"auto", overflow:"scroll"}}>
-            <img src={getImage(imgName)} className='gallery--image' />
-            <img src={getImage("./art2.jpg")} className='gallery--image' />
-            <img src={getImage("./art3.jpg")} className='gallery--image' />
-            <img src={getImage("./art4.jpg")} className='gallery--image' />
-            <img src={getImage("./art6.jpg")} className='gallery--image' />
-            <img src={getImage("./art7.jpg")} className='gallery--image' />
-            <img src={getImage("./art8.jpg")} className='gallery--image' />
-            <img src={getImage("./art9.jpg")} className='gallery--image' />
-            <img src={getImage("./art10.jpg")} className='gallery--image' />
+            { images.map((elem) => {
+                return <div style={{backgroundImage:`url(${getImage(elem.path)})`, backgroundSize:elem.backgroundSize,
+                    ackgroundPosition:elem.backgroundPosition}} className='gallery--image'/>
+                })}
         </div>
 
         </div>

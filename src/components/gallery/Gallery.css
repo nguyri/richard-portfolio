@@ -1,5 +1,14 @@
 .gallery--image{
-    width:20vw;
+    --scale:1.0;
+    width:calc(22vw / var(--scale));
+    height:calc(30vw / var(--scale));
+    scale:var(--scale);
+    /* width: 22vw;
+    height:30vw; */
+    /* scale:1.2; */
+    /* object-fit:cover; */
+    background-size:120%;
+    background-position: -5% -10%;
     column-span: span 1;
-    row: span 1;
+    row-span: span 1;
 }
