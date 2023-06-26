@@ -10,16 +10,16 @@ export default function Gallery (props) {
     const galleryRef = React.useRef();
     const [darkMode, setShrinkHeader] = useOutletContext();
     const images = [
-        {path: "./art1.jpg", backgroundSize:"120%", backgroundPosition:"-5% -10%"},
-        {path: "./art2.jpg", backgroundSize:"120%", backgroundPosition:"-5% -10%"},
-        {path: "./art4.jpg", backgroundSize:"120%", backgroundPosition:"-5% -10%"},
-        {path: "./art5.jpg", backgroundSize:"120%", backgroundPosition:"-5% -10%"},
-        {path: "./art6.jpg", backgroundSize:"120%", backgroundPosition:"-5% -10%"},
-        {path: "./art7.jpg", backgroundSize:"120%", backgroundPosition:"-5% -10%"},
-        {path: "./art8.jpg", backgroundSize:"120%", backgroundPosition:"-5% -10%"},
-        {path: "./art9.jpg", backgroundSize:"120%", backgroundPosition:"-5% -10%"},
-        {path: "./art10.jpg", backgroundSize:"120%", backgroundPosition:"-5% -10%"},
-        {path: "./art11.jpg", backgroundSize:"120%", backgroundPosition:"-5% -10%"},
+        {id:"vest", path: "./art1.jpg", backgroundSize:"110%", backgroundPosition:"20% 0%"},
+        {id:"wires",  path: "./art2.jpg", backgroundSize:"200%", backgroundPosition:"40% 40%"},
+        {id:"miku",  path: "./art4.jpg", backgroundSize:"170%", backgroundPosition:"45% 5%"},
+        {id:"updo",  path: "./art5.jpg", backgroundSize:"140%", backgroundPosition:"50% 50%"},
+        {id:"ninja", path: "./art6.jpg", backgroundSize:"150%", backgroundPosition:"50% 00%"},
+        // {id:"hot", path: "./art7.jpg", backgroundSize:"250%", backgroundPosition:"50% 50%"},
+        {id:"kick",  path: "./art8.jpg", backgroundSize:"120%", backgroundPosition:"40% 20%"},
+        {id:"sword",  path: "./art9.jpg", backgroundSize:"120%", backgroundPosition:"50% 50%"},
+        {id:"lucy",  path: "./art11.jpg", backgroundSize:"180%", backgroundPosition:"50% 40%"},
+        {id:"coat", path: "./art10.jpg", backgroundSize:"160%", backgroundPosition:"50% 20%"},
     ]
 
     const handleScroll = () => {
@@ -30,11 +30,11 @@ export default function Gallery (props) {
     return (
         <div ref = {galleryRef} onScroll={handleScroll} style={{display:"flex", flexDirection:"row", justifyContent:"center", height:"90vh"}}>
         <div style={{display:"grid", width:"70vw", gridTemplateColumns: "repeat(3, 1fr)",
-            margin:"0", gap: "5px", padding:"20px 30px 20px 30px", justifyContent: "space-evenly",
+            margin:"0", gap: "3px", padding:"20px 30px 20px 30px", justifyContent: "space-evenly",
             gridAutoFlow: "row", height:"auto", overflow:"scroll"}}>
             { images.map((elem) => {
                 return <div style={{backgroundImage:`url(${getImage(elem.path)})`, backgroundSize:elem.backgroundSize,
-                    ackgroundPosition:elem.backgroundPosition}} className='gallery--image'/>
+                    backgroundPosition:elem.backgroundPosition}} className='gallery--image'/>
                 })}
         </div>
 

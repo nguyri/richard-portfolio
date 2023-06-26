@@ -8,6 +8,7 @@
     /* scale:1.2; */
     /* object-fit:cover; */
     background-size:120%;
+    background-repeat:no-repeat;
     background-position: -5% -10%;
     column-span: span 1;
     row-span: span 1;
