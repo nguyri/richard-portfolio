@@ -197,7 +197,8 @@ let entries = [
 
     ],
     imageName:'./addlathe1.jpg',
-    imageStyle:{style: {objectPosition:'right 0 bottom 200px'}}
+    imageStyle:{style: {objectPosition:'right 0px bottom 200px', objectFit:'cover', scale:'1.0', overflow:'visible'}},
+    mobileStyle:{style: {}},
     },
     {
     num: 4,
@@ -324,10 +325,10 @@ let entries = [
     nose area to create a highlight.`, style: {gridColumn:"span 2"}},
     {key: nanoid(), text:`You can also multiply with a color to make the ever beloved hue shift. 
     Varying the hue with respect to brightness is called a hue shift. 
-    Hatsune's hair is more yellow where it's lit on top, and more blue in the shadow. 
+    In the above image, her hair is more yellow where it's lit on top, and more blue in the shadow. 
     This is achieved with multiplying a blue in the shadow and screening a yellow for light.`, style: {paddingTop:"10px"}},
-    {key: nanoid(), text:`The formula for multiply is in the name: multiply the colours together. To gt more sensible behaviour 
-    the effects layer is normalized from 0 to 1, notated with the caret. Colours have been abbreviated to a single channel.`, style:{paddingTop:'20px', gridColumn:"span 2"}},
+    {key: nanoid(), text:`The formula for multiply is in the name: multiply the colours together. To get more sensible behaviour 
+    the effects layer is normalized from 0 to 1, notated with the caret.`, style:{paddingTop:'20px', gridColumn:"span 2"}},
     {key: 'multiplyslider', component: <BlendingModes key={nanoid()} mode="multiply" style={{gridColumn:"3 / span 3", minWidth:"0"}}/>},
 
     {key: 'overlay', subtitle:`Overlay`},
@@ -412,6 +413,7 @@ let entries = [
     {key: nanoid(), text:``},
     ],
     imageName:'./art1.jpg',
-    imageStyle:{style: {objectPosition:'right 0px top -20px', transform:'scale(1.2)'}}
+    imageStyle:{style: {objectPosition:'right 0px top -20px', transform:'scale(1.2)'}},
+    mobileStyle:{style: {objectPosition:'right 0px top -20px', transform:'scale(1.2)'}}
 },
 ]

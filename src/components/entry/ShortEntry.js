@@ -18,7 +18,8 @@ export default function ShortEntry(props) {
             <div id={props.link} className="entry--overlay-container">
                 <img src={getImage(props.imageName) ? getImage(props.imageName) : ""} 
                     className="entry--img" 
-                    style={props.imageStyle ? props.imageStyle.style : {}} />
+                    style={isTabletOrMobile ? props.mobileStyle ? props.mobileStyle.style : {}
+                                            : props.imageStyle ? props.imageStyle.style: {}} />
                 {/* <div className="entry--overlay">
                     <span className="material-icons-round entry--overlay-icon">expand_more</span>
                 </div> */}
