@@ -13,3 +13,33 @@
     column-span: span 1;
     row-span: span 1;
 }
+
+.gallery {
+    display:grid;
+    width:70vw;
+    grid-template-columns: repeat(3, 1fr);
+    margin:0;
+    gap: 3px;
+    padding:20px 30px 20px 30px;
+    justify-content: space-evenly;
+    grid-auto-flow: row;
+    height:auto;
+    overflow:scroll;
+}
+
+
+@media screen and (max-width: 1224px) {
+    .gallery {
+        width:96vw;
+        padding:5vw 0 5vw 0 ;
+        height:fit-content;
+        align-items: center;
+        gap:1px;
+        overflow-x:hidden;
+        overflow-y:scroll;
+    }
+    .gallery--image {
+        width: 32vw;
+        height: 40vw;
+    }
+}

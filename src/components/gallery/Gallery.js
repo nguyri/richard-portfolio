@@ -29,11 +29,9 @@ export default function Gallery (props) {
 
     return (
         <div ref = {galleryRef} onScroll={handleScroll} style={{display:"flex", flexDirection:"row", justifyContent:"center", height:"90vh"}}>
-        <div style={{display:"grid", width:"70vw", gridTemplateColumns: "repeat(3, 1fr)",
-            margin:"0", gap: "3px", padding:"20px 30px 20px 30px", justifyContent: "space-evenly",
-            gridAutoFlow: "row", height:"auto", overflow:"scroll"}}>
+        <div className="gallery">
             { images.map((elem) => {
-                return <div style={{backgroundImage:`url(${getImage(elem.path)})`, backgroundSize:elem.backgroundSize,
+                return <div key={elem.id} style={{backgroundImage:`url(${getImage(elem.path)})`, backgroundSize:elem.backgroundSize,
                     backgroundPosition:elem.backgroundPosition}} className='gallery--image'/>
                 })}
         </div>
