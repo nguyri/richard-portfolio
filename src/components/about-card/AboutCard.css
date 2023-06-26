@@ -44,6 +44,7 @@
     margin-bottom:-20%;
 }
 
+
 .info--img {
     position:relative;
     width:100%;
@@ -51,7 +52,13 @@
     overflow:hidden;
     border-radius:20px;
     box-shadow: 0px 0px 40px rgb(205, 205, 205);
-    max-width:400px;
+    max-width:300px;
+}
+
+@media screen and (max-width: 1224px) {
+    .info--img {
+        width:30vw;
+    }
 }
 
 .info--img-dark {
@@ -65,6 +72,7 @@
     text-align:center;
     padding-top:20px;
 }
+
 
 .info--name {
     padding-top: 20px;
@@ -94,48 +102,57 @@
     margin:5px;
 }
 
+@media screen and (max-width: 1224px) {
+    .info--name {
+        font-size:1.0rem;
+    }
+    .info--title {
+        font-size:1.0rem;
+    }
+    .info--link {
+        font-size:1.0rem;
+    }
+    .info--item {
+        margin:2px;
+    }
+}
+
+
 .about {
     margin:10px 30px;
     text-align:left;
     padding:0;
 }
 
-.about--header {
+.content--header {
     padding:0;
     margin:10px 0px;
     font-weight:600;
-    font-size:1.3rem;
+    font-size:1.5rem;
     /* line-height:1.1rem; */
 }
 
-.about--text {
+.content--text {
     padding:0;
     margin:0;
     font-weight:300;
     font-size: 1.3rem;
     /* line-height:1.3rem; */
+}
+
+@media screen and (max-width: 1224px) {
+    .content--header{
+        font-size:1.0rem;
+    }
+    .content--text {
+        font-size:0.8rem;
+    }
 }
 
 .interests {
     margin:10px 30px;
     text-align:left;
     padding:0;
-}
-
-.interests--header {
-    padding:0;
-    margin:10px 0px;
-    font-weight:600;
-    font-size:1.2rem;
-    line-height:1.0rem;
-}
-
-.interests--text {
-    padding:0;
-    margin:0;
-    font-weight:300;
-    font-size: 1.3rem;
-    /* line-height:1.3rem; */
 }
 
 .footer {

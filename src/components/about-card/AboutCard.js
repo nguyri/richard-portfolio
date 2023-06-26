@@ -18,13 +18,13 @@ export default function AboutCard() {
                 <h3 className ="info--item info--link"> nguyr.com </h3>
             </header>        
             <header className="about">
-                <h1 className="about--header"> About </h1>
-                <p className="about--text"> Hello, I'm a software developer and electrical engineer. 
+                <h1 className="content--header"> About </h1>
+                <p className="content--text"> Hello, I'm a software developer and electrical engineer. 
                 I try to learn new things all the time! </p>
             </header>
             <header className="interests">
-                <h1 className="interests--header"> Interests </h1>
-                <p className="interests--text"> I'm interested in CNC machining, 3D algorithms, and automation. 
+                <h1 className="content--header"> Interests </h1>
+                <p className="content--text"> I'm interested in CNC machining, 3D algorithms, and automation. 
                  I'm working on more on web development lately. In the past I've done algorithmic modelling in 
                  Grasshopper, user interfaces in python, and game development in C#. 
                   </p>
