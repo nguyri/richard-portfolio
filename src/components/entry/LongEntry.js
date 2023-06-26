@@ -30,12 +30,6 @@ export default function LongEntry() {
                     <img src={getImage(elem.imageName) ? getImage(elem.imageName) : ""} style={isTabletOrMobile ? {} : elem.picStyle} className={elem.className} />
                     </div>
             }
-            // <div key={elem.key} style={{width:"40vw"}}> 
-            //     <elem.component/>
-            //     {/* <ThreeScene zoom={isTabletOrMobile? 4.0 : 5.4}/> 
-            //     <MovingPlaneCanvas /> 
-            //     <ImageTransitionCanvas/> */}
-            // </div>
             else if (elem.component) {
                 return elem.component;
             }
@@ -66,7 +60,7 @@ export default function LongEntry() {
     }
 
     function bigEntry() {
-        window.scrollTo(0,0)
+        // window.scrollTo(0,0)
         // console.log(entryData);
         if(!entryData.num) {
             return <NotFound />

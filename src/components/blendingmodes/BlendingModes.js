@@ -76,7 +76,8 @@ export default function BlendingModes(props) {
       filtPatternOffsetY: 80,
       sliderReverse:false,
       sliderDefault:128,
-      staticFormula: `$f(a,b) = {(a hat b, hat b > 0.5), (1 - (1 - a) * (1 - hat b), hat b < 0.5):}$`,
+      staticFormula:`$f(a,b) = {(text(screen), hat b > 0.5), (text(multiply), hat b < 0.5):}$`,
+      // staticFormula: `$f(a,b) = {(a hat b, hat b > 0.5), (1 - (1 - a) * (1 - hat b), hat b < 0.5):}$`,
       dynamicFormula: `$f(a,\color{${color}}${slider}) = a * \color{${color}} ${((slider) / 256).toFixed(2)}$`,    
       filter: OverlayFilter
     },

@@ -11,13 +11,18 @@ export default function EntriesLayout(props) {
     const handleScroll = () => {
         setShrinkHeader(entriesRef.current.scrollTop > 50) ;
     };
+
+    const scrollToTop = () => {
+        entriesRef.current.scrollTo(0,0);
+    }
+
     return (
         
         <div className="entries-layout" ref={entriesRef} onScroll={handleScroll}>
             {/* <link rel="icon" type="image/x-icon" src={getImage('./favicon.png') ? getImage('./favicon.png') : ""}></link>
             {console.log(getImage('./favicon.png'))} */}
             {/* <TableOfContents /> */}
-            <Outlet context={useOutletContext()}/>
+            <Outlet context={[...useOutletContext(), scrollToTop]}/>
             {/* <Entries /> */}
         </div>
     )

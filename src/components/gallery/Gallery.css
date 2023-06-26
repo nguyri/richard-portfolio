@@ -16,12 +16,13 @@
 
 .gallery {
     display:grid;
-    width:70vw;
+    /* width:70vw; */
+    width:100%;
     grid-template-columns: repeat(3, 1fr);
     margin:0;
     gap: 3px;
-    padding:20px 30px 20px 30px;
-    justify-content: space-evenly;
+    padding:20px 20vw 20px 20vw;
+    justify-content: center;
     grid-auto-flow: row;
     height:auto;
     overflow:scroll;

@@ -231,7 +231,7 @@ let entries = [
     {key: 1, text:`For what it’s worth, the MPCNC is an excellent open source CNC router for anyone 
     interested in making parts that can’t be made on a 3D printer. If I were to make another CNC router, I would make a PrintNC. `},
     {key: 16, vimeo:'https://vimeo.com/612194957', style: {}},
-    {key: 2, text:`Admittedly, using this small garage router is more finnicky than using a rigid commercial machine
+    {key: 2, text:`Using this small garage router is more finnicky than using a rigid commercial machine
     with a spindle measured in horsepower. One upside is that if you crash it, the tiny steppers can't possibly generate enough force to damage anything other than your self esteem.`}, 
     {key:'common-troubleshooting', subtitle:'Common Troubleshooting'},
     {key:5, img:'test img', style: {gridColumn:"span 3", gridRow:"span 3", marginBottom:"30px"}, className:"entry--img-inline",  imageName:'./mpcnc2.jpg'},
@@ -241,7 +241,7 @@ let entries = [
     {key:'laser', title:'Laser', style:{marginTop:'30px'}},
     {key: nanoid(), text:`At the end of this project I found myself not using the router particularly often because routing
     wood was messy and takes a long time. `},
-    {key: nanoid(), text:`The laser is simpler to setup than plasma, requiring only power and optional air assist. Unfortunately, paper or plastic are most suitable for the laser cutter which smell terrible when vaporized. Even running it in an open garage it is quite stinky. `},
+    {key: nanoid(), text:`The laser is simpler to setup than plasma, requiring only power and optional air assist. Unfortunately, paper or plastic are most suitable for the laser cutter which smell terrible when vaporized. Running the laser cutter, even with the garage door open, is quite stinky. `},
     {key: nanoid(), vimeo:'https://vimeo.com/748947623', style: {}},
     ],
 
@@ -260,8 +260,8 @@ let entries = [
     I find making your own things gives you new and better appreciation for your surroundings.`},
     {key: 'safety', subtitle:`Safety`},
     {key:nanoid(), text:`Starting with woods requires a healthy fear of wood tooling. Wood tools move faster and store more energy than (equivalently sized) metal ones due to the higher RPM needed to sever wood fibers.`},
-    {key:nanoid(), html:<div>Kickback occurs when the cutter enters the material in an uncontrolled manner, usually throwing or destroying the workpiece. In a 2011 report by the CPSC, <a href="https://cpsc.gov/s3fs-public/statsaws.pdf">available at this link</a>, nearly 80000 injuries occuried in the US between 2007 and 2009. </div>},
-    {key:nanoid(), text:`Don't do anything sketchy on the table saw. When you do end up doing something sketchy, stop moving and turn off the saw until is fully stops.`},
+    {key:nanoid(), html:<div>Kickback occurs when the cutter enters the material in an uncontrolled manner, usually throwing or destroying the workpiece. A 2011 report by the CPSC, <a href="https://cpsc.gov/s3fs-public/statsaws.pdf" target="_blank" rel="noreferrer noopener">available at this link</a>, states that nearly 80% of 100,000 stationary saw injuries in 2007 to 2009 involved a table saw. </div>},
+    {key:nanoid(), text:`Use as many safety devices as possible with a table saw. If you are uncomfortable with how a workpiece is behaving in the saw, stop moving and turn off the saw until it fully stops.`},
     {key: 'wood-grain', subtitle:`Wood Grain`},
     {key:nanoid(), text:`The next fundametal of wood is working with the grain. Most people start off with a mitre or table saw which are fairly grain agnostic.`},
     {key:nanoid(), text:`The jointer and planer prefer going with the grain however. Going against the grain with a hand planer immediately feels much worse and sometimes you'll be punished when a group of fibers tears out. `},
@@ -302,7 +302,7 @@ let entries = [
     mathematical expression on the base and effect.`},
     {key: nanoid(), text:`This allows for a risk free approach to light and shadow, where you can try out different brightnesses and colours without the commitment of traditional paint. Here are my favorite blending modes and how to use them.`},
     {key: 'whylearn', title:`Why learn the blending modes?`},
-    {key: nanoid(), html: <div>
+    {key: nanoid(), html: <>
     <b>Color constancy.</b> Your brain will just make up colors depending on the surrounding color context, 
     so it can be very difficult to pick the right color every time. Blending modes give you a way to approach the color 
     you want without having to get it exactly right the first try. <br></br><br></br>
@@ -314,7 +314,9 @@ let entries = [
     you can also separate light from shadow. In some cases discussed later, you might use an overlay to do light and shadow in one layer. <br></br><br></br>
     <b>Small variations.</b> Sometimes, the difference between two shadows or two lit areas is tiny. It's actually impractical 
     to pick different color on the color wheel. In procreate color picking is confused with a disc: the triangle allows for a clear direction in each axis. Instead, adding a very light blending layer is easier.
-    Once you learn blending modes you'll wonder how you lived without them and you can turn your rendering time from 1 hour to well over 10.</div>},
+    <br/><br/>
+    <i>Once you learn blending modes you'll wonder how you lived without them, and turn your rendering time from 1 hour to well over 10.</i>
+    </>},
 
     {key: 'multiply', subtitle:`Multiply`},
     {key:nanoid(), imageName:'./art4.jpg', style: {gridColumn:"1 /span 3", gridRow:"span 1", overflow:"hidden", objectFit:"cover", paddingBottom:"20px", borderRadius:"10px"}, picStyle:{scale:"1.4", objectPosition:"50% 40px", textAlign:"center"}, className:"entry--img-inline"},
