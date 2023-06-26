@@ -5,10 +5,16 @@ import { useOutletContext } from "react-router-dom";
 import richardo from "../../imgs/richardo1.jpg"
 
 export default function AboutCard() {
-    const darkMode = useOutletContext()[0];
+    const [darkMode, setShrinkHeader] = useOutletContext();
+    const aboutRef = React.useRef();
+
+    const handleScroll = () => {
+        setShrinkHeader(aboutRef.current.scrollTop > 50) ;
+    };
+
     return (
-    <div className="entries-layout">
-        <div className = {darkMode ? "about-card--dark about-card " : "about-card"}>
+    <div className="entries-layout" ref = {aboutRef} onScroll={handleScroll}>
+        <div  className = {darkMode ? "about-card--dark about-card " : "about-card"}>
             <header className="info">
                 <div className={darkMode ? "info--img-dark info--img" : "info--img"}>
                     <img src={richardo} />

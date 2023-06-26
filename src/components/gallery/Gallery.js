@@ -5,7 +5,6 @@ import './Gallery.css'
 import { Link, Outlet, useOutlet, useOutletContext } from "react-router-dom";
 
 export default function Gallery (props) {
-    const imgName = "./art1.jpg"
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
     const galleryRef = React.useRef();
     const [darkMode, setShrinkHeader] = useOutletContext();
@@ -25,11 +24,10 @@ export default function Gallery (props) {
     const handleScroll = () => {
         setShrinkHeader(galleryRef.current.scrollTop > 50) ;
     };
-    console.log(`${getImage("./art2.jpg")}`);
 
     return (
-        <div ref = {galleryRef} onScroll={handleScroll} style={{display:"flex", flexDirection:"row", justifyContent:"center", height:"90vh"}}>
-        <div className="gallery">
+        <div style={{display:"flex", flexDirection:"row", justifyContent:"center", height:"90vh"}}>
+        <div className="gallery" ref = {galleryRef} onScroll={handleScroll} >
             { images.map((elem) => {
                 return <div key={elem.id} style={{backgroundImage:`url(${getImage(elem.path)})`, backgroundSize:elem.backgroundSize,
                     backgroundPosition:elem.backgroundPosition}} className='gallery--image'/>
