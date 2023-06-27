@@ -7,8 +7,7 @@ export default function ImageDetail (props) {
     const elem = props.props;
     return (
         <div key={elem.id} style={{backgroundImage:`url(${getImage(elem.path)})`, backgroundSize:elem.backgroundSize,
-                    backgroundPosition:elem.backgroundPosition}} onClick={elem.handleClick} className='gallery--image-detail'>
-            Image detail is here!
+                    backgroundPosition:elem.backgroundPosition, gridRow:`${elem.row} / span 1`}} onClick={elem.handleClick} className='gallery--image-detail'>
         </div>
     );
 }
