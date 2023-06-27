@@ -3,7 +3,7 @@ import {getImage} from '../entry/data'
 import { useMediaQuery } from 'react-responsive'
 import './Gallery.css'
 import { Link, Outlet, useOutlet, useOutletContext } from "react-router-dom";
-import ImageDetail from './ImageDetail'
+import {ImageDetail, Image} from './ImageDetail'
 
 export default function Gallery (props) {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
@@ -34,7 +34,7 @@ export default function Gallery (props) {
             setExpandID(-1);
         else
             setExpandID(id);
-        images.sort(function(a,b) {return a.id == expandID ? -1 : b.id == expandID ? 1: 0});
+        // images.sort(function(a,b) {return a.id == expandID ? -1 : b.id == expandID ? 1: 0});
         // console.log(images);
     }
 
@@ -46,18 +46,17 @@ export default function Gallery (props) {
     return (
         <div style={{display:"flex", flexDirection:"row", justifyContent:"center", height:"90vh"}}>
         <div className="gallery" ref = {galleryRef} onScroll={handleScroll} >
-            { 
-            images.filter((elem => elem.id == expandID)).map((elem => {
-                return <ImageDetail key={elem.id} props={{...elem, handleClick:(() => handleClick(elem.id)), row:elem.row}}/>;
+            { images.filter((elem => elem.id == expandID)).map((elem => {
+                return <ImageDetail key={elem.id} props={{...elem, 
+                    handleClick:(() => handleClick(elem.id)), row:elem.row, className:'gallery--image-detail'}}/>;
             }))}
-            {
-            images.map((elem) => {
-                return elem.id != expandID && 
-                <div key={elem.id} style={{backgroundImage:`url(${getImage(elem.path)})`, backgroundSize:elem.backgroundSize,
-                    backgroundPosition:elem.backgroundPosition, gridRow: expandID > 0 ? `${elem.row} / span 1` : `span 1`}} onClick={() => handleClick(elem.id) } className='gallery--image'/>
+            { images.map((elem) => {
+                return elem.id != expandID && <Image key={elem.id} props={{...elem, 
+                    handleClick:(() => handleClick(elem.id)), row:expandID > 0 ? `${elem.row} / span 1` : `span 1`, className:'gallery--image'}}/>;
+                // <div key={elem.id} style={{backgroundImage:`url(${getImage(elem.path)})`, backgroundSize:elem.backgroundSize,
+                //     backgroundPosition:elem.backgroundPosition, gridRow: expandID > 0 ? `${elem.row} / span 1` : `span 1`}} onClick={() => handleClick(elem.id) } className='gallery--image'/>
                 })}
         </div>
-
         </div>
     );
 }

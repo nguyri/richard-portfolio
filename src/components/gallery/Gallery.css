@@ -11,15 +11,24 @@
     background-repeat:no-repeat;
     background-position: -5% -10%;
     grid-column: span 1;
-    transition:200ms;
+    transition: grid-column 100ms, width 100ms, height 100ms;
+    transition: 100ms;
+}
+
+.gallery--image:hover{
+    scale:0.95;
+    transition:100ms;
+    /* grid-column: span 3;
+    height:80vh; */
 }
 
 .gallery--image-detail {
     grid-column: span 3;
     height:80vh;
-    transition:200ms;
-    /* scale:2; */
+    transition: grid-column 100ms, width 100ms, height 100ms;
+    transition:100ms;
 }
+    /* scale:2; */
 
 .gallery {
     display:grid;
