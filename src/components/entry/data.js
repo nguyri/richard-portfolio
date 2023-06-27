@@ -402,15 +402,13 @@ let entries = [
     {key: nanoid(), text:`It did not take long before generative AI for images became a threat instead of a novelty.
     Lawsuits were started due to training images being scraped from the internet without artist or owner permission.`},
     {key: nanoid(), text:`Why was such backlash not seen for ChatGPT? SD allows for end-user tuning, by embeddings, hypernetworks, or DreamBooth. 
-    While the initial training of SD took 150,000 GPU hours, tuning only required a handful of hours on a moderate server.`},
+    While the initial training of SD took 150,000 GPU hours, tuning only requires a handful of hours on a moderate server.`},
     {key: nanoid(), text:`This allowed for users to train models in the style of particular artists instead of the rather generic output of plain SD. 
     Although these artist trained models weren't the subject of lawsuits, they drew enough attention to get some sort of legal action moving against Stability AI.`},
     {key: nanoid(), text:`Either way, there would be no lawsuit if the technology was not startlingly good. 
     It does seem to be a "sheer miracle" that after so many training hours this model that the output is any good at all. I dabbed a little into 
     DreamBooth and did not get very far after a few hours of training.`},
-    {key: nanoid(), text:`Personally, it's fun to see the hornets nest get stirred up. Artists are angry, programmers are self righteous, I
-    think the whole thing is fascinating. There is so many interesting observations from the technological and artistic sides. The tools for artists 
-    and programmers have never been more powerful.`},
+    {key: nanoid(), text:`Personally, I think it's fun to see the hornets nest get stirred up. Artists are indignant and programmers are self righteous. There are many new interesting situations from the technological and artistic sides. I'm excited to see what artists and programmers will do with such powerful new tools.`},
     {key: nanoid(), text:``},
     {key: nanoid(), text:``},
     ],

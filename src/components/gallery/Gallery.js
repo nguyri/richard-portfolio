@@ -3,11 +3,13 @@ import {getImage} from '../entry/data'
 import { useMediaQuery } from 'react-responsive'
 import './Gallery.css'
 import { Link, Outlet, useOutlet, useOutletContext } from "react-router-dom";
+import ImageDetail from './ImageDetail'
 
 export default function Gallery (props) {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
     const galleryRef = React.useRef();
     const [darkMode, setShrinkHeader] = useOutletContext();
+    const [expandID, setExpandID] = React.useState(-1);
     const images = [
         {id:"vest", path: "./art1.jpg", backgroundSize:"110%", backgroundPosition:"20% 0%"},
         {id:"wires",  path: "./art2.jpg", backgroundSize:"200%", backgroundPosition:"40% 40%"},
@@ -25,12 +27,23 @@ export default function Gallery (props) {
         setShrinkHeader(galleryRef.current.scrollTop > 50) ;
     };
 
+    const handleClick = (id) => {
+        console.log("clicked!" + id);
+        
+        if (id == expandID)
+            setExpandID(-1);
+        else
+            setExpandID(id);
+    }
+    
     return (
         <div style={{display:"flex", flexDirection:"row", justifyContent:"center", height:"90vh"}}>
         <div className="gallery" ref = {galleryRef} onScroll={handleScroll} >
             { images.map((elem) => {
-                return <div key={elem.id} style={{backgroundImage:`url(${getImage(elem.path)})`, backgroundSize:elem.backgroundSize,
-                    backgroundPosition:elem.backgroundPosition}} className='gallery--image'/>
+                return elem.id == expandID ? 
+                <ImageDetail key={elem.id} props={{...elem, handleClick:(() => handleClick(elem.id))}}/> : 
+                <div key={elem.id} style={{backgroundImage:`url(${getImage(elem.path)})`, backgroundSize:elem.backgroundSize,
+                    backgroundPosition:elem.backgroundPosition}} onClick={() => handleClick(elem.id)} className='gallery--image'/>
                 })}
         </div>
 

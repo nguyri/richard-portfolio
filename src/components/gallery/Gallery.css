@@ -10,8 +10,16 @@
     background-size:120%;
     background-repeat:no-repeat;
     background-position: -5% -10%;
-    column-span: span 1;
-    row-span: span 1;
+    grid-column: span 1;
+    grid-row:span 1;
+    transition:200ms;
+}
+
+.gallery--image-detail {
+    grid-column: 1 / span 2;
+    height:50vh;
+    transition:200ms;
+    /* scale:2; */
 }
 
 .gallery {
