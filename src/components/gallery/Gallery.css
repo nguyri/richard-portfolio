@@ -27,6 +27,7 @@
     height:80vh;
     transition: grid-column 100ms, width 100ms, height 100ms;
     transition:100ms;
+    background-repeat:no-repeat;
 }
     /* scale:2; */
 

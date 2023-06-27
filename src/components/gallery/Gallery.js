@@ -12,16 +12,29 @@ export default function Gallery (props) {
     const [expandID, setExpandID] = React.useState(-1);
     let rowCounter = 0, row = 0;
     const images = [
-        {id:"vest", path: "./art1.jpg", backgroundSize:"110%", backgroundPosition:"20% 0%"},
+        {id:"vest", path: "./art1.jpg", backgroundSize:"110%", backgroundPosition:"20% 0%", detailSize:"100%", detailPosition:"50% 20%"},
+        {id:"miku",  path: "./art4.jpg", backgroundSize:"170%", backgroundPosition:"45% 5%", detailSize:"100%", detailPosition:"50% 10%"},
+        {id:"lucy",  path: "./art11.jpg", backgroundSize:"180%", backgroundPosition:"50% 40%", detailSize:"120%", detailPosition:"50% 30%"},
+        {id:"wires",  path: "./art2.jpg", backgroundSize:"150%", backgroundPosition:"40% 40%", detailSize:"100%", detailPosition:"50% 30%"},
+        {id:"ninja", path: "./art6.jpg", backgroundSize:"150%", backgroundPosition:"50% 00%", detailSize:"100%", detailPosition:"50% 10%"},
+        // {id:"hot", path: "./art7.jpg", backgroundSize:"250%", backgroundPosition:"50% 50%", detailSize:"100%", detailPosition:"50% 50%"},
+        {id:"kick",  path: "./art8.jpg", backgroundSize:"120%", backgroundPosition:"40% 20%", detailSize:"100%", detailPosition:"50% 20%"},
+        {id:"sword",  path: "./art9.jpg", backgroundSize:"120%", backgroundPosition:"50% 50%", detailSize:"100%", detailPosition:"50% 30%"},
+        {id:"updo",  path: "./art5.jpg", backgroundSize:"140%", backgroundPosition:"50% 50%", detailSize:"100%", detailPosition:"50% 30%"},
+        {id:"coat", path: "./art10.jpg", backgroundSize:"160%", backgroundPosition:"50% 20%", detailSize:"100%", detailPosition:"50% 30%"},
+    ]
+
+    const imageDetails = [
+        {id:"vest", path: "./art1.jpg", backgroundSize:"200%", backgroundPosition:"20% 0%"},
         {id:"wires",  path: "./art2.jpg", backgroundSize:"200%", backgroundPosition:"40% 40%"},
-        {id:"miku",  path: "./art4.jpg", backgroundSize:"170%", backgroundPosition:"45% 5%"},
-        {id:"updo",  path: "./art5.jpg", backgroundSize:"140%", backgroundPosition:"50% 50%"},
-        {id:"ninja", path: "./art6.jpg", backgroundSize:"150%", backgroundPosition:"50% 00%"},
-        // {id:"hot", path: "./art7.jpg", backgroundSize:"250%", backgroundPosition:"50% 50%"},
-        {id:"kick",  path: "./art8.jpg", backgroundSize:"120%", backgroundPosition:"40% 20%"},
-        {id:"sword",  path: "./art9.jpg", backgroundSize:"120%", backgroundPosition:"50% 50%"},
-        {id:"lucy",  path: "./art11.jpg", backgroundSize:"180%", backgroundPosition:"50% 40%"},
-        {id:"coat", path: "./art10.jpg", backgroundSize:"160%", backgroundPosition:"50% 20%"},
+        {id:"miku",  path: "./art4.jpg", backgroundSize:"200%", backgroundPosition:"45% 5%"},
+        {id:"updo",  path: "./art5.jpg", backgroundSize:"200%", backgroundPosition:"50% 50%"},
+        {id:"ninja", path: "./art6.jpg", backgroundSize:"200%", backgroundPosition:"50% 00%"},
+        // {id:"hot", path: "./art7.jpg", backgroundSize:"200%", backgroundPosition:"50% 50%"},
+        {id:"kick",  path: "./art8.jpg", backgroundSize:"200%", backgroundPosition:"40% 20%"},
+        {id:"sword",  path: "./art9.jpg", backgroundSize:"200%", backgroundPosition:"50% 50%"},
+        {id:"lucy",  path: "./art11.jpg", backgroundSize:"200%", backgroundPosition:"50% 40%"},
+        {id:"coat", path: "./art10.jpg", backgroundSize:"200%", backgroundPosition:"50% 20%"},
     ]
 
     const handleScroll = () => {
