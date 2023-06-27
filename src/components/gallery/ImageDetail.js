@@ -1,14 +1,40 @@
 import React from 'react';
 import {getImage} from '../entry/data'
+import Slider from 'rc-slider'
 import './Gallery.css'
 
 export function ImageDetail (props) {
     // console.log(props);
+    const [slider, setSlider] = React.useState(0);
+    const sliderRef = React.useRef();
     const elem = props.props;
+    const slideshow =  elem.path.slice(0, -4) + '-' + slider  + elem.path.slice(-4)
+    console.log(slideshow);
+    console.log(getImage(slideshow));
+
+    const handleMouseX = (event) => {
+        console.log('scrolling' + event.currentTarget.scrollTop);
+        // console.log(event.currentTarget);
+        let num = map_range(event.currentTarget.scrollTop, 0, 1080, 0, 18)
+        console.log(event.currentTarget.scrollTop, num);
+        console.log('setting slider to: ' + Math.ceil(num));
+        setSlider((Math.ceil(num)));
+    }
+
+    function map_range(value, low1, high1, low2, high2) {
+        return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
+    }
+
     return (
-        <div key={elem.id} style={{backgroundImage:`url(${getImage(elem.path)})`, backgroundSize:elem.detailSize,
-            backgroundPosition:elem.detailPosition, gridRow:`${elem.row} / span 1`}} onClick={elem.handleClick} className={elem.className}>
+        <>
+        <div key={elem.id} style={{backgroundImage:`url(${getImage(slideshow)})`, backgroundSize:elem.detailSize,
+            backgroundPosition:elem.detailPosition, gridRow:`${elem.row} / span 1`}} onClick={elem.handleClick} className={elem.className}
+            onScroll={event => handleMouseX(event)} >
+            <div style={{height:"180vh", width:"100vw"}} onScroll={handleMouseX} />
+            {/* // onMouseMove={handleMouseX}> */}
         </div>
+        <Slider ref={sliderRef} onChange={setSlider} min={1} max={18}  step={1}/>
+        </>
     );
 }
 

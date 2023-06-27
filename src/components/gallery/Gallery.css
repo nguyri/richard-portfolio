@@ -26,6 +26,8 @@
     grid-column: span 3;
     height:80vh;
     transition: grid-column 100ms, width 100ms, height 100ms;
+    /* margin-bottom:80vh; */
+    overflow:scroll;
     transition:100ms;
     background-repeat:no-repeat;
 }
