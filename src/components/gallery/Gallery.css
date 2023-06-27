@@ -50,8 +50,8 @@
 
 @media screen and (max-width: 1224px) {
     .gallery {
-        width:96vw;
-        padding:5vw 0 5vw 0 ;
+        width:99vw;
+        padding:1vw 0 5vw 0 ;
         height:fit-content;
         align-items: center;
         gap:1px;
@@ -59,7 +59,7 @@
         overflow-y:scroll;
     }
     .gallery--image {
-        width: 32vw;
+        width: 33vw;
         height: 40vw;
     }
 }
