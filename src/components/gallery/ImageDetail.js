@@ -8,16 +8,18 @@ export function ImageDetail (props) {
     const [slider, setSlider] = React.useState(0);
     const sliderRef = React.useRef();
     const elem = props.props;
-    const slideshow =  elem.path.slice(0, -4) + '-' + slider  + elem.path.slice(-4)
-    console.log(slideshow);
-    console.log(getImage(slideshow));
+    const slideshow = elem.slideshowEnabled ? 
+        elem.path.slice(0, -4) + '-' + slider  + elem.path.slice(-4) : elem.path
+    // console.log(slideshow);
+    // console.log(getImage(slideshow));
 
-    const handleMouseX = (event) => {
-        console.log('scrolling' + event.currentTarget.scrollTop);
+    const handleScroll = (event) => {
+        // console.log('scrolling' + event.currentTarget.scrollTop, event.currentTarget.scrollHeight, event.currentTarget.clientHeight);
         // console.log(event.currentTarget);
-        let num = map_range(event.currentTarget.scrollTop, 0, 1080, 0, 18)
-        console.log(event.currentTarget.scrollTop, num);
-        console.log('setting slider to: ' + Math.ceil(num));
+        let num = map_range(event.currentTarget.scrollTop, 0, 
+            event.currentTarget.scrollHeight - event.currentTarget.clientHeight, 0, elem.slides);
+        // console.log(event.currentTarget.scrollTop, num);
+        // console.log('setting slider to: ' + Math.ceil(num));
         setSlider((Math.ceil(num)));
     }
 
@@ -29,9 +31,8 @@ export function ImageDetail (props) {
         <>
         <div key={elem.id} style={{backgroundImage:`url(${getImage(slideshow)})`, backgroundSize:elem.detailSize,
             backgroundPosition:elem.detailPosition, gridRow:`${elem.row} / span 1`}} onClick={elem.handleClick} className={elem.className}
-            onScroll={event => handleMouseX(event)} >
-            <div style={{height:"180vh", width:"100vw"}} onScroll={handleMouseX} />
-            {/* // onMouseMove={handleMouseX}> */}
+            onScroll={event => handleScroll(event)} >
+            <div style={{height:"180vh"}} onScroll={handleScroll} />
         </div>
         <Slider ref={sliderRef} onChange={setSlider} min={1} max={18}  step={1}/>
         </>
