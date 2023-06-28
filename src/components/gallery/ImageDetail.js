@@ -30,7 +30,7 @@ export function ImageDetail (props) {
 
     return (
         <div style={{gridColumn:"span 3", height:"80vh", position:"relative"}}>
-        <ProgressBar/>
+        {elem.slideshowEnabled && <ProgressBar slider={slider} lastSlideNum={elem.lastSlideNum}/>}
         <div key={elem.id} style={{backgroundImage:`url(${getImage(slideshow)})`, backgroundSize:elem.detailSize,
             backgroundPosition:elem.detailPosition, gridRow:`${elem.row} / span 1`}} onClick={elem.handleClick} className={elem.className}
             onScroll={event => handleScroll(event)} >

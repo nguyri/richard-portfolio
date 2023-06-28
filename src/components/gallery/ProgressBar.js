@@ -6,8 +6,8 @@ export function Pip (props) {
 }
 
 export function ProgressBar (props) {
-    const pips = Array(10).fill(0);
-    pips[5] = 1;
+    const pips = Array(props.lastSlideNum/2).fill(0);
+    pips[Math.floor((props.slider - 1)/2)] = 1;
     // console.log(pips);
     return (
         <div className='gallery--progress-bar'>
