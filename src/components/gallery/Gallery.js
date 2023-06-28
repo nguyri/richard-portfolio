@@ -10,7 +10,6 @@ export default function Gallery (props) {
     const galleryRef = React.useRef();
     const [darkMode, setShrinkHeader] = useOutletContext();
     const [expandID, setExpandID] = React.useState(-1);
-    let rowCounter = 0, row = 0;
     const images = [
         {id:"vest", path: "./art1.jpg", backgroundSize:"110%", backgroundPosition:"20% 0%", detailSize:"100%", detailPosition:"50% 20%", slideshowEnabled:true, lastSlideNum: 18, slideshowFlip:false},
         {id:"miku",  path: "./art4.jpg", backgroundSize:"170%", backgroundPosition:"45% 5%", detailSize:"100%", detailPosition:"50% 30%", slideshowEnabled:true, lastSlideNum: 20, slideshowFlip:false},
@@ -23,6 +22,11 @@ export default function Gallery (props) {
         {id:"updo",  path: "./art5.jpg", backgroundSize:"140%", backgroundPosition:"50% 50%", detailSize:"100%", detailPosition:"50% 30%", slideshowEnabled:true, lastSlideNum: 30, slideshowFlip:true},
         {id:"coat", path: "./art10.jpg", backgroundSize:"160%", backgroundPosition:"50% 20%", detailSize:"100%", detailPosition:"50% 30%", slideshowEnabled:true, lastSlideNum: 18, slideshowFlip:false},
     ]
+    let rowCounter = 0, row = 0;
+    images.forEach((image => {
+        row = (Math.ceil(++rowCounter / 3));
+        image.row = row;
+    }));
 
     const handleScroll = () => {
         setShrinkHeader(galleryRef.current.scrollTop > 50) ;
@@ -38,11 +42,6 @@ export default function Gallery (props) {
         // console.log(images);
     }
 
-    images.forEach((image => {
-        row = (Math.ceil(++rowCounter / 3));
-        image.row = row;
-        console.log(image.row);
-    }));
 
     return (
         <div style={{display:"flex", flexDirection:"row", justifyContent:"center", height:"90vh"}}>
