@@ -62,8 +62,8 @@ export default function BlendingModes(props) {
     },
     screen: {
       image: './art2.jpg',
-      origPatternOffsetY: 250,
-      filtPatternOffsetY: 200,
+      origPatternOffsetY: 1000,
+      filtPatternOffsetY: 800,
       sliderReverse:false,
       sliderDefault:1,
       staticFormula: `$f(a,b) = 1 - (1 - a) * (1 - hat b)$`,
@@ -71,7 +71,7 @@ export default function BlendingModes(props) {
       filter: ScreenFilter
     },
     overlay: {
-      image: './art3.jpg',
+      image: './art4.jpg',
       origPatternOffsetY: 120,
       filtPatternOffsetY: 80,
       sliderReverse:false,
@@ -121,10 +121,10 @@ export default function BlendingModes(props) {
     return (
       <Layer ref={layerRef}>
            <Rect x={0} y={0} width={width / 2} height={height / heightFraction} cornerRadius={0}
-          fillPatternImage={image} fillPatternScale={{ x: 0.4, y: 0.4 }} fillPatternOffsetY={modes[props.mode].origPatternOffsetY} />
+          fillPatternImage={image} fillPatternScale={{ x: 0.08, y: 0.08 }} fillPatternOffsetY={modes[props.mode].origPatternOffsetY} />
         <Rect x={height} y={0} width={width / 2} height={height / heightFraction} cornerRadius={0} fill={`rgb(${slider},${slider},${slider})`} />
         <Rect x={0} y={height / heightFraction} width={width} height={height} cornerRadius={0} fillPatternImage={image}
-          fillPatternOffsetY={modes[props.mode].filtPatternOffsetY} fillPatternScale={{ x: 0.6, y: 0.6 }} fillPatternRepeat='no-repeat'
+          fillPatternOffsetY={modes[props.mode].filtPatternOffsetY} fillPatternScale={{ x: 0.12, y: 0.12 }} fillPatternRepeat='no-repeat'
           filters={[modes[props.mode].filter]}
           ref={imageRef}
           />
