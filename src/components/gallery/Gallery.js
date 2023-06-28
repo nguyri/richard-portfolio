@@ -12,16 +12,16 @@ export default function Gallery (props) {
     const [expandID, setExpandID] = React.useState(-1);
     let rowCounter = 0, row = 0;
     const images = [
-        {id:"vest", path: "./art1.jpg", backgroundSize:"110%", backgroundPosition:"20% 0%", detailSize:"100%", detailPosition:"50% 20%", slideshowEnabled:true, lastSlideNum: 18},
-        {id:"miku",  path: "./art4.jpg", backgroundSize:"170%", backgroundPosition:"45% 5%", detailSize:"100%", detailPosition:"50% 30%", slideshowEnabled:true, lastSlideNum: 20},
-        {id:"lucy",  path: "./art11.jpg", backgroundSize:"180%", backgroundPosition:"50% 40%", detailSize:"120%", detailPosition:"50% 30%", slideshowEnabled:true, lastSlideNum: 30},
-        {id:"wires",  path: "./art2.jpg", backgroundSize:"150%", backgroundPosition:"40% 40%", detailSize:"100%", detailPosition:"50% 30%", slideshowEnabled:true, lastSlideNum: 28},
-        {id:"ninja", path: "./art6.jpg", backgroundSize:"150%", backgroundPosition:"50% 00%", detailSize:"100%", detailPosition:"50% 10%", slideshowEnabled:true, lastSlideNum: 40},
-        // {id:"hot", path: "./art7.jpg", backgroundSize:"250%", backgroundPosition:"50% 50%", detailSize:"100%", detailPosition:"50% 50%", slideshowEnabled:false, lastSlideNum: 18},
-        {id:"kick",  path: "./art8.jpg", backgroundSize:"120%", backgroundPosition:"40% 20%", detailSize:"100%", detailPosition:"50% 20%", slideshowEnabled:true, lastSlideNum: 20},
-        {id:"sword",  path: "./art9.jpg", backgroundSize:"120%", backgroundPosition:"50% 50%", detailSize:"100%", detailPosition:"50% 30%", slideshowEnabled:true, lastSlideNum: 20},
-        {id:"updo",  path: "./art5.jpg", backgroundSize:"140%", backgroundPosition:"50% 50%", detailSize:"100%", detailPosition:"50% 30%", slideshowEnabled:true, lastSlideNum: 30},
-        {id:"coat", path: "./art10.jpg", backgroundSize:"160%", backgroundPosition:"50% 20%", detailSize:"100%", detailPosition:"50% 30%", slideshowEnabled:true, lastSlideNum: 18},
+        {id:"vest", path: "./art1.jpg", backgroundSize:"110%", backgroundPosition:"20% 0%", detailSize:"100%", detailPosition:"50% 20%", slideshowEnabled:true, lastSlideNum: 18, slideshowFlip:false},
+        {id:"miku",  path: "./art4.jpg", backgroundSize:"170%", backgroundPosition:"45% 5%", detailSize:"100%", detailPosition:"50% 30%", slideshowEnabled:true, lastSlideNum: 20, slideshowFlip:false},
+        {id:"lucy",  path: "./art11.jpg", backgroundSize:"180%", backgroundPosition:"50% 40%", detailSize:"120%", detailPosition:"50% 30%", slideshowEnabled:true, lastSlideNum: 30, slideshowFlip:false},
+        {id:"wires",  path: "./art2.jpg", backgroundSize:"150%", backgroundPosition:"40% 40%", detailSize:"100%", detailPosition:"50% 30%", slideshowEnabled:true, lastSlideNum: 28, slideshowFlip:false},
+        {id:"ninja", path: "./art6.jpg", backgroundSize:"150%", backgroundPosition:"50% 00%", detailSize:"100%", detailPosition:"50% 10%", slideshowEnabled:true, lastSlideNum: 40, slideshowFlip:true},
+        // {id:"hot", path: "./art7.jpg", backgroundSize:"250%", backgroundPosition:"50% 50%", detailSize:"100%", detailPosition:"50% 50%", slideshowEnabled:false, lastSlideNum: 18, slideshowFlip:true},
+        {id:"kick",  path: "./art8.jpg", backgroundSize:"120%", backgroundPosition:"40% 20%", detailSize:"100%", detailPosition:"50% 20%", slideshowEnabled:true, lastSlideNum: 20, slideshowFlip:true},
+        {id:"sword",  path: "./art9.jpg", backgroundSize:"120%", backgroundPosition:"50% 50%", detailSize:"100%", detailPosition:"50% 30%", slideshowEnabled:true, lastSlideNum: 20, slideshowFlip:true},
+        {id:"updo",  path: "./art5.jpg", backgroundSize:"140%", backgroundPosition:"50% 50%", detailSize:"100%", detailPosition:"50% 30%", slideshowEnabled:true, lastSlideNum: 30, slideshowFlip:true},
+        {id:"coat", path: "./art10.jpg", backgroundSize:"160%", backgroundPosition:"50% 20%", detailSize:"100%", detailPosition:"50% 30%", slideshowEnabled:true, lastSlideNum: 18, slideshowFlip:false},
     ]
 
     const handleScroll = () => {

@@ -12,6 +12,7 @@ export function ImageDetail (props) {
     const slideshow = elem.slideshowEnabled ? 
         slider > 1 && slider < elem.lastSlideNum ? 
             elem.path.slice(0, -4) + '-' + slider  + elem.path.slice(-4) : elem.path : elem.path
+    const transform = elem.slideshowFlip ? slideshow == elem.path ? "scaleX(-1)" : "" : "" ;
     console.log(slideshow);
     // console.log(getImage(slideshow));
 
@@ -33,7 +34,7 @@ export function ImageDetail (props) {
         <div style={{gridColumn:"span 3", height:"80vh", position:"relative", gridRow:`${elem.row} / span 1`}}>
         {elem.slideshowEnabled && <ProgressBar slider={slider} lastSlideNum={elem.lastSlideNum}/>}
         <div key={elem.id} style={{backgroundImage:`url(${getImage(slideshow)})`, backgroundSize:elem.detailSize,
-            backgroundPosition:elem.detailPosition}} onClick={elem.handleClick} className={elem.className}
+            backgroundPosition:elem.detailPosition, transform:transform}} onClick={elem.handleClick} className={elem.className}
             onScroll={event => handleScroll(event)} >
             <div style={{height:elem.slideshowEnabled ? "180vh": "auto"}} onScroll={handleScroll} className="gallery--slideshow" />
         </div>
