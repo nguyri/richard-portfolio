@@ -5,6 +5,25 @@ const webpack = require("webpack");
 
 module.exports = {
   entry: "./src/index.js",
+  // entry: {
+  //   index: {
+  //     import: "./src/index.js",
+  //     dependOn: "app",
+  //   },
+  //   app: {
+  //     import: "./src/App.js",
+  //     dependOn:["entrieslayout","about","gallery"],
+  //   },
+  //   entrieslayout: {
+  //     import: "./src/components/entry/EntriesLayout.js"
+  //   },
+  //   about: {
+  //     import: "./src/components/about-card/AboutCard.js"
+  //   },
+  //   gallery: {
+  //     import: "./src/components/gallery/Gallery.js"
+  //   }
+  // },
   module: {
     rules: [
       {
@@ -48,7 +67,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist/"),
     publicPath: "/dist/",
-    filename: "bundle.js"
+    filename: "[name].bundle.js"
   },
   plugins: [
     // new HtmlWebpackPlugin({
