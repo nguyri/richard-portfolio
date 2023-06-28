@@ -10,8 +10,9 @@ export function ImageDetail (props) {
     const sliderRef = React.useRef();
     const elem = props.props;
     const slideshow = elem.slideshowEnabled ? 
-        elem.path.slice(0, -4) + '-' + slider  + elem.path.slice(-4) : elem.path
-    // console.log(slideshow);
+        slider > 1 && slider < elem.lastSlideNum ? 
+            elem.path.slice(0, -4) + '-' + slider  + elem.path.slice(-4) : elem.path : elem.path
+    console.log(slideshow);
     // console.log(getImage(slideshow));
 
     const handleScroll = (event) => {
