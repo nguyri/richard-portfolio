@@ -12,7 +12,7 @@ export function ImageDetail (props) {
     const slideshow = elem.slideshowEnabled ? 
         slider > 1 && slider < elem.lastSlideNum ? 
             elem.path.slice(0, -4) + '-' + slider  + elem.path.slice(-4) : elem.path : elem.path
-    const transform = elem.slideshowFlip ? slideshow == elem.path ? "scaleX(-1)" : "" : "" ;
+    const transform = elem.slideshowFlip ? slideshow != elem.path ? "scaleX(-1)" : "" : "" ;
     console.log(slideshow);
     // console.log(getImage(slideshow));
 
@@ -32,12 +32,13 @@ export function ImageDetail (props) {
 
     return (
         <div style={{gridColumn:"span 3", height:"80vh", position:"relative", gridRow:`${elem.row} / span 1`}}>
-        {elem.slideshowEnabled && <ProgressBar slider={slider} lastSlideNum={elem.lastSlideNum}/>}
-        <div key={elem.id} style={{backgroundImage:`url(${getImage(slideshow)})`, backgroundSize:elem.detailSize,
-            backgroundPosition:elem.detailPosition, transform:transform}} onClick={elem.handleClick} className={elem.className}
-            onScroll={event => handleScroll(event)} >
-            <div style={{height:elem.slideshowEnabled ? "180vh": "auto"}} onScroll={handleScroll} className="gallery--slideshow" />
-        </div>
+
+            {elem.slideshowEnabled && <ProgressBar slider={slider} lastSlideNum={elem.lastSlideNum}/>}
+            <div key={elem.id} style={{backgroundImage:`url(${getImage(slideshow)})`, backgroundSize:elem.detailSize,
+                backgroundPosition:elem.detailPosition, transform:transform}} onClick={elem.handleClick} className={elem.className}
+                onScroll={event => handleScroll(event)} >
+                <div style={{height:elem.slideshowEnabled ? "180vh": "auto"}} onScroll={handleScroll} className="gallery--slideshow" />
+            </div>
         {/* <Slider ref={sliderRef} onChange={setSlider} min={1} max={18}  step={1}/> */}
         </div>
     );
@@ -48,7 +49,8 @@ export function Image (props) {
     const elem = props.props;
     return (
         <div key={elem.id} style={{backgroundImage:`url(${getImage(elem.path)})`, backgroundSize:elem.backgroundSize,
-            backgroundPosition:elem.backgroundPosition, gridRow:`span 1`}} onClick={elem.handleClick} className={elem.className}>
+        backgroundPosition:elem.backgroundPosition, gridRow:`span 1`,}} onClick={elem.handleClick} className={elem.className}>
+            {/* // backgroundPosition:elem.backgroundPosition, gridRow:`span 1`, transform:elem.slideshowFlip ? "scaleX(-1)" : ""}} onClick={elem.handleClick} className={elem.className}> */}
 
         {/* // backgroundPosition:elem.backgroundPosition, gridRow:`${elem.row} / span 1`}} onClick={elem.handleClick} className={elem.className}> */}
         </div>
