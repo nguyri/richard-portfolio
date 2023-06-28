@@ -2,6 +2,7 @@ import React from 'react';
 import {getImage} from '../entry/data'
 import Slider from 'rc-slider'
 import './Gallery.css'
+import ProgressBar from './ProgressBar';
 
 export function ImageDetail (props) {
     // console.log(props);
@@ -28,14 +29,15 @@ export function ImageDetail (props) {
     }
 
     return (
-        <>
+        <div style={{gridColumn:"span 3", height:"80vh", position:"relative"}}>
+        <ProgressBar/>
         <div key={elem.id} style={{backgroundImage:`url(${getImage(slideshow)})`, backgroundSize:elem.detailSize,
             backgroundPosition:elem.detailPosition, gridRow:`${elem.row} / span 1`}} onClick={elem.handleClick} className={elem.className}
             onScroll={event => handleScroll(event)} >
             <div style={{height:elem.slideshowEnabled ? "180vh": "auto"}} onScroll={handleScroll} />
         </div>
         {/* <Slider ref={sliderRef} onChange={setSlider} min={1} max={18}  step={1}/> */}
-        </>
+        </div>
     );
 }
 
