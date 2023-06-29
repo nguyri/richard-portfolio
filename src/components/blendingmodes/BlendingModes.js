@@ -1,6 +1,6 @@
 import React from 'react'
 import Slider from 'rc-slider'
-import { Stage, Layer, Rect, Text, Image } from 'react-konva';
+import { Stage, Layer, Rect, Circle, Text, Image } from 'react-konva';
 import { MathJax, MathJaxContext } from 'better-react-mathjax'
 import Konva from 'konva';
 import { getEntry, getImage } from '../entry/data'
@@ -31,13 +31,13 @@ export default function BlendingModes(props) {
     for (var i = 0; i < nPixels - 4; i += 4) {
       // let r = imageData.data[i], g = imageData.data[i + 1], b = imageData.data[i + 2];
       if (slider < 128) {
-        imageData.data[i] *= slider / 256; // red
-        imageData.data[i + 1] *= slider / 256; // green
-        imageData.data[i + 2] *= slider / 256; // blue
+        imageData.data[i] *= ( slider + 128 ) / 256; // red
+        imageData.data[i + 1] *= ( slider + 128 ) / 256; // green
+        imageData.data[i + 2] *= ( slider + 128 ) / 256; // blue
       } else {
-        imageData.data[i] = 256 * (1 - (1 - imageData.data[i]/256) * (1 - slider/256));
-        imageData.data[i + 1] = 256 * (1 - (1 - imageData.data[i + 1]/256) * (1 - slider/256));
-        imageData.data[i + 2] = 256 * (1 - (1 - imageData.data[i + 2]/256) * (1 - slider/256));
+        imageData.data[i] = 256 * (1 - (1 - imageData.data[i]/256) * (1 - ( slider - 128 ) /256));
+        imageData.data[i + 1] = 256 * (1 - (1 - imageData.data[i + 1]/256) * (1 - ( slider - 128 ) /256));
+        imageData.data[i + 2] = 256 * (1 - (1 - imageData.data[i + 2]/256) * (1 - ( slider - 128 ) /256));
       }
     }
   };
@@ -52,7 +52,8 @@ export default function BlendingModes(props) {
   const modes = {
     multiply: {
       image: './art1.jpg',
-      origPatternOffsetY: 130,
+      origPatternOffsetX: 1300,
+      origPatternOffsetY: 700,
       filtPatternOffsetY: 50,
       sliderReverse: true,
       sliderDefault: 256,
@@ -62,7 +63,8 @@ export default function BlendingModes(props) {
     },
     screen: {
       image: './art2.jpg',
-      origPatternOffsetY: 1000,
+      origPatternOffsetX: 1200,
+      origPatternOffsetY: 1500,
       filtPatternOffsetY: 800,
       sliderReverse:false,
       sliderDefault:1,
@@ -72,7 +74,8 @@ export default function BlendingModes(props) {
     },
     overlay: {
       image: './art4.jpg',
-      origPatternOffsetY: 120,
+      origPatternOffsetX: 1520,
+      origPatternOffsetY: 600,
       filtPatternOffsetY: 80,
       sliderReverse:false,
       sliderDefault:128,
@@ -83,7 +86,8 @@ export default function BlendingModes(props) {
     },
     dodge: {
       image: './art6.jpg',
-      origPatternOffsetY: 80,
+      origPatternOffsetX: 1500,
+      origPatternOffsetY: 500,
       filtPatternOffsetY: 40,
       sliderReverse:false,
       sliderDefault:1,
@@ -105,7 +109,7 @@ export default function BlendingModes(props) {
       ]
     }
   };
-  const width = 400, height = 200, heightFraction = 5;
+  const width = 400, height = 200, heightFraction = 5, radius = 30;
 
   React.useEffect(() => {
     if(image){
@@ -120,14 +124,15 @@ export default function BlendingModes(props) {
   const BlendingLayer = () => {
     return (
       <Layer ref={layerRef}>
-           <Rect x={0} y={0} width={width / 2} height={height / heightFraction} cornerRadius={0}
-          fillPatternImage={image} fillPatternScale={{ x: 0.08, y: 0.08 }} fillPatternOffsetY={modes[props.mode].origPatternOffsetY} />
-        <Rect x={height} y={0} width={width / 2} height={height / heightFraction} cornerRadius={0} fill={`rgb(${slider},${slider},${slider})`} />
-        <Rect x={0} y={height / heightFraction} width={width} height={height} cornerRadius={0} fillPatternImage={image}
-          fillPatternOffsetY={modes[props.mode].filtPatternOffsetY} fillPatternScale={{ x: 0.12, y: 0.12 }} fillPatternRepeat='no-repeat'
+        <Rect x={0} y={0} width={width} height={height} cornerRadius={0} fillPatternImage={image}
+          fillPatternOffsetY={modes[props.mode].filtPatternOffsetY} fillPatternScale={{ x: 0.13, y: 0.13 }} fillPatternRepeat='no-repeat'
           filters={[modes[props.mode].filter]}
           ref={imageRef}
           />
+        <Circle x={width - radius*1.5} y={radius*1.5} radius={radius} stroke={'grey'} strokeWidth={0.5} 
+          fillPatternImage={image} fillPatternScale={{ x: 0.08, y: 0.08 }} fillPatternOffsetY={modes[props.mode].origPatternOffsetY} fillPatternOffsetX={modes[props.mode].origPatternOffsetX} />
+        <Circle x={width - radius*1.5} y={radius*4} radius={radius} stroke={'grey'} strokeWidth={0.5} 
+          fill={`rgb(${slider},${slider},${slider})`} />
       </Layer>
     )
   }

@@ -347,10 +347,7 @@ let entries = [
     {key: 'multiplyslider', component: <BlendingModes key={nanoid()} mode="multiply" style={{gridColumn:"3 / span 3", minWidth:"0"}}/>},
 
     {key: 'overlay', subtitle:`Overlay`},
-    {key: nanoid(), text:`Overlay allows you to brighten and darken in a single layer. 
-    In procreate, the overlay tends to be slightly more saturated than a comparable screen or multiply when blending 
-    with a grey. Especially on skin if you want a more grey shadow multiply is easiest, 
-    but a warmer shadow is easier to control with an overlay.`, style: {gridColumn:"1 / span 2"}},
+    {key: nanoid(), text:`Overlay allows you to brighten and darken in a single layer by simply combining multiply and screen. Depending on the app, the amount overlay can brighten or darken may be reduced compared to the respective multiply and screen. This is because the equations are offset so that the neutral color for both equations is grey.`, style: {gridColumn:"1 / span 2"}},
     {key: 'blendingscreen', component: <BlendingModes key={nanoid()} mode="overlay" style={{gridColumn:"3 / span 3", minWidth:"0"}}/>},
     {key: 'overlayrecolor', subtitle:`Overlay Recolor`},
     {key: nanoid(), text:`Another use for overlay is adding color to a highlight or shadow. This is very common to see at the edge of a shadow, where the edge will have a rich red tint before turning into the shadow on skin. The physical reason for this is called subsurface scattering, but it's often just used everywhere in anime art for stylistic reasons. It's fun and easy: Add a neutral red-ish overlay to the edges of your lit areas and erase/smudge the color into the right spot. `, style: {gridColumn:"1 / span 3"}},
