@@ -29,15 +29,17 @@ importAll(require.context('../../models/', false, /\.(3mf)$/));
 
 const ThreeFunc = (props) => {
     let [modelShown, setModelShown] = React.useState(0);
-    let [zoom, setZoom] = React.useState(1);
+    let [zoom, setZoom] = React.useState(props.zoom);
     let modelList = [];
     let scene = new THREE.Scene();
     let myRef = React.useRef();
+    let camera; 
+    let controls;
 
     React.useEffect(() => {
         const width = myRef.current.clientWidth
         const height = myRef.current.clientHeight
-        let camera = new THREE.OrthographicCamera(width / -2, width / 2, height / 2, height / -2, 0, 2000)//( 10, width / height, 50, 800)
+        camera = new THREE.OrthographicCamera(width / -2, width / 2, height / 2, height / -2, 0, 2000)//( 10, width / height, 50, 800)
         // this.camera = new THREE.PerspectiveCamera( 5, width / height, 50, 2000)
         camera.zoom = zoom
         camera.up.set(0, 0, 1);
@@ -45,6 +47,7 @@ const ThreeFunc = (props) => {
         camera.lookAt(0, 0, 0)
         camera.updateProjectionMatrix();
     
+        console.log(camera);
         // this.camera = new THREE.PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 1, 500 );
     
         let pointLight = new THREE.PointLight(0xffffff, 0.6);
@@ -59,18 +62,22 @@ const ThreeFunc = (props) => {
     
         let loader = new ThreeMFLoader();
         loadThreeMF(loader, modelData, modelList, modelShown, scene)
+
+        const render = () => {
+            renderer.render(scene, camera);
+        }
     
-        // let controls = new OrbitControls(camera, renderer.domElement);
-        // controls.addEventListener('change', myRef.current);
-        // controls.target.set(20, 0, 0);
-        // controls.minPolarAngle = Math.PI / 3;
-        // controls.maxPolarAngle = controls.minPolarAngle;
-        // controls.minAzimuthAngle = Math.PI / 8;
-        // controls.maxAzimuthAngle = Math.PI * 7 / 8;
-        // controls.enablePan = false;
-        // controls.enableZoom = false;
-        // controls.autoRotate = true;
-        // controls.update();
+        controls = new OrbitControls(camera, renderer.domElement);
+        controls.addEventListener('change', render);
+        controls.target.set(20, 0, 0);
+        controls.minPolarAngle = Math.PI / 3;
+        controls.maxPolarAngle = controls.minPolarAngle;
+        controls.minAzimuthAngle = Math.PI / 8;
+        controls.maxAzimuthAngle = Math.PI * 7 / 8;
+        controls.enablePan = false;
+        controls.enableZoom = false;
+        controls.autoRotate = true;
+        controls.update();
 
         let onWindowResize = function () {
             camera.aspect = window.innerWidth / window.innerHeight;
@@ -82,12 +89,17 @@ const ThreeFunc = (props) => {
 
         const animate = () => {
             requestAnimationFrame( animate );
-            renderer.render(scene, camera);
+            render();
         }
 
         animate();
-        return () => myRef.current.removeChild(renderer.domElement);
+        // return () => myRef.current.removeChild(renderer.domElement);
     }, []);
+
+    React.useEffect(() => {
+        console.log(camera, zoom);
+        camera.zoom = zoom;
+    }, [zoom]);
 
     const loadThreeMF = (loader, modelData, list, modelShown, scene) => {
         // loader.addExtension( ThreeMFLoader.MaterialsAndPropertiesExtension );
@@ -133,7 +145,7 @@ const ThreeFunc = (props) => {
           // if(index == 0)
           //   console.log(model.position.z)
         })
-        camera.zoom = zoom - num / 20;
+        camera.zoom = props.zoom - num / 20;
         camera.updateProjectionMatrix();
       }
     return (

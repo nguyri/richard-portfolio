@@ -109,7 +109,7 @@ let entries = [
     reactDescription: {html:<div>A computer graphics classic: <b>raytracing</b>,  and a few <b>three.js</b> demos </div>},
     longdescription: [
     {key: 'graphics', title:`Graphics`},
-    {key:nanoid(), component: <ThreeFunc key={nanoid()}/>},
+    {key:nanoid(), component: <ThreeFunc style={{width:"40vw"}} zoom={4.0} key={nanoid()}/>},
     {key:nanoid(), text:`I've always had an interest in graphics and shaders. I quite like visual thinking and
     the beauty of graphics is apparent even without in-depth knowledge.`},
     {key: 'raytracer', title:`Raytracer`},
