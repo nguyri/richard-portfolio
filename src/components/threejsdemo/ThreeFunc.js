@@ -120,19 +120,22 @@ const ThreeFunc = (props) => {
               console.error("loader error" + error);
             }); // loader.load
           }); //modelGroup.files.forEach
-    
+          console.log(loadedGroup);
           list.push(loadedGroup);
+          console.log(list);
         })
       }
 
     const changeModelShown = (num) => {
+        console.log(modelList);
         modelList.forEach((modelGroup, index) => {
+            modelGroup.forEach((model) => {
             if (index == num) {
                 scene.add(model)
               } else {
                 scene.remove(model)
               }
-        })
+        })})
     }
     const setTranslation = (num) => {
         let unitArray = []
@@ -156,7 +159,7 @@ const ThreeFunc = (props) => {
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <Button variant="primary" size='lg' className={'threescene--button'} onClick={() =>
-            state.modelShown > 0 && changeModelShown(state.modelShown - 1)}>Prev</Button> {' '}
+            modelShown > 0 && changeModelShown(modelShown - 1)}>Prev</Button> {' '}
           <Button variant="primary" size='lg' className={'threescene--button'} onClick={() =>
             modelShown < modelList.length - 1 && changeModelShown(modelShown + 1)}>Next Model</Button>
         </div>
