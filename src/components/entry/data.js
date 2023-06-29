@@ -256,12 +256,12 @@ let entries = [
     longdescription: [
     {key:'woodshop', title:`Woodshop`},
     {key: 1, text:`I’ve been using wood tools for a very long time. 
-    I started off rather bad at making stuff out of wood. Nowadays I do alright. 
-    I find making your own things gives you new and better appreciation for your surroundings.`},
+    I started off rather bad at making stuff out of wood, but everyone has to start somewhere. It is an approachable and easily available medium for many people. The only downside is the risk of harm from tooling.`},
     {key: 'safety', subtitle:`Safety`},
-    {key:nanoid(), text:`Starting with woods requires a healthy fear of wood tooling. Wood tools move faster and store more energy than (equivalently sized) metal ones due to the higher RPM needed to sever wood fibers.`},
-    {key:nanoid(), html:<div>Kickback occurs when the cutter enters the material in an uncontrolled manner, usually throwing or destroying the workpiece. A 2011 report by the CPSC, <a href="https://cpsc.gov/s3fs-public/statsaws.pdf" target="_blank" rel="noreferrer noopener">available at this link</a>, states that nearly 80% of 100,000 stationary saw injuries in 2007 to 2009 involved a table saw. </div>},
+    {key:nanoid(), text:`Making things out of wood requires a healthy fear of wood tooling. Wood tools move faster and store more energy than (equivalently sized) metal ones due to the higher RPM needed to sever wood fibers. The chisel is razor sharp and is often improperly controlled.`},
+    {key:nanoid(), html:<div>The table saw is a workhorse tool that can do it all, but is also the most dangerous. A 2011 report by the CPSC, <a href="https://cpsc.gov/s3fs-public/statsaws.pdf" target="_blank" rel="noreferrer noopener">available at this link</a>, states that nearly 80% of 100,000 stationary saw injuries in 2007 to 2009 involved a table saw. </div>},
     {key:nanoid(), text:`Use as many safety devices as possible with a table saw. If you are uncomfortable with how a workpiece is behaving in the saw, stop moving and turn off the saw until it fully stops.`},
+    {key:nanoid(), text:`The most common dangerous incident is kickback. Kickback occurs when the cutter enters the material in an uncontrolled manner, causing the material to catch and be thrown or destroyed. Safety devices like the riving saw, fence, or blade guard, aim to control the material to reduce the risk of kickback.`},
     {key: 'wood-grain', subtitle:`Wood Grain`},
     {key:nanoid(), text:`The next fundametal of wood is working with the grain. Most people start off with a mitre or table saw which are fairly grain agnostic.`},
     {key:nanoid(), text:`The jointer and planer prefer going with the grain however. Going against the grain with a hand planer immediately feels much worse and sometimes you'll be punished when a group of fibers tears out. `},
@@ -277,12 +277,25 @@ let entries = [
     <li>For bowed pieces, it will also reduce the amount of relative bowing from end to end. A heavily bowed 8' piece of wood might be so bowed that there really is no 'flat wood' inside of there. Reduce it to 2 feet and you'll have to do only a quarter of the flattening.</li>
     </ul>
     </div>},
-    {key:7, text:`Final size is often subjective. Wood furniture is usually static or only needs simple holes for metal fasteners. Most of the time I cut wood to the width of another piece of wood, without any especial care to the exact size. Wood also bends and warps over time anyways. `},
+    {key:7, text:`Final size is often subjective. Wood furniture is usually static or only needs simple holes for metal fasteners. Most of the time I cut wood to the width of another piece of wood, without any special care to the exact size. Wood also bends and warps over time. `},
+    {key: 'tricks', title:`Common Tricks`},
+    {key: 'shims', subtitle:`Shimming`},
+    {key:nanoid(), text:`If you know nothing about carpentery you will still know to measure twice and cut once. This introduces more sources of error than necessary, in some cases. `},
+    {key:nanoid(), text:`Take a butt end lap joint. It is possible to cut it by measuring the width of the butting piece, subtracting the blade kerf, then setting the fence to that number. But every measurement, especially with imprecise tape measures and fences, introduces error. `},
+    {key:nanoid(), text:`Instead, place the butting piece between the saw blade and the fence and gently butt the fence up against it. Now the saw will cut the width of the butting piece plus the saw kerf. Add a shim, a drill bit will do, to take out the saw kerf and you can measure zero times, cut once. `},
+    {key: 'touch', subtitle:`Touch`},
+    {key:nanoid(), text:`When cutting two pieces to the same size on a mitre saw, it's probably best to use an endstop. But without an endstop, your fingers can feel a bump less than a micron high. Line up your pieces until they are flush to the touch and they certainly be good enough for any wood application.`},
+    {key: 'mitresled', subtitle:`Mitre Sled`},
+    {key:7, img:'test img', style: {gridColumn:"1 / span 2", gridRow:"span 2",  marginBlock:"20px", height:'40vh'}, className:"entry--img-inline", imageName:'./wood3.jpg' },
+    {key:nanoid(), text:`If the cuts need to be slightly more acute or obtuse from there the bolted fences can be adjusted or replaced easily. Sandpaper on the faces makes sure the pieces do not slip while cutting. `, style: {gridColumn:"span 3"}},
+    {key:nanoid(), text:`By far the most used sled that I have made. Once you use angles that are not 0 or 90 you invite disorder into your workshop. In most cases, the exact angle of the mitre is less important than adding up to 90. This makes calibrating the mitre sled easy. Approximate 45 degrees on one side before using your best square to precisely line up the other. `, style: {gridColumn:"span 3"}},
+    
     {key: 'chessboard', title:`Chessboard`},
     {key:5, img:'test img', style: {gridColumn:"span 2", gridRow:"span 4", marginBottom:"20px",}, className:"entry--img-inline", imageName: './wood2.jpg'},
-    {key:4, text:`I decided to do this chessboard out of red oak and black walnut and I was quite pleased with it. At the 
-    time of writing I haven’t done many projects out of hardwood and have only recently gotten a jointer and planer.`, style: {gridColumn:"span 3"}},
-    {key:7, img:'test img', style: {gridColumn:"1 / span 2",  marginBlock:"20px", height:'40vh'}, className:"entry--img-inline", imageName:'./wood3.jpg' },
+    {key:4, text:`I decided to do this chessboard out of red oak and black walnut and I was quite pleased with it. It was a good project to make use 
+    of the planer and jointer that I recently got at the time of writing. `, style: {gridColumn:"span 3"}},
+    {key:nanoid(), text:`The primary difficulty is getting a neat and seamless finish to the chessboard squares. However, the jointer and planer are designed exactly for this problem. Getting the hinges to align comparatively was a struggle because some creative tooling was required.`, style: {gridColumn:"span 3"}},
+    
     {key:8, img:'test img', style: {gridColumn:"span 3",  marginBlock:"20px", height:'40vh'}, className:"entry--img-inline", imageName:'./wood1.jpg' },
     {key:9, img:'test img', style: {gridColumn:"1 /span 2",  marginBottom:"20px", height:'40vh'}, className:"entry--img-inline", imageName:'./wood5.jpg' },
     {key:10, img:'test img', style: {gridColumn:"span 3",  marginBottom:"20px", height:'40vh'}, className:"entry--img-inline", imageName:'./wood9.jpg' },
