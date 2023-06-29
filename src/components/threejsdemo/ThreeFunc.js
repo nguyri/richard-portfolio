@@ -34,47 +34,60 @@ const ThreeFunc = (props) => {
     let scene = new THREE.Scene();
     let myRef = React.useRef();
 
-    const width = this.mount.clientWidth
-    const height = this.mount.clientHeight
-    this.camera = new THREE.OrthographicCamera(width / -2, width / 2, height / 2, height / -2, 0, 2000)//( 10, width / height, 50, 800)
-    // this.camera = new THREE.PerspectiveCamera( 5, width / height, 50, 2000)
-    this.camera.zoom = this.state.zoom
-    this.camera.up.set(0, 0, 1);
-    this.camera.position.set(200, 200, 200);
-    this.camera.lookAt(0, 0, 0)
-    this.camera.updateProjectionMatrix();
-
-    // this.camera = new THREE.PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 1, 500 );
-
-    this.pointLight = new THREE.PointLight(0xffffff, 0.6);
-    this.pointLight.position.set(80, 90, 200);
-    this.scene.add(this.pointLight);
-    this.scene.add(new THREE.AmbientLight(0xffffff, 0.6));
-
-    this.renderer = new THREE.WebGLRenderer({ antialias: true })
-    this.renderer.setClearColor('#FFFFFF', 0) //#F9F7F0
-    this.renderer.setSize(width, height)
-    this.mount.appendChild(this.renderer.domElement)
-
-    let loader = new ThreeMFLoader();
-    this.loadThreeMF(loader, modelData, this.modelList, this.state.modelShown, this.scene)
-
-    let controls = new OrbitControls(this.camera, this.renderer.domElement);
-    controls.addEventListener('change', this.render);
-    controls.target.set(20, 0, 0);
-    controls.minPolarAngle = Math.PI / 3;
-    controls.maxPolarAngle = controls.minPolarAngle;
-    controls.minAzimuthAngle = Math.PI / 8;
-    controls.maxAzimuthAngle = Math.PI * 7 / 8;
-    controls.enablePan = false;
-    controls.enableZoom = false;
-    controls.autoRotate = true;
-    controls.update();
-
-
     React.useEffect(() => {
-        this.start();
-    })
+        const width = myRef.current.clientWidth
+        const height = myRef.current.clientHeight
+        let camera = new THREE.OrthographicCamera(width / -2, width / 2, height / 2, height / -2, 0, 2000)//( 10, width / height, 50, 800)
+        // this.camera = new THREE.PerspectiveCamera( 5, width / height, 50, 2000)
+        camera.zoom = zoom
+        camera.up.set(0, 0, 1);
+        camera.position.set(200, 200, 200);
+        camera.lookAt(0, 0, 0)
+        camera.updateProjectionMatrix();
+    
+        // this.camera = new THREE.PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 1, 500 );
+    
+        let pointLight = new THREE.PointLight(0xffffff, 0.6);
+        pointLight.position.set(80, 90, 200);
+        scene.add(pointLight);
+        scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+    
+        let renderer = new THREE.WebGLRenderer({ antialias: true })
+        renderer.setClearColor('#FFFFFF', 0) //#F9F7F0
+        renderer.setSize(width, height)
+        myRef.current.appendChild(renderer.domElement)
+    
+        let loader = new ThreeMFLoader();
+        loadThreeMF(loader, modelData, modelList, modelShown, scene)
+    
+        // let controls = new OrbitControls(camera, renderer.domElement);
+        // controls.addEventListener('change', myRef.current);
+        // controls.target.set(20, 0, 0);
+        // controls.minPolarAngle = Math.PI / 3;
+        // controls.maxPolarAngle = controls.minPolarAngle;
+        // controls.minAzimuthAngle = Math.PI / 8;
+        // controls.maxAzimuthAngle = Math.PI * 7 / 8;
+        // controls.enablePan = false;
+        // controls.enableZoom = false;
+        // controls.autoRotate = true;
+        // controls.update();
+
+        let onWindowResize = function () {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize( window.innerWidth, window.innerHeight );
+          }
+      
+        window.addEventListener("resize", onWindowResize, false);
+
+        const animate = () => {
+            requestAnimationFrame( animate );
+            renderer.render(scene, camera);
+        }
+
+        animate();
+        return () => myRef.current.removeChild(renderer.domElement);
+    }, []);
 
     const loadThreeMF = (loader, modelData, list, modelShown, scene) => {
         // loader.addExtension( ThreeMFLoader.MaterialsAndPropertiesExtension );
