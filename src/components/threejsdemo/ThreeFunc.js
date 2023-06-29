@@ -31,7 +31,7 @@ const ThreeFunc = (props) => {
     let [modelShown, setModelShown] = React.useState(0);
     let [zoom, setZoom] = React.useState(props.zoom);
     let [modelList, setModelList] = React.useState([]);
-    let scene = new THREE.Scene();
+    let [scene, setScene] = React.useState(new THREE.Scene());
     let myRef = React.useRef();
     let [camera, setCamera] = React.useState(); 
     let controls;
@@ -82,8 +82,8 @@ const ThreeFunc = (props) => {
         controls.update();
 
         let onWindowResize = function () {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
+            cameraInit.aspect = window.innerWidth / window.innerHeight;
+            cameraInit.updateProjectionMatrix();
             renderer.setSize( window.innerWidth, window.innerHeight );
           }
       
@@ -95,17 +95,8 @@ const ThreeFunc = (props) => {
         }
 
         animate();
-        // return () => myRef.current.removeChild(renderer.domElement);
+        return () => myRef.current.removeChild(renderer.domElement);
     }, []);
-
-    React.useEffect(() => {
-
-    }, []);
-
-    // React.useEffect(() => {
-    //     console.log(camera, zoom);
-    //     camera.zoom = zoom;
-    // }, [zoom]);
 
     const loadThreeMF = (loader, modelData, list, modelShown, scene) => {
         // loader.addExtension( ThreeMFLoader.MaterialsAndPropertiesExtension );
@@ -126,13 +117,10 @@ const ThreeFunc = (props) => {
               console.error("loader error" + error);
             }); // loader.load
           }); //modelGroup.files.forEach
-          console.log(loadedGroup);
           list.push(loadedGroup);
-          console.log(list);
         })
         setModelList(list);
       }
-      console.log(modelList);
 
       const changeModelShown = (num) => {
         setModelShown(num);
@@ -169,11 +157,8 @@ const ThreeFunc = (props) => {
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <Button variant="primary" size='lg' className={'threescene--button'} onClick={() =>
             modelShown > 0 && changeModelShown(modelShown - 1)}>Prev</Button> {' '}
-          <Button variant="primary" size='lg' className={'threescene--button'} onClick={() => {
-            console.log(modelShown, modelList.length);
-modelShown < modelList.length - 1 && changeModelShown(modelShown + 1)
-          }
-            }>Next Model</Button>
+          <Button variant="primary" size='lg' className={'threescene--button'} onClick={() => 
+            modelShown < modelList.length - 1 && changeModelShown(modelShown + 1)}>Next Model</Button>
         </div>
         <MediaQuery minWidth={1224} >
           {(matches) => 
