@@ -32,8 +32,49 @@ const ThreeFunc = (props) => {
     let [zoom, setZoom] = React.useState(1);
     let modelList = [];
     let scene = new THREE.Scene();
+    let myRef = React.useRef();
 
-    
+    const width = this.mount.clientWidth
+    const height = this.mount.clientHeight
+    this.camera = new THREE.OrthographicCamera(width / -2, width / 2, height / 2, height / -2, 0, 2000)//( 10, width / height, 50, 800)
+    // this.camera = new THREE.PerspectiveCamera( 5, width / height, 50, 2000)
+    this.camera.zoom = this.state.zoom
+    this.camera.up.set(0, 0, 1);
+    this.camera.position.set(200, 200, 200);
+    this.camera.lookAt(0, 0, 0)
+    this.camera.updateProjectionMatrix();
+
+    // this.camera = new THREE.PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 1, 500 );
+
+    this.pointLight = new THREE.PointLight(0xffffff, 0.6);
+    this.pointLight.position.set(80, 90, 200);
+    this.scene.add(this.pointLight);
+    this.scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+
+    this.renderer = new THREE.WebGLRenderer({ antialias: true })
+    this.renderer.setClearColor('#FFFFFF', 0) //#F9F7F0
+    this.renderer.setSize(width, height)
+    this.mount.appendChild(this.renderer.domElement)
+
+    let loader = new ThreeMFLoader();
+    this.loadThreeMF(loader, modelData, this.modelList, this.state.modelShown, this.scene)
+
+    let controls = new OrbitControls(this.camera, this.renderer.domElement);
+    controls.addEventListener('change', this.render);
+    controls.target.set(20, 0, 0);
+    controls.minPolarAngle = Math.PI / 3;
+    controls.maxPolarAngle = controls.minPolarAngle;
+    controls.minAzimuthAngle = Math.PI / 8;
+    controls.maxAzimuthAngle = Math.PI * 7 / 8;
+    controls.enablePan = false;
+    controls.enableZoom = false;
+    controls.autoRotate = true;
+    controls.update();
+
+
+    React.useEffect(() => {
+        this.start();
+    })
 
     const loadThreeMF = (loader, modelData, list, modelShown, scene) => {
         // loader.addExtension( ThreeMFLoader.MaterialsAndPropertiesExtension );
@@ -68,28 +109,42 @@ const ThreeFunc = (props) => {
               }
         })
     }
+    const setTranslation = (num) => {
+        let unitArray = []
+        for (var i = modelList[modelShown].length - 1; i >= 0; i--) {
+          let step = 2 / (modelList[modelShown].length - 1)
+          unitArray.push(step * i - 1)
+        }
+        modelList[modelShown].forEach((model, index) => {
+          model.position.z = modelData[modelShown].positions[index][2] + num * unitArray[index]
+          // if(index == 0)
+          //   console.log(model.position.z)
+        })
+        camera.zoom = zoom - num / 20;
+        camera.updateProjectionMatrix();
+      }
     return (
         <div className='threescene--div'>
-        <h1 className='threescene--title'>{this.state && modelData[this.state.modelShown].name}</h1>
+        <h1 className='threescene--title'>{modelData[modelShown].name}</h1>
         <div className='threescene--slider-div'>
-          <Slider onChange={this.setTranslation} min={1} max={30} />
+          <Slider onChange={setTranslation} min={1} max={30} />
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <Button variant="primary" size='lg' className={'threescene--button'} onClick={() =>
-            this.state.modelShown > 0 && this.changeModelShown(this.state.modelShown - 1)}>Prev</Button> {' '}
+            state.modelShown > 0 && changeModelShown(state.modelShown - 1)}>Prev</Button> {' '}
           <Button variant="primary" size='lg' className={'threescene--button'} onClick={() =>
-            this.state.modelShown < this.modelList.length - 1 && this.changeModelShown(this.state.modelShown + 1)}>Next Model</Button>
+            modelShown < modelList.length - 1 && changeModelShown(modelShown + 1)}>Next Model</Button>
         </div>
         <MediaQuery minWidth={1224} >
           {(matches) => 
           matches ? 
           <div
             style = {{ width: '30vw', height: '30vw' }}
-            ref={(mount) => { this.mount = mount; }} >
+            ref={myRef} >
           </div> : 
           <div
             style = {{ width: '100vw', height: '100vw' }}
-            ref={(mount) => { this.mount = mount; }} >
+            ref={myRef} >
           </div>
           } 
         </MediaQuery>
