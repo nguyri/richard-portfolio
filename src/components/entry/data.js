@@ -4,6 +4,7 @@ import ThreeScene from '../threejsdemo/ThreeScene';
 import MovingPlaneCanvas from '../threefiber/MovingPlaneCanvas';
 import ImageTransitionCanvas from '../threefiber/ImageTransition';
 import BlendingModes from '../blendingmodes/BlendingModes';
+import ThreeFunc from '../threejsdemo/ThreeFunc';
 
 const images = {}
 
@@ -108,6 +109,7 @@ let entries = [
     reactDescription: {html:<div>A computer graphics classic: <b>raytracing</b>,  and a few <b>three.js</b> demos </div>},
     longdescription: [
     {key: 'graphics', title:`Graphics`},
+    {key:nanoid(), component: <ThreeFunc key={nanoid()}/>},
     {key:nanoid(), text:`I've always had an interest in graphics and shaders. I quite like visual thinking and
     the beauty of graphics is apparent even without in-depth knowledge.`},
     {key: 'raytracer', title:`Raytracer`},
