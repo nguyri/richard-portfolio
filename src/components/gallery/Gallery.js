@@ -44,7 +44,7 @@ export default function Gallery (props) {
 
 
     return (
-        <div style={{display:"flex", flexDirection:"row", justifyContent:"center", height:"90vh"}}>
+        <div style={{display:"flex", flexDirection:"row", justifyContent:"center", height:"90vh", overflow:"auto"}}>
         <div className="gallery" ref = {galleryRef} onScroll={handleScroll} >
             { images.filter((elem => elem.id == expandID)).map((elem => {
                 return <ImageDetail key={elem.id} props={{...elem, 
