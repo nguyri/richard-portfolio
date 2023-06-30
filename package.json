@@ -34,6 +34,7 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
+    "@atlaskit/code": "^14.6.4",
     "@react-three/drei": "^9.32.11",
     "@react-three/fiber": "^8.8.9",
     "better-react-mathjax": "^2.0.2",

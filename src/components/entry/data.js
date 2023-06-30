@@ -5,6 +5,7 @@ import MovingPlaneCanvas from '../threefiber/MovingPlaneCanvas';
 import ImageTransitionCanvas from '../threefiber/ImageTransition';
 import BlendingModes from '../blendingmodes/BlendingModes';
 import ThreeFunc from '../threejsdemo/ThreeFunc';
+import Expand from '../entry/Expand'
 
 const images = {}
 
@@ -214,7 +215,7 @@ let entries = [
     {key:nanoid(), subtitle: `Tutorials`},
     {key: nanoid(), html:<>
     Demo for inline context expansion. Here are some key concepts in react:
-    <ul><li>Components can import modules they need and must export themselves at the bottom of their files.</li>
+    <ul><li><Expand name='Components'/> can import modules they need and must export themselves at the bottom of their files.</li>
     <li>Component functions are named in PascalCase</li>
     <li>You can use JS variables by putting them in curly braces</li>
     <li>Some JSX attributes are different to avoid name conflict. For example, class is called className</li>

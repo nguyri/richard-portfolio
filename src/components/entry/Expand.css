@@ -1,0 +1,9 @@
+.expand--anchor {
+    color:cornflowerblue;
+    text-decoration: underline;
+    cursor:pointer;
+}
+
+.expand--anchor:hover {
+    color:rgb(68, 105, 172);
+}
