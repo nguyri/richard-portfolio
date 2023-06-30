@@ -211,8 +211,18 @@ let entries = [
     and a <b>wordle</b> demo</div>},
     longdescription: [
     {key:'wordle', title:`Wordle`},
-    {key: 1, html:<div>React is great at making easy to work with components 
-    and adds a virtual DOM that can make your webpages <i><b>react</b></i> to user inputs. </div>},
+    {key:nanoid(), subtitle: `Tutorials`},
+    {key: nanoid(), html:<>
+    Demo for inline context expansion. Here are some key concepts in react:
+    <ul><li>Components can import modules they need and must export themselves at the bottom of their files.</li>
+    <li>Component functions are named in PascalCase</li>
+    <li>You can use JS variables by putting them in curly braces</li>
+    <li>Some JSX attributes are different to avoid name conflict. For example, class is called className</li>
+    <li>Props are written like attributes, directly into the angle brackets and passed into components, often with the name (props) </li>
+    </ul>
+    </>},
+    {key: 1, html:<>React is great at making easy to work with components 
+    and adds a virtual DOM that can make your webpages <i><b>react</b></i> to user inputs. </>},
     {key: 3, wordle: true},
     {key: 2, text:`This website is written in Javascript and CSS with some great packages. Some of the more popular ones 
     are react, react-router, and react-three-fiber. 

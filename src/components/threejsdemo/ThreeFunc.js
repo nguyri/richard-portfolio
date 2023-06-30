@@ -96,7 +96,7 @@ const ThreeFunc = (props) => {
         }
 
         animate();
-        return () => myRef.current.removeChild(renderer.domElement);
+        return () => myRef.current && myRef.current.removeChild(renderer.domElement);
     }, []);
 
     const loadThreeMF = (loader, modelData, list, modelShown, scene) => {
