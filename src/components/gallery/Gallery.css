@@ -78,9 +78,6 @@
     display: inline-block;
 }
 
-.gallery--slideshow{
-}
-
 .gallery--slideshow::-webkit-scrollbar {
     display: none;
 }
