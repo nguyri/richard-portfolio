@@ -216,10 +216,12 @@ let entries = [
     {key:nanoid(), subtitle: `Tutorials`},
     {key: nanoid(), html:<>
     Demo for inline context expansion. Here are some key concepts in react:
-    <ul><li><Expand name='Components can import modules they need and must export themselves at the bottom of their files.' 
-        hightlight='Components'
+    <ul style={{listStylePosition:"inside"}}>
+        <li><Expand name='Components are independent blocks of code that return HTML.' 
+        highlight='Components'
         content= 
-        {<span>An independent bit of code that returns HTML. A simple component looks like this: 
+        {<span> Components can import modules they need and export themselves at the bottom of their files. 
+            A simple component looks like this: 
             <CodeBlock language='jsx' text={
 `function MyComponent () {
     return (
@@ -230,14 +232,16 @@ let entries = [
         </span>}>
         </Expand> 
         </li>
-    <li>Component functions are named in <Expand name='PascalCase' 
+    <li><Expand name='Component functions are named in PascalCase' 
+    highlight='PascalCase'
     content= {
         <>PascalCase is a method of writing phrases with capital letters and without punctuation or spaces. 
         It is commonly used in programming and was popularized by the Pascal programming language. </>
     }></Expand></li>
-    <li>You can use JSX variables by <Expand name='putting them in curly braces' 
+    <li><Expand name='You can use JSX variables by putting them in curly braces' 
+    highlight = 'putting them in curly braces'
     content = {
-        <> A strength of React is that you can write plain Javascript. This is done by adding curly braces. 
+        <> A strength of React is that you can write plain Javascript inside HTML. This is done by adding curly braces. 
         <CodeBlock language='jsx' text = 
         {`function MyComponent (props) {
     return (

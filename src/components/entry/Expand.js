@@ -10,8 +10,7 @@ const Expand = (props) => {
 
     const formatName = (name, highlight) => {
         let index = name.indexOf(highlight);
-        console.log(index);
-        if( index > 0) {
+        if( index >= 0) {
             return ( <>
             {props.name.slice(0,index)}
             <a onClick={handleClick} className={'expand--anchor'}>{props.highlight}</a>
@@ -26,7 +25,7 @@ const Expand = (props) => {
     return (<>
     { showExpand ? 
         <div className='expand--block'><div><a onClick={handleClick} className={'expand--anchor'}>{props.name}</a> </div> {props.content} </div> :
-        <a onClick={handleClick} className={'expand--anchor'}>{formatName(props.name, props.highlight)}</a>
+        formatName(props.name, props.highlight)
     }
     </>);
 }
