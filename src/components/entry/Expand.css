@@ -1,11 +1,13 @@
 .expand--anchor {
-    color:cornflowerblue;
+    /* color:cornflowerblue; */
+    color:black;
     text-decoration: underline;
     cursor:pointer;
 }
 
 .expand--anchor:hover {
-    color:rgb(68, 105, 172);
+    /* color:rgb(68, 105, 172); */
+    color:grey;
 }
 
 .expand--block {

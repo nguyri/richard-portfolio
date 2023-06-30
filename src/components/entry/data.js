@@ -216,8 +216,10 @@ let entries = [
     {key:nanoid(), subtitle: `Tutorials`},
     {key: nanoid(), html:<>
     Demo for inline context expansion. Here are some key concepts in react:
-    <ul><li><Expand name='Components' 
-        content= {<span>An independent bit of code that returns HTML. A simple component looks like this: 
+    <ul><li><Expand name='Components can import modules they need and must export themselves at the bottom of their files.' 
+        hightlight='Components'
+        content= 
+        {<span>An independent bit of code that returns HTML. A simple component looks like this: 
             <CodeBlock language='jsx' text={
 `function MyComponent () {
     return (
@@ -225,12 +227,30 @@ let entries = [
             <h1> My first React App </h1>
         </div>
         )}`}/>
-        </span>}></Expand> can import modules they need and must export themselves at the bottom of their files.</li>
-    <li>Component functions are named in <Expand name='PascalCase' content= {
+        </span>}>
+        </Expand> 
+        </li>
+    <li>Component functions are named in <Expand name='PascalCase' 
+    content= {
         <>PascalCase is a method of writing phrases with capital letters and without punctuation or spaces. 
         It is commonly used in programming and was popularized by the Pascal programming language. </>
     }></Expand></li>
-    <li>You can use JS variables by putting them in curly braces</li>
+    <li>You can use JSX variables by <Expand name='putting them in curly braces' 
+    content = {
+        <> A strength of React is that you can write plain Javascript. This is done by adding curly braces. 
+        <CodeBlock language='jsx' text = 
+        {`function MyComponent (props) {
+    return (
+        <div className="my-component"> 
+            <h1> My first React Component </h1>
+            The value of my props is: {props.value}
+        </div>
+        )}`}
+        />
+        </>
+    }
+    >
+        </Expand></li>
     <li>Some JSX attributes are different to avoid name conflict. For example, class is called className</li>
     <li>Props are written like attributes, directly into the angle brackets and passed into components, often with the name (props) </li>
     </ul>
