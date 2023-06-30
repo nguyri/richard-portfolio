@@ -226,7 +226,10 @@ let entries = [
         </div>
         )}`}/>
         </span>}></Expand> can import modules they need and must export themselves at the bottom of their files.</li>
-    <li>Component functions are named in PascalCase</li>
+    <li>Component functions are named in <Expand name='PascalCase' content= {
+        <>PascalCase is a method of writing phrases with capital letters and without punctuation or spaces. 
+        It is commonly used in programming and was popularized by the Pascal programming language. </>
+    }></Expand></li>
     <li>You can use JS variables by putting them in curly braces</li>
     <li>Some JSX attributes are different to avoid name conflict. For example, class is called className</li>
     <li>Props are written like attributes, directly into the angle brackets and passed into components, often with the name (props) </li>

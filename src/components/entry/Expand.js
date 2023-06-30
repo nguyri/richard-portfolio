@@ -8,8 +8,10 @@ const Expand = (props) => {
         setShowExpand(!showExpand);
     }
     return (<>
-    { <div><a onClick={handleClick} className={'expand--anchor'}>{props.name}</a></div> }
-    { showExpand && props.content }
+    { showExpand ? 
+        <div className='expand--block'><div><a onClick={handleClick} className={'expand--anchor'}>{props.name}</a> </div> {props.content} </div> :
+        <a onClick={handleClick} className={'expand--anchor'}>{props.name}</a>
+    }
     </>);
 }
 
