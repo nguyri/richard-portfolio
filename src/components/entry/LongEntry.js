@@ -1,5 +1,5 @@
 import React from "react"
-import { Container, Button, Alert } from 'react-bootstrap';
+// import { Container, Button, Alert } from 'react-bootstrap';
 import { CSSTransition } from 'react-transition-group';
 import "./Entry.css"
 import ReactPlayer from 'react-player/lazy'

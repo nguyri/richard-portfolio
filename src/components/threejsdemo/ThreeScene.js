@@ -9,7 +9,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import Slider, { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import modelData from './modelData'
-import Button from 'react-bootstrap/Button'
+// import Button from 'react-bootstrap/Button'
 import './ThreeScene.css'
 import MediaQuery from 'react-responsive'
 
@@ -167,10 +167,10 @@ export default class ThreeScene extends Component {
           <Slider onChange={this.setTranslation} min={1} max={30} />
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <Button variant="primary" size='lg' className={'threescene--button'} onClick={() =>
-            this.state.modelShown > 0 && this.changeModelShown(this.state.modelShown - 1)}>Prev</Button> {' '}
-          <Button variant="primary" size='lg' className={'threescene--button'} onClick={() =>
-            this.state.modelShown < this.modelList.length - 1 && this.changeModelShown(this.state.modelShown + 1)}>Next Model</Button>
+          <button variant="primary" size='lg' className={'threescene--button'} onClick={() =>
+            this.state.modelShown > 0 && this.changeModelShown(this.state.modelShown - 1)}>Prev</button> {' '}
+          <button variant="primary" size='lg' className={'threescene--button'} onClick={() =>
+            this.state.modelShown < this.modelList.length - 1 && this.changeModelShown(this.state.modelShown + 1)}>Next Model</button>
         </div>
         <MediaQuery minWidth={1224} >
           {(matches) => 

@@ -23,8 +23,19 @@
 .threescene--button {
     margin:5px 5px;
     padding:8px 8px;
-    font-size:1.5 rem;
+    font-size:2.0 rem;
+    color:white;
+    background-color:rgb(29, 136, 244);
+    border-radius: 10px;
+    border:none;
 }
+.threescene--button:hover {
+    background-color:rgb(26, 110, 193);
+}
+/* .threescene--button:after {
+    border-color:rgb(112, 177, 241);
+    border:10px;
+} */
 
 .threescene--slider-div {
     display: flex;

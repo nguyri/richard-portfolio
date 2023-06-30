@@ -9,7 +9,7 @@ import Header from "./components/header/Header"
 import img from "./imgs/assiniboine.jpg"
 
 import { Outlet, Link, useNavigate } from "react-router-dom";
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+// import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Favicon from "react-favicon";
 import {getImage} from './components/entry/data';
 

@@ -10,7 +10,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import Slider, { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import modelData from './modelData'
-import Button from 'react-bootstrap/Button'
+// import Button from 'react-bootstrap/Button'
 import './ThreeScene.css'
 import MediaQuery from 'react-responsive'
 
@@ -34,6 +34,7 @@ const ThreeFunc = (props) => {
     let [scene, setScene] = React.useState(new THREE.Scene());
     let myRef = React.useRef();
     let [camera, setCamera] = React.useState(); 
+    let [material] = React.useState(new THREE.MeshPhongMaterial({ flatShading: 'false', color: new THREE.Color(0xafafaf) }))
     let controls;
 
     React.useEffect(() => {
@@ -108,7 +109,6 @@ const ThreeFunc = (props) => {
               loadedGroup[index]=(object3mf);
               object3mf.position.set(...modelGroup.positions[index]);
               object3mf.rotation.set(...modelGroup.rotations[index]);
-              const material = new THREE.MeshPhongMaterial({ flatShading: 'false', color: new THREE.Color(0xafafaf) });
               object3mf.children[0].children[0].material = material;
               if (modelIndex == modelShown) {
                 scene.add(object3mf);
@@ -155,10 +155,10 @@ const ThreeFunc = (props) => {
           <Slider onChange={setTranslation} min={1} max={30} />
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <Button variant="primary" size='lg' className={'threescene--button'} onClick={() =>
-            modelShown > 0 && changeModelShown(modelShown - 1)}>Prev</Button> {' '}
-          <Button variant="primary" size='lg' className={'threescene--button'} onClick={() => 
-            modelShown < modelList.length - 1 && changeModelShown(modelShown + 1)}>Next Model</Button>
+          <button className={'threescene--button'} onClick={() =>
+            modelShown > 0 && changeModelShown(modelShown - 1)}>Prev</button> {' '}
+          <button className={'threescene--button'} onClick={() => 
+            modelShown < modelList.length - 1 && changeModelShown(modelShown + 1)}>Next Model</button>
         </div>
         <MediaQuery minWidth={1224} >
           {(matches) => 

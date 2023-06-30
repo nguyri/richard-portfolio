@@ -109,7 +109,6 @@ let entries = [
     reactDescription: {html:<div>A computer graphics classic: <b>raytracing</b>,  and a few <b>three.js</b> demos </div>},
     longdescription: [
     {key: 'graphics', title:`Graphics`},
-    {key:nanoid(), component: <ThreeFunc style={{width:"40vw"}} zoom={4.0} key={nanoid()}/>},
     {key:nanoid(), text:`I've always had an interest in graphics and shaders. I quite like visual thinking and
     the beauty of graphics is apparent even without in-depth knowledge.`},
     {key: 'raytracer', title:`Raytracer`},
@@ -135,7 +134,7 @@ let entries = [
     I grew up in the era of flash websites so it's pretty satisfying seeing the mathematically perfect graphics that you can do with three.js.`},
     {key:'assembly-viewer', subtitle:`Assembly Viewer`},
     {key: 7, text:`A few models I've drawn up in Fusion360. Slider for exploded-view. Click and drag to pan! `},
-    {key:nanoid(), component: <ThreeScene style={{width:"40vw"}} zoom={4.0} key={nanoid()}/>},
+    {key:nanoid(), component: <ThreeFunc style={{width:"40vw"}} zoom={4.0} key={nanoid()}/>},
     {key:'waves', subtitle:`Waves`},
     {key:nanoid(), text: `A little waves demo. The vertex shader moves the points of the plane into a 
     wavey shape, while a stepped color function gives different blues in the fragment shader.`},
