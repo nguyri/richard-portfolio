@@ -54,6 +54,7 @@
     "react-router-dom": "^6.4.1",
     "react-transition-group": "^4.4.5",
     "three": "^0.145.0",
+    "transition-hook": "^1.5.2",
     "url-loader": "^4.1.1",
     "use-image": "^1.1.0",
     "use-react-router-breadcrumbs": "^4.0.0",

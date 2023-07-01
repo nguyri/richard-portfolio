@@ -1,8 +1,10 @@
 import React from 'react'
+import {useTransition} from 'transition-hook'
 import './Expand.css'
 
 const Expand = (props) => {
     const [showExpand, setShowExpand] = React.useState(0);
+    const {stage, shouldMount} = useTransition(showExpand, 300);
 
     const handleClick = () => {
         setShowExpand(!showExpand);
@@ -24,7 +26,11 @@ const Expand = (props) => {
 
     return (<div>
     {props.list ? <li>{formatName(props.name, props.highlight)}</li> : formatName(props.name, props.highlight)}
-    {showExpand ? <div className='expand--block'>{props.content} </div> : <></>}
+    {shouldMount ? <div className='expand--block' 
+        style={{transition: '.3s', 
+            opacity: stage === 'enter' ? 1 : 0,
+            transform: stage === 'enter' ? 'unset' : 'translateY(-10px) scale(1)', }
+            }>{props.content}  </div> : <></>}
     </div>);
 }
 

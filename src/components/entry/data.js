@@ -218,8 +218,7 @@ let entries = [
     Demo for inline context expansion. Here are some key concepts in react:
     <ul style={{listStylePosition:"inside"}}>
         <Expand name='Components are independent blocks of code that return HTML.' 
-        highlight='Components'
-        list = {true}
+        highlight='Components' list = {true}
         content= 
         {<> Components can import modules they need and export themselves at the bottom of their files. 
             A simple component looks like this: 
@@ -233,16 +232,15 @@ let entries = [
         </>}>
         </Expand> 
     <Expand name='Component functions are named in PascalCase' 
-    highlight='PascalCase'
+    highlight='PascalCase' list={true}
     content= {
         <>A phrase written in capital letters, without punctuation or spaces </>
     }></Expand>
     <Expand name='You can use JSX variables by putting them in curly braces' 
-    highlight = 'putting them in curly braces'
-    list = {true}
+    highlight = 'putting them in curly braces' list = {true}
     content = {
         <> A strength of React is that you can write plain Javascript inside HTML. This is done by adding curly braces. 
-        <CodeBlock language='jsx' text = 
+        <CodeBlock language='jsx' highlight={"5"} text = 
         {`function MyComponent (props) {
     return (
         <div className="my-component"> 
@@ -259,7 +257,7 @@ let entries = [
     highlight='name conflict'
     list = {true}
     content= {
-        <>A phrase written in capital letters, without punctuation or spaces </>
+        <>For example, setting a CSS class uses the keyword className: <Code>{`<MyComponent className="my-component-style">`}</Code> </>
     }></Expand>
     <li>Props are written like attributes, directly into the angle brackets and passed into components, often with the name (props) </li>
     </ul>
