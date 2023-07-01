@@ -24,8 +24,8 @@ const Expand = (props) => {
 
     return (<>
     { showExpand ? 
-        <div className='expand--block'><div><a onClick={handleClick} className={'expand--anchor'}>{props.name}</a> </div> {props.content} </div> :
-        formatName(props.name, props.highlight)
+        <><li>{formatName(props.name, props.highlight)}</li><div className='expand--block'>{props.content} </div></> :
+        <li>{formatName(props.name, props.highlight)}</li>
     }
     </>);
 }

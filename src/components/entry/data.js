@@ -217,10 +217,10 @@ let entries = [
     {key: nanoid(), html:<>
     Demo for inline context expansion. Here are some key concepts in react:
     <ul style={{listStylePosition:"inside"}}>
-        <li><Expand name='Components are independent blocks of code that return HTML.' 
+        <Expand name='Components are independent blocks of code that return HTML.' 
         highlight='Components'
         content= 
-        {<span> Components can import modules they need and export themselves at the bottom of their files. 
+        {<> Components can import modules they need and export themselves at the bottom of their files. 
             A simple component looks like this: 
             <CodeBlock language='jsx' text={
 `function MyComponent () {
@@ -229,16 +229,14 @@ let entries = [
             <h1> My first React App </h1>
         </div>
         )}`}/>
-        </span>}>
+        </>}>
         </Expand> 
-        </li>
-    <li><Expand name='Component functions are named in PascalCase' 
+    <Expand name='Component functions are named in PascalCase' 
     highlight='PascalCase'
     content= {
-        <>PascalCase is a method of writing phrases with capital letters and without punctuation or spaces. 
-        It is commonly used in programming and was popularized by the Pascal programming language. </>
-    }></Expand></li>
-    <li><Expand name='You can use JSX variables by putting them in curly braces' 
+        <>A phrase written in capital letters, without punctuation or spaces </>
+    }></Expand>
+    <Expand name='You can use JSX variables by putting them in curly braces' 
     highlight = 'putting them in curly braces'
     content = {
         <> A strength of React is that you can write plain Javascript inside HTML. This is done by adding curly braces. 
@@ -254,8 +252,12 @@ let entries = [
         </>
     }
     >
-        </Expand></li>
-    <li>Some JSX attributes are different to avoid name conflict. For example, class is called className</li>
+    </Expand>
+    <Expand name='Some JSX attributes are different to avoid name conflict' 
+    highlight='name conflict'
+    content= {
+        <>A phrase written in capital letters, without punctuation or spaces </>
+    }></Expand>
     <li>Props are written like attributes, directly into the angle brackets and passed into components, often with the name (props) </li>
     </ul>
     </>},
