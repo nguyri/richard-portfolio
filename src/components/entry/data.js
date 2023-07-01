@@ -219,6 +219,7 @@ let entries = [
     <ul style={{listStylePosition:"inside"}}>
         <Expand name='Components are independent blocks of code that return HTML.' 
         highlight='Components'
+        list = {true}
         content= 
         {<> Components can import modules they need and export themselves at the bottom of their files. 
             A simple component looks like this: 
@@ -238,6 +239,7 @@ let entries = [
     }></Expand>
     <Expand name='You can use JSX variables by putting them in curly braces' 
     highlight = 'putting them in curly braces'
+    list = {true}
     content = {
         <> A strength of React is that you can write plain Javascript inside HTML. This is done by adding curly braces. 
         <CodeBlock language='jsx' text = 
@@ -255,6 +257,7 @@ let entries = [
     </Expand>
     <Expand name='Some JSX attributes are different to avoid name conflict' 
     highlight='name conflict'
+    list = {true}
     content= {
         <>A phrase written in capital letters, without punctuation or spaces </>
     }></Expand>

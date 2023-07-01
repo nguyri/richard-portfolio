@@ -22,12 +22,10 @@ const Expand = (props) => {
         }
     }
 
-    return (<>
-    { showExpand ? 
-        <><li>{formatName(props.name, props.highlight)}</li><div className='expand--block'>{props.content} </div></> :
-        <li>{formatName(props.name, props.highlight)}</li>
-    }
-    </>);
+    return (<div>
+    {props.list ? <li>{formatName(props.name, props.highlight)}</li> : formatName(props.name, props.highlight)}
+    {showExpand ? <div className='expand--block'>{props.content} </div> : <></>}
+    </div>);
 }
 
 export default Expand;
