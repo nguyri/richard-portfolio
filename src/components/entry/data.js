@@ -213,9 +213,11 @@ let entries = [
     and a <b>wordle</b> demo</div>},
     longdescription: [
     {key:'wordle', title:`Wordle`},
-    {key:nanoid(), subtitle: `Tutorials`},
+    {key:nanoid(), title: `React`},
+    {key:nanoid(), html: <> React is a JavaScript library for creating user interfaces. It is made up of <b>components</b> manage their own data, called <b>state</b>. 
+    State can be given to child components to make them <b>react</b>. Components are modular and can be reused. </>},
+    {key:nanoid(), subtitle: `Basics`},
     {key: nanoid(), html:<>
-    Demo for inline context expansion. Here are some key concepts in react:
     <ul style={{listStylePosition:"inside"}}>
         <Expand name='Components are independent blocks of code that return HTML.' 
         highlight='Components' list = {true}
@@ -259,11 +261,84 @@ let entries = [
     content= {
         <>For example, setting a CSS class uses the keyword className: <Code>{`<MyComponent className="my-component-style">`}</Code> </>
     }></Expand>
-    <li>Props are written like attributes, directly into the angle brackets and passed into components, often with the name (props) </li>
+    <Expand name='Props are written like attributes, directly into the angle brackets and passed into components, often with the name (props)'
+    highlight='the name (props)'
+    list = {true}
+    content= {
+        <>Give a prop to a component by writing <Code>{`<MyComponent myProp={myPropValue}>`}</Code>. Inside MyComponent it can be used as 
+        <CodeBlock language='jsx' text = {
+`const MyComponent = (props) => {
+    return (
+        <h1> My prop value is: {props.myPropValue} </h1>
+    )}`}></CodeBlock> </>
+    }></Expand>
+    <Expand name='Some JSX attributes are different to avoid name conflict' 
+    highlight='name conflict'
+    list = {true}
+    content= {
+        <>For example, setting a CSS class uses the keyword className: <Code>{`<MyComponent className="my-component-style">`}</Code> </>
+    }></Expand>
+    <Expand name='Events are written directly into the elements with JSX'
+    highlight='Events'
+    list = {true}
+    content= {
+        <>Instead of finding a DOM node, then attaching listeners, React allows you to directly attach a callback function to an event
+         <Code>{`<MyComponent myProp={myPropValue}>`}</Code>. Inside MyComponent it can be used as 
+        <CodeBlock language='jsx' text = {
+`const MyComponent = (props) => {
+    return (
+        <h1> My prop value is: {props.myPropValue} </h1>
+    )}`}></CodeBlock> </>
+    }></Expand>
+    <Expand name='State defines some data that will be tracked. When the state changes the elements tracking it will automatically update.'
+    highlight='State'
+    list = {true}
+    content= {
+        <>Give a prop to a component by writing <Code>{`<MyComponent myProp={myPropValue}>`}</Code>. Inside MyComponent it can be used as 
+        <CodeBlock language='jsx' text = {
+`const MyComponent = (props) => {
+    return (
+        <h1> My prop value is: {props.myPropValue} </h1>
+    )}`}></CodeBlock> </>
+    }></Expand>
+    <Expand name='To synchronize two states, useEffect will make an effect occur after a state changes.'
+    highlight='useEffect'
+    list = {true}
+    content= {
+        <>Give a prop to a component by writing <Code>{`<MyComponent myProp={myPropValue}>`}</Code>. Inside MyComponent it can be used as 
+        <CodeBlock language='jsx' text = {
+`const MyComponent = (props) => {
+    return (
+        <h1> My prop value is: {props.myPropValue} </h1>
+    )}`}></CodeBlock> </>
+    }></Expand>
+    <Expand name='You can avoid DOM queries for the most part. If you need need access to the element, useRef provides a reference.'
+    highlight='useRef'
+    list = {true}
+    content= {
+        <>Give a prop to a component by writing <Code>{`<MyComponent myProp={myPropValue}>`}</Code>. Inside MyComponent it can be used as 
+        <CodeBlock language='jsx' text = {
+`const MyComponent = (props) => {
+    return (
+        <h1> My prop value is: {props.myPropValue} </h1>
+    )}`}></CodeBlock> </>
+    }></Expand>
     </ul>
     </>},
-    {key: 1, html:<>React is great at making easy to work with components 
-    and adds a virtual DOM that can make your webpages <i><b>react</b></i> to user inputs. </>},
+    {key:nanoid(), subtitle: `Patterns`},
+    {key: nanoid(), html:<> <b>Showing or hiding a component</b> is often done with the ? or && operators. Picking between two options, 
+    the ternary operator is used, while picking whether to show or hide can be done with &&. Otherwise known as <b>conditional rendering</b> </>},
+    {key: nanoid(), html:<> While traditional CSS inline styles are generally bad style, because of the ability to use props and state 
+    <b> react inline styles are excellent. </b>Add a style = css attributes prop to assign an inline style.  </>},
+    {key: nanoid(), html: <> <b>Fragments</b>, using <Code>{`<React.Fragment>, or preferably <> </>`}</Code> combine multiple html objects into a single returnable 
+    element. It is sometimes preferable to a div because it populates with no wrapper element. </> },
+    {key: nanoid(), html: <> <b>Array map </b> is a powerful but easy to read method to turn a list of data into Components.  
+    <Code>{`Array.map((elem) => {<Component data=elem/>})`}</Code> </>},
+    {key: nanoid(), html: <> <b>Spread syntax</b> is useful when passing props to children. If <Code>{`Array.map((elem) => {<Component props=elem/>})`}</Code> 
+    were used, props would appear as <Code>{`props.props.data`}</Code> in the child. <Code>{`<Component ...data)`}</Code> Spreading can be read as <Code>{`<Component data1=1 data2=2 data3=3)`}</Code>  
+    Spreading the data keeps the props pattern organized even with many children. </>},
+
+
     {key: 3, wordle: true},
     {key: 2, text:`This website is written in Javascript and CSS with some great packages. Some of the more popular ones 
     are react, react-router, and react-three-fiber. 
