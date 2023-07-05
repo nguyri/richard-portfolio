@@ -213,10 +213,9 @@ let entries = [
     and a <b>wordle</b> demo</div>},
     longdescription: [
     {key:'wordle', title:`Wordle`},
-    {key:nanoid(), title: `React`},
     {key:nanoid(), html: <> React is a JavaScript library for creating user interfaces. It is made up of <b>components</b> manage their own data, called <b>state</b>. 
     State can be given to child components to make them <b>react</b>. Components are modular and can be reused. </>},
-    {key:nanoid(), subtitle: `Basics`},
+    {key:nanoid(), title: `React Basics`},
     {key: nanoid(), html:<>
     <ul style={{listStylePosition:"inside"}}>
         <Expand name='Components are independent blocks of code that return HTML.' 
@@ -325,18 +324,26 @@ let entries = [
     }></Expand>
     </ul>
     </>},
-    {key:nanoid(), subtitle: `Patterns`},
+    {key:nanoid(), title: `React Patterns`},
+    {key:nanoid(), subtitle: `Conditional Rendering`},
     {key: nanoid(), html:<> <b>Showing or hiding a component</b> is often done with the ? or && operators. Picking between two options, 
     the ternary operator is used, while picking whether to show or hide can be done with &&. Otherwise known as <b>conditional rendering</b> </>},
+    {key:nanoid(), subtitle: `Inline styles`},
     {key: nanoid(), html:<> While traditional CSS inline styles are generally bad style, because of the ability to use props and state 
     <b> react inline styles are excellent. </b>Add a style = css attributes prop to assign an inline style.  </>},
+    {key:nanoid(), subtitle: `Fragments`},
     {key: nanoid(), html: <> <b>Fragments</b>, using <Code>{`<React.Fragment>, or preferably <> </>`}</Code> combine multiple html objects into a single returnable 
     element. It is sometimes preferable to a div because it populates with no wrapper element. </> },
+    {key:nanoid(), subtitle: `Array map`},
     {key: nanoid(), html: <> <b>Array map </b> is a powerful but easy to read method to turn a list of data into Components.  
     <Code>{`Array.map((elem) => {<Component data=elem/>})`}</Code> </>},
+    {key:nanoid(), subtitle: `Spread syntax`},
     {key: nanoid(), html: <> <b>Spread syntax</b> is useful when passing props to children. If <Code>{`Array.map((elem) => {<Component props=elem/>})`}</Code> 
     were used, props would appear as <Code>{`props.props.data`}</Code> in the child. <Code>{`<Component ...data)`}</Code> Spreading can be read as <Code>{`<Component data1=1 data2=2 data3=3)`}</Code>  
     Spreading the data keeps the props pattern organized even with many children. </>},
+    {key:nanoid(), subtitle: `Class to Functional`},
+    {key: nanoid(), html: <> Around React 14 components had to extend the class component. Nowadays functional components 
+    are the recommended style due to optimization, and I find them easier to read.<b> Converting class to functional</b> components takes some time but can be done.</>},
 
 
     {key: 3, wordle: true},
