@@ -50,7 +50,6 @@ const ThreeFunc = (props) => {
 
         setCamera(cameraInit);
     
-        console.log(camera);
         // this.camera = new THREE.PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 1, 500 );
     
         let pointLight = new THREE.PointLight(0xffffff, 0.6);

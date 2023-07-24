@@ -25,14 +25,14 @@ export default function AboutCard() {
             </header>        
             <header className="about">
                 <h1 className="content--header"> About </h1>
-                <p className="content--text"> Hello, I'm a software developer and electrical engineer. 
-                I try to learn new things all the time! </p>
+                <p className="content--text"> A software developer and electrical engineer. 
+                Interested in combining machine precision with human ingenuity.</p>
             </header>
             <header className="interests">
                 <h1 className="content--header"> Interests </h1>
-                <p className="content--text"> I'm interested in CNC machining, 3D algorithms, and automation. 
-                 I'm working on more on web development lately. In the past I've done algorithmic modelling in 
-                 Grasshopper, user interfaces in python, and game development in C#. 
+                <p className="content--text"> More recently web development and machine learning. 
+                In the past, CNC machining, 3D algorithms, and automation. I've done algorithmic machining in 
+                 Grasshopper, user interfaces in python, C# mobile apps and embedded C. 
                   </p>
             </header>
             {/* <header className="interests">

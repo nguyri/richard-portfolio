@@ -18,7 +18,7 @@ module.exports = merge(common, {
     historyApiFallback: true,
   },
   plugins: [
-    new BundleAnalyzerPlugin()
+    // new BundleAnalyzerPlugin()
   ]
   // plugins: [new webpack.HotModuleReplacementPlugin()]
 });

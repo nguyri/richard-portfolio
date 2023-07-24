@@ -126,10 +126,10 @@ let entries = [
     {key:9, img:'rt2', style: {gridColumn:"span 5",gridRow:"span 5"}, className:"entry--img-inline", imageName:'./raytracer2.jpg'},
     {key:'metals-and-dielectrics', subtitle: 'Metals and Dielectrics'},
     {key: nanoid(), text:`By the final chapter you've added metals, which reflect incoming light at the same angle, and dielectrics, which refract the light 
-    according to Snell's Law. As mentioned in the book, it can get pretty difficult to tell when there are bugs since you 
-    don't really encounter many glass orbs in day-to-day life. `},
-    {key: nanoid(), text:`The shader is for educational purposes after all and it takes
-    an excruciating amount of time to render a high-resolution image pixel by pixel, literally outputting a list of pixel colors. Pretty satisfying end result!`},
+    according to Snell's Law. As mentioned in the book, it is pretty difficult to tell when there are bugs since you 
+    don't encounter many glass orbs in day-to-day life. `},
+    {key: nanoid(), text:`The shader takes an excruciating amount of time to render a high-resolution image pixel by pixel, literally outputting a text file with each pixel color. 
+    However, as an educational project the end result is quite satisfying.`},
     {key:10, img:'rt1', style: {gridColumn:"span 5",gridRow:"span 5", paddingBottom:'20px'}, className:"entry--img-inline", imageName:'./raytracer1.jpg', },
     {key: 'threejs', title:`Three JS`},
     {key: 3, text:`There are a lot of neat WebGL/OpenGL demos online and I wanted to give it a shot. I got started with three.js and react-three-fiber.
@@ -158,9 +158,9 @@ let entries = [
     It prints onto a custom machined drum rather than a flat bed. </div>},
     longdescription: [
     {key:'additivelathe', title:'Additive Lathe'},
-    {key: 1, text:`Our capstone engineering project. This multidisciplinary project modifies Cura to generate gcode. It prints onto a custom machined drum rather than a flat bed.`},
-    {key: 16, vimeo:'https://vimeo.com/692393001', style: {}},
-    {key: 3, text:`I designed the cylindrical slicer and also integrated it into a popular open source slicer, Cura. 
+    {key: nanoid(), text:`Our capstone engineering project. This multidisciplinary project modifies Cura to generate gcode. It prints onto a custom machined drum rather than a flat bed.`},
+    {key: nanoid(), vimeo:'https://vimeo.com/692393001', style: {}},
+    {key: nanoid(), text:`I designed the cylindrical slicer and also integrated it into a popular open source slicer, Cura. 
     I also rewrote part of the display shader to display print previews with cylindrical layers.`, style: {gridRow:"span 5"}},
     {key: 'slicer-modifications', subtitle:'Slicer Modifications'},
     {key: nanoid(), text:`The goal of the slicer is to create toolpaths that recreate the 3D model in cylindrical coordinates.
@@ -193,10 +193,10 @@ let entries = [
     {key:nanoid(), img:'test img', style: {gridColumn:"span 5", marginBottom: "30px", height:"300px"}, className:"entry--img-inline", imageName:'./addlathe5.png'},
     {key:nanoid(), text:`The frame is paired with a Duet 2 control board, which has an excellent user interface, ethernet 
     connection, and dual extruder outputs.`,},
-    {key:5, img:'test img', style: {gridColumn:"span 5", marginBottom: "30px", height:"300px"}, className:"entry--img-inline", imageName:'./addlathe2.jpg'},
-    {key: 2, text:`The project won first place in the 2019 Schulich School of Engineering Capstone Fair as well as 2019 CSME National Design Competition Best Overall Design.`, style: {gridRow:"span 5"}},
+    {key:nanoid(), img:'test img', style: {gridColumn:"span 5", marginBottom: "30px", height:"300px"}, className:"entry--img-inline", imageName:'./addlathe2.jpg'},
+    {key: nanoid(), text:`The project won first place in the 2019 Schulich School of Engineering Capstone Fair as well as 2019 CSME National Design Competition Best Overall Design.`, style: {gridRow:"span 5"}},
     {key: 'poster', title:'Poster'},
-    {key:5, img:'test img', style: {gridColumn:"span 5", marginBottom: "30px", height:"440px"}, className:"entry--img-inline", imageName:'./addlathe4.jpg'},
+    {key:nanoid(), img:'test img', style: {gridColumn:"span 5", marginBottom: "30px", height:"440px"}, className:"entry--img-inline", imageName:'./addlathe4.jpg'},
 
     ],
     imageName:'./addlathe1.jpg',
@@ -213,6 +213,8 @@ let entries = [
     and a <b>wordle</b> demo</div>},
     longdescription: [
     {key:'wordle', title:`Wordle`},
+    {key: nanoid(), text:`A wordle demo written with React in 150 lines`},
+    {key: nanoid(), wordle: true},
     {key:nanoid(), html: <> React is a JavaScript library for creating user interfaces. It is made up of <b>components</b> manage their own data, called <b>state</b>. 
     State can be given to child components to make them <b>react</b>. Components are modular and can be reused. </>},
     {key:nanoid(), title: `React Basics`},
@@ -324,7 +326,7 @@ let entries = [
     }></Expand>
     </ul>
     </>},
-    {key:nanoid(), title: `React Patterns`},
+    {key:nanoid(), title: `React Concepts`},
     {key:nanoid(), subtitle: `Conditional Rendering`},
     {key: nanoid(), html:<> <b>Showing or hiding a component</b> is often done with the ? or && operators. Picking between two options, 
     the ternary operator is used, while picking whether to show or hide can be done with &&. Otherwise known as <b>conditional rendering</b> </>},
@@ -344,9 +346,6 @@ let entries = [
     {key:nanoid(), subtitle: `Class to Functional`},
     {key: nanoid(), html: <> Around React 14 components had to extend the class component. Nowadays functional components 
     are the recommended style due to optimization, and I find them easier to read.<b> Converting class to functional</b> components takes some time but can be done.</>},
-
-
-    {key: 3, wordle: true},
     {key: 2, text:`This website is written in Javascript and CSS with some great packages. Some of the more popular ones 
     are react, react-router, and react-three-fiber. 
     On the backend it's built with babel and webpack. Deployment is an nginx server running on an arch VPS.`},
@@ -389,7 +388,7 @@ let entries = [
     description: "Wood is great for making furniture and other objects that need a less industrial feel.",
     longdescription: [
     {key:'woodshop', title:`Woodshop`},
-    {key: 1, text:`I’ve been using wood tools for a very long time. 
+    {key: nanoid(), text:`I’ve been using wood tools for a very long time. 
     I started off rather bad at making stuff out of wood, but everyone has to start somewhere. It is an approachable and easily available medium for many people. The only downside is the risk of harm from tooling.`},
     {key: 'safety', subtitle:`Safety`},
     {key:nanoid(), text:`Making things out of wood requires a healthy fear of wood tooling. Wood tools move faster and store more energy than (equivalently sized) metal ones due to the higher RPM needed to sever wood fibers. The chisel is razor sharp and is often improperly controlled.`},
@@ -408,10 +407,10 @@ let entries = [
     <ul><li>
     If you try to stick an 8 foot piece of wood into your 12.5" planer you
     will probably knock something important over.</li>
-    <li>For bowed pieces, it will also reduce the amount of relative bowing from end to end. A heavily bowed 8' piece of wood might be so bowed that there really is no 'flat wood' inside of there. Reduce it to 2 feet and you'll have to do only a quarter of the flattening.</li>
+    <li>For bowed pieces, it will also reduce the amount of relative bowing from end to end. A heavily bowed 8' piece of wood might be so bowed that there is no 'flat wood' inside of there. Reduce it to 2 feet and you'll have to do only a quarter of the flattening.</li>
     </ul>
     </div>},
-    {key:7, text:`Final size is often subjective. Wood furniture is usually static or only needs simple holes for metal fasteners. Most of the time I cut wood to the width of another piece of wood, without any special care to the exact size. Wood also bends and warps over time. `},
+    {key:nanoid(), text:`Final size is often subjective. Wood furniture is usually static or only needs simple holes for metal fasteners. Most of the time I cut wood to the width of another piece of wood, without any special care to the exact size. Wood also bends and warps over time. `},
     {key: 'tricks', title:`Common Tricks`},
     {key: 'shims', subtitle:`Shimming`},
     {key:nanoid(), text:`If you know nothing about carpentery you will still know to measure twice and cut once. This introduces more sources of error than necessary, in some cases. `},
@@ -420,19 +419,19 @@ let entries = [
     {key: 'touch', subtitle:`Touch`},
     {key:nanoid(), text:`When cutting two pieces to the same size on a mitre saw, it's probably best to use an endstop. But without an endstop, your fingers can feel a bump less than a micron high. Line up your pieces until they are flush to the touch and they certainly be good enough for any wood application.`},
     {key: 'mitresled', subtitle:`Mitre Sled`},
-    {key:7, img:'test img', style: {gridColumn:"1 / span 2", gridRow:"span 2",  marginBlock:"20px", height:'40vh'}, className:"entry--img-inline", imageName:'./wood3.jpg' },
-    {key:nanoid(), text:`If the cuts need to be slightly more acute or obtuse from there the bolted fences can be adjusted or replaced easily. Sandpaper on the faces makes sure the pieces do not slip while cutting. `, style: {gridColumn:"span 3"}},
+    {key:nanoid(), img:'test img', style: {gridColumn:"1 / span 2", gridRow:"span 2",  marginBlock:"20px", height:'40vh'}, className:"entry--img-inline", imageName:'./wood3.jpg' },
     {key:nanoid(), text:`By far the most used sled that I have made. Once you use angles that are not 0 or 90 you invite disorder into your workshop. In most cases, the exact angle of the mitre is less important than adding up to 90. This makes calibrating the mitre sled easy. Approximate 45 degrees on one side before using your best square to precisely line up the other. `, style: {gridColumn:"span 3"}},
+    {key:nanoid(), text:`If the cuts need to be slightly more acute or obtuse from there the bolted fences can be adjusted or replaced easily. Sandpaper on the faces makes sure the pieces do not slip while cutting. `, style: {gridColumn:"span 3"}},
     
     {key: 'chessboard', title:`Chessboard`},
-    {key:5, img:'test img', style: {gridColumn:"span 2", gridRow:"span 4", marginBottom:"20px",}, className:"entry--img-inline", imageName: './wood2.jpg'},
-    {key:4, text:`I decided to do this chessboard out of red oak and black walnut and I was quite pleased with it. It was a good project to make use 
+    {key:nanoid(), img:'test img', style: {gridColumn:"span 2", gridRow:"span 4", marginBottom:"20px",}, className:"entry--img-inline", imageName: './wood2.jpg'},
+    {key:nanoid(), text:`I decided to do this chessboard out of red oak and black walnut and I was quite pleased with it. It was a good project to make use 
     of the planer and jointer that I recently got at the time of writing. `, style: {gridColumn:"span 3"}},
     {key:nanoid(), text:`The primary difficulty is getting a neat and seamless finish to the chessboard squares. However, the jointer and planer are designed exactly for this problem. Getting the hinges to align comparatively was a struggle because some creative tooling was required.`, style: {gridColumn:"span 3"}},
     
-    {key:8, img:'test img', style: {gridColumn:"span 3",  marginBlock:"20px", height:'40vh'}, className:"entry--img-inline", imageName:'./wood1.jpg' },
-    {key:9, img:'test img', style: {gridColumn:"1 /span 2",  marginBottom:"20px", height:'40vh'}, className:"entry--img-inline", imageName:'./wood5.jpg' },
-    {key:10, img:'test img', style: {gridColumn:"span 3",  marginBottom:"20px", height:'40vh'}, className:"entry--img-inline", imageName:'./wood9.jpg' },
+    {key:nanoid(), img:'test img', style: {gridColumn:"span 3",  marginBlock:"20px", height:'40vh'}, className:"entry--img-inline", imageName:'./wood1.jpg' },
+    {key:nanoid(), img:'test img', style: {gridColumn:"1 /span 2",  marginBottom:"20px", height:'40vh'}, className:"entry--img-inline", imageName:'./wood5.jpg' },
+    {key:nanoid(), img:'test img', style: {gridColumn:"span 3",  marginBottom:"20px", height:'40vh'}, className:"entry--img-inline", imageName:'./wood9.jpg' },
     ],
     imageName:'./wood10.jpg',
     imageStyle:{style: {objectPosition:'right 0 bottom 200px'}}
@@ -441,7 +440,7 @@ let entries = [
     num:7,
     title: "Digital Art",
     link: "digitalart",
-    description:`"I have learned that what I have not drawn I have never really seen, and that when I start drawing an ordinary thing, I realize how extraordinary it is, sheer miracle."`,
+    description:`I think drawing really helps your observation and communication skills. "I have learned that what I have not drawn I have never really seen"`,
     longdescription: [
     {key:'digitalart', title:`Digital Art`},
     {key: 'blendingmodes', title:`Blending Modes`},
