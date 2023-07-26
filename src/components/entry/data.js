@@ -220,20 +220,20 @@ let entries = [
     {key:nanoid(), title: `React Basics`},
     {key: nanoid(), html:<>
     <ul style={{listStylePosition:"inside"}}>
-        <Expand name='Components are independent blocks of code that return HTML.' 
-        highlight='Components' list = {true}
-        content= 
-        {<> Components can import modules they need and export themselves at the bottom of their files. 
-            A simple component looks like this: 
-            <CodeBlock language='jsx' text={
-`function MyComponent () {
+    <Expand name='Components are independent blocks of code that return HTML.' 
+    highlight='Components' list = {true}
+    content= 
+    {<> Components can import modules they need and export themselves at the bottom of their files. 
+        A simple component looks like this: 
+        <CodeBlock language='jsx' text=
+    {`function MyComponent () {
     return (
         <div className="App"> 
             <h1> My first React App </h1>
         </div>
         )}`}/>
         </>}>
-        </Expand> 
+    </Expand> 
     <Expand name='Component functions are named in PascalCase' 
     highlight='PascalCase' list={true}
     content= {
@@ -263,7 +263,7 @@ let entries = [
         <>For example, setting a CSS class uses the keyword className: <Code>{`<MyComponent className="my-component-style">`}</Code> </>
     }></Expand>
     <Expand name='Props are written like attributes, directly into the angle brackets and passed into components, often with the name (props)'
-    highlight='the name (props)'
+    highlight='Props'
     list = {true}
     content= {
         <>Give a prop to a component by writing <Code>{`<MyComponent myProp={myPropValue}>`}</Code>. Inside MyComponent it can be used as 
@@ -292,32 +292,47 @@ let entries = [
     content= {
         <>Give a prop to a component by writing <Code>{`<MyComponent myProp={myPropValue}>`}</Code>. Inside MyComponent it can be used as 
         <CodeBlock language='jsx' text = {
-`const MyComponent = (props) => {
-    return (
-        <h1> My prop value is: {props.myPropValue} </h1>
+`const MyComponent = () => {
+    const [clicked, setClicked] = React.useState(false);
+    const handleClick = () => {
+        setClicked(!clicked);
+    }
+    return ( <> 
+        <a onClick={handleClick}> Set Clicked </a>
+        <h1> My state value is: {clicked} </h1> 
+        </>
     )}`}></CodeBlock> </>
     }></Expand>
-    <Expand name='To synchronize two states, useEffect will make an effect occur after a state changes.'
+    <Expand name='To synchronize two states, useEffect will make an effect occur after a state changes'
     highlight='useEffect'
     list = {true}
     content= {
-        <>Give a prop to a component by writing <Code>{`<MyComponent myProp={myPropValue}>`}</Code>. Inside MyComponent it can be used as 
+        <>Remember to make sure useEffect is necessary before using it. Usually giving the state to the parent component, "elevating state" is sufficient.  If you have to use useEffect, put the empty braces to only useEffect once, or a state to useEffect on.
         <CodeBlock language='jsx' text = {
-`const MyComponent = (props) => {
-    return (
-        <h1> My prop value is: {props.myPropValue} </h1>
-    )}`}></CodeBlock> </>
+`React.useEffect( () => {
+    setRows( (prevRows) => {
+        const playerRow = prevRows[playerIndex]
+        playerRow.squares = playerRow.squares.map((square, index) => ({letter: [...playerRow.letters][index], color: styles[index]}))
+        
+        return prevRows.map( (row) => row.player ? playerRow : row);
+    }, [validSubmit, styles])`}></CodeBlock> </>
     }></Expand>
     <Expand name='You can avoid DOM queries for the most part. If you need need access to the element, useRef provides a reference.'
     highlight='useRef'
     list = {true}
     content= {
-        <>Give a prop to a component by writing <Code>{`<MyComponent myProp={myPropValue}>`}</Code>. Inside MyComponent it can be used as 
+        <>Get a ref by assigning it where the component is created. <Code>{`<Gallery ref={galleryRef}>`}</Code>. The ref can be accessed with .current to get DOM properties.
         <CodeBlock language='jsx' text = {
-`const MyComponent = (props) => {
+`const galleryRef = React.useRef();
+    export default function Gallery () => {
+    const handleScroll = () => {
+        setShrinkHeader(galleryRef.current.scrollTop > 50) ;
+    };
     return (
-        <h1> My prop value is: {props.myPropValue} </h1>
-    )}`}></CodeBlock> </>
+        <div className="gallery" ref = {galleryRef} onScroll={handleScroll} >
+    );
+}
+`}></CodeBlock> </>
     }></Expand>
     </ul>
     </>},
