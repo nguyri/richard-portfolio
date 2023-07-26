@@ -279,17 +279,12 @@ let entries = [
     content= {
         <>For example, setting a CSS class uses the keyword className: <Code>{`<MyComponent className="my-component-style">`}</Code> </>
     }></Expand>
-    <Expand name='Events are written directly into the elements with JSX'
+    <Expand name='Events like onClick are written directly into the elements with JSX'
     highlight='Events'
     list = {true}
     content= {
         <>Instead of finding a DOM node, then attaching listeners, React allows you to directly attach a callback function to an event
-         <Code>{`<MyComponent myProp={myPropValue}>`}</Code>. Inside MyComponent it can be used as 
-        <CodeBlock language='jsx' text = {
-`const MyComponent = (props) => {
-    return (
-        <h1> My prop value is: {props.myPropValue} </h1>
-    )}`}></CodeBlock> </>
+         <Code>{`<MyComponent onClick={handleClick}>`}</Code>. </>
     }></Expand>
     <Expand name='State defines some data that will be tracked. When the state changes the elements tracking it will automatically update.'
     highlight='State'
@@ -327,24 +322,18 @@ let entries = [
     </ul>
     </>},
     {key:nanoid(), title: `React Concepts`},
-    {key:nanoid(), subtitle: `Conditional Rendering`},
     {key: nanoid(), html:<> <b>Showing or hiding a component</b> is often done with the ? or && operators. Picking between two options, 
     the ternary operator is used, while picking whether to show or hide can be done with &&. Otherwise known as <b>conditional rendering</b> </>},
-    {key:nanoid(), subtitle: `Inline styles`},
     {key: nanoid(), html:<> While traditional CSS inline styles are generally bad style, because of the ability to use props and state 
     <b> react inline styles are excellent. </b>Add a style = css attributes prop to assign an inline style.  </>},
-    {key:nanoid(), subtitle: `Fragments`},
     {key: nanoid(), html: <> <b>Fragments</b>, using <Code>{`<React.Fragment>, or preferably <> </>`}</Code> combine multiple html objects into a single returnable 
     element. It is sometimes preferable to a div because it populates with no wrapper element. </> },
-    {key:nanoid(), subtitle: `Array map`},
     {key: nanoid(), html: <> <b>Array map </b> is a powerful but easy to read method to turn a list of data into Components.  
     <Code>{`Array.map((elem) => {<Component data=elem/>})`}</Code> </>},
-    {key:nanoid(), subtitle: `Spread syntax`},
     {key: nanoid(), html: <> <b>Spread syntax</b> is useful when passing props to children. If <Code>{`Array.map((elem) => {<Component props=elem/>})`}</Code> 
     were used, props would appear as <Code>{`props.props.data`}</Code> in the child. <Code>{`<Component ...data)`}</Code> Spreading can be read as <Code>{`<Component data1=1 data2=2 data3=3)`}</Code>  
     Spreading the data keeps the props pattern organized even with many children. </>},
-    {key:nanoid(), subtitle: `Class to Functional`},
-    {key: nanoid(), html: <> Around React 14 components had to extend the class component. Nowadays functional components 
+    {key: nanoid(), html: <> React Classes to Functional Components. Around React 14 components had to extend the class component. Nowadays functional components 
     are the recommended style due to optimization, and I find them easier to read.<b> Converting class to functional</b> components takes some time but can be done.</>},
     {key: 2, text:`This website is written in Javascript and CSS with some great packages. Some of the more popular ones 
     are react, react-router, and react-three-fiber. 
@@ -444,9 +433,10 @@ let entries = [
     longdescription: [
     {key:'digitalart', title:`Digital Art`},
     {key: 'blendingmodes', title:`Blending Modes`},
-    {key: nanoid(), text:`Coming from the photography era, lighting modes are effects that change a base layer according to an effect layer by performing some
-    mathematical expression on the base and effect.`},
-    {key: nanoid(), text:`This allows for a risk free approach to light and shadow, where you can try out different brightnesses and colours without the commitment of traditional paint. Here are my favorite blending modes and how to use them.`},
+    {key: nanoid(), text:`Coming from the film photography era, lighting modes are effects that change a base layer according to an effect layer by performing some
+    mathematical expression on the base and effect.`, style: {gridColumn:"span 3"}},
+    {key:nanoid(), imageName:'./art11.jpg', style: {gridColumn:"4 /span 2", gridRow:"span 2", height:"300px", overflow:"hidden", objectFit:"cover", paddingBottom:"20px", borderRadius:"10px"}, picStyle:{scale:"1.8", transformOrigin:"center top", objectPosition:"50% 40%", textAlign:"center"}, className:"entry--img-inline"},
+    {key: nanoid(), text:`This allows for a risk free approach to light and shadow, where you can try out different brightnesses and colours without the commitment of traditional paint. Here are my favorite blending modes and how to use them.`, style: {gridColumn:"span 3"}},
     {key: 'whylearn', title:`Why learn the blending modes?`},
     {key: nanoid(), html: <>
     <b>Color constancy.</b> Your brain will just make up colors depending on the surrounding color context, 
@@ -487,12 +477,11 @@ let entries = [
     {key:nanoid(), imageName:'./art7.jpg', style: {gridColumn:"4 /span 2", gridRow:"span 1", height:"300px", overflow:"hidden", objectFit:"cover", paddingBottom:"20px", borderRadius:"10px"}, picStyle:{scale:"1.3", objectPosition:"50% 20px", textAlign:"center"}, className:"entry--img-inline"},
     {key: nanoid(), text:`All blending modes have a color that returns the original color: a neutral color. Overlay has a neutral color 
     that's a 50% grey because of the piecewise function. This can be useful for picking a hue shift because it adds color while only lightly changing the brightness.
-     You could use a color blending mode for this.. but color is so strict the coloring ends up lifeless.`, style: {gridColumn:"1 / span 2"}},
-    {key:nanoid(), imageName:'./art11.jpg', style: {gridColumn:"3 /span 3", gridRow:"span 1", height:"400px", overflow:"hidden", objectFit:"cover", paddingBottom:"20px", borderRadius:"10px"}, picStyle:{scale:"2.0", objectPosition:"50% 50px", textAlign:"center"}, className:"entry--img-inline"},
+     There is a color blending mode which can be used, but because the world is so full of hue shifted light and shadows, it ends up looking lifeless.`, style: {paddingTop:"10px"}},
 
     {key: 'opacity', subtitle:'Opacity'},
     {key:nanoid(), imageName:'./art5.jpg', style: {gridColumn:"1 /span 3", gridRow:"span 2", height:"400px", overflow:"hidden", objectFit:"cover", paddingBottom:"20px", borderRadius:"10px"}, picStyle:{scale:"1.2", objectPosition:"50% -20px", textAlign:"center"}, className:"entry--img-inline"},
-    {key: nanoid(), text:`You might think if opaque clothing is 100% opacity, just turn the opacity down and you'll have see through clothing. 
+    {key: nanoid(), text:`You might think if opaque clothing is 100% opacity, it makes sense to turn the opacity down and you'll have see through clothing. 
     This is actually shooting yourself in the foot for a few reasons. `, style: {gridColumn:"4 / span 2"}},
     {key: nanoid(), text:`Blending modes lose their shading power and color picking picks up the layer underneath with a low opacity layer. It is better to overlay, multiply and screen like you normally would, but your "shadow" is the darkest part of the clothing and the "light" is the most see through part of the clothing.`, style: {gridColumn:"4 / span 2"}},
     {key: nanoid(), text:`Where the sleeve hangs off of the arm, the background comes through instead of the skin tone. Takes a bit of time but I prefer that to dealing with opacity.`},
@@ -524,13 +513,15 @@ let entries = [
     {key: nanoid(), text:`Starting with areas of light and dark is another useful approach, also known as values. It is especially useful for composition and adding depth. It is useful that blending modes add ways of easily playing with values without having to color pick every light variation. `},
 
     {key: 'illusion', subtitle:'Illusion'},
-    {key: nanoid(), text:`A key idea is that every artistic representation is an illusion and not the subject itself. Any image, even photons from the sun bouncing into the eyes, is trickery that convinces the eyes the subject is in view.`},
-    {key: nanoid(), html:<div>Playing with the slider of illusion is the spirit of a <b>painterly</b> style. <b>Impressionists</b> were concerned with extending this idea to the minimum impression they could use. Contrarily, <b>raytracing</b> composes a picture mathematically pixel by pixel. There is no overarching subject or lighting theme, each pixel is individually calculated on its own and through mathematical coincidence creates a compelling illusion. </div>},
+    {key: nanoid(), text:`A key idea is that every image is an illusion and not the subject itself. Even photons from the sun interacting with atoms around you and bouncing into the eyes, is trickery that convinces the eyes the subject is in view. The brain does a huge amount of image processing to provide the experience of vision. In extreme examples an optical illusion occurs.`, style: {gridColumn:"1 /span 3"}},
+    {key:nanoid(), imageName:'./illusion1.jpg', style: {gridColumn:"4 /span 2", paddingBottom:"20px"},className:"entry--img-inline"},
+    {key: nanoid(), html:<div>Playing with the slider of illusion is the spirit of a <b>painterly</b> style.  <b>Impressionists</b> were concerned with extending this idea to the minimum impression they could use. Contrarily, <b>raytracing</b> composes a picture mathematically pixel by pixel. There is no overarching subject or lighting theme, each pixel is individually calculated on its own and through mathematical coincidence creates a compelling illusion. </div>},
+    {key: nanoid(), text:`Keeping in mind that you're trying to represent the illusion of the subject and not explicitly defining every detail imaginable adds a levity to your brush and calms the mind.`},
 
     {key: 'backgrounds', subtitle:'Backgrounds'},
-    {key:nanoid(), imageName:'./art2.jpg', style: {gridColumn:"1 /span 3", gridRow:"span 2", height:"400px", overflow:"hidden", objectFit:"cover", paddingBottom:"20px", borderRadius:"10px"}, picStyle:{scale:"1.5", objectPosition:"50% -20px", textAlign:"center"}, className:"entry--img-inline"},
+    {key:nanoid(), imageName:'./art2.jpg', style: {gridColumn:"1 /span 3", gridRow:"span 2", height:"400px", overflow:"hidden", objectFit:"cover", paddingBottom:"20px", borderRadius:"10px"}, picStyle:{scale:"1.0", objectPosition:"50% -20px", textAlign:"center"}, className:"entry--img-inline"},
     {key: nanoid(), text:`If you're a "character artist" eventually you'll have spent a whole session rendering and realize you have no background to speak of.`, style: {gridColumn:"4 / span 2", gridRow:"span 1"}},
-    {key: nanoid(), text:`The background establishes the color and lighting of the image, and can help balance your picture overall. You could just forget about this background business, go full flat anime color and live a happy life. Or, you can use blending modes to achieve depth and the subtle shadow variations that occur on large flat surfaces (like walls).`, style: {gridColumn:"4 / span 2", gridRow:"span 1"}},
+    {key: nanoid(), text:`The background establishes the color and lighting of the image, and can help balance your picture overall. You could just forget about this background business, use flat cel shaded color and live a happy life. Or, you can use blending modes to achieve depth and the subtle shadow variations that occur on large flat surfaces (like walls).`, style: {gridColumn:"4 / span 2", gridRow:"span 1"}},
     {key: nanoid(), text:`The troubling thing about walls is that they are so big the nature of light changes from one side to the other. It may be tempting to simply fill a wall with a single flat color but without variations in light it gives a shallow and unrealistic appearance. Watch the occlusion shadows in the corners, which are subtle and spread over the whole corner. A crisp line with the right perspective is necessary in the corners to establish the roominess. `},
     {key: nanoid(), text:`Generally for wider shot backgrounds, the foreground is darker than the background. It can be useful to layer up multiply layers as you get closer to the foreground, which is how this background was built up.`},
     {key: nanoid(), text:`All of this is to say I usually just cram the background in as an afterthought at the end.`},
