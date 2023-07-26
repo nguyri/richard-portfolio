@@ -222,21 +222,18 @@ let entries = [
         <ExpandList/>
     </>},
     {key:nanoid(), title: `React Concepts`},
-    {key: nanoid(), html:<> <b>Showing or hiding a component</b> is often done with the ? or && operators. Picking between two options, 
-    the ternary operator is used, while picking whether to show or hide can be done with &&. Otherwise known as <b>conditional rendering</b> </>},
-    {key: nanoid(), html:<> While traditional CSS inline styles are generally bad style, because of the ability to use props and state 
-    <b> react inline styles are excellent. </b>Add a style = css attributes prop to assign an inline style.  </>},
-    {key: nanoid(), html: <> <b>Fragments</b>, using <Code>{`<React.Fragment>, or preferably <> </>`}</Code> combine multiple html objects into a single returnable 
-    element. It is sometimes preferable to a div because it populates with no wrapper element. </> },
+    {key: nanoid(), html:<> <b>Conditional Rendering. </b>Showing or hiding a component is often done with the <Code>{`? or &&`}</Code> operators. Showing or hide can be done with <Code>{`&&`}</Code>, while picking between two options easy with <Code>{`?`}</Code> </>},
+    {key: nanoid(), html:<> <b>Inline Styles </b>While traditional CSS inline styles are generally bad style, but react inline styles are excellent due to props and conditional rendering. Add a style with an object containing CSS properties, such as <Code>{`style = {margin: "10px"}`}</Code> to assign an inline style. </>},
+    {key: nanoid(), html: <> <b>Fragments</b>, using <Code>{`<React.Fragment>, or preferably <> </>`}</Code> to combine multiple html objects into a single returnable 
+    element. In situations where no wrapper element is desired a Fragment can be used rather than a wrapper div. </> },
     {key: nanoid(), html: <> <b>Array map </b> is a powerful but easy to read method to turn a list of data into Components.  
     <Code>{`Array.map((elem) => {<Component data=elem/>})`}</Code> </>},
     {key: nanoid(), html: <> <b>Spread syntax</b> is useful when passing props to children. If <Code>{`Array.map((elem) => {<Component props=elem/>})`}</Code> 
-    were used, props would appear as <Code>{`props.props.data`}</Code> in the child. <Code>{`<Component ...data)`}</Code> Spreading can be read as <Code>{`<Component data1=1 data2=2 data3=3)`}</Code>  
+    were used, props would appear as <Code>{`props.props.data`}</Code> in the child. <Code>{`<Component ...data)`}</Code> Spreading can be read as <Code>{`<Component data1=1 data2=2 data3=3)`}</Code>
     Spreading the data keeps the props pattern organized even with many children. </>},
-    {key: nanoid(), html: <> React Classes to Functional Components. Around React 14 components had to extend the class component. Nowadays functional components 
-    are the recommended style due to optimization, and I find them easier to read.<b> Converting class to functional</b> components takes some time but can be done.</>},
-    {key: 2, text:`This website is written in Javascript and CSS with some great packages. Some of the more popular ones 
-    are react, react-router, and react-three-fiber. 
+    {key: nanoid(), html: <> <b>React Classes to Functional Components.</b> Around React 14 components had to extend the class component. Nowadays functional components 
+    are the recommended style due to optimization, and I find them easier to read. Converting class to functional components takes some time but can be done.</>},
+    {key: 2, text:`This website is written in Javascript and CSS. Some of the more popular packages used are react, react-router, and react-three-fiber. 
     On the backend it's built with babel and webpack. Deployment is an nginx server running on an arch VPS.`},
     ],
     imageName:'./wordle2.png',

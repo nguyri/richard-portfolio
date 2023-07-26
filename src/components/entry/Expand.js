@@ -25,16 +25,18 @@ export function Expand (props) {
         }
     }
 
-    return (<div>
+    return (<>
     {props.list ? <li>{formatName(props.name, props.highlight)}</li> : formatName(props.name, props.highlight)}
     {shouldMount ? <div className='expand--block' 
         style={{transition: '.3s', 
             opacity: stage === 'enter' ? 1 : 0,
             transform: stage === 'enter' ? 'unset' : 'translateY(-10px) scale(1)', }
             }>{props.content}  </div> : <></>}
-    </div>);
+    </>);
 }
 
 export function ExpandList () {
-    return data;
+    return <ul style={{listStylePosition:"inside"}}>
+        {data.map((elem) => <li>{elem}</li>)}
+    </ul>;
 }

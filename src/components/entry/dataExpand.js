@@ -2,9 +2,9 @@ import React from 'react'
 import {Expand} from './Expand'
 import {CodeBlock, Code} from '@atlaskit/code'
 
-export let data = <ul style={{listStylePosition:"inside"}}>
+export let data = [
     <Expand name='Components are independent blocks of code that return HTML.' 
-    highlight='Components' list = {true}
+    highlight='Components'
     content= 
     {<> Components can import modules they need and export themselves at the bottom of their files. 
         A simple component looks like this: 
@@ -16,14 +16,16 @@ export let data = <ul style={{listStylePosition:"inside"}}>
         </div>
         )}`}/>
         </>}>
-    </Expand> 
+    </Expand> ,
+    
     <Expand name='Component functions are named in PascalCase' 
-    highlight='PascalCase' list={true}
+    highlight='PascalCase'
     content= {
         <>A phrase written in capital letters, without punctuation or spaces </>
-    }></Expand>
+    }></Expand>,
+
     <Expand name='You can use JSX variables by putting them in curly braces' 
-    highlight = 'putting them in curly braces' list = {true}
+    highlight = 'putting them in curly braces'
     content = {
         <> A strength of React is that you can write plain Javascript inside HTML. This is done by adding curly braces. 
         <CodeBlock language='jsx' highlight={"5"} text = 
@@ -38,16 +40,16 @@ export let data = <ul style={{listStylePosition:"inside"}}>
         </>
     }
     >
-    </Expand>
+    </Expand>,
+
     <Expand name='Some JSX attributes are different to avoid name conflict' 
     highlight='name conflict'
-    list = {true}
     content= {
         <>For example, setting a CSS class uses the keyword className: <Code>{`<MyComponent className="my-component-style">`}</Code> </>
-    }></Expand>
+    }></Expand>,
+
     <Expand name='Props are written like attributes, directly into the angle brackets and passed into components, often with the name (props)'
     highlight='Props'
-    list = {true}
     content= {
         <>Give a prop to a component by writing <Code>{`<MyComponent myProp={myPropValue}>`}</Code>. Inside MyComponent it can be used as 
         <CodeBlock language='jsx' text = {
@@ -55,23 +57,23 @@ export let data = <ul style={{listStylePosition:"inside"}}>
     return (
         <h1> My prop value is: {props.myPropValue} </h1>
     )}`}></CodeBlock> </>
-    }></Expand>
+    }></Expand> ,
+
     <Expand name='Some JSX attributes are different to avoid name conflict' 
     highlight='name conflict'
-    list = {true}
     content= {
         <>For example, setting a CSS class uses the keyword className: <Code>{`<MyComponent className="my-component-style">`}</Code> </>
-    }></Expand>
+    }></Expand>,
+
     <Expand name='Events like onClick are written directly into the elements with JSX'
     highlight='Events'
-    list = {true}
     content= {
         <>Instead of finding a DOM node, then attaching listeners, React allows you to directly attach a callback function to an event
          <Code>{`<MyComponent onClick={handleClick}>`}</Code>. </>
-    }></Expand>
+    }></Expand>,
+
     <Expand name='State defines some data that will be tracked. When the state changes the elements tracking it will automatically update.'
     highlight='State'
-    list = {true}
     content= {
         <>Give a prop to a component by writing <Code>{`<MyComponent myProp={myPropValue}>`}</Code>. Inside MyComponent it can be used as 
         <CodeBlock language='jsx' text = {
@@ -85,10 +87,11 @@ export let data = <ul style={{listStylePosition:"inside"}}>
         <h1> My state value is: {clicked} </h1> 
         </>
     )}`}></CodeBlock> </>
-    }></Expand>
+    }></Expand>,
+
     <Expand name='To synchronize two states, useEffect will make an effect occur after a state changes'
     highlight='useEffect'
-    list = {true}
+
     content= {
         <>Remember to make sure useEffect is necessary before using it. Usually giving the state to the parent component, "elevating state" is sufficient.  If you have to use useEffect, put the empty braces to only useEffect once, or a state to useEffect on.
         <CodeBlock language='jsx' text = {
@@ -99,10 +102,10 @@ export let data = <ul style={{listStylePosition:"inside"}}>
         
         return prevRows.map( (row) => row.player ? playerRow : row);
     }, [validSubmit, styles])`}></CodeBlock> </>
-    }></Expand>
+    }></Expand>,
+
     <Expand name='You can avoid DOM queries for the most part. If you need need access to the element, useRef provides a reference.'
     highlight='useRef'
-    list = {true}
     content= {
         <>Get a ref by assigning it where the component is created. <Code>{`<Gallery ref={galleryRef}>`}</Code>. The ref can be accessed with .current to get DOM properties.
         <CodeBlock language='jsx' text = {
@@ -117,4 +120,4 @@ export let data = <ul style={{listStylePosition:"inside"}}>
 }
 `}></CodeBlock> </>
     }></Expand>
-    </ul>
+];
