@@ -1,8 +1,9 @@
 import React from 'react'
 import {useTransition} from 'transition-hook'
+import {data} from './dataExpand'
 import './Expand.css'
 
-const Expand = (props) => {
+export function Expand (props) {
     const [showExpand, setShowExpand] = React.useState(0);
     const {stage, shouldMount} = useTransition(showExpand, 300);
 
@@ -34,4 +35,6 @@ const Expand = (props) => {
     </div>);
 }
 
-export default Expand;
+export function ExpandList () {
+    return data;
+}
