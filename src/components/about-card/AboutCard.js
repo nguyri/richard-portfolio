@@ -25,8 +25,8 @@ export default function AboutCard() {
             </header>        
             <header className="about">
                 <h1 className="content--header"> About </h1>
-                <p className="content--text"> A software developer and electrical engineer. 
-                Interested in combining machine precision with human ingenuity.</p>
+                <p className="content--text"> Hello, I'm a software developer and electrical engineer. 
+                I love to see the combination of machine precision with human ingenuity.</p>
             </header>
             <header className="interests">
                 <h1 className="content--header"> Interests </h1>

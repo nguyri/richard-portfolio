@@ -1,6 +1,6 @@
 import React from 'react'
 import {useTransition} from 'transition-hook'
-import {data} from './dataExpand'
+import {data} from './dataReactTut'
 import './Expand.css'
 
 export function Expand (props) {
@@ -36,7 +36,7 @@ export function Expand (props) {
 }
 
 export function ExpandList () {
-    return <ul style={{listStylePosition:"inside"}}>
+    return <ul style={{listStylePosition:"outside"}}>
         {data.map((elem) => <li>{elem}</li>)}
     </ul>;
 }

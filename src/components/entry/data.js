@@ -86,7 +86,10 @@ let entries = [
     cut, but more often than not you'll have to chip it away for mild steel. `},
     {key:nanoid(), text:`On stainless I've found it is much more sticky and has to be ground off. It's possible
     to get drossless cuts with this setup but not consistently.`},
-    {key:nanoid(), imageName:'./plasma3.jpg', style: {gridColumn:"1 /span 5", gridRow:"span 1", overflow:"hidden", objectFit:"cover", paddingBottom:"20px", height:"300px"}, className:"entry--img-inline"},
+    {key:nanoid(), imageName:'./plasma3.jpg', style: {gridColumn:"1 /span 5", gridRow:"span 1", overflow:"hidden", objectFit:"cover", paddingBottom:"20px", height:"300px"}, className:"entry--img-inline"},     
+    {key: 'setup', subtitle:`Re-setup`},
+    {key:nanoid(), text:`I've found the plasma cutter requires a large amount of time to setup each individual job, especially after an idle period. Chemists might liken it to a high activation energy. Even after patterning, the material has to be prepped, machine zeroed, plasma cutter and air compressor routed and powered, dry run, water table, and finally the job can be run. `},
+    {key:nanoid(), text:`In trying to reduce the activation energy, I try to keep a sheet of material already prepped in the tray. Keeping the plasma cutter and air compressor on a hefty power bar reduces the routing to a single switch. The water table adds a whole new dimension of trouble so I tend to go without.`},
     {key: 'welding', title:`Welding` },
     {key:nanoid(), text:`Welding is easy to learn and hard to master. I quite liked Steve Bleile’s welding videos. They are densely packed with information and without the 
     embellishments of a youtube tutorial.`},
@@ -217,11 +220,11 @@ let entries = [
     {key: nanoid(), wordle: true},
     {key:nanoid(), html: <> React is a JavaScript library for creating user interfaces. It is made up of <b>components</b> manage their own data, called <b>state</b>. 
     State can be given to child components to make them <b>react</b>. Components are modular and can be reused. </>},
-    {key:nanoid(), title: `React Basics`},
+    {key:'react-basics', title: `React Basics`},
     {key: nanoid(), html:<>
         <ExpandList/>
     </>},
-    {key:nanoid(), title: `React Concepts`},
+    {key:'react-concepts', title: `React Concepts`},
     {key: nanoid(), html:<> <b>Conditional Rendering. </b>Showing or hiding a component is often done with the <Code>{`? or &&`}</Code> operators. Showing or hide can be done with <Code>{`&&`}</Code>, while picking between two options easy with <Code>{`?`}</Code> </>},
     {key: nanoid(), html:<> <b>Inline Styles </b>While traditional CSS inline styles are generally bad style, but react inline styles are excellent due to props and conditional rendering. Add a style with an object containing CSS properties, such as <Code>{`style = {margin: "10px"}`}</Code> to assign an inline style. </>},
     {key: nanoid(), html: <> <b>Fragments</b>, using <Code>{`<React.Fragment>, or preferably <> </>`}</Code> to combine multiple html objects into a single returnable 
@@ -233,7 +236,8 @@ let entries = [
     Spreading the data keeps the props pattern organized even with many children. </>},
     {key: nanoid(), html: <> <b>React Classes to Functional Components.</b> Around React 14 components had to extend the class component. Nowadays functional components 
     are the recommended style due to optimization, and I find them easier to read. Converting class to functional components takes some time but can be done.</>},
-    {key: 2, text:`This website is written in Javascript and CSS. Some of the more popular packages used are react, react-router, and react-three-fiber. 
+    {key:'about', title: `About`},
+    {key: nanoid(), text:`This website is written in Javascript and CSS. Some of the more popular packages used are react, react-router, and react-three-fiber. 
     On the backend it's built with babel and webpack. Deployment is an nginx server running on an arch VPS.`},
     ],
     imageName:'./wordle2.png',
@@ -326,7 +330,7 @@ let entries = [
     num:7,
     title: "Digital Art",
     link: "digitalart",
-    description:`I think drawing really helps your observation and communication skills. "I have learned that what I have not drawn I have never really seen"`,
+    description:`I think drawing really helps your observation skills, and some ideas are best communicated with a drawing.`,
     longdescription: [
     {key:'digitalart', title:`Digital Art`},
     {key: 'blendingmodes', title:`Blending Modes`},
@@ -440,7 +444,8 @@ let entries = [
     It does seem to be a "sheer miracle" that after so many training hours this model that the output is any good at all. I dabbed a little into 
     DreamBooth and did not get very far after a few hours of training.`},
     {key: nanoid(), text:`Personally, I think it's fun to see the hornets nest get stirred up. Artists are indignant and programmers are self righteous. There are many new interesting situations from the technological and artistic sides. I'm excited to see what artists and programmers will do with such powerful new tools.`},
-    {key: nanoid(), text:``},
+    {key:'about', title:'About'},
+    {key: nanoid(), text:`The blending mode demonstrations on this page are made with react-konva, a JS library for drawing canvas graphics with React. It would probably be enough to do an slider between a normal and blend mode image. However, I wanted to showcase the formulas behind the blending modes. To apply the formula to each pixel in the canvas, pixel manipulation of the canvas is needed. This could also be done without the react-konva, by using a normal html <canvas>. The formulas are made with better-react-mathjax, configured for asciimath. As much as I love LaTeX, for small short formulas it's superfluous.`},
     {key: nanoid(), text:``},
     ],
     imageName:'./art1.jpg',
