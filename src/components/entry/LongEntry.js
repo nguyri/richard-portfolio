@@ -2,9 +2,9 @@ import React from "react"
 // import { Container, Button, Alert } from 'react-bootstrap';
 import { CSSTransition } from 'react-transition-group';
 import "./Entry.css"
-import ReactPlayer from 'react-player/lazy'
+const ReactPlayer = React.lazy(() => import('react-player/lazy'));
 import ThreeScene from "../threejsdemo/ThreeScene"
-import Wordle from "../wordle/Wordle"
+const Wordle = React.lazy(() => import("../wordle/Wordle"));
 import NotFound from "../errordocs/NotFound"
 import { useMediaQuery } from 'react-responsive'
 import { useParams, useOutletContext } from "react-router-dom";

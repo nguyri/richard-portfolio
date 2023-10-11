@@ -1,10 +1,10 @@
 import { nanoid } from 'nanoid'
 import React from 'react'
 import ThreeScene from '../threejsdemo/ThreeScene';
-import MovingPlaneCanvas from '../threefiber/MovingPlaneCanvas';
-import ImageTransitionCanvas from '../threefiber/ImageTransition';
-import BlendingModes from '../blendingmodes/BlendingModes';
-import ThreeFunc from '../threejsdemo/ThreeFunc';
+const MovingPlaneCanvas = React.lazy(() => import('../threefiber/MovingPlaneCanvas'));
+const ImageTransitionCanvas = React.lazy(() => import('../threefiber/ImageTransition'));
+const BlendingModes = React.lazy(() => import('../blendingmodes/BlendingModes'));
+const ThreeFunc = React.lazy(() => import('../threejsdemo/ThreeFunc'));
 import {ExpandList} from '../entry/Expand'
 import {Code, CodeBlock} from '@atlaskit/code'
 

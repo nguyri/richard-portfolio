@@ -67,7 +67,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist/"),
     publicPath: "/dist/",
-    filename: "bundle.js"
+    filename: "[name].bundle.js"
   },
   plugins: [
     // new HtmlWebpackPlugin({
@@ -78,6 +78,19 @@ module.exports = {
     // new FaviconsWebpackPlugin({logo:"./src/imgs/favicon.png", inject:true}),
     // new FaviconsWebpackPlugin()
   ],
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendor: {
+          test: /node_modules/,
+          chunks: 'initial',
+          name: 'vendor',
+          enforce: true,
+        },
+      },
+    },
+  },
 };
 
 // const TerserPlugin = require('terser-webpack-plugin');
