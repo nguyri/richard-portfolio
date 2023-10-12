@@ -1,4 +1,5 @@
 import React from 'react';
+import {nanoid} from 'nanoid';
 import './Gallery.css'
 
 export function Pip (props) {
@@ -12,7 +13,7 @@ export function ProgressBar (props) {
     return (
         <div className='gallery--progress-bar'>
             {pips.map((pip) => {
-                return <Pip pip={pip}/>
+                return <Pip pip={pip} key={nanoid()}/>
             })}
         </div>
     );

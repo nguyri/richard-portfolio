@@ -13,7 +13,7 @@ export function ImageDetail (props) {
         slider > 1 && slider < elem.lastSlideNum ? 
             elem.path.slice(0, -4) + '-' + slider  + elem.path.slice(-4) : elem.path : elem.path
     const transform = elem.slideshowFlip ? slideshow != elem.path ? "scaleX(-1)" : "" : "" ;
-    console.log(slideshow);
+    // console.log(slideshow);
     // console.log(getImage(slideshow));
 
     const handleScroll = (event) => {

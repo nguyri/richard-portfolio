@@ -33,7 +33,7 @@ export default function Gallery (props) {
     };
 
     const handleClick = (id) => {
-        console.log("clicked!" + id);
+        // console.log("clicked!" + id);
         if (id == expandID)
             setExpandID(-1);
         else
