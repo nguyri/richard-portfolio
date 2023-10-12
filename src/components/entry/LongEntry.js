@@ -31,18 +31,17 @@ export default function LongEntry() {
                     </div>
             }
             else if (elem.component) {
-                return elem.component;
+                return <React.Suspense fallback={<div>Loading...</div>}>{elem.component}</React.Suspense>;
             }
             else if (elem.vimeo) {
                 return < div key={elem.key} className="entry--vimeo-fixed-aspect" style={elem.style}>
-                        <ReactPlayer url={elem.vimeo} className="entry--vimeo" width='100%' height='100%' style={{justifyContent:'left'}}
-                            volume={elem.vimeo_auto ? 0 : null} muted={elem.vimeo_auto ? true: false} controls={elem.vimeo_auto ? false:true}
-                            playing={elem.vimeo_auto ? true: false} loop={elem.vimeo_auto ? true: false} 
-                        />
+                        <React.Suspense fallback={<div>Loading...</div>}>
+                            <ReactPlayer url={elem.vimeo} className="entry--vimeo" width='100%' height='100%' style={{justifyContent:'left'}}
+                                volume={elem.vimeo_auto ? 0 : null} muted={elem.vimeo_auto ? true: false} controls={elem.vimeo_auto ? false:true}
+                                playing={elem.vimeo_auto ? true: false} loop={elem.vimeo_auto ? true: false} 
+                            />
+                        </React.Suspense>
                     </div>
-            }
-            else if (elem.wordle) {
-                return <Wordle key={elem.key}/>
             }
             else if (elem.title) {
                 return <h2 id={elem.key} key={elem.key} className={entryData.darkMode ? "entry--title entry--title-dark" : "entry--title"}  style={elem.style}> {elem.title} </h2>

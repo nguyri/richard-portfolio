@@ -5,6 +5,7 @@ const MovingPlaneCanvas = React.lazy(() => import('../threefiber/MovingPlaneCanv
 const ImageTransitionCanvas = React.lazy(() => import('../threefiber/ImageTransition'));
 const BlendingModes = React.lazy(() => import('../blendingmodes/BlendingModes'));
 const ThreeFunc = React.lazy(() => import('../threejsdemo/ThreeFunc'));
+const Wordle = React.lazy(() => import('../wordle/Wordle'))
 import {ExpandList} from '../entry/Expand'
 import {Code, CodeBlock} from '@atlaskit/code'
 
@@ -217,7 +218,7 @@ let entries = [
     longdescription: [
     {key:'wordle', title:`Wordle`},
     {key: nanoid(), text:`A wordle demo written with React in 150 lines`},
-    {key: nanoid(), wordle: true},
+    {key: nanoid(), component: <Wordle/>},
     {key:nanoid(), html: <> React is a JavaScript library for creating user interfaces. It is made up of <b>components</b> manage their own data, called <b>state</b>. 
     State can be given to child components to make them <b>react</b>. Components are modular and can be reused. </>},
     {key:'react-basics', title: `React Basics`},
