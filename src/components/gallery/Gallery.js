@@ -44,6 +44,7 @@ export default function Gallery (props) {
 
 
     return (
+        <React.Suspense fallback={<div>Loading...</div>}>
         <div style={{display:"flex", flexDirection:"row", justifyContent:"center", height:"90vh", overflow:"auto"}}>
         <div className="gallery" ref = {galleryRef} onScroll={handleScroll} >
             { images.filter((elem => elem.id == expandID)).map((elem => {
@@ -58,5 +59,6 @@ export default function Gallery (props) {
                 })}
         </div>
         </div>
+        </React.Suspense>
     );
 }

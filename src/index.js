@@ -6,8 +6,9 @@ import Entries from "./components/entry/Entries"
 import LongEntry from "./components/entry/LongEntry"
 import NotFound from "./components/errordocs/NotFound"
 import { BrowserRouter, Routes, Route, Redirect } from "react-router-dom";
-import AboutCard from "./components/about-card/AboutCard"
-import Gallery from "./components/gallery/Gallery"
+// const AboutCard = React.lazy(()=> import("./components/about-card/AboutCard"));
+import AboutCard from "./components/about-card/AboutCard";
+const Gallery = React.lazy(()=> import("./components/gallery/Gallery"));
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
