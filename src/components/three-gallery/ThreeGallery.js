@@ -3,6 +3,7 @@ import {getImage} from '../entry/data'
 import { useMediaQuery } from 'react-responsive'
 import './ThreeGallery.css'
 import { Link, Outlet, useOutlet, useOutletContext } from "react-router-dom";
+import ModelViewer from './ModelViewer'
 
 export default function Gallery (props) {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
@@ -46,6 +47,7 @@ export default function Gallery (props) {
         <React.Suspense fallback={<div>Loading...</div>}>
         <div style={{display:"flex", flexDirection:"row", justifyContent:"center", height:"90vh", overflow:"auto"}}>
             Hello World!
+            <ModelViewer/>
         </div>
         </React.Suspense>
     );
