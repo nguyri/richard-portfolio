@@ -1,0 +1,99 @@
+.gallery--image{
+    --scale:1.0;
+    width:calc(22vw / var(--scale));
+    height:calc(30vw / var(--scale));
+    scale:var(--scale);
+    /* width: 22vw;
+    height:30vw; */
+    /* scale:1.2; */
+    /* object-fit:cover; */
+    background-size:120%;
+    background-repeat:no-repeat;
+    background-position: -5% -10%;
+    grid-column: span 1;
+    transition: grid-column 100ms, width 100ms, height 100ms;
+    /* transition: 100ms; */
+}
+
+.gallery--image:hover{
+    scale:0.95;
+    transition:100ms;
+    /* grid-column: span 3;
+    height:80vh; */
+}
+
+.gallery--image-detail {
+    grid-column: span 3;
+    height:80vh;
+    transition: grid-column 100ms, width 100ms, height 100ms;
+    /* margin-bottom:80vh; */
+    overflow:scroll;
+    transition:100ms;
+    background-repeat:no-repeat;
+    /* position:relative; */
+}
+    /* scale:2; */
+
+.gallery {
+    display:grid;
+    /* width:70vw; */
+    width:100%;
+    grid-template-columns: repeat(3, 1fr);
+    margin:0;
+    gap: 3px;
+    padding:20px 15vw 20px 15vw;
+    justify-content: center;
+    width:min-content;
+    grid-auto-flow: dense;
+    height:auto;
+    overflow:auto;
+}
+
+.gallery--progress-bar {
+    position:absolute;
+    right:20px;
+    margin: auto 0 auto 0;
+    top:0;
+    bottom:0;
+    width:auto;
+    height:50%;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index:100;
+}
+
+.gallery--dot-filled {
+    background-color: #ffffff;
+}
+
+.gallery--dot{
+    height: 10px;
+    width: 10px;
+    /* background-color: #656565; */
+    border-style:solid;
+    border-color:#ffffff;
+    border-width: 0.5px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.gallery--slideshow::-webkit-scrollbar {
+    display: none;
+}
+
+@media screen and (max-width: 1224px) {
+    .gallery {
+        width:99vw;
+        padding:1vw 0 5vw 0 ;
+        height:fit-content; 
+        align-items: center;
+        gap:1px;
+        overflow-x:hidden;
+        overflow-y:scroll;
+    }
+    .gallery--image {
+        width: 33vw;
+        height: 40vw;
+    }
+}
