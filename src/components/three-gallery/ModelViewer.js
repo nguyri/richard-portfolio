@@ -29,7 +29,7 @@ importAll(require.context('../../models/', false, /\.(3mf)$/));
 
 const ModelViewer = (props) => {
     let [modelShown, setModelShown] = React.useState(0);
-    let [zoom, setZoom] = React.useState(props.zoom);
+    let [zoom, setZoom] = React.useState(props.zoom, 4);
     let [modelList, setModelList] = React.useState([]);
     let [scene, setScene] = React.useState(new THREE.Scene());
     let myRef = React.useRef();
@@ -62,13 +62,14 @@ const ModelViewer = (props) => {
         renderer.setSize(width, height)
         myRef.current.appendChild(renderer.domElement)
     
-        let loader = new ThreeMFLoader();
-        loadThreeMF(loader, modelData, modelList, modelShown, scene)
+        // let loader = new ThreeMFLoader();
+        // loadThreeMF(loader, modelData, modelList, modelShown, scene)
 
         const render = () => {
             renderer.render(scene, cameraInit);
         }
-        const geometry = new THREE.BoxGeometry(1, 1, 1);
+        const size = 10
+        const geometry = new THREE.BoxGeometry(size, size, size);
         const cube = new THREE.Mesh(geometry, material);
         scene.add(cube);
     
