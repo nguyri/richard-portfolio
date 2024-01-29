@@ -31,7 +31,7 @@ const ModelViewer = (props) => {
     let controls;
 
     const models = {};
-    importAll(require.context('../../models/', false, /\.(fbx)$/));
+    importAll(require.context('../../models/', false, /\.(glb|fbx)$/));
 
     function importAll(r) {
       r.keys().forEach((key) => models[key] = r(key));
@@ -63,6 +63,7 @@ const ModelViewer = (props) => {
         myRef.current.appendChild(renderer.domElement)
     
         let loader = new FBXLoader();
+        // loadGLTF(loader, models, modelData, modelList, modelShown, scene);
         loadFBX(loader, models, modelData, modelList, modelShown, scene);
         // let loaderThree = new ThreeMFLoader();
         // loadThreeMF(loader, modelData, modelList, modelShown, scene)
@@ -104,13 +105,35 @@ const ModelViewer = (props) => {
         return () => myRef.current && myRef.current.removeChild(renderer.domElement);
     }, []);
 
+    const loadGLTF = (loader, models, modelData, list, modelShown, scene) => {
+      const path = `./${modelData[0].files}`
+      console.log(path);
+      console.log(models);
+      console.log(models[path].default)
+      
+      loader.load( models["./urban-10-new-export.glb"].default , function ( fbx ) {
+      // loader.load( models["./urban-10-new-export.fbx"].default , function ( fbx ) {
+        fbx.name = path
+        console.log(fbx);
+        // fbx.rotation.set(...modelData[0].rotations);
+        // fbx.position.set(...modelData[0].positions);
+        fbx.scale.set(0.1, 0.1, 0.1);
+        fbx.children[0].material = material;
+        scene.add( fbx );
+      }, undefined, function ( error ) {
+        console.error( error );
+      } );
+    }
+
     const loadFBX = (loader, models, modelData, list, modelShown, scene) => {
       const path = `./${modelData[0].files}`
       console.log(path);
       console.log(models);
       console.log(models[path].default)
-      loader.load( models["./urban-10-sword-armature.fbx"].default , function ( fbx ) {
-        // fbx.name = path
+      
+      loader.load( models["./urban-10-new-export.fbx"].default , function ( fbx ) {
+      // loader.load( models["./urban-10-new-export.fbx"].default , function ( fbx ) {
+        fbx.name = path
         console.log(fbx);
         // fbx.rotation.set(...modelData[0].rotations);
         // fbx.position.set(...modelData[0].positions);
