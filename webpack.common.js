@@ -37,7 +37,7 @@ module.exports = {
         use: ["style-loader", "css-loader"]
       },
       {
-        test: /\.(png|jpe?g|gif|3mf|gltf)$/i,
+        test: /\.(png|jpe?g|gif|3mf|fbx|gltf|bin)$/i,
         use: [
           {
             loader: 'file-loader',
@@ -46,7 +46,7 @@ module.exports = {
       },
       {
         test: /\.bin$/,
-        exclude: /node_modules/,
+        exclude: /(node_modules|\.\/src\/models)/,
         use: [
           {
             loader: 'url-loader',
