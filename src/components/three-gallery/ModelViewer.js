@@ -29,7 +29,12 @@ const ModelViewer = (props) => {
     let [camera, setCamera] = React.useState(); 
     let [material] = React.useState(new THREE.MeshPhongMaterial({ flatShading: 'false', color: new THREE.Color(0xafafaf) }))
     let [brightness, setBrightness] = React.useState(1);
-    let [pointLight] = React.useState(new THREE.PointLight(0xffffff, brightness));
+    let [rimLight] = React.useState(new THREE.PointLight(0xffffff, brightness));
+    // let [pointLight] = React.useState(new THREE.HemisphereLight( 0xffffff, 0x444444 ));
+    let [pointLight] = React.useState(new THREE.DirectionalLight( 0xffffff ));
+
+
+    // var hemiLight = new THREE.HemisphereLight( 0xffffff, 0x444444 );
     let controls;
 
     const models = {};
@@ -54,8 +59,10 @@ const ModelViewer = (props) => {
     
         // this.camera = new THREE.PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 1, 500 );
     
-        pointLight.position.set(80, 90, 200);
+        rimLight.position.set(-80, 90, 100);
+        pointLight.position.set(80, -90, 200);
         scene.add(pointLight);
+        scene.add(rimLight);
         // scene.add(new THREE.AmbientLight(0xffffff, 2.0));
         // let [material] = React.useState(new THREE.MeshPhongMaterial({ flatShading: 'false', color: new THREE.Color(0xafafaf) }))
         let material = new THREE.MeshPhongMaterial({ flatShading: 'false', color: new THREE.Color(0xafafaf) });
@@ -91,7 +98,7 @@ const ModelViewer = (props) => {
         controls.addEventListener('change', render);
         controls.target.set(0, 0, 20);
         controls.minPolarAngle = Math.PI / 3;
-        controls.maxPolarAngle = controls.minPolarAngle;
+        controls.maxPolarAngle = Math.PI ;
         controls.minAzimuthAngle = Math.PI / 8;
         controls.maxAzimuthAngle = Math.PI * 7 / 8;
         controls.enablePan = false;
@@ -117,10 +124,13 @@ const ModelViewer = (props) => {
     }, []);
 
     React.useEffect(() => {
-      console.log(pointLight);
+      // console.log(pointLight);
       pointLight.intensity = brightness;
       pointLight.updateMatrix();
       pointLight.updateMatrixWorld();
+      rimLight.intensity = brightness;
+      rimLight.updateMatrix();
+      rimLight.updateMatrixWorld();
     }, [brightness])
 
     function findBody(list) {
@@ -148,13 +158,13 @@ const ModelViewer = (props) => {
         console.log(fullModel);
         console.log(body);
         // body.material.metalness = 0;
-        body.children[0].material.metalness = 0;
-        body.children[1].material.metalness = 0;
+        // body.children[0].material.metalness = 0;
+        // body.children[1].material.metalness = 0;
         fullModel.traverse((child) =>  {
           if (child.isMesh) {
-            // child.material.emissive = 1;
-            child.material.ambient = 1;
-            // child.material.specular = 1;
+            // child.material.emissive = 0;
+            // child.material.ambient = 0;
+            child.material.specular = 1;
             child.material.metalness = 0;
           }
         })
