@@ -48,7 +48,7 @@ export default function Gallery (props) {
         <div style={{display:"flex", flexDirection:"row", justifyContent:"center", height:"90vh", overflow:"auto"}}>
             Hello World!
             {/* <ModelViewer/> */}
-            <ModelViewer style={{width:"40vw"}} zoom={8.0}/>
+            <ModelViewer style={{width:"40vw"}} zoom={16.0}/>
             {/* <ThreeFunc style={{width:"40vw"}} zoom={4.0}/> */}
         </div>
         </React.Suspense>

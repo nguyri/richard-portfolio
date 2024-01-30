@@ -44,7 +44,7 @@ const ModelViewer = (props) => {
         // this.cameraInit = new THREE.PerspectiveCameraInit( 5, width / height, 50, 2000)
         cameraInit.zoom = zoom;
         cameraInit.up.set(0, 0, 1);
-        cameraInit.position.set(200, 200, 200);
+        cameraInit.position.set(50, -200, 100);
         cameraInit.lookAt(0, 0, 0)
         cameraInit.updateProjectionMatrix();
 
@@ -52,33 +52,43 @@ const ModelViewer = (props) => {
     
         // this.camera = new THREE.PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 1, 500 );
     
-        let pointLight = new THREE.PointLight(0xffffff, 0.6);
+        let pointLight = new THREE.PointLight(0xffffff, 1);
         pointLight.position.set(80, 90, 200);
         scene.add(pointLight);
-        scene.add(new THREE.AmbientLight(0xffffff, 0.6));
-    
+        // scene.add(new THREE.AmbientLight(0xffffff, 2.0));
+        // let [material] = React.useState(new THREE.MeshPhongMaterial({ flatShading: 'false', color: new THREE.Color(0xafafaf) }))
+        let material = new THREE.MeshPhongMaterial({ flatShading: 'false', color: new THREE.Color(0xafafaf) });
+
+        const sphereRadius = 3;
+        const sphereWidthDivisions = 32;
+        const sphereHeightDivisions = 16;
+        const sphereGeo = new THREE.SphereGeometry(sphereRadius, sphereWidthDivisions, sphereHeightDivisions);
+        const sphereMat = new THREE.MeshPhongMaterial({color: '#CA8'});
+        const mesh = new THREE.Mesh(sphereGeo, sphereMat);
+        mesh.position.set(-sphereRadius - 1, sphereRadius + 2, 0);
+        scene.add(mesh);
+
         let renderer = new THREE.WebGLRenderer({ antialias: true })
         renderer.setClearColor('#FFFFFF', 0) //#F9F7F0
         renderer.setSize(width, height)
         myRef.current.appendChild(renderer.domElement)
     
-        let loader = new FBXLoader();
-        // loadGLTF(loader, models, modelData, modelList, modelShown, scene);
-        loadFBX(loader, models, modelData, modelList, modelShown, scene);
+        let loader = new GLTFLoader();
+        loadGLTF(loader, models, modelData, modelList, modelShown, scene, material);
+        // loadFBX(loader, models, modelData, modelList, modelShown, scene);
         // let loaderThree = new ThreeMFLoader();
         // loadThreeMF(loader, modelData, modelList, modelShown, scene)
 
         const render = () => {
             renderer.render(scene, cameraInit);
         }
-        const size = 1
-        const geometry = new THREE.BoxGeometry(size, size, size);
-        const cube = new THREE.Mesh(geometry, material);
+        const axesHelper = new THREE.AxesHelper(20);
+        scene.add(axesHelper);
         // scene.add(cube);
     
         controls = new OrbitControls(cameraInit, renderer.domElement);
         controls.addEventListener('change', render);
-        controls.target.set(20, 0, 0);
+        controls.target.set(0, 0, 20);
         controls.minPolarAngle = Math.PI / 3;
         controls.maxPolarAngle = controls.minPolarAngle;
         controls.minAzimuthAngle = Math.PI / 8;
@@ -105,21 +115,39 @@ const ModelViewer = (props) => {
         return () => myRef.current && myRef.current.removeChild(renderer.domElement);
     }, []);
 
-    const loadGLTF = (loader, models, modelData, list, modelShown, scene) => {
+    function findBody(list) {
+      for (var i in list) {
+        if(list[i].name == 'body')
+          return list[i];
+        if (Object.hasOwn(list[i], "children")) {
+          var result = findBody(list[i].children);
+          if (result != null) {
+            return result;
+          }
+        }
+      }
+      return null;
+    }
+    const loadGLTF = (loader, models, modelData, list, modelShown, scene, material) => {
       const path = `./${modelData[0].files}`
-      console.log(path);
-      console.log(models);
-      console.log(models[path].default)
-      
-      loader.load( models["./urban-10-new-export.glb"].default , function ( fbx ) {
-      // loader.load( models["./urban-10-new-export.fbx"].default , function ( fbx ) {
-        fbx.name = path
-        console.log(fbx);
-        // fbx.rotation.set(...modelData[0].rotations);
-        // fbx.position.set(...modelData[0].positions);
-        fbx.scale.set(0.1, 0.1, 0.1);
-        fbx.children[0].material = material;
-        scene.add( fbx );
+      // console.log(modelData[0])
+      loader.load( models[path].default , function ( loadedGLTF ) {
+      // loader.load( models["./urban-10-new-export.loadedGLTF"].default , function ( loadedGLTF ) {
+        loadedGLTF.name = path
+        let fullModel = loadedGLTF.scene.children[0];
+        let body = findBody(loadedGLTF.scene.children);
+
+        console.log(fullModel);
+        console.log(body);
+        // body.scale.set(20,20,20);
+        // fullModel.scale.set(20,20,20);
+
+        fullModel.scale.set(20,20,20);
+        fullModel.position.set(...modelData[0].position);
+        fullModel.rotation.set(...modelData[0].rotation);
+
+        // loadedGLTF.scene.children[0].children[3].children[0].material = material;
+        scene.add( loadedGLTF.scene );
       }, undefined, function ( error ) {
         console.error( error );
       } );
@@ -143,50 +171,7 @@ const ModelViewer = (props) => {
       }, undefined, function ( error ) {
         console.error( error );
       } );
-      // modelData.forEach((modelGroup, modelIndex) => {
-      //   let loadedGroup = []
-      //   modelGroup.files.forEach((path, index) => {
-      //     loader.load(models[path].default, (objectGLTF) => {
-      //       objectGLTF.name = path
-      //       loadedGroup[index]=(objectGLTF);
-      //       // objectGLTF.position.set(...modelGroup.positions[index]);
-      //       // objectGLTF.rotation.set(...modelGroup.rotations[index]);
-      //       // objectGLTF.children[0].children[0].material = material;
-      //       // if (modelIndex == modelShown) {
-      //       //   scene.add(objectGLTF);
-      //       // }
-      //       scene.add(objectGLTF);
-      //     }, undefined, function (error) {
-      //       console.error("loader error" + error);
-      //     }); // loader.load
-      //   }); //modelGroup.files.forEach
-      //   list.push(loadedGroup);
-      // })
-      // setModelList(list);
     }
-    // const loadThreeMF = (loader, modelData, list, modelShown, scene) => {
-    //     // loader.addExtension( ThreeMFLoader.MaterialsAndPropertiesExtension );
-    //     modelData.forEach((modelGroup, modelIndex) => {
-    //       let loadedGroup = []
-    //       console.log("three" + modelGroup);
-    //       modelGroup.files.forEach((path, index) => {
-    //         loader.load(models[path].default, (object3mf) => {
-    //           object3mf.name = path
-    //           loadedGroup[index]=(object3mf);
-    //           object3mf.position.set(...modelGroup.positions[index]);
-    //           object3mf.rotation.set(...modelGroup.rotations[index]);
-    //           object3mf.children[0].children[0].material = material;
-    //           if (modelIndex == modelShown) {
-    //             scene.add(object3mf);
-    //           }
-    //         }, undefined, function (error) {
-    //           console.error("loader error" + error);
-    //         }); // loader.load
-    //       }); //modelGroup.files.forEach
-    //       list.push(loadedGroup);
-    //     })
-    //     setModelList(list);
-    //   }
 
       const changeModelShown = (num) => {
         setModelShown(num);
@@ -200,6 +185,10 @@ const ModelViewer = (props) => {
               }
         })})
     }
+    const setLight = (num) => {
+      
+    }
+
     const setTranslation = (num) => {
         let unitArray = []
         // for (var i = modelList[modelShown].length - 1; i >= 0; i--) {
