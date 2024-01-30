@@ -28,6 +28,8 @@ const ModelViewer = (props) => {
     let myRef = React.useRef();
     let [camera, setCamera] = React.useState(); 
     let [material] = React.useState(new THREE.MeshPhongMaterial({ flatShading: 'false', color: new THREE.Color(0xafafaf) }))
+    let [brightness, setBrightness] = React.useState(1);
+    let [pointLight] = React.useState(new THREE.PointLight(0xffffff, brightness));
     let controls;
 
     const models = {};
@@ -52,7 +54,6 @@ const ModelViewer = (props) => {
     
         // this.camera = new THREE.PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 1, 500 );
     
-        let pointLight = new THREE.PointLight(0xffffff, 1);
         pointLight.position.set(80, 90, 200);
         scene.add(pointLight);
         // scene.add(new THREE.AmbientLight(0xffffff, 2.0));
@@ -115,6 +116,13 @@ const ModelViewer = (props) => {
         return () => myRef.current && myRef.current.removeChild(renderer.domElement);
     }, []);
 
+    React.useEffect(() => {
+      console.log(pointLight);
+      pointLight.intensity = brightness;
+      pointLight.updateMatrix();
+      pointLight.updateMatrixWorld();
+    }, [brightness])
+
     function findBody(list) {
       for (var i in list) {
         if(list[i].name == 'body')
@@ -139,6 +147,17 @@ const ModelViewer = (props) => {
 
         console.log(fullModel);
         console.log(body);
+        // body.material.metalness = 0;
+        body.children[0].material.metalness = 0;
+        body.children[1].material.metalness = 0;
+        fullModel.traverse((child) =>  {
+          if (child.isMesh) {
+            // child.material.emissive = 1;
+            child.material.ambient = 1;
+            // child.material.specular = 1;
+            child.material.metalness = 0;
+          }
+        })
         // body.scale.set(20,20,20);
         // fullModel.scale.set(20,20,20);
 
@@ -185,9 +204,6 @@ const ModelViewer = (props) => {
               }
         })})
     }
-    const setLight = (num) => {
-      
-    }
 
     const setTranslation = (num) => {
         let unitArray = []
@@ -207,7 +223,7 @@ const ModelViewer = (props) => {
         <div className='threescene--div'>
         <h1 className='threescene--title'>{modelData[modelShown].name}</h1>
         <div className='threescene--slider-div'>
-          <Slider onChange={setTranslation} min={1} max={30} />
+          <Slider onChange={setBrightness} min={1} max={30} />
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <button className={'threescene--button'} onClick={() =>
