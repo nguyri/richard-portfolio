@@ -7,6 +7,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
 import { ThreeMFLoader } from 'three/examples/jsm/loaders/3MFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import {getImage} from '../entry/data'
 
 import Slider, { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
@@ -22,16 +23,16 @@ import model from '../../models/lamp-base-1.3mf'
 
 const ModelViewer = (props) => {
     let [modelShown, setModelShown] = React.useState(0);
-    let [zoom, setZoom] = React.useState(props.zoom, 40);
+    let [zoom, setZoom] = React.useState(props.zoom);
     let [modelList, setModelList] = React.useState([]);
     let [scene, setScene] = React.useState(new THREE.Scene());
     let myRef = React.useRef();
     let [camera, setCamera] = React.useState(); 
     let [material] = React.useState(new THREE.MeshPhongMaterial({ flatShading: 'false', color: new THREE.Color(0xafafaf) }))
-    let [brightness, setBrightness] = React.useState(1);
-    let [rimLight] = React.useState(new THREE.PointLight(0xffffff, brightness));
+    let [brightness, setBrightness] = React.useState(15);
+    let [rimLight] = React.useState(new THREE.PointLight(0xffffff));
     // let [pointLight] = React.useState(new THREE.HemisphereLight( 0xffffff, 0x444444 ));
-    let [pointLight] = React.useState(new THREE.DirectionalLight( 0xffffff ));
+    let [floodLight] = React.useState(new THREE.DirectionalLight( 0xffffff ));
 
 
     // var hemiLight = new THREE.HemisphereLight( 0xffffff, 0x444444 );
@@ -60,19 +61,26 @@ const ModelViewer = (props) => {
         // this.camera = new THREE.PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 1, 500 );
     
         rimLight.position.set(-80, 90, 100);
-        pointLight.position.set(80, -90, 200);
-        scene.add(pointLight);
+        floodLight.position.set(80, -90, 200);
+        scene.add(floodLight);
         scene.add(rimLight);
         // scene.add(new THREE.AmbientLight(0xffffff, 2.0));
         // let [material] = React.useState(new THREE.MeshPhongMaterial({ flatShading: 'false', color: new THREE.Color(0xafafaf) }))
-        let material = new THREE.MeshPhongMaterial({ flatShading: 'false', color: new THREE.Color(0xafafaf) });
+        let texLoader = new THREE.TextureLoader();
+        let textureClothes = texLoader.load(getImage('./texture-clothes.png'));
+        textureClothes.colorSpace = THREE.SRGBColorSpace;
+        textureClothes.flipY = false;
+        let textureSkin = texLoader.load(getImage('./texture-skin.png'));
+        textureSkin.flipY = false;
+        let materialClothes = new THREE.MeshLambertMaterial({ map: textureClothes });
+        let materialSkin = new THREE.MeshLambertMaterial({map: textureSkin});
 
-        const sphereRadius = 3;
+        const sphereRadius = 30;
         const sphereWidthDivisions = 32;
         const sphereHeightDivisions = 16;
         const sphereGeo = new THREE.SphereGeometry(sphereRadius, sphereWidthDivisions, sphereHeightDivisions);
         const sphereMat = new THREE.MeshPhongMaterial({color: '#CA8'});
-        const mesh = new THREE.Mesh(sphereGeo, sphereMat);
+        const mesh = new THREE.Mesh(sphereGeo, materialClothes);
         mesh.position.set(-sphereRadius - 1, sphereRadius + 2, 0);
         scene.add(mesh);
 
@@ -82,7 +90,7 @@ const ModelViewer = (props) => {
         myRef.current.appendChild(renderer.domElement)
     
         let loader = new GLTFLoader();
-        loadGLTF(loader, models, modelData, modelList, modelShown, scene, material);
+        loadGLTF(loader, models, modelData, modelList, modelShown, scene, materialSkin, materialClothes);
         // loadFBX(loader, models, modelData, modelList, modelShown, scene);
         // let loaderThree = new ThreeMFLoader();
         // loadThreeMF(loader, modelData, modelList, modelShown, scene)
@@ -96,14 +104,23 @@ const ModelViewer = (props) => {
     
         controls = new OrbitControls(cameraInit, renderer.domElement);
         controls.addEventListener('change', render);
-        controls.target.set(0, 0, 20);
+        controls.target.set(0, 0, 60);
         controls.minPolarAngle = Math.PI / 3;
         controls.maxPolarAngle = Math.PI ;
-        controls.minAzimuthAngle = Math.PI / 8;
+        controls.minAzimuthAngle = - Math.PI / 4;
         controls.maxAzimuthAngle = Math.PI * 7 / 8;
-        controls.enablePan = false;
-        controls.enableZoom = false;
-        controls.autoRotate = true;
+        controls.maxZoom = 20;
+        controls.minZoom = 5;
+        controls.enablePan = true;
+        controls.enableZoom = true;
+        // controls.autoRotate = true;
+
+        controls.keys = {
+          LEFT: 'ArrowLeft', //left arrow
+          UP: 'ArrowUp', // up arrow
+          RIGHT: 'ArrowRight', // right arrow
+          BOTTOM: 'ArrowDown' // down arrow
+        }
         controls.update();
 
         let onWindowResize = function () {
@@ -125,13 +142,22 @@ const ModelViewer = (props) => {
 
     React.useEffect(() => {
       // console.log(pointLight);
-      pointLight.intensity = brightness;
-      pointLight.updateMatrix();
-      pointLight.updateMatrixWorld();
+      floodLight.intensity = brightness;
+      floodLight.updateMatrix();
+      floodLight.updateMatrixWorld();
       rimLight.intensity = brightness;
       rimLight.updateMatrix();
       rimLight.updateMatrixWorld();
     }, [brightness])
+
+    React.useEffect(() => {
+      // setZoom(zoom);
+      if(camera) {
+        camera.updateProjectionMatrix();
+        camera.zoom = zoom;
+        console.log(camera);
+      }
+    }, [zoom])
 
     function findBody(list) {
       for (var i in list) {
@@ -146,7 +172,7 @@ const ModelViewer = (props) => {
       }
       return null;
     }
-    const loadGLTF = (loader, models, modelData, list, modelShown, scene, material) => {
+    const loadGLTF = (loader, models, modelData, list, modelShown, scene, materialSkin, materialClothes) => {
       const path = `./${modelData[0].files}`
       // console.log(modelData[0])
       loader.load( models[path].default , function ( loadedGLTF ) {
@@ -154,24 +180,28 @@ const ModelViewer = (props) => {
         loadedGLTF.name = path
         let fullModel = loadedGLTF.scene.children[0];
         let body = findBody(loadedGLTF.scene.children);
+        body.children[0].material = materialSkin;
+        body.children[1].material = materialClothes;
 
         console.log(fullModel);
-        console.log(body);
+        // console.log(body);
         // body.material.metalness = 0;
         // body.children[0].material.metalness = 0;
         // body.children[1].material.metalness = 0;
         fullModel.traverse((child) =>  {
           if (child.isMesh) {
-            // child.material.emissive = 0;
-            // child.material.ambient = 0;
+            // child.material.emissive = 1;
+            // child.material.roughness = 1;
             child.material.specular = 1;
             child.material.metalness = 0;
+            // child.scale.set(20,20,20);
           }
         })
         // body.scale.set(20,20,20);
         // fullModel.scale.set(20,20,20);
 
-        fullModel.scale.set(20,20,20);
+        let scale = 40
+        fullModel.scale.set(scale, scale, scale);
         fullModel.position.set(...modelData[0].position);
         fullModel.rotation.set(...modelData[0].rotation);
 
@@ -214,26 +244,12 @@ const ModelViewer = (props) => {
               }
         })})
     }
-
-    const setTranslation = (num) => {
-        let unitArray = []
-        // for (var i = modelList[modelShown].length - 1; i >= 0; i--) {
-        //   let step = 2 / (modelList[modelShown].length - 1)
-        //   unitArray.push(step * i - 1)
-        // }
-        // modelList[modelShown].forEach((model, index) => {
-        //   model.position.z = modelData[modelShown].positions[index][2] + num * unitArray[index]
-        //   // if(index == 0)
-        //   //   console.log(model.position.z)
-        // })
-        // camera.zoom = props.zoom - num / 20;
-        camera.updateProjectionMatrix();
-      }
       return (
-        <div className='threescene--div'>
+        <div className='gallery'>
         <h1 className='threescene--title'>{modelData[modelShown].name}</h1>
         <div className='threescene--slider-div'>
           <Slider onChange={setBrightness} min={1} max={30} />
+          <Slider onChange={setZoom} min={1} max={30} />
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <button className={'threescene--button'} onClick={() =>
@@ -245,7 +261,7 @@ const ModelViewer = (props) => {
           {(matches) => 
           matches ? 
           <div
-            style = {{ width: '30vw', height: '30vw' }}
+            style = {{ width: '50vw', height: '30vw' }}
             ref={myRef} >
           </div> : 
           <div

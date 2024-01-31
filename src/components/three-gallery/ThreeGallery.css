@@ -35,14 +35,13 @@
     /* scale:2; */
 
 .gallery {
-    display:grid;
+    display:flex;
+    flex-direction: column;
     /* width:70vw; */
     width:100%;
-    grid-template-columns: repeat(3, 1fr);
-    margin:0;
-    gap: 3px;
     padding:20px 15vw 20px 15vw;
     justify-content: center;
+    align-items: center;
     width:min-content;
     grid-auto-flow: dense;
     height:auto;
