@@ -110,9 +110,9 @@ const ModelViewer = (props) => {
         controls.minAzimuthAngle = - Math.PI / 4;
         controls.maxAzimuthAngle = Math.PI * 7 / 8;
         controls.maxZoom = 20;
-        controls.minZoom = 5;
-        controls.enablePan = true;
-        controls.panSpeed = 1.0;
+        controls.minZoom = 10;
+        // controls.enablePan = true;
+        // controls.panSpeed = 1.0;
 	      controls.screenSpacePanning = true; 
 
         controls.enableZoom = true;
@@ -259,10 +259,15 @@ const ModelViewer = (props) => {
         })})
     }
       return (
-        <div className='gallery'>
-        <h1 className='threescene--title'>{modelData[modelShown].name}</h1>
-        <div className='threescene--slider-div'>
-          <Slider onChange={setBrightness} defaultValue={0.2} min={0.1} max={0.5} step={0.025} />
+        <div className='threegallery'>
+        <h1 className='threegallery--title'>{modelData[modelShown].name}</h1>
+        scroll to zoom, drag to orbit
+        <div className='threegallery--slider-div'>
+        Brightness
+        <Slider onChange={setBrightness} defaultValue={0.2} min={0.1} max={0.5} step={0.025} />
+        </div>
+        <div className='threegallery--slider-div'>
+        Position
           <Slider onChange={setZPosition} defaultValue = {0} min={0} max={40} />
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -271,18 +276,13 @@ const ModelViewer = (props) => {
           <button className={'threescene--button'} onClick={() => 
             modelShown < modelList.length - 1 && changeModelShown(modelShown + 1)}>Next Model</button>
         </div>
-        <MediaQuery minWidth={1224} >
-          {(matches) => 
-          matches ? 
-          <div
-            style = {{ width: '50vw', height: '30vw' }}
-            ref={myRef} >
-          </div> : 
-          <div
-            style = {{ width: '100vw', height: '100vw' }}
-            ref={myRef} >
-          </div>
-          } 
+        <MediaQuery minWidth={1224}>
+          {(smallWidth) => (
+            <div style={smallWidth ? 
+              { width: '50vw', height: '30vw' } : 
+              { width: '100vw', height: '100vw' }} 
+              ref={myRef} />
+          )}
         </MediaQuery>
       </div>
     );

@@ -159,18 +159,13 @@ const ThreeFunc = (props) => {
           <button className={'threescene--button'} onClick={() => 
             modelShown < modelList.length - 1 && changeModelShown(modelShown + 1)}>Next Model</button>
         </div>
-        <MediaQuery minWidth={1224} >
-          {(matches) => 
-          matches ? 
-          <div
-            style = {{ width: '30vw', height: '30vw' }}
-            ref={myRef} >
-          </div> : 
-          <div
-            style = {{ width: '100vw', height: '100vw' }}
-            ref={myRef} >
-          </div>
-          } 
+        <MediaQuery minWidth={1224}>
+          {(smallWidth) => (
+            <div style={smallWidth ? 
+              { width: '30vw', height: '30vw' } : 
+              { width: '100vw', height: '100vw' }} 
+              ref={myRef} />
+          )}
         </MediaQuery>
       </div>
     );
