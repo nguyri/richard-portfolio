@@ -29,14 +29,13 @@ const ModelViewer = (props) => {
     let myRef = React.useRef();
     let [camera, setCamera] = React.useState(); 
     let [material] = React.useState(new THREE.MeshPhongMaterial({ flatShading: 'false', color: new THREE.Color(0xafafaf) }))
-    let [brightness, setBrightness] = React.useState(15);
+    let [brightness, setBrightness] = React.useState(0.2);
     let [rimLight] = React.useState(new THREE.PointLight(0xffffff));
-    // let [pointLight] = React.useState(new THREE.HemisphereLight( 0xffffff, 0x444444 ));
-    let [floodLight] = React.useState(new THREE.DirectionalLight( 0xffffff ));
-
-
-    // var hemiLight = new THREE.HemisphereLight( 0xffffff, 0x444444 );
+    let [dirLight] = React.useState(new THREE.DirectionalLight( 0xffffff ));
+    let [ambientLight] = React.useState(new THREE.AmbientLight( 0xdddddd ));
+    let lights = [rimLight, dirLight];
     let controls;
+    let [model, setModel] = React.useState();
 
     const models = {};
     importAll(require.context('../../models/', false, /\.(glb|fbx)$/));
@@ -60,10 +59,11 @@ const ModelViewer = (props) => {
     
         // this.camera = new THREE.PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 1, 500 );
     
-        rimLight.position.set(-80, 90, 100);
-        floodLight.position.set(80, -90, 200);
-        scene.add(floodLight);
+        rimLight.position.set(-180, 100, 200);
+        dirLight.position.set(200, -90, 200);
+        scene.add(dirLight);
         scene.add(rimLight);
+        scene.add(ambientLight);
         // scene.add(new THREE.AmbientLight(0xffffff, 2.0));
         // let [material] = React.useState(new THREE.MeshPhongMaterial({ flatShading: 'false', color: new THREE.Color(0xafafaf) }))
         let texLoader = new THREE.TextureLoader();
@@ -75,14 +75,14 @@ const ModelViewer = (props) => {
         let materialClothes = new THREE.MeshLambertMaterial({ map: textureClothes });
         let materialSkin = new THREE.MeshLambertMaterial({map: textureSkin});
 
-        const sphereRadius = 30;
-        const sphereWidthDivisions = 32;
-        const sphereHeightDivisions = 16;
-        const sphereGeo = new THREE.SphereGeometry(sphereRadius, sphereWidthDivisions, sphereHeightDivisions);
-        const sphereMat = new THREE.MeshPhongMaterial({color: '#CA8'});
-        const mesh = new THREE.Mesh(sphereGeo, materialClothes);
-        mesh.position.set(-sphereRadius - 1, sphereRadius + 2, 0);
-        scene.add(mesh);
+        // const sphereRadius = 30;
+        // const sphereWidthDivisions = 32;
+        // const sphereHeightDivisions = 16;
+        // const sphereGeo = new THREE.SphereGeometry(sphereRadius, sphereWidthDivisions, sphereHeightDivisions);
+        // const sphereMat = new THREE.MeshPhongMaterial({color: '#CA8'});
+        // const mesh = new THREE.Mesh(sphereGeo, materialClothes);
+        // mesh.position.set(-sphereRadius - 1, sphereRadius + 2, 0);
+        // scene.add(mesh);
 
         let renderer = new THREE.WebGLRenderer({ antialias: true })
         renderer.setClearColor('#FFFFFF', 0) //#F9F7F0
@@ -104,7 +104,7 @@ const ModelViewer = (props) => {
     
         controls = new OrbitControls(cameraInit, renderer.domElement);
         controls.addEventListener('change', render);
-        controls.target.set(0, 0, 60);
+        controls.target.set(0, 0, 55);
         controls.minPolarAngle = Math.PI / 3;
         controls.maxPolarAngle = Math.PI ;
         controls.minAzimuthAngle = - Math.PI / 4;
@@ -112,15 +112,13 @@ const ModelViewer = (props) => {
         controls.maxZoom = 20;
         controls.minZoom = 5;
         controls.enablePan = true;
+        controls.panSpeed = 1.0;
+	      controls.screenSpacePanning = true; 
+
         controls.enableZoom = true;
+
         // controls.autoRotate = true;
 
-        controls.keys = {
-          LEFT: 'ArrowLeft', //left arrow
-          UP: 'ArrowUp', // up arrow
-          RIGHT: 'ArrowRight', // right arrow
-          BOTTOM: 'ArrowDown' // down arrow
-        }
         controls.update();
 
         let onWindowResize = function () {
@@ -142,22 +140,37 @@ const ModelViewer = (props) => {
 
     React.useEffect(() => {
       // console.log(pointLight);
-      floodLight.intensity = brightness;
-      floodLight.updateMatrix();
-      floodLight.updateMatrixWorld();
-      rimLight.intensity = brightness;
-      rimLight.updateMatrix();
-      rimLight.updateMatrixWorld();
+
+      lights.forEach((elem) =>(updateLight(elem, brightness)));
     }, [brightness])
 
-    React.useEffect(() => {
-      // setZoom(zoom);
-      if(camera) {
-        camera.updateProjectionMatrix();
-        camera.zoom = zoom;
-        console.log(camera);
-      }
-    }, [zoom])
+    const updateLight = (light, brightness) => {
+      light.intensity = brightness;
+      light.updateMatrix();
+      light.updateMatrixWorld();
+    }
+
+    // React.useEffect(() => {
+    //   // setZoom(zoom);
+    //   if(camera) {
+    //     camera.updateProjectionMatrix();
+    //     camera.zoom = zoom;
+    //     console.log(camera);
+    //   }
+    // }, [zoom])
+
+    // React.useEffect(() => {
+    // // setZoom(zoom);
+    // console.log(controls);
+    // console.log(target);
+    // console.log(targetVec);
+    // setTargetVec(new THREE.Vector3(0,0,target));
+    // }, [target])
+    const setZPosition = (num) => {
+      // console.log(model)
+      model.position.z = num;
+      camera.updateProjectionMatrix();
+    };
 
     function findBody(list) {
       for (var i in list) {
@@ -179,6 +192,7 @@ const ModelViewer = (props) => {
       // loader.load( models["./urban-10-new-export.loadedGLTF"].default , function ( loadedGLTF ) {
         loadedGLTF.name = path
         let fullModel = loadedGLTF.scene.children[0];
+        setModel(fullModel);
         let body = findBody(loadedGLTF.scene.children);
         body.children[0].material = materialSkin;
         body.children[1].material = materialClothes;
@@ -248,8 +262,8 @@ const ModelViewer = (props) => {
         <div className='gallery'>
         <h1 className='threescene--title'>{modelData[modelShown].name}</h1>
         <div className='threescene--slider-div'>
-          <Slider onChange={setBrightness} min={1} max={30} />
-          <Slider onChange={setZoom} min={1} max={30} />
+          <Slider onChange={setBrightness} defaultValue={0.2} min={0.1} max={0.5} step={0.025} />
+          <Slider onChange={setZPosition} defaultValue = {0} min={0} max={40} />
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <button className={'threescene--button'} onClick={() =>
