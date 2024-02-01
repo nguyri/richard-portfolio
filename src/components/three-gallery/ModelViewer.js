@@ -245,36 +245,51 @@ const ModelViewer = (props) => {
         console.error( error );
       } );
     }
+    const trackStyle={ height: 10 }
+    const  handleStyle={
+          // borderColor: 'blue',
+          height: 28,
+          width: 28,
+          marginLeft: 0,
+          marginTop: -10,
+          // backgroundColor: 'black',
+        }
+    const railStyle={ height: 10 }
 
-      const changeModelShown = (num) => {
-        setModelShown(num);
-        // console.log('in model shown', modelShown,modelList.length, num);
-        modelList.forEach((modelGroup, index) => {
-            modelGroup.forEach((model) => {
-            if (index == num) {
-                scene.add(model)
-              } else {
-                scene.remove(model)
-              }
-        })})
+    const changeModelShown = (num) => {
+      setModelShown(num);
+      // console.log('in model shown', modelShown,modelList.length, num);
+      modelList.forEach((modelGroup, index) => {
+          modelGroup.forEach((model) => {
+          if (index == num) {
+              scene.add(model)
+            } else {
+              scene.remove(model)
+            }
+      })})
     }
       return (
         <div className='threegallery'>
+        <div className='threegallery--slider-grid'>
         <h1 className='threegallery--title'>{modelData[modelShown].name}</h1>
-        scroll to zoom, drag to orbit
-        <div className='threegallery--slider-div'>
-        Brightness
-        <Slider onChange={setBrightness} defaultValue={0.2} min={0.1} max={0.5} step={0.025} />
+        <div style={{display:'flex', flexDirection:'column'}}>
+        <div className='threegallery--desc'> <b>scroll</b> to zoom</div>
+        <div className='threegallery--desc'> <b>drag</b> to orbit</div>
         </div>
-        <div className='threegallery--slider-div'>
-        Position
-          <Slider onChange={setZPosition} defaultValue = {0} min={0} max={40} />
+        <div className='threegallery--slider-div' style={{gridRow:'1 / span 1'}}>
+        <div className='threegallery--slider-title' >Brightness</div>
+        <Slider trackStyle={trackStyle} handleStyle={handleStyle} railStyle={railStyle} onChange={setBrightness} defaultValue={0.2} min={0.1} max={0.5} step={0.025} />
+        </div>
+        <div className='threegallery--slider-div' style={{gridRow:'2 / span 1'}}>
+        <div className='threegallery--slider-title' >Position</div>
+          <Slider trackStyle={trackStyle} handleStyle={handleStyle} railStyle={railStyle} onChange={setZPosition} defaultValue = {0} min={0} max={40} />
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <button className={'threescene--button'} onClick={() =>
             modelShown > 0 && changeModelShown(modelShown - 1)}>Prev</button> {' '}
           <button className={'threescene--button'} onClick={() => 
             modelShown < modelList.length - 1 && changeModelShown(modelShown + 1)}>Next Model</button>
+        </div>
         </div>
         <MediaQuery minWidth={1224}>
           {(smallWidth) => (
