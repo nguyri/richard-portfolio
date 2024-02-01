@@ -3,7 +3,7 @@ import {getImage} from '../entry/data'
 import { useMediaQuery } from 'react-responsive'
 import './ThreeGallery.css'
 import { Link, Outlet, useOutlet, useOutletContext } from "react-router-dom";
-import ModelViewer from './ModelViewer'
+const ModelViewer = React.lazy(() => import('./ModelViewer'));
 
 export default function Gallery (props) {
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });

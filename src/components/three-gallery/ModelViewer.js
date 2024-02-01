@@ -285,9 +285,9 @@ const ModelViewer = (props) => {
           <Slider trackStyle={trackStyle} handleStyle={handleStyle} railStyle={railStyle} onChange={setZPosition} defaultValue = {0} min={0} max={40} />
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <button className={'threescene--button'} onClick={() =>
+          <button disabled className={'threegallery--button'} onClick={() =>
             modelShown > 0 && changeModelShown(modelShown - 1)}>Prev</button> {' '}
-          <button className={'threescene--button'} onClick={() => 
+          <button disabled className={'threegallery--button'} onClick={() => 
             modelShown < modelList.length - 1 && changeModelShown(modelShown + 1)}>Next Model</button>
         </div>
         </div>
