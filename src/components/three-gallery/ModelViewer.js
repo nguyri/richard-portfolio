@@ -28,11 +28,10 @@ const ModelViewer = (props) => {
     let [scene, setScene] = React.useState(new THREE.Scene());
     let myRef = React.useRef();
     let [camera, setCamera] = React.useState(); 
-    let [material] = React.useState(new THREE.MeshPhongMaterial({ flatShading: 'false', color: new THREE.Color(0xafafaf) }))
-    let [brightness, setBrightness] = React.useState(0.2);
+    let [brightness, setBrightness] = React.useState(2);
     let [rimLight] = React.useState(new THREE.PointLight(0xffffff));
     let [dirLight] = React.useState(new THREE.DirectionalLight( 0xffffff ));
-    let [ambientLight] = React.useState(new THREE.AmbientLight( 0xdddddd ));
+    let [ambientLight] = React.useState(new THREE.AmbientLight( 0xffffff, 2));
     let lights = [rimLight, dirLight];
     let controls;
     let [model, setModel] = React.useState();
@@ -64,16 +63,21 @@ const ModelViewer = (props) => {
         scene.add(dirLight);
         scene.add(rimLight);
         scene.add(ambientLight);
+        THREE.ColorManagement.enabled = true;
         // scene.add(new THREE.AmbientLight(0xffffff, 2.0));
         // let [material] = React.useState(new THREE.MeshPhongMaterial({ flatShading: 'false', color: new THREE.Color(0xafafaf) }))
         let texLoader = new THREE.TextureLoader();
         let textureClothes = texLoader.load(getImage('./texture-clothes.png'));
-        textureClothes.colorSpace = THREE.SRGBColorSpace;
         textureClothes.flipY = false;
         let textureSkin = texLoader.load(getImage('./texture-skin.png'));
         textureSkin.flipY = false;
-        let materialClothes = new THREE.MeshLambertMaterial({ map: textureClothes });
-        let materialSkin = new THREE.MeshLambertMaterial({map: textureSkin});
+        textureSkin.colorSpace = THREE.SRGBColorSpace;
+        textureClothes.colorSpace = THREE.SRGBColorSpace;
+        let materialClothes = new THREE.MeshStandardMaterial({ map: textureClothes});
+        let materialSkin = new THREE.MeshStandardMaterial({map: textureSkin});
+
+        textureClothes.dispose();
+        textureSkin.dispose();
 
         // const sphereRadius = 30;
         // const sphereWidthDivisions = 32;
@@ -226,7 +230,7 @@ const ModelViewer = (props) => {
       } );
     }
 
-    const loadFBX = (loader, models, modelData, list, modelShown, scene) => {
+    const loadFBX = (loader, models, modelData, list, modelShown, material, scene) => {
       const path = `./${modelData[0].files}`
       console.log(path);
       console.log(models);
@@ -278,7 +282,7 @@ const ModelViewer = (props) => {
         </div>
         <div className='threegallery--slider-div' style={{gridRow:'1 / span 1'}}>
         <div className='threegallery--slider-title' >Brightness</div>
-        <Slider trackStyle={trackStyle} handleStyle={handleStyle} railStyle={railStyle} onChange={setBrightness} defaultValue={0.2} min={0.1} max={0.5} step={0.025} />
+        <Slider trackStyle={trackStyle} handleStyle={handleStyle} railStyle={railStyle} onChange={setBrightness} defaultValue={2} min={1} max={4} step={0.25} />
         </div>
         <div className='threegallery--slider-div' style={{gridRow:'2 / span 1'}}>
         <div className='threegallery--slider-title' >Position</div>

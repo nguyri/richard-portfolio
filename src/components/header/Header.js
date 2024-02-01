@@ -57,7 +57,7 @@ export default function Header(props) {
              <h2 className={
                     `header--subtitle  ${props.darkMode && `header--subtitle-dark`}  ${shrinkHeader && `header--subtitle-shrink`}`}>
                     { ((!shrinkHeader && !isTabletOrMobile)) &&
-                     <div style={{display: "flex", flexDirection: "row", alignItems:"center", paddingInline:"20px",}}>
+                     <div style={{display: "flex", flexDirection: "row", alignItems:"center", paddingInline:"20px", textOverflow:'ellipsis'}}>
                         putting the magic smoke 
                         into {<div className="material-icons-round header--icon" style={ {width:'20px'}}> auto_fix_normal</div>} 
                         wood {<div className="material-icons-round header--icon" style={ {width:'20px'}}> park</div>} 
@@ -74,7 +74,7 @@ export default function Header(props) {
                             <Link to={'projects'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>projects</Link>
                             <Link to={'about'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>about</Link>
                             <Link to={'gallery'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>gallery</Link>
-                            <Link to={'three-gallery'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>test</Link>
+                            {/* <Link to={'three-gallery'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>t</Link> */}
                         </>}
                     {/* <Link to={'docs'} className="nav--item">docs</Link> */}
                     <div className="toggler">
