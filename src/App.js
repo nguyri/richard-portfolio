@@ -28,6 +28,7 @@ export default function App() {
   // console.log(getImage('./favicon.png'));
 
   return(  
+      <React.Suspense fallback={<div>Loading...</div>}>
       <div className={darkMode? "App App--dark" : "App"}>
         <Favicon url={getImage('./favicon.png')} />
         <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} shrinkHeader ={shrinkHeader}/>
@@ -35,5 +36,6 @@ export default function App() {
           <Outlet context={[darkMode, setShrinkHeader]}/>
         </main>
       </div>
+      </React.Suspense>
   );
 }
