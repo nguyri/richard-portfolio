@@ -5,6 +5,7 @@ import EntriesLayout from "./components/entry/EntriesLayout"
 import Entries from "./components/entry/Entries"
 import LongEntry from "./components/entry/LongEntry"
 import NotFound from "./components/errordocs/NotFound"
+import Loading from "./components/errordocs/Loading"
 import { BrowserRouter, Routes, Route, Redirect } from "react-router-dom";
 // const AboutCard = React.lazy(()=> import("./components/about-card/AboutCard"));
 import AboutCard from "./components/about-card/AboutCard";
@@ -12,6 +13,7 @@ const Gallery = React.lazy(()=> import("./components/gallery/Gallery"));
 const ThreeGallery = React.lazy(() => import("./components/three-gallery/ThreeGallery"))
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
     <BrowserRouter>
         <Routes>
@@ -26,10 +28,12 @@ root.render(
                 </Route>
                 <Route path="about" element={<AboutCard />} />
                 <Route path="gallery" element={<Gallery />} />
-                <Route path="three-gallery" element={<ThreeGallery />}/>
+                <Route path="three-gallery" element={<ThreeGallery />} />
+                <Route path="/posts/:postId" element={<Loading />} />
                 <Route path="*" element={<NotFound />}/>
             </Route>
             <Route path="*" element={<NotFound />}/>
         </Routes>
     </BrowserRouter>
+    
     );

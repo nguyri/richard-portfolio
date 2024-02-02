@@ -65,11 +65,12 @@ module.exports = {
   resolve: { extensions: ["*", ".js", ".jsx"] },
 
   output: {
-    path: path.resolve(__dirname, "dist/"),
+    path: path.resolve(__dirname, "dist"),
     publicPath: "/dist/",
-    filename: "[name].bundle.js"
+    filename: "[name].bundle.js",
+    clean: true,
   },
-  plugins: [
+  // plugins: [
     // new HtmlWebpackPlugin({
     //   template: './{dist/template.html',
     //   favicon: './dist/assets/favicon.png',
@@ -77,7 +78,7 @@ module.exports = {
     // }),
     // new FaviconsWebpackPlugin({logo:"./src/imgs/favicon.png", inject:true}),
     // new FaviconsWebpackPlugin()
-  ],
+  // ],
   optimization: {
     splitChunks: {
       chunks: 'all',
