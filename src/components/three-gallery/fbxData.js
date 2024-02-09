@@ -5,7 +5,7 @@ export default [
         files:['urban-10-new-export.glb'],
         position:[0,0,0],
         rotation:[3.14/2,0,0],
-        textures:['texture-clothes.png', 'texture-skin.png']
+        textures:['texture-skin.png','texture-clothes.png']
     },
     {
         key:2,

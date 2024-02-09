@@ -94,13 +94,8 @@ const ModelViewer = (props) => {
         const composer = new EffectComposer(renderer);
         const renderPass = new RenderPass(scene, cameraInit);
         composer.addPass(renderPass);
-        const outlinePass = new OutlinePass(new THREE.Vector2(window.innerWidth, window.innerHeight), scene, cameraInit);
-        outlinePass.enabled = true; // not enough to disable because the other passes will make a normal looking render
-        outlinePass.edgeThickness = 10;
-        outlinePass.edgeStrength = 1;//150
-        outlinePass.visibleEdgeColor.set("#ffffff");//"#661a23");//"#30090e"); 
+        const outlinePass = configureOutlinePass(window, scene, cameraInit);
         composer.addPass(outlinePass);
-        // composer.addPass(secondOutline);
         const outputPass = new OutputPass();
 				composer.addPass( outputPass );
 				const effectFXAA = new ShaderPass( FXAAShader );
@@ -108,9 +103,7 @@ const ModelViewer = (props) => {
 				composer.addPass( effectFXAA );
         // let outlinePass;
 
-        let loader = new GLTFLoader();
-        console.log(textures);
-        loadGLTF(loader, models, modelData, modelList, modelShown, scene, textures[1], textures[0], outlinePass);
+        loadGLTF(models, modelData, modelList, modelShown, scene, textures, outlinePass);
         // loadFBX(loader, models, modelData, modelList, modelShown, scene);
         // let loaderThree = new ThreeMFLoader();
         // loadThreeMF(loader, modelData, modelList, modelShown, scene)
@@ -189,10 +182,19 @@ const ModelViewer = (props) => {
         let texture = texLoader.load(getImage(`./${texPath}`));
         texture.flipY = false;
         texture.colorSpace = THREE.SRGBColorSpace;
-        textures.push(new THREE.MeshStandardMaterial({map: texture}));
+        textures.push(new THREE.MeshStandardMaterial({map: texture, metalness:0}));
         texture.dispose();
       });
       return textures;
+    }
+
+    const configureOutlinePass = (window, scene, cameraInit) => {
+      const outlinePass = new OutlinePass(new THREE.Vector2(window.innerWidth, window.innerHeight), scene, cameraInit);
+      outlinePass.enabled = true; // not enough to disable because the other passes will make a normal looking render
+      outlinePass.edgeThickness = 10;
+      outlinePass.edgeStrength = 1;//150
+      outlinePass.visibleEdgeColor.set("#ffffff");//"#661a23");//"#30090e"); 
+      return outlinePass;
     }
 
     // React.useEffect(() => {
@@ -230,8 +232,9 @@ const ModelViewer = (props) => {
       }
       return null;
     }
-    const loadGLTF = (loader, models, modelData, list, modelShown, scene, materialSkin, materialClothes, outlinePass) => {
+    const loadGLTF = (models, modelData, list, modelShown, scene, materials, outlinePass) => {
       const path = `./${modelData[0].files}`
+      let loader = new GLTFLoader();
       // console.log(modelData[0])
       loader.load( models[path].default , function ( loadedGLTF ) {
       // loader.load( models["./urban-10-new-export.loadedGLTF"].default , function ( loadedGLTF ) {
@@ -239,16 +242,17 @@ const ModelViewer = (props) => {
         let fullModel = loadedGLTF.scene.children[0];
         setModel(fullModel);
         let body = findBody(loadedGLTF.scene.children);
-        body.children[0].material = materialSkin;
-        body.children[1].material = materialClothes;
 
-        console.log(fullModel);
+        materials.forEach((material, index) => {
+          body.children[index].material = material;
+        });
+
+        // console.log(fullModel);
         // console.log(body);
         // body.material.metalness = 0;
         // body.children[0].material.metalness = 0;
         // body.children[1].material.metalness = 0;
-        if(outlinePass)
-          outlinePass.selectedObjects.push(fullModel);
+        outlinePass && outlinePass.selectedObjects.push(fullModel);
         // secondOutline.selectedObjects.push(fullModel);
         fullModel.traverse((child) =>  {
           if (child.isMesh) {
