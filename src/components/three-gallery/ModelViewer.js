@@ -30,9 +30,10 @@ import model from '../../models/lamp-base-1.3mf'
 //https://github.com/technohippy/3MFLoader/blob/master/app/index.html
 
 const ModelViewer = (props) => {
-    let [modelShown, setModelShown] = React.useState(0);
-    let [zoom, setZoom] = React.useState(props.zoom);
+    let [modelIndex, setModelIndex] = React.useState(1);
+    let [modelShown, setModelShown] = React.useState();
     let [modelList, setModelList] = React.useState([]);
+    let [zoom, setZoom] = React.useState(props.zoom);
     let [scene, setScene] = React.useState(new THREE.Scene());
     let myRef = React.useRef();
     let [camera, setCamera] = React.useState(); 
@@ -42,15 +43,15 @@ const ModelViewer = (props) => {
     let [ambientLight] = React.useState(new THREE.AmbientLight( 0xffffff, 2 ));
     let lights = [rimLight, dirLight];
     let controls;
-    let [model, setModel] = React.useState();
 
     const models = {};
-    importAll(require.context('../../models/', false, /\.(glb|fbx)$/));
+    importAll(require.context('../../models/', false, /\.(glb)$/));
 
     function importAll(r) {
       r.keys().forEach((key) => models[key] = r(key));
     }
 
+    // console.log(models);
     React.useEffect(() => {
         const width = myRef.current.clientWidth
         const height = myRef.current.clientHeight
@@ -74,7 +75,7 @@ const ModelViewer = (props) => {
         THREE.ColorManagement.enabled = true;
         // scene.add(new THREE.AmbientLight(0xffffff, 2.0));
         // let [material] = React.useState(new THREE.MeshPhongMaterial({ flatShading: 'false', color: new THREE.Color(0xafafaf) }))
-        let textures = loadTextures(modelData, modelShown);
+        let textures = loadTextures(modelData, modelIndex);
 
         // const sphereRadius = 30;
         // const sphereWidthDivisions = 32;
@@ -103,21 +104,10 @@ const ModelViewer = (props) => {
 				composer.addPass( effectFXAA );
         // let outlinePass;
 
-        loadGLTF(models, modelData, modelList, modelShown, scene, textures, outlinePass);
-        // loadFBX(loader, models, modelData, modelList, modelShown, scene);
-        // let loaderThree = new ThreeMFLoader();
-        // loadThreeMF(loader, modelData, modelList, modelShown, scene)
-
-        // let outlineEffect = new OutlineEffect(renderer, {
-        //   defaultThickness: 0.008,
-        //   defaultColor:[0,0,0],
-        //   defaultAlpha:0.8,
-        //   defaultKeepAlive: true,
-        // });
+        loadGLTF(models, modelData, modelList, modelIndex, scene, textures, outlinePass);
         
         const render = () => {     
           renderer.render(scene, cameraInit);
-          // outlineEffect.render(scene, cameraInit); // must be after renderer render
         }
 
         const axesHelper = new THREE.AxesHelper(20);
@@ -173,8 +163,8 @@ const ModelViewer = (props) => {
       light.updateMatrixWorld();
     }
 
-    const loadTextures = (modelData, modelShown) => {
-      let texturePaths = modelData[modelShown].textures;
+    const loadTextures = (modelData, modelIndex) => {
+      let texturePaths = modelData[modelIndex].textures;
       let texLoader = new THREE.TextureLoader();
       let textures = [];
 
@@ -215,13 +205,13 @@ const ModelViewer = (props) => {
     // }, [target])
     const setZPosition = (num) => {
       // console.log(model)
-      model.position.z = num;
+      modelShown.position.z = num;
       camera.updateProjectionMatrix();
     };
 
     function findBody(list) {
       for (var i in list) {
-        if(list[i].name == 'body')
+        if(list[i].name.includes('body'))
           return list[i];
         if (Object.hasOwn(list[i], "children")) {
           var result = findBody(list[i].children);
@@ -232,19 +222,26 @@ const ModelViewer = (props) => {
       }
       return null;
     }
-    const loadGLTF = (models, modelData, list, modelShown, scene, materials, outlinePass) => {
-      const path = `./${modelData[0].files}`
+    const loadGLTF = (models, modelData, list, modelIndex, scene, materials, outlinePass) => {
+      const path = `./${modelData[modelIndex].files}`
+      console.log(path);
       let loader = new GLTFLoader();
       // console.log(modelData[0])
       loader.load( models[path].default , function ( loadedGLTF ) {
       // loader.load( models["./urban-10-new-export.loadedGLTF"].default , function ( loadedGLTF ) {
         loadedGLTF.name = path
         let fullModel = loadedGLTF.scene.children[0];
-        setModel(fullModel);
+        console.log('in full model');
+        console.log(fullModel);
+        setModelShown(fullModel);
         let body = findBody(loadedGLTF.scene.children);
 
+        console.log(body);
         materials.forEach((material, index) => {
-          body.children[index].material = material;
+          if(body.isGroup)
+            body.children[index].material = material;
+          else
+            body.material = material;
         });
 
         // console.log(fullModel);
@@ -278,16 +275,16 @@ const ModelViewer = (props) => {
       } );
     }
 
-    const loadFBX = (loader, models, modelData, list, modelShown, material, scene) => {
+    const loadFBX = (loader, models, modelData, list, modelIndex, material, scene) => {
       const path = `./${modelData[0].files}`
-      console.log(path);
-      console.log(models);
-      console.log(models[path].default)
+      // console.log(path);
+      // console.log(models);
+      // console.log(models[path].default)
       
       loader.load( models["./urban-10-new-export.fbx"].default , function ( fbx ) {
       // loader.load( models["./urban-10-new-export.fbx"].default , function ( fbx ) {
         fbx.name = path
-        console.log(fbx);
+        // console.log(fbx);
         // fbx.rotation.set(...modelData[0].rotations);
         // fbx.position.set(...modelData[0].positions);
         fbx.scale.set(0.1, 0.1, 0.1);
@@ -308,9 +305,9 @@ const ModelViewer = (props) => {
         }
     const railStyle={ height: 10 }
 
-    const changeModelShown = (num) => {
-      setModelShown(num);
-      // console.log('in model shown', modelShown,modelList.length, num);
+    const changeModelIndex = (num) => {
+      setModelIndex(num);
+      // console.log('in model shown', modelIndex,modelList.length, num);
       modelList.forEach((modelGroup, index) => {
           modelGroup.forEach((model) => {
           if (index == num) {
@@ -323,7 +320,7 @@ const ModelViewer = (props) => {
       return (
         <div className='threegallery'>
         <div className='threegallery--slider-grid'>
-        <h1 className='threegallery--title'>{modelData[modelShown].name}</h1>
+        <h1 className='threegallery--title'>{modelData[modelIndex].name}</h1>
         <div style={{display:'flex', flexDirection:'column'}}>
         <div className='threegallery--desc'> <b>scroll</b> to zoom</div>
         <div className='threegallery--desc'> <b>drag</b> to orbit</div>
@@ -338,9 +335,9 @@ const ModelViewer = (props) => {
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <button disabled className={'threegallery--button'} onClick={() =>
-            modelShown > 0 && changeModelShown(modelShown - 1)}>Prev</button> {' '}
+            modelIndex > 0 && changeModelIndex(modelIndex - 1)}>Prev</button> {' '}
           <button disabled className={'threegallery--button'} onClick={() => 
-            modelShown < modelList.length - 1 && changeModelShown(modelShown + 1)}>Next Model</button>
+            modelIndex < modelList.length - 1 && changeModelIndex(modelIndex + 1)}>Next Model</button>
         </div>
         </div>
         <MediaQuery minWidth={1224}>

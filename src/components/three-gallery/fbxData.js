@@ -10,8 +10,9 @@ export default [
     {
         key:2,
         name:'Witch',
-        files:['deres-13-export-2-weight-fix-2.fbx'],
+        files:['deres-13-export-2-weight-fix-2.glb'],
         position:[0,0,0],
-        rotation:[3.14/2,0,0]
+        rotation:[3.14/2,0,0],
+        textures:['Atlas_00001.png']
     }
 ]
