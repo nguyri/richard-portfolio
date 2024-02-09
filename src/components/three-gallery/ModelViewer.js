@@ -74,18 +74,7 @@ const ModelViewer = (props) => {
         THREE.ColorManagement.enabled = true;
         // scene.add(new THREE.AmbientLight(0xffffff, 2.0));
         // let [material] = React.useState(new THREE.MeshPhongMaterial({ flatShading: 'false', color: new THREE.Color(0xafafaf) }))
-        let texLoader = new THREE.TextureLoader();
-        let textureClothes = texLoader.load(getImage('./texture-clothes.png'));
-        textureClothes.flipY = false;
-        let textureSkin = texLoader.load(getImage('./texture-skin.png'));
-        textureSkin.flipY = false;
-        textureSkin.colorSpace = THREE.SRGBColorSpace;
-        textureClothes.colorSpace = THREE.SRGBColorSpace;
-        let materialClothes = new THREE.MeshStandardMaterial({ map: textureClothes});
-        let materialSkin = new THREE.MeshStandardMaterial({map: textureSkin});
-
-        textureClothes.dispose();
-        textureSkin.dispose();
+        let textures = loadTextures(modelData, modelShown);
 
         // const sphereRadius = 30;
         // const sphereWidthDivisions = 32;
@@ -120,7 +109,8 @@ const ModelViewer = (props) => {
         // let outlinePass;
 
         let loader = new GLTFLoader();
-        loadGLTF(loader, models, modelData, modelList, modelShown, scene, materialSkin, materialClothes, outlinePass);
+        console.log(textures);
+        loadGLTF(loader, models, modelData, modelList, modelShown, scene, textures[1], textures[0], outlinePass);
         // loadFBX(loader, models, modelData, modelList, modelShown, scene);
         // let loaderThree = new ThreeMFLoader();
         // loadThreeMF(loader, modelData, modelList, modelShown, scene)
@@ -188,6 +178,21 @@ const ModelViewer = (props) => {
       light.intensity = brightness;
       light.updateMatrix();
       light.updateMatrixWorld();
+    }
+
+    const loadTextures = (modelData, modelShown) => {
+      let texturePaths = modelData[modelShown].textures;
+      let texLoader = new THREE.TextureLoader();
+      let textures = [];
+
+      texturePaths.forEach((texPath) => {
+        let texture = texLoader.load(getImage(`./${texPath}`));
+        texture.flipY = false;
+        texture.colorSpace = THREE.SRGBColorSpace;
+        textures.push(new THREE.MeshStandardMaterial({map: texture}));
+        texture.dispose();
+      });
+      return textures;
     }
 
     // React.useEffect(() => {
