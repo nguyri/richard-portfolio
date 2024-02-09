@@ -33,7 +33,7 @@ const ModelViewer = (props) => {
     let [modelIndex, setModelIndex] = React.useState(1);
     let [modelShown, setModelShown] = React.useState();
     let [modelList, setModelList] = React.useState([]);
-    let [zoom, setZoom] = React.useState(props.zoom);
+    let [zoom, setZoom] = React.useState(15);
     let [scene, setScene] = React.useState(new THREE.Scene());
     let myRef = React.useRef();
     let [camera, setCamera] = React.useState(); 
@@ -75,7 +75,7 @@ const ModelViewer = (props) => {
         THREE.ColorManagement.enabled = true;
         // scene.add(new THREE.AmbientLight(0xffffff, 2.0));
         // let [material] = React.useState(new THREE.MeshPhongMaterial({ flatShading: 'false', color: new THREE.Color(0xafafaf) }))
-        let textures = loadTextures(modelData, modelIndex);
+        let materials = loadTextures(modelData, modelIndex);
 
         // const sphereRadius = 30;
         // const sphereWidthDivisions = 32;
@@ -93,6 +93,7 @@ const ModelViewer = (props) => {
         myRef.current.appendChild(renderer.domElement)
         
         const composer = new EffectComposer(renderer);
+        composer.setSize(window.innerWidth, window.innerHeight);
         const renderPass = new RenderPass(scene, cameraInit);
         composer.addPass(renderPass);
         const outlinePass = configureOutlinePass(window, scene, cameraInit);
@@ -103,8 +104,9 @@ const ModelViewer = (props) => {
 				effectFXAA.uniforms[ 'resolution' ].value.set( 1 / window.innerWidth, 1 / window.innerHeight );
 				composer.addPass( effectFXAA );
         // let outlinePass;
+        // let composer;
 
-        loadGLTF(models, modelData, modelList, modelIndex, scene, textures, outlinePass);
+        loadGLTF(models, modelData, modelList, modelIndex, scene, materials, outlinePass);
         
         const render = () => {     
           renderer.render(scene, cameraInit);
@@ -144,7 +146,7 @@ const ModelViewer = (props) => {
         const animate = () => {
           requestAnimationFrame( animate );
           render();
-          composer.render();
+          composer && composer.render();
         }
         
         animate();
@@ -166,16 +168,16 @@ const ModelViewer = (props) => {
     const loadTextures = (modelData, modelIndex) => {
       let texturePaths = modelData[modelIndex].textures;
       let texLoader = new THREE.TextureLoader();
-      let textures = [];
+      let materials = [];
 
       texturePaths.forEach((texPath) => {
         let texture = texLoader.load(getImage(`./${texPath}`));
         texture.flipY = false;
         texture.colorSpace = THREE.SRGBColorSpace;
-        textures.push(new THREE.MeshStandardMaterial({map: texture, metalness:0}));
+        materials.push(new THREE.MeshStandardMaterial({map: texture, metalness:0, specular:0}));
         texture.dispose();
       });
-      return textures;
+      return materials;
     }
 
     const configureOutlinePass = (window, scene, cameraInit) => {
@@ -331,7 +333,7 @@ const ModelViewer = (props) => {
         </div>
         <div className='threegallery--slider-div' style={{gridRow:'2 / span 1'}}>
         <div className='threegallery--slider-title' >Position</div>
-          <Slider trackStyle={trackStyle} handleStyle={handleStyle} railStyle={railStyle} onChange={setZPosition} defaultValue = {0} min={0} max={40} />
+          <Slider trackStyle={trackStyle} handleStyle={handleStyle} railStyle={railStyle} onChange={setZPosition} defaultValue = {0} min={-5} max={45} />
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <button disabled className={'threegallery--button'} onClick={() =>

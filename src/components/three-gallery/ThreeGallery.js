@@ -47,7 +47,7 @@ export default function Gallery (props) {
         <React.Suspense fallback={<div>Loading...</div>}>
         <div style={{display:"flex", flexDirection:"row", justifyContent:"center", height:"90vh", overflow:"auto"}}>
             {/* <ModelViewer/> */}
-            <ModelViewer style={{width:"40vw"}} zoom={12.0}/>
+            <ModelViewer style={{width:"40vw"}}/>
             {/* <ThreeFunc style={{width:"40vw"}} zoom={4.0}/> */}
         </div>
         </React.Suspense>
