@@ -96,8 +96,11 @@ const ModelViewer = (props) => {
         composer.setSize(window.innerWidth, window.innerHeight);
         const renderPass = new RenderPass(scene, cameraInit);
         composer.addPass(renderPass);
-        const outlinePass = configureOutlinePass(window, scene, cameraInit);
-        composer.addPass(outlinePass);
+        // const outlinePass = configureOutlinePass(window, scene, cameraInit, 18, 2, "#ffffff");
+        // composer.addPass(outlinePass);
+        const darkOutlinePass = configureOutlinePass(window, scene, cameraInit, 4, 7, 0, modelData[modelIndex].outlineColor);
+        composer.addPass( darkOutlinePass);
+        let passes = [ darkOutlinePass];
         const outputPass = new OutputPass();
 				composer.addPass( outputPass );
 				const effectFXAA = new ShaderPass( FXAAShader );
@@ -106,8 +109,8 @@ const ModelViewer = (props) => {
         // let outlinePass;
         // let composer;
 
-        loadGLTF(models, modelData, modelList, modelIndex, scene, materials, outlinePass);
-        
+        loadGLTF(models, modelData, modelList, modelIndex, scene, materials, passes);
+
         const render = () => {     
           renderer.render(scene, cameraInit);
         }
@@ -123,7 +126,7 @@ const ModelViewer = (props) => {
         controls.maxPolarAngle = Math.PI ;
         controls.minAzimuthAngle = - Math.PI / 4;
         controls.maxAzimuthAngle = Math.PI * 7 / 8;
-        controls.maxZoom = 20;
+        controls.maxZoom = 25;
         controls.minZoom = 10;
         // controls.enablePan = true;
         // controls.panSpeed = 1.0;
@@ -180,12 +183,13 @@ const ModelViewer = (props) => {
       return materials;
     }
 
-    const configureOutlinePass = (window, scene, cameraInit) => {
+    const configureOutlinePass = (window, scene, cameraInit, edgeThickness, edgeStrength, edgeGlow, color) => {
       const outlinePass = new OutlinePass(new THREE.Vector2(window.innerWidth, window.innerHeight), scene, cameraInit);
       outlinePass.enabled = true; // not enough to disable because the other passes will make a normal looking render
-      outlinePass.edgeThickness = 10;
-      outlinePass.edgeStrength = 1;//150
-      outlinePass.visibleEdgeColor.set("#ffffff");//"#661a23");//"#30090e"); 
+      outlinePass.edgeThickness = edgeThickness ? edgeThickness : 10;
+      outlinePass.edgeStrength = edgeStrength ? edgeStrength : 1;//150
+      outlinePass.visibleEdgeColor.set(color ? color : "#ffffff");//"#661a23");//"#30090e"); 
+      outlinePass.edgeGlow = edgeGlow ? edgeGlow: 0;
       return outlinePass;
     }
 
@@ -224,7 +228,7 @@ const ModelViewer = (props) => {
       }
       return null;
     }
-    const loadGLTF = (models, modelData, list, modelIndex, scene, materials, outlinePass) => {
+    const loadGLTF = (models, modelData, list, modelIndex, scene, materials, passes) => {
       const path = `./${modelData[modelIndex].files}`
       console.log(path);
       let loader = new GLTFLoader();
@@ -251,7 +255,8 @@ const ModelViewer = (props) => {
         // body.material.metalness = 0;
         // body.children[0].material.metalness = 0;
         // body.children[1].material.metalness = 0;
-        outlinePass && outlinePass.selectedObjects.push(fullModel);
+        if(passes)
+          passes.forEach((pass) => pass.selectedObjects.push(fullModel));
         // secondOutline.selectedObjects.push(fullModel);
         fullModel.traverse((child) =>  {
           if (child.isMesh) {
@@ -272,6 +277,7 @@ const ModelViewer = (props) => {
 
         // loadedGLTF.scene.children[0].children[3].children[0].material = material;
         scene.add( loadedGLTF.scene );
+        return fullModel;
       }, undefined, function ( error ) {
         console.error( error );
       } );
