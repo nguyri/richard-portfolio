@@ -7,6 +7,14 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
 import { ThreeMFLoader } from 'three/examples/jsm/loaders/3MFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { OutlineEffect } from 'three/examples/jsm/effects/OutlineEffect'
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
+import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
+import { OutlinePass } from 'three/examples/jsm/postprocessing/OutlinePass.js';
+import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
+import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader.js';
+
 import {getImage} from '../entry/data'
 
 import Slider, { Range } from 'rc-slider';
@@ -31,7 +39,7 @@ const ModelViewer = (props) => {
     let [brightness, setBrightness] = React.useState(2);
     let [rimLight] = React.useState(new THREE.PointLight(0xffffff));
     let [dirLight] = React.useState(new THREE.DirectionalLight( 0xffffff ));
-    let [ambientLight] = React.useState(new THREE.AmbientLight( 0xffffff, 2));
+    let [ambientLight] = React.useState(new THREE.AmbientLight( 0xffffff, 2 ));
     let lights = [rimLight, dirLight];
     let controls;
     let [model, setModel] = React.useState();
@@ -88,24 +96,53 @@ const ModelViewer = (props) => {
         // mesh.position.set(-sphereRadius - 1, sphereRadius + 2, 0);
         // scene.add(mesh);
 
+        
         let renderer = new THREE.WebGLRenderer({ antialias: true })
-        renderer.setClearColor('#FFFFFF', 0) //#F9F7F0
+        renderer.setClearColor('#ffffff', 0) //#F9F7F0
         renderer.setSize(width, height)
         myRef.current.appendChild(renderer.domElement)
-    
+        
+        const composer = new EffectComposer(renderer);
+        const renderPass = new RenderPass(scene, cameraInit);
+        composer.addPass(renderPass);
+        const outlinePass = new OutlinePass(new THREE.Vector2(window.innerWidth, window.innerHeight), scene, cameraInit);
+        let secondOutline;
+        outlinePass.enabled = true; // not enough to disable because the other passes will make a normal looking render
+        outlinePass.edgeThickness = 1;
+        outlinePass.edgeStrength = 4;//150
+        outlinePass.usePatternTexture = false; 
+        outlinePass.visibleEdgeColor.set("#661a23");//"#30090e"); 
+        composer.addPass(outlinePass);
+        // composer.addPass(secondOutline);
+        const outputPass = new OutputPass();
+				composer.addPass( outputPass );
+				const effectFXAA = new ShaderPass( FXAAShader );
+				effectFXAA.uniforms[ 'resolution' ].value.set( 1 / window.innerWidth, 1 / window.innerHeight );
+				composer.addPass( effectFXAA );
+        // let outlinePass;
+
         let loader = new GLTFLoader();
-        loadGLTF(loader, models, modelData, modelList, modelShown, scene, materialSkin, materialClothes);
+        loadGLTF(loader, models, modelData, modelList, modelShown, scene, materialSkin, materialClothes, outlinePass);
         // loadFBX(loader, models, modelData, modelList, modelShown, scene);
         // let loaderThree = new ThreeMFLoader();
         // loadThreeMF(loader, modelData, modelList, modelShown, scene)
 
-        const render = () => {
-            renderer.render(scene, cameraInit);
+        // let outlineEffect = new OutlineEffect(renderer, {
+        //   defaultThickness: 0.008,
+        //   defaultColor:[0,0,0],
+        //   defaultAlpha:0.8,
+        //   defaultKeepAlive: true,
+        // });
+        
+        const render = () => {     
+          renderer.render(scene, cameraInit);
+          // outlineEffect.render(scene, cameraInit); // must be after renderer render
         }
+
         const axesHelper = new THREE.AxesHelper(20);
         scene.add(axesHelper);
         // scene.add(cube);
-    
+        
         controls = new OrbitControls(cameraInit, renderer.domElement);
         controls.addEventListener('change', render);
         controls.target.set(0, 0, 55);
@@ -118,30 +155,31 @@ const ModelViewer = (props) => {
         // controls.enablePan = true;
         // controls.panSpeed = 1.0;
 	      controls.screenSpacePanning = true; 
-
+        
         controls.enableZoom = true;
-
+        
         // controls.autoRotate = true;
-
+        
         controls.update();
-
+        
         let onWindowResize = function () {
-            cameraInit.aspect = window.innerWidth / window.innerHeight;
-            cameraInit.updateProjectionMatrix();
-            renderer.setSize( window.innerWidth, window.innerHeight );
-          }
-      
-        window.addEventListener("resize", onWindowResize, false);
-
-        const animate = () => {
-            requestAnimationFrame( animate );
-            render();
+          cameraInit.aspect = window.innerWidth / window.innerHeight;
+          cameraInit.updateProjectionMatrix();
+          renderer.setSize( window.innerWidth, window.innerHeight );
         }
-
+        
+        window.addEventListener("resize", onWindowResize, false);
+        
+        const animate = () => {
+          requestAnimationFrame( animate );
+          render();
+          composer.render();
+        }
+        
         animate();
         return () => myRef.current && myRef.current.removeChild(renderer.domElement);
-    }, []);
-
+      }, []);
+      
     React.useEffect(() => {
       // console.log(pointLight);
 
@@ -189,7 +227,7 @@ const ModelViewer = (props) => {
       }
       return null;
     }
-    const loadGLTF = (loader, models, modelData, list, modelShown, scene, materialSkin, materialClothes) => {
+    const loadGLTF = (loader, models, modelData, list, modelShown, scene, materialSkin, materialClothes, outlinePass) => {
       const path = `./${modelData[0].files}`
       // console.log(modelData[0])
       loader.load( models[path].default , function ( loadedGLTF ) {
@@ -206,6 +244,9 @@ const ModelViewer = (props) => {
         // body.material.metalness = 0;
         // body.children[0].material.metalness = 0;
         // body.children[1].material.metalness = 0;
+        if(outlinePass)
+          outlinePass.selectedObjects.push(fullModel);
+        // secondOutline.selectedObjects.push(fullModel);
         fullModel.traverse((child) =>  {
           if (child.isMesh) {
             // child.material.emissive = 1;
