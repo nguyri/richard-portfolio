@@ -98,7 +98,7 @@ const ModelViewer = (props) => {
 
         
         let renderer = new THREE.WebGLRenderer({ antialias: true })
-        renderer.setClearColor('#ffffff', 0) //#F9F7F0
+        renderer.setClearColor('#000000', 0) //#F9F7F0
         renderer.setSize(width, height)
         myRef.current.appendChild(renderer.domElement)
         
@@ -106,12 +106,10 @@ const ModelViewer = (props) => {
         const renderPass = new RenderPass(scene, cameraInit);
         composer.addPass(renderPass);
         const outlinePass = new OutlinePass(new THREE.Vector2(window.innerWidth, window.innerHeight), scene, cameraInit);
-        let secondOutline;
         outlinePass.enabled = true; // not enough to disable because the other passes will make a normal looking render
-        outlinePass.edgeThickness = 1;
-        outlinePass.edgeStrength = 4;//150
-        outlinePass.usePatternTexture = false; 
-        outlinePass.visibleEdgeColor.set("#661a23");//"#30090e"); 
+        outlinePass.edgeThickness = 10;
+        outlinePass.edgeStrength = 1;//150
+        outlinePass.visibleEdgeColor.set("#ffffff");//"#661a23");//"#30090e"); 
         composer.addPass(outlinePass);
         // composer.addPass(secondOutline);
         const outputPass = new OutputPass();
