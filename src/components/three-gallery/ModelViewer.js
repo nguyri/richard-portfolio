@@ -30,8 +30,9 @@ import model from '../../models/lamp-base-1.3mf'
 //https://github.com/technohippy/3MFLoader/blob/master/app/index.html
 
 const ModelViewer = (props) => {
-    let [modelIndex, setModelIndex] = React.useState(1);
+    let [modelIndex, setModelIndex] = React.useState(0);
     let [modelShown, setModelShown] = React.useState();
+    let [loadedModel, setLoadedModel] = React.useState();
     let [modelList, setModelList] = React.useState([]);
     let [zoom, setZoom] = React.useState(15);
     let [scene, setScene] = React.useState(new THREE.Scene());
@@ -43,6 +44,7 @@ const ModelViewer = (props) => {
     let [ambientLight] = React.useState(new THREE.AmbientLight( 0xffffff, 2 ));
     let lights = [rimLight, dirLight];
     let controls;
+    let passes = [];
 
     const models = {};
     importAll(require.context('../../models/', false, /\.(glb)$/));
@@ -100,7 +102,7 @@ const ModelViewer = (props) => {
         // composer.addPass(outlinePass);
         const darkOutlinePass = configureOutlinePass(window, scene, cameraInit, 4, 7, 0, modelData[modelIndex].outlineColor);
         composer.addPass( darkOutlinePass);
-        let passes = [ darkOutlinePass];
+        passes = [ darkOutlinePass ];
         const outputPass = new OutputPass();
 				composer.addPass( outputPass );
 				const effectFXAA = new ShaderPass( FXAAShader );
@@ -108,8 +110,11 @@ const ModelViewer = (props) => {
 				composer.addPass( effectFXAA );
         // let outlinePass;
         // let composer;
-
-        loadGLTF(models, modelData, modelList, modelIndex, scene, materials, passes);
+        console.log("MODELS");
+        console.log(models);
+        console.log(models, modelIndex);
+        let loadedGLTF = loadGLTF(models, modelData, modelIndex, scene, materials, passes);
+        setLoadedModel(loadedGLTF);
 
         const render = () => {     
           renderer.render(scene, cameraInit);
@@ -228,7 +233,7 @@ const ModelViewer = (props) => {
       }
       return null;
     }
-    const loadGLTF = (models, modelData, list, modelIndex, scene, materials, passes) => {
+    const loadGLTF = (models, modelData, modelIndex, scene, materials, passes) => {
       const path = `./${modelData[modelIndex].files}`
       console.log(path);
       let loader = new GLTFLoader();
@@ -277,7 +282,7 @@ const ModelViewer = (props) => {
 
         // loadedGLTF.scene.children[0].children[3].children[0].material = material;
         scene.add( loadedGLTF.scene );
-        return fullModel;
+        return loadedGLTF;
       }, undefined, function ( error ) {
         console.error( error );
       } );
@@ -315,15 +320,21 @@ const ModelViewer = (props) => {
 
     const changeModelIndex = (num) => {
       setModelIndex(num);
-      // console.log('in model shown', modelIndex,modelList.length, num);
-      modelList.forEach((modelGroup, index) => {
-          modelGroup.forEach((model) => {
-          if (index == num) {
-              scene.add(model)
-            } else {
-              scene.remove(model)
-            }
-      })})
+      console.log('in model shown', modelIndex,modelList.length, num);
+      console.log(models);
+
+      scene.remove(loadedModel);
+      let materials = loadTextures(modelData, modelIndex);
+      let model = loadGLTF(models, modelData, modelIndex, scene, materials, passes);
+      setLoadedModel(model);
+
+      // models.forEach((model, index) => {
+      //     if (index == num) {
+      //         scene.add(model)
+      //       } else {
+      //         scene.remove(model)
+      //       }
+      // })
     }
       return (
         <div className='threegallery'>
@@ -342,10 +353,10 @@ const ModelViewer = (props) => {
           <Slider trackStyle={trackStyle} handleStyle={handleStyle} railStyle={railStyle} onChange={setZPosition} defaultValue = {0} min={-5} max={45} />
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <button disabled className={'threegallery--button'} onClick={() =>
+          <button className={'threegallery--button'} onClick={() =>
             modelIndex > 0 && changeModelIndex(modelIndex - 1)}>Prev</button> {' '}
-          <button disabled className={'threegallery--button'} onClick={() => 
-            modelIndex < modelList.length - 1 && changeModelIndex(modelIndex + 1)}>Next Model</button>
+          <button className={'threegallery--button'} onClick={() => 
+            modelIndex < modelData.length - 1 && changeModelIndex(modelIndex + 1)}>Next Model</button>
         </div>
         </div>
         <MediaQuery minWidth={1224}>
