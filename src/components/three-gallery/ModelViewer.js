@@ -276,8 +276,8 @@ const ModelViewer = (props) => {
 
         let scale = 40
         fullModel.scale.set(scale, scale, scale);
-        fullModel.position.set(...modelData[0].position);
-        fullModel.rotation.set(...modelData[0].rotation);
+        fullModel.position.set(...modelData[modelIndex].position);
+        fullModel.rotation.set(...modelData[modelIndex].rotation);
 
         // loadedGLTF.scene.children[0].children[3].children[0].material = material;
         scene.add( loadedGLTF.scene );
