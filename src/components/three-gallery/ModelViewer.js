@@ -44,7 +44,7 @@ const ModelViewer = (props) => {
     let [ambientLight] = React.useState(new THREE.AmbientLight( 0xffffff, 2 ));
     let lights = [rimLight, dirLight];
     let controls;
-    let passes = [];
+    let [outlinePass, setOutlinePass] = React.useState();
 
     const models = {};
     importAll(require.context('../../models/', false, /\.(glb)$/));
@@ -52,6 +52,17 @@ const ModelViewer = (props) => {
     function importAll(r) {
       r.keys().forEach((key) => models[key] = r(key));
     }
+
+    React.useEffect(() => {
+      if (!loadedModel) return;
+      try {
+        let outlinedModel = loadedModel.children[0];
+        outlinePass.visibleEdgeColor.set(modelData[modelIndex].outlineColor)
+        outlinePass.selectedObjects.push(outlinedModel);
+      } catch (err) {
+        console.error(err);
+      }
+    }, [loadedModel]);
 
     // console.log(models);
     React.useEffect(() => {
@@ -101,7 +112,7 @@ const ModelViewer = (props) => {
         // composer.addPass(outlinePass);
         const darkOutlinePass = configureOutlinePass(window, scene, cameraInit, 4, 7, 0, modelData[modelIndex].outlineColor);
         composer.addPass( darkOutlinePass);
-        passes = [ darkOutlinePass ];
+        setOutlinePass(darkOutlinePass); 
         const outputPass = new OutputPass();
 				composer.addPass( outputPass );
 				const effectFXAA = new ShaderPass( FXAAShader );
@@ -228,7 +239,7 @@ const ModelViewer = (props) => {
       }
       return null;
     }
-    const loadGLTF = (models, modelData, modelIndex, scene, materials, passes) => {
+    const loadGLTF = (models, modelData, modelIndex, scene, materials) => {
       const path = `./${modelData[modelIndex].files}`
       let loader = new GLTFLoader();
       loader.load( models[path].default , function ( loadedGLTF ) {
@@ -250,8 +261,6 @@ const ModelViewer = (props) => {
         // body.material.metalness = 0;
         // body.children[0].material.metalness = 0;
         // body.children[1].material.metalness = 0;
-        if(passes)
-          passes.forEach((pass) => pass.selectedObjects.push(fullModel));
         // secondOutline.selectedObjects.push(fullModel);
         fullModel.traverse((child) =>  {
           if (child.isMesh) {
@@ -311,7 +320,7 @@ const ModelViewer = (props) => {
     const loadModelIndex = (num) => {
       scene.remove(loadedModel);
       let materials = loadTextures(modelData, num);
-      loadGLTF(models, modelData, num, scene, materials, passes);
+      loadGLTF(models, modelData, num, scene, materials);
       setModelIndex(num);
     }
       return (
