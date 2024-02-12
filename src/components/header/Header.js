@@ -6,7 +6,7 @@ import useBreadcrumbs from 'use-react-router-breadcrumbs';
 
 export default function Header(props) {
     const entriesLayout = document.querySelector(".entries-layout");
-    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
+    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1450px)' })
     const shrinkHeader = props.shrinkHeader;
 
     // const handleScroll = () => {
@@ -54,18 +54,25 @@ export default function Header(props) {
         <div className={`header ${props.darkMode && `header--dark`} ${shrinkHeader && `header--shrink`}`}>
             { ((isTabletOrMobile && !shrinkHeader) || (!isTabletOrMobile)) && <Link to={'projects'} style={{ textDecoration: "none" }} >{homeButton()}</Link>}
             
-             <h2 className={
-                    `header--subtitle  ${props.darkMode && `header--subtitle-dark`}  ${shrinkHeader && `header--subtitle-shrink`}`}>
-                    { ((!shrinkHeader && !isTabletOrMobile)) &&
-                     <div style={{display: "flex", flexDirection: "row", alignItems:"center", paddingInline:"20px", textOverflow:'ellipsis'}}>
-                        putting the magic smoke 
-                        into {<div className="material-icons-round header--icon" style={ {width:'20px'}}> auto_fix_normal</div>} 
-                        wood {<div className="material-icons-round header--icon" style={ {width:'20px'}}> park</div>} 
-                        code {<div className="material-icons-round header--icon" style={ {width:'25px'}}>terminal</div>} 
-                        steel {<div className="material-icons-round header--icon" style={{width:'20px'}}> precision_manufacturing</div>} </div> }
-                        {/* h_mobiledata */} 
-                    { Breadcrumbs(props.darkMode) }
-                </h2>   
+            <h2 className={`header--subtitle ${props.darkMode && 'header--subtitle-dark'} ${shrinkHeader && 'header--subtitle-shrink'}`}>
+                {!shrinkHeader && !isTabletOrMobile && (
+                    <div style={{display:'flex', flexDirection:'row'}}>
+                    <div className={'header--subtitle-text'}>
+                        putting the magic smoke into 
+                    </div>
+                    <div className={'header--subtitle-text'}>
+                        <div className="material-icons-round header--icon" style={{ width: '20px' }}> auto_fix_normal</div>
+                        wood 
+                        <div className="material-icons-round header--icon" style={{ width: '20px' }}> park</div>
+                        code 
+                        <div className="material-icons-round header--icon" style={{ width: '25px' }}>terminal</div>
+                        steel 
+                        <div className="material-icons-round header--icon" style={{ width: '20px' }}> precision_manufacturing</div>
+                    </div></div>
+                )}
+                {/* h_mobiledata */} 
+                {Breadcrumbs(props.darkMode)}
+            </h2>
 
             <nav className={props.darkMode ? "nav--dark" : ""}>
                 <div className="nav--row">
@@ -74,7 +81,7 @@ export default function Header(props) {
                             <Link to={'projects'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>projects</Link>
                             <Link to={'about'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>about</Link>
                             <Link to={'gallery'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>gallery</Link>
-                            <Link to={'three-gallery'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>t</Link>
+                            <Link to={'three-gallery'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>models</Link>
                         </>}
                     {/* <Link to={'docs'} className="nav--item">docs</Link> */}
                     <div className="toggler">
