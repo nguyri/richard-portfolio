@@ -77,8 +77,7 @@ const ModelViewer = (props) => {
         THREE.ColorManagement.enabled = true;
         // scene.add(new THREE.AmbientLight(0xffffff, 2.0));
         // let [material] = React.useState(new THREE.MeshPhongMaterial({ flatShading: 'false', color: new THREE.Color(0xafafaf) }))
-        let materials = loadTextures(modelData, modelIndex);
-
+        
         // const sphereRadius = 30;
         // const sphereWidthDivisions = 32;
         // const sphereHeightDivisions = 16;
@@ -87,7 +86,7 @@ const ModelViewer = (props) => {
         // const mesh = new THREE.Mesh(sphereGeo, materialClothes);
         // mesh.position.set(-sphereRadius - 1, sphereRadius + 2, 0);
         // scene.add(mesh);
-
+        
         
         let renderer = new THREE.WebGLRenderer({ antialias: true })
         renderer.setClearColor('#000000', 0) //#F9F7F0
@@ -110,12 +109,9 @@ const ModelViewer = (props) => {
 				composer.addPass( effectFXAA );
         // let outlinePass;
         // let composer;
-        console.log("MODELS");
-        console.log(models);
-        console.log(models, modelIndex);
-        let loadedGLTF = loadGLTF(models, modelData, modelIndex, scene, materials, passes);
-        setLoadedModel(loadedGLTF);
-
+        console.log(modelIndex);
+        loadModelIndex(modelIndex);
+        
         const render = () => {     
           renderer.render(scene, cameraInit);
         }
@@ -182,7 +178,7 @@ const ModelViewer = (props) => {
         let texture = texLoader.load(getImage(`./${texPath}`));
         texture.flipY = false;
         texture.colorSpace = THREE.SRGBColorSpace;
-        materials.push(new THREE.MeshStandardMaterial({map: texture, metalness:0, specular:0}));
+        materials.push(new THREE.MeshStandardMaterial({map: texture, metalness:0}));
         texture.dispose();
       });
       return materials;
@@ -235,19 +231,16 @@ const ModelViewer = (props) => {
     }
     const loadGLTF = (models, modelData, modelIndex, scene, materials, passes) => {
       const path = `./${modelData[modelIndex].files}`
-      console.log(path);
       let loader = new GLTFLoader();
-      // console.log(modelData[0])
+      console.log(modelData);
+      console.log(path)
       loader.load( models[path].default , function ( loadedGLTF ) {
       // loader.load( models["./urban-10-new-export.loadedGLTF"].default , function ( loadedGLTF ) {
         loadedGLTF.name = path
         let fullModel = loadedGLTF.scene.children[0];
-        console.log('in full model');
-        console.log(fullModel);
         setModelShown(fullModel);
         let body = findBody(loadedGLTF.scene.children);
 
-        console.log(body);
         materials.forEach((material, index) => {
           if(body.isGroup)
             body.children[index].material = material;
@@ -282,7 +275,7 @@ const ModelViewer = (props) => {
 
         // loadedGLTF.scene.children[0].children[3].children[0].material = material;
         scene.add( loadedGLTF.scene );
-        return loadedGLTF;
+        setLoadedModel(loadedGLTF.scene);
       }, undefined, function ( error ) {
         console.error( error );
       } );
@@ -318,15 +311,12 @@ const ModelViewer = (props) => {
         }
     const railStyle={ height: 10 }
 
-    const changeModelIndex = (num) => {
+    const loadModelIndex = (num) => {
       setModelIndex(num);
-      console.log('in model shown', modelIndex,modelList.length, num);
-      console.log(models);
-
+      console.log("in load model index", num);
       scene.remove(loadedModel);
       let materials = loadTextures(modelData, modelIndex);
-      let model = loadGLTF(models, modelData, modelIndex, scene, materials, passes);
-      setLoadedModel(model);
+      loadGLTF(models, modelData, modelIndex, scene, materials, passes);
 
       // models.forEach((model, index) => {
       //     if (index == num) {
@@ -354,9 +344,9 @@ const ModelViewer = (props) => {
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <button className={'threegallery--button'} onClick={() =>
-            modelIndex > 0 && changeModelIndex(modelIndex - 1)}>Prev</button> {' '}
+            modelIndex > 0 && loadModelIndex(modelIndex - 1)}>Prev</button> {' '}
           <button className={'threegallery--button'} onClick={() => 
-            modelIndex < modelData.length - 1 && changeModelIndex(modelIndex + 1)}>Next Model</button>
+            modelIndex < modelData.length - 1 && loadModelIndex(modelIndex + 1)}>Next Model</button>
         </div>
         </div>
         <MediaQuery minWidth={1224}>
