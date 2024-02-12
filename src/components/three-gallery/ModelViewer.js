@@ -109,7 +109,6 @@ const ModelViewer = (props) => {
 				composer.addPass( effectFXAA );
         // let outlinePass;
         // let composer;
-        console.log(modelIndex);
         loadModelIndex(modelIndex);
         
         const render = () => {     
@@ -232,8 +231,6 @@ const ModelViewer = (props) => {
     const loadGLTF = (models, modelData, modelIndex, scene, materials, passes) => {
       const path = `./${modelData[modelIndex].files}`
       let loader = new GLTFLoader();
-      console.log(modelData);
-      console.log(path)
       loader.load( models[path].default , function ( loadedGLTF ) {
       // loader.load( models["./urban-10-new-export.loadedGLTF"].default , function ( loadedGLTF ) {
         loadedGLTF.name = path
@@ -312,19 +309,10 @@ const ModelViewer = (props) => {
     const railStyle={ height: 10 }
 
     const loadModelIndex = (num) => {
-      setModelIndex(num);
-      console.log("in load model index", num);
       scene.remove(loadedModel);
-      let materials = loadTextures(modelData, modelIndex);
-      loadGLTF(models, modelData, modelIndex, scene, materials, passes);
-
-      // models.forEach((model, index) => {
-      //     if (index == num) {
-      //         scene.add(model)
-      //       } else {
-      //         scene.remove(model)
-      //       }
-      // })
+      let materials = loadTextures(modelData, num);
+      loadGLTF(models, modelData, num, scene, materials, passes);
+      setModelIndex(num);
     }
       return (
         <div className='threegallery'>

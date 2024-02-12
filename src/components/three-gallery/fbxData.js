@@ -1,6 +1,6 @@
 export default [
     {
-        key:1,
+        key:0,
         name:'Radio Operator',
         files:['urban-10-new-export.glb'],
         position:[0,0,0],
@@ -9,7 +9,7 @@ export default [
         outlineColor: "#c49189",
     },
     {
-        key:2,
+        key:1,
         name:'Baseball Witch',
         files:['deres-13-export-2-weight-fix-2.glb'],
         position:[0,0,0],
