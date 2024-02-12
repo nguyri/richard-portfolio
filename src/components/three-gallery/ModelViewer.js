@@ -110,7 +110,7 @@ const ModelViewer = (props) => {
         composer.addPass(renderPass);
         // const outlinePass = configureOutlinePass(window, scene, cameraInit, 18, 2, "#ffffff");
         // composer.addPass(outlinePass);
-        const darkOutlinePass = configureOutlinePass(window, scene, cameraInit, 4, 7, 0, modelData[modelIndex].outlineColor);
+        const darkOutlinePass = configureOutlinePass(window, scene, cameraInit, 1, 2, 0, modelData[modelIndex].outlineColor);
         composer.addPass( darkOutlinePass);
         setOutlinePass(darkOutlinePass); 
         const outputPass = new OutputPass();

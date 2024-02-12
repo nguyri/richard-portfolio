@@ -1,12 +1,12 @@
 import React from "react"
 import "./Header.css"
 import { useMediaQuery } from 'react-responsive'
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import useBreadcrumbs from 'use-react-router-breadcrumbs';
 
 export default function Header(props) {
     const entriesLayout = document.querySelector(".entries-layout");
-    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1450px)' })
+    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1450px)' });
     const shrinkHeader = props.shrinkHeader;
 
     // const handleScroll = () => {

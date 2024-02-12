@@ -15,6 +15,9 @@ export default function EntriesLayout(props) {
     const scrollToTop = () => {
         entriesRef.current.scrollTo(0,0);
     }
+    React.useEffect(() => {
+        setShrinkHeader(false);
+    }, [])
 
     return (
         
