@@ -60,9 +60,6 @@ const ModelViewer = (props) => {
       let outlinedModel = loadedModel.children[0];
       outlinePass.visibleEdgeColor.set(modelData[modelIndex].outlineColor)
       outlinePass.selectedObjects.push(outlinedModel);
-      setMixer(new THREE.AnimationMixer());
-      console.log('mixer', mixer);
-      
     } catch (err) {
       console.error(err);
     }
@@ -122,11 +119,6 @@ const ModelViewer = (props) => {
     const positionKF = new THREE.VectorKeyframeTrack(".position", times, values);
     // const clip = new THREE.AnimationClip("idle", -1, positionKF);
     let clip;
-    loadFBXAnim(models)
-      .then((loadedClip) => {
-        clip = loadedClip;
-        console.log(clip); // Log the loaded clip
-      }).catch((error) => { console.error('Failed to load FBX animation:', error); });
     
 
 
@@ -152,7 +144,7 @@ const ModelViewer = (props) => {
     composer.addPass(effectFXAA);
     // let outlinePass;
     // let composer;
-    loadModelIndex(modelIndex, darkOutlinePass);
+    loadModelIndex(modelIndex, darkOutlinePass, clip);
 
     const render = () => {
       renderer.render(scene, cameraInit);
@@ -342,10 +334,21 @@ const ModelViewer = (props) => {
     scene.remove(loadedModel);
     let materials = loadTextures(modelData, num);
     setModelIndex(num);
+    
+    let clip;
+    loadFBXAnim(models)
+    .then((loadedClip) => {
+      clip = loadedClip;
+      console.log(clip); // Log the loaded clip
+    }).catch((error) => { console.error('Failed to load FBX animation:', error); });
+
     loadGLTF(models, modelData, num, scene, materials).then((loadedModel) => {
         console.log("loaded model");
         setLoadedModel(loadedModel);
         setOutline(loadedModel, outlinePass);
+        const mixer = new THREE.AnimationMixer(loadedModel);
+        const action = mixer.clipAction(clip);
+        console.log(action);
     }).catch((error) => {console.log('failed to load gltf model',error)});
   }
   return (
