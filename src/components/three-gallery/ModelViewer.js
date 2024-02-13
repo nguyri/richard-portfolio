@@ -324,8 +324,9 @@ const ModelViewer = (props) => {
       loadGLTF(models, modelData, num, scene, materials);
       setModelIndex(num);
     }
+    console.log(props);
       return (
-        <div className='threegallery'>
+        <div className={props.darkMode ? 'threegallery threegallery--dark' : 'threegallery'}>
         <div className='threegallery--slider-grid'>
         <h1 className='threegallery--title'>{modelData[modelIndex].name}</h1>
         <div style={{display:'flex', flexDirection:'column'}}>

@@ -64,6 +64,11 @@
     grid-column: 1;
 }
 
+.threegallery--dark {
+    background-color:#333333;
+    color:var(--entry-light-text);
+}
+
 .threegallery--title {
     font-family:Inter;
     font-weight:700;
