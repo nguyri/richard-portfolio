@@ -101,6 +101,7 @@ const ModelViewer = (props) => {
         
         let renderer = new THREE.WebGLRenderer({ antialias: true })
         renderer.setClearColor('#000000', 0) //#F9F7F0
+        renderer.setPixelRatio(window.devicePixelRatio);
         renderer.setSize(width, height)
         myRef.current.appendChild(renderer.domElement)
         
@@ -110,7 +111,7 @@ const ModelViewer = (props) => {
         composer.addPass(renderPass);
         // const outlinePass = configureOutlinePass(window, scene, cameraInit, 18, 2, "#ffffff");
         // composer.addPass(outlinePass);
-        const darkOutlinePass = configureOutlinePass(window, scene, cameraInit, 1, 2, 0, modelData[modelIndex].outlineColor);
+        const darkOutlinePass = configureOutlinePass(window, scene, cameraInit, 3, 6, 0, modelData[modelIndex].outlineColor);
         composer.addPass( darkOutlinePass);
         setOutlinePass(darkOutlinePass); 
         const outputPass = new OutputPass();
