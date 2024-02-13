@@ -6,23 +6,14 @@ const webpack = require("webpack");
 module.exports = {
   entry: "./src/index.js",
   // entry: {
-  //   index: {
-  //     import: "./src/index.js",
-  //     dependOn: "app",
-  //   },
-  //   app: {
-  //     import: "./src/App.js",
-  //     dependOn:["entrieslayout","about","gallery"],
-  //   },
-  //   entrieslayout: {
-  //     import: "./src/components/entry/EntriesLayout.js"
-  //   },
-  //   about: {
-  //     import: "./src/components/about-card/AboutCard.js"
-  //   },
-  //   gallery: {
-  //     import: "./src/components/gallery/Gallery.js"
-  //   }
+  //   index: './src/index.js', // Main entry point
+    // app: {
+    //   import: './src/App.js',
+    //   dependOn: ['entrieslayout', 'about', 'gallery']
+    // },
+    // entrieslayout: './src/components/entry/EntriesLayout.js',
+    // about: './src/components/about-card/AboutCard.js',
+    // gallery: './src/components/gallery/Gallery.js'
   // },
   module: {
     rules: [
@@ -64,11 +55,17 @@ module.exports = {
   },
   resolve: { extensions: ["*", ".js", ".jsx"] },
 
+  // output: {
+  //   path: path.resolve(__dirname, "dist"),
+  //   publicPath: "/dist/",
+  //   filename: "[name].bundle.js",
+  //   clean: true,
+  // },
   output: {
     path: path.resolve(__dirname, "dist"),
     publicPath: "/dist/",
     filename: "[name].bundle.js",
-    clean: true,
+    // clean: true,
   },
   // plugins: [
     // new HtmlWebpackPlugin({

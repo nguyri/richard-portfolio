@@ -11,6 +11,7 @@ module.exports = merge(common, {
     // contentBase: path.join(__dirname, "public/"),
     static: {
       directory: path.join(__dirname, 'public'),
+      // directory: path.join(__dirname, 'dist'),
     },
     port: 3000,
     // publicPath: "http://localhost:3000/dist/",
