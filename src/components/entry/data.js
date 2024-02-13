@@ -369,11 +369,11 @@ let entries = [
     This is achieved with multiplying a blue in the shadow and screening a yellow for light.`, style: {paddingTop:"10px"}},
     {key: nanoid(), text:`The formula for multiply is in the name: multiply the colours together. To get more sensible behaviour 
     the effects layer is normalized from 0 to 1, notated with the caret.`, style:{paddingTop:'20px', gridColumn:"span 2"}},
-    {key: 'multiplyslider', component: <BlendingModes key={nanoid()} mode="multiply" style={{gridColumn:"3 / span 3", minWidth:"0"}}/>},
+    {key: 'multiplyslider', blendingComponent: <BlendingModes key={nanoid()} mode="multiply" style={{gridColumn:"3 / span 3", minWidth:"0"}}/>},
 
     {key: 'overlay', subtitle:`Overlay`},
     {key: nanoid(), text:`Overlay allows you to brighten and darken in a single layer by simply combining multiply and screen. Depending on the app, the amount overlay can brighten or darken may be reduced compared to the respective multiply and screen. This is because the equations are offset so that the neutral color for both equations is grey.`, style: {gridColumn:"1 / span 2"}},
-    {key: 'blendingscreen', component: <BlendingModes key={nanoid()} mode="overlay" style={{gridColumn:"3 / span 3", minWidth:"0"}}/>},
+    {key: 'blendingscreen', blendingComponent: <BlendingModes key={nanoid()} mode="overlay" style={{gridColumn:"3 / span 3", minWidth:"0"}}/>},
     {key: 'overlayrecolor', subtitle:`Overlay Recolor`},
     {key: nanoid(), text:`Another use for overlay is adding color to a highlight or shadow. This is very common to see at the edge of a shadow, where the edge will have a rich red tint before turning into the shadow on skin. The physical reason for this is called subsurface scattering, but it's often just used everywhere in anime art for stylistic reasons. It's fun and easy: Add a neutral red-ish overlay to the edges of your lit areas and erase/smudge the color into the right spot. `, style: {gridColumn:"1 / span 3"}},
     {key:nanoid(), imageName:'./art7.jpg', style: {gridColumn:"4 /span 2", gridRow:"span 1", height:"300px", overflow:"hidden", objectFit:"cover", paddingBottom:"20px", borderRadius:"10px"}, picStyle:{scale:"1.3", objectPosition:"50% 20px", textAlign:"center"}, className:"entry--img-inline"},
@@ -396,7 +396,7 @@ let entries = [
     to stop dodging. Color dodging is a great way to add saturation to your image, but too much saturation makes your picture look unnatural.`, style: {gridColumn:"4 / span 2"}},
     {key: nanoid(), text:`The principle is similar to the smudge tool. If you smudge too much your painting will be a blobby formless mess. If you dodge too much your painting will look like the surface of the sun. Because of the division
     in the formula a very dark color should be used for dodging, otherwise the denominator approaches zero and the brightness skyrockets. The preview circles show that a dodge with even a very dark grey results in a completely blown out image.`, style:{gridColumn:"1 / span 2"}},
-    {key: 'blendingscreen', component: <BlendingModes key={nanoid()} mode="dodge" style={{gridColumn:"3 / span 3", minWidth:"0"}}/>},
+    {key: 'blendingscreen', blendingComponent: <BlendingModes key={nanoid()} mode="dodge" style={{gridColumn:"3 / span 3", minWidth:"0"}}/>},
 
     {key: 'normal', subtitle:'Normal'},
     {key:nanoid(), imageName:'./art8.jpg', style: {gridColumn:"1 /span 3", gridRow:"span 1", height:"400px", overflow:"hidden", objectFit:"cover", paddingBottom:"20px", borderRadius:"10px"}, picStyle:{scale:"1.7", objectPosition:"left 20px top 50px", textAlign:"center"}, className:"entry--img-inline"},
@@ -407,7 +407,7 @@ let entries = [
     {key: nanoid(), text:`Screen can lighten an area although its usage usually has to be combined with overlay and multiply to get a full range of light. You can multiply a whole layer and it will look like it's in shadow, but screen will not make everything look lighter. Generally good when you want to add a less saturated light than overlay, or a rim light that's not as saturated as color dodge.`, style: {gridColumn:"1 / span 2"}},
     {key:nanoid(), imageName:'./art1.jpg', style: {gridColumn:"3 /span 3", gridRow:"span 1", height:"400px", overflow:"hidden", objectFit:"cover", paddingBottom:"20px", borderRadius:"10px"}, picStyle:{scale:"1.2", objectPosition:"50% 0px", textAlign:"center"}, className:"entry--img-inline"},
     {key: nanoid(), text:`Here you can see the neutral white-ish light coming in from the top with a screen, and a red overlay to highlight the shadow on the arms and legs.`, style: {paddingTop:"20px", gridColumn:"1 / span 2"}},
-    {key: 'blendingscreen', component: <BlendingModes key={nanoid()} mode="screen" style={{gridColumn:"3 / span 3", minWidth:"0"}}/>},
+    {key: 'blendingscreen', blendingComponent: <BlendingModes key={nanoid()} mode="screen" style={{gridColumn:"3 / span 3", minWidth:"0"}}/>},
 
     {key: 'principles', title:'Principles'},
     {key: 'values', subtitle:'Value'},

@@ -25,16 +25,21 @@ export default function LongEntry() {
    
     function paragraphBigEntry(paragraphArr) {
         return (paragraphArr.map((elem) => {
+            if(elem.component)console.log(elem.component.type)
             if (elem.imageName) {
                 // return <img key={elem.key} src={getImage(elem.imageName) ? getImage(elem.imageName) : ""} style={isTabletOrMobile ? {} : elem.style} className={elem.className} />;
                 return <div key={elem.key} style={isTabletOrMobile ? {} : elem.style}>
                     <img src={getImage(elem.imageName) ? getImage(elem.imageName) : ""} style={isTabletOrMobile ? {} : elem.picStyle} className={elem.className} />
                     </div>
             }
+            else if (elem.blendingComponent) {
+                return <React.Suspense fallback={<div>Loading...</div>}>
+                    <BlendingModes {...elem.blendingComponent.props} darkMode={useOutletContext()[0]}/>
+                </React.Suspense>;
+            }
             else if (elem.component) {
                 return <React.Suspense fallback={<div>Loading...</div>}>
-                    <BlendingModes {...elem.component.props} darkMode={useOutletContext()[0]}/>
-                </React.Suspense>;
+                    {elem.component}</React.Suspense>;
             }
             else if (elem.vimeo) {
                 return < div key={elem.key} className="entry--vimeo-fixed-aspect" style={elem.style}>
