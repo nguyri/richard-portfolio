@@ -29,8 +29,7 @@ export default function ThreeGallery (props) {
         <React.Suspense fallback={<div>Loading...</div>}>
         <div style={{display:"flex", flexDirection:"row", justifyContent:"center", height:"90vh", overflow:"auto"}}>
             {/* <ModelViewer/> */}
-            <ModelViewer darkMode={useOutletContext()[0]} style={{width:"40vw"}}/>
-            {setShrinkHeader(true)}
+            <ModelViewer darkMode={useOutletContext()[0]} shrinkCallback={() => setShrinkHeader(true)} style={{width:"40vw"} }/>
             {/* <ThreeFunc style={{width:"40vw"}} zoom={4.0}/> */}
         </div>
         </React.Suspense>
