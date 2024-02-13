@@ -82,10 +82,20 @@ module.exports = {
       cacheGroups: {
         vendor: {
           test: /node_modules/,
-          chunks: 'initial',
+          chunks: 'all',
           name: 'vendor',
           enforce: true,
         },
+        gallery: {
+          test: /gallery/,
+          name: 'gallery',
+          chunks: 'all',
+        },
+        models: {
+          test: /three-gallery/,
+          name: 'three-gallery',
+          chunks: 'all',
+        }
       },
     },
   },

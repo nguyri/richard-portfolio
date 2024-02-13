@@ -79,9 +79,9 @@ export default function Header(props) {
                     { ((!shrinkHeader && isTabletOrMobile) || (!isTabletOrMobile)) && 
                         <>
                             <Link to={'projects'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>projects</Link>
-                            <Link to={'about'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>about</Link>
                             <Link to={'gallery'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>gallery</Link>
                             <Link to={'three-gallery'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>models</Link>
+                            <Link to={'about'} className={`nav--item ${props.darkMode && `nav--item-dark`} ${shrinkHeader && `nav--item-shrink`}`}>about</Link>
                         </>}
                     {/* <Link to={'docs'} className="nav--item">docs</Link> */}
                     <div className="toggler">

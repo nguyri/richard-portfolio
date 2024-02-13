@@ -304,7 +304,7 @@ let entries = [
     {key:nanoid(), text:`Final size is often subjective. Wood furniture is usually static or only needs simple holes for metal fasteners. Most of the time I cut wood to the width of another piece of wood, without any special care to the exact size. Wood also bends and warps over time. `},
     {key: 'tricks', title:`Common Tricks`},
     {key: 'shims', subtitle:`Shimming`},
-    {key:nanoid(), text:`If you know nothing about carpentery you will still know to measure twice and cut once. This introduces more sources of error than necessary, in some cases. `},
+    {key:nanoid(), text:`If you know nothing about carpentery you will still know to measure twice and cut once. However without experience taking accurate measurements and accounting for parallax, tool geometry and datum reference a low quality measurement often gives a false sense of accuracy.`},
     {key:nanoid(), text:`Take a butt end lap joint. It is possible to cut it by measuring the width of the butting piece, subtracting the blade kerf, then setting the fence to that number. But every measurement, especially with imprecise tape measures and fences, introduces error. `},
     {key:nanoid(), text:`Instead, place the butting piece between the saw blade and the fence and gently butt the fence up against it. Now the saw will cut the width of the butting piece plus the saw kerf. Add a shim, a drill bit will do, to take out the saw kerf and you can measure zero times, cut once. `},
     {key: 'touch', subtitle:`Touch`},
@@ -312,7 +312,7 @@ let entries = [
     {key: 'mitresled', subtitle:`Mitre Sled`},
     {key:nanoid(), img:'test img', style: {gridColumn:"1 / span 2", gridRow:"span 2",  marginBlock:"20px", height:'40vh'}, className:"entry--img-inline", imageName:'./wood3.jpg' },
     {key:nanoid(), text:`By far the most used sled that I have made. Once you use angles that are not 0 or 90 you invite disorder into your workshop. In most cases, the exact angle of the mitre is less important than adding up to 90. This makes calibrating the mitre sled easy. Approximate 45 degrees on one side before using your best square to precisely line up the other. `, style: {gridColumn:"span 3"}},
-    {key:nanoid(), text:`If the cuts need to be slightly more acute or obtuse from there the bolted fences can be adjusted or replaced easily. Sandpaper on the faces makes sure the pieces do not slip while cutting. `, style: {gridColumn:"span 3"}},
+    {key:nanoid(), text:`If the cuts need to be slightly more acute or obtuse from there the bolted fences can be adjusted or replaced easily. Sandpaper on the faces makes sure the pieces do not slip while cutting. I recommend a stable but thin piece of 3/8 plywood as the base to keep the saw height to a minimum. For small table saws like mine, extending the guides past the base helps align the sled before a cut.`, style: {gridColumn:"span 3"}},
     
     {key: 'chessboard', title:`Chessboard`},
     {key:nanoid(), img:'test img', style: {gridColumn:"span 2", gridRow:"span 4", marginBottom:"20px",}, className:"entry--img-inline", imageName: './wood2.jpg'},
@@ -331,7 +331,7 @@ let entries = [
     num:7,
     title: "Digital Art",
     link: "digitalart",
-    description:`I think drawing really helps your observation skills, and some ideas are best communicated with a drawing.`,
+    description:`Almost all digital art programs feature "blending modes" that allow you to non-destructively light your paintings, but how do they work?`,
     longdescription: [
     {key:'digitalart', title:`Digital Art`},
     {key: 'blendingmodes', title:`Blending Modes`},
@@ -363,7 +363,7 @@ let entries = [
     desaturates your shadows while drawing attention to the brighter, more saturated areas. 
     Here multiply is used over the entire face and torso, before taking out the chest and 
     nose area to create a highlight.`, style: {gridColumn:"span 2"}},
-    {key: nanoid(), text:`You can also multiply with a color to make the ever beloved hue shift. 
+    {key: nanoid(), text:`You can also multiply with a color to make the beloved hue shift. 
     Varying the hue with respect to brightness is called a hue shift. 
     In the above image, her hair is more yellow where it's lit on top, and more blue in the shadow. 
     This is achieved with multiplying a blue in the shadow and screening a yellow for light.`, style: {paddingTop:"10px"}},
@@ -386,7 +386,7 @@ let entries = [
     {key: nanoid(), text:`You might think if opaque clothing is 100% opacity, it makes sense to turn the opacity down and you'll have see through clothing. 
     This is actually shooting yourself in the foot for a few reasons. `, style: {gridColumn:"4 / span 2"}},
     {key: nanoid(), text:`Blending modes lose their shading power and color picking picks up the layer underneath with a low opacity layer. It is better to overlay, multiply and screen like you normally would, but your "shadow" is the darkest part of the clothing and the "light" is the most see through part of the clothing.`, style: {gridColumn:"4 / span 2"}},
-    {key: nanoid(), text:`Where the sleeve hangs off of the arm, the background comes through instead of the skin tone. Takes a bit of time but I prefer that to dealing with opacity.`},
+    {key: nanoid(), text:`Where the sleeve hangs off of the arm, the background comes through instead of the skin tone which helps sell the transparency of the clothing.`},
 
     {key: 'colordodge', subtitle:'Color Dodge'},
     {key:nanoid(), imageName:'./art9.jpg', style: {gridColumn:"1 /span 3", gridRow:"span 1", height:"400px", overflow:"hidden", objectFit:"cover", paddingBottom:"20px", borderRadius:"10px"}, picStyle:{scale:"1.5", objectPosition:"50% -20px", textAlign:"center"}, className:"entry--img-inline"},
@@ -395,7 +395,7 @@ let entries = [
     variation, like the orange around the edges of the sword glint. However, once you start dodging it can be difficult 
     to stop dodging. Color dodging is a great way to add saturation to your image, but too much saturation makes your picture look unnatural.`, style: {gridColumn:"4 / span 2"}},
     {key: nanoid(), text:`The principle is similar to the smudge tool. If you smudge too much your painting will be a blobby formless mess. If you dodge too much your painting will look like the surface of the sun. Because of the division
-    in the formula a very dark color should be used for dodging, otherwise the result approaches a divide by zero: very bright.`, style:{gridColumn:"1 / span 2"}},
+    in the formula a very dark color should be used for dodging, otherwise the denominator approaches zero and the brightness skyrockets. The preview circles show that a dodge with even a very dark grey results in a completely blown out image.`, style:{gridColumn:"1 / span 2"}},
     {key: 'blendingscreen', component: <BlendingModes key={nanoid()} mode="dodge" style={{gridColumn:"3 / span 3", minWidth:"0"}}/>},
 
     {key: 'normal', subtitle:'Normal'},

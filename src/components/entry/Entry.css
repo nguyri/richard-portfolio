@@ -29,7 +29,7 @@
     justify-content: end;
     scroll-behavior: smooth;
     position: sticky;
-    max-height: calc(100vh - 100px);
+    max-height: calc(100vh);
     overflow-y:auto;
     overflow-x:hidden;
 }

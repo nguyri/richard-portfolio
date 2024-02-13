@@ -35,6 +35,7 @@ export default function Entries (props) {
             {/* <Outlet context={darkMode}/> */}
             {/* {console.log(createBrowserHistory())} */}
             {entries}
+            <div style={{height:'7vh'}}/>
             {/* <ThreeScene /> */}
         </div>
         )
