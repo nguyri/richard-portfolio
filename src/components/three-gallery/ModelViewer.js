@@ -152,10 +152,7 @@ const ModelViewer = (props) => {
     composer.addPass(effectFXAA);
     // let outlinePass;
     // let composer;
-    loadModelIndex(modelIndex).then((loadedModel) => {
-      console.log("loaded model");
-      setOutline(loadedModel, darkOutlinePass);})
-      .catch((error) => {console.log(error)});
+    loadModelIndex(modelIndex, darkOutlinePass);
 
     const render = () => {
       renderer.render(scene, cameraInit);
@@ -341,11 +338,15 @@ const ModelViewer = (props) => {
   }
   const railStyle = { height: 10 }
 
-  const loadModelIndex = (num) => {
+  const loadModelIndex = (num, outlinePass) => {
     scene.remove(loadedModel);
     let materials = loadTextures(modelData, num);
     setModelIndex(num);
-    return loadGLTF(models, modelData, num, scene, materials);
+    loadGLTF(models, modelData, num, scene, materials).then((loadedModel) => {
+        console.log("loaded model");
+        setLoadedModel(loadedModel);
+        setOutline(loadedModel, outlinePass);
+    }).catch((error) => {console.log('failed to load gltf model',error)});
   }
   return (
     <div className={props.darkMode ? 'threegallery threegallery--dark' : 'threegallery'}>
@@ -365,9 +366,9 @@ const ModelViewer = (props) => {
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <button className={'threegallery--button'} onClick={() =>
-            modelIndex > 0 && loadModelIndex(modelIndex - 1)}>Prev</button> {' '}
+            modelIndex > 0 && loadModelIndex(modelIndex - 1, outlinePass)}>Prev</button> {' '}
           <button className={'threegallery--button'} onClick={() =>
-            modelIndex < modelData.length - 1 && loadModelIndex(modelIndex + 1)}>Next Model</button>
+            modelIndex < modelData.length - 1 && loadModelIndex(modelIndex + 1, outlinePass)}>Next Model</button>
         </div>
       </div>
       <MediaQuery minWidth={1224}>
