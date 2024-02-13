@@ -14,6 +14,7 @@ import MovingPlaneCanvas from "../threefiber/MovingPlaneCanvas";
 import { Canvas } from "@react-three/fiber";
 
 import ImageTransitionCanvas from "../threefiber/ImageTransition";
+import BlendingModes from "../blendingmodes/BlendingModes";
 // import ImageTransitionCanvas from "../threefiber/ImageTransition";
 
 export default function LongEntry() {
@@ -31,7 +32,9 @@ export default function LongEntry() {
                     </div>
             }
             else if (elem.component) {
-                return <React.Suspense fallback={<div>Loading...</div>}>{elem.component}</React.Suspense>;
+                return <React.Suspense fallback={<div>Loading...</div>}>
+                    <BlendingModes {...elem.component.props} darkMode={useOutletContext()[0]}/>
+                </React.Suspense>;
             }
             else if (elem.vimeo) {
                 return < div key={elem.key} className="entry--vimeo-fixed-aspect" style={elem.style}>

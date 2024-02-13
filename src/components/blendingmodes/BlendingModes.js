@@ -141,7 +141,7 @@ export default function BlendingModes(props) {
     <div style={props.style}>
       <div style={{ paddingBottom: "0px", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems:"flex-start" }}>
         <MathJaxContext config={config}>
-          <MathJax className="formula">
+          <MathJax className={props.darkMode ? "formula dark" : "formula"}>
             <span>{modes[props.mode].staticFormula}</span>
           </MathJax>
           <div style={{ display: "block", }}>
@@ -149,7 +149,7 @@ export default function BlendingModes(props) {
               <BlendingLayer/>
             </Stage>
           </div>
-          <MathJax inline dynamic className="formula">
+          <MathJax inline dynamic className={props.darkMode ? "formula dark" : "formula"}>
             <span >{modes[props.mode].dynamicFormula}</span>
           </MathJax>{" "}
         </MathJaxContext>
