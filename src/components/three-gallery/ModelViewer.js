@@ -45,6 +45,8 @@ const ModelViewer = (props) => {
   let lights = [rimLight, dirLight];
   let controls;
   let [outlinePass, setOutlinePass] = React.useState();
+  let [mixer, setMixer] = React.useState();
+  
 
   const models = {};
   importAll(require.context('../../models/', false, /\.(glb|fbx)$/));
@@ -53,16 +55,32 @@ const ModelViewer = (props) => {
     r.keys().forEach((key) => models[key] = r(key));
   }
 
-  React.useEffect(() => {
-    if (!loadedModel) return;
+  const setOutline = (loadedModel, outlinePass) => {
     try {
       let outlinedModel = loadedModel.children[0];
       outlinePass.visibleEdgeColor.set(modelData[modelIndex].outlineColor)
       outlinePass.selectedObjects.push(outlinedModel);
+      setMixer(new THREE.AnimationMixer());
+      console.log('mixer', mixer);
+      
     } catch (err) {
       console.error(err);
     }
-  }, [loadedModel]);
+  }
+
+  // React.useEffect(() => {
+  //   if (!loadedModel) return;
+  //   try {
+  //     let outlinedModel = loadedModel.children[0];
+  //     outlinePass.visibleEdgeColor.set(modelData[modelIndex].outlineColor)
+  //     outlinePass.selectedObjects.push(outlinedModel);
+  //     setMixer(new THREE.AnimationMixer());
+  //     console.log('mixer', mixer);
+      
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // }, [loadedModel]);
 
   // console.log(models);
   React.useEffect(() => {
@@ -108,10 +126,9 @@ const ModelViewer = (props) => {
       .then((loadedClip) => {
         clip = loadedClip;
         console.log(clip); // Log the loaded clip
-      })
-      .catch((error) => {
-        console.error('Failed to load FBX animation:', error);
-      });
+      }).catch((error) => { console.error('Failed to load FBX animation:', error); });
+    
+
 
     let renderer = new THREE.WebGLRenderer({ antialias: true })
     renderer.setClearColor('#000000', 0) //#F9F7F0
@@ -135,7 +152,10 @@ const ModelViewer = (props) => {
     composer.addPass(effectFXAA);
     // let outlinePass;
     // let composer;
-    loadModelIndex(modelIndex);
+    loadModelIndex(modelIndex).then((loadedModel) => {
+      console.log("loaded model");
+      setOutline(loadedModel, darkOutlinePass);})
+      .catch((error) => {console.log(error)});
 
     const render = () => {
       renderer.render(scene, cameraInit);
@@ -255,52 +275,46 @@ const ModelViewer = (props) => {
     return null;
   }
   const loadGLTF = (models, modelData, modelIndex, scene, materials) => {
-    const path = `./${modelData[modelIndex].files}`
-    let loader = new GLTFLoader();
-    loader.load(models[path].default, function (loadedGLTF) {
-      // loader.load( models["./urban-10-new-export.loadedGLTF"].default , function ( loadedGLTF ) {
-      loadedGLTF.name = path
-      let fullModel = loadedGLTF.scene.children[0];
-      setModelShown(fullModel);
-      let body = findBody(loadedGLTF.scene.children);
-
-      materials.forEach((material, index) => {
-        if (body.isGroup)
-          body.children[index].material = material;
-        else
-          body.material = material;
+    return new Promise((resolve, reject) => {
+      const path = `./${modelData[modelIndex].files}`;
+      let loader = new GLTFLoader();
+      loader.load(models[path].default, function (loadedGLTF) {
+        loadedGLTF.name = path;
+        let fullModel = loadedGLTF.scene.children[0];
+        setModelShown(fullModel);
+        let body = findBody(loadedGLTF.scene.children);
+  
+        materials.forEach((material, index) => {
+          if (body.isGroup)
+            body.children[index].material = material;
+          else
+            body.material = material;
+        });
+  
+        fullModel.traverse((child) => {
+          if (child.isMesh) {
+            child.material.specular = 1;
+            child.material.metalness = 0;
+          }
+        });
+  
+        let scale = 40
+        fullModel.scale.set(scale, scale, scale);
+        fullModel.position.set(...modelData[modelIndex].position);
+        fullModel.rotation.set(...modelData[modelIndex].rotation);
+  
+        scene.add(loadedGLTF.scene);
+        // setLoadedModel(loadedGLTF.scene);
+  
+        // Resolve the Promise with the loadedGLTF.scene
+        resolve(loadedGLTF.scene);
+      }, undefined, function (error) {
+        console.error(error);
+        // Reject the Promise if there's an error
+        reject(error);
       });
-
-      // console.log(fullModel);
-      // console.log(body);
-      // body.material.metalness = 0;
-      // body.children[0].material.metalness = 0;
-      // body.children[1].material.metalness = 0;
-      // secondOutline.selectedObjects.push(fullModel);
-      fullModel.traverse((child) => {
-        if (child.isMesh) {
-          // child.material.emissive = 1;
-          // child.material.roughness = 1;
-          child.material.specular = 1;
-          child.material.metalness = 0;
-          // child.scale.set(20,20,20);
-        }
-      })
-      // body.scale.set(20,20,20);
-      // fullModel.scale.set(20,20,20);
-
-      let scale = 40
-      fullModel.scale.set(scale, scale, scale);
-      fullModel.position.set(...modelData[modelIndex].position);
-      fullModel.rotation.set(...modelData[modelIndex].rotation);
-
-      // loadedGLTF.scene.children[0].children[3].children[0].material = material;
-      scene.add(loadedGLTF.scene);
-      setLoadedModel(loadedGLTF.scene);
-    }, undefined, function (error) {
-      console.error(error);
     });
-  }
+  };
 
   const loadFBXAnim = (models) => {
     return new Promise((resolve, reject) => {
@@ -330,8 +344,8 @@ const ModelViewer = (props) => {
   const loadModelIndex = (num) => {
     scene.remove(loadedModel);
     let materials = loadTextures(modelData, num);
-    loadGLTF(models, modelData, num, scene, materials);
     setModelIndex(num);
+    return loadGLTF(models, modelData, num, scene, materials);
   }
   return (
     <div className={props.darkMode ? 'threegallery threegallery--dark' : 'threegallery'}>
