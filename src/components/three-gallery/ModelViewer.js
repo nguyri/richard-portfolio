@@ -45,8 +45,10 @@ const ModelViewer = (props) => {
   let lights = [rimLight, dirLight];
   let controls;
   let [outlinePass, setOutlinePass] = React.useState();
-  let [mixer, setMixer] = React.useState();
-  
+  // let [mixer, setMixer] = React.useState();
+  let clock = new THREE.Clock(true);
+  let mixer;
+  let action;
 
   const models = {};
   importAll(require.context('../../models/', false, /\.(glb|fbx)$/));
@@ -182,6 +184,9 @@ const ModelViewer = (props) => {
     window.addEventListener("resize", onWindowResize, false);
 
     const animate = () => {
+      const delta = clock.getDelta();
+      mixer && mixer.update(delta);
+      // console.log(mixer);
       requestAnimationFrame(animate);
       render();
       composer && composer.render();
@@ -307,9 +312,9 @@ const ModelViewer = (props) => {
 
   const loadFBXAnim = (models) => {
     return new Promise((resolve, reject) => {
-      let loader = new FBXLoader();
-      loader.load(models["./Idle.fbx"].default, function (fbx) {
-        fbx.name = "./Idle.fbx";
+      let loader = new GLTFLoader();
+      loader.load(models["./urban-9-gun-draw.glb"].default, function (fbx) {
+        fbx.name = "./urban-9-gun-draw.glb";
         console.log(fbx);
         const clip = fbx.animations.at(0);
         resolve(clip);
@@ -334,7 +339,7 @@ const ModelViewer = (props) => {
     scene.remove(loadedModel);
     let materials = loadTextures(modelData, num);
     setModelIndex(num);
-    
+
     let clip;
     loadFBXAnim(models)
     .then((loadedClip) => {
@@ -343,12 +348,16 @@ const ModelViewer = (props) => {
     }).catch((error) => { console.error('Failed to load FBX animation:', error); });
 
     loadGLTF(models, modelData, num, scene, materials).then((loadedModel) => {
-        console.log("loaded model");
+        console.log("loaded model", loadedModel);
         setLoadedModel(loadedModel);
         setOutline(loadedModel, outlinePass);
-        const mixer = new THREE.AnimationMixer(loadedModel);
-        const action = mixer.clipAction(clip);
+        mixer = new THREE.AnimationMixer(loadedModel);
+        mixer.scale = new THREE.Vector3(40,40,40);
+        action = mixer.clipAction(clip);
+        action.play();
+        // setMixer(mixer);
         console.log(action);
+        console.log(mixer);
     }).catch((error) => {console.log('failed to load gltf model',error)});
   }
   return (

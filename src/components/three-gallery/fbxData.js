@@ -2,7 +2,7 @@ export default [
     {
         key:0,
         name:'Signaller',
-        files:['urban-10-new-export.glb'],
+        files:['urban-9-gun-draw.glb'],
         position:[0,0,-1],
         rotation:[3.14/2,0,0],
         textures:['texture-skin.png','texture-clothes.png'],
