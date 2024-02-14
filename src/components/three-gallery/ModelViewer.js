@@ -274,7 +274,7 @@ const ModelViewer = (props) => {
       let loader = new GLTFLoader();
       loader.load(models[path].default, function (loadedGLTF) {
         loadedGLTF.name = path;
-        let fullModel = loadedGLTF.scene.children[0];
+        let fullModel = loadedGLTF.scene;
         setModelShown(fullModel);
         let body = findBody(loadedGLTF.scene.children);
   
@@ -293,6 +293,7 @@ const ModelViewer = (props) => {
         });
   
         let scale = 40
+        console.log(loadedGLTF)
         fullModel.scale.set(scale, scale, scale);
         fullModel.position.set(...modelData[modelIndex].position);
         fullModel.rotation.set(...modelData[modelIndex].rotation);
