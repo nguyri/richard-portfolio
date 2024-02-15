@@ -75,7 +75,7 @@ const ModelViewer = (props) => {
   //     outlinePass.selectedObjects.push(outlinedModel);
   //     setMixer(new THREE.AnimationMixer());
   //     console.log('mixer', mixer);
-      
+
   //   } catch (err) {
   //     console.error(err);
   //   }
@@ -120,8 +120,6 @@ const ModelViewer = (props) => {
     const values = [0, 0, 0, 2, 2, 2, 0, 0, 0];
     const positionKF = new THREE.VectorKeyframeTrack(".position", times, values);
     // const clip = new THREE.AnimationClip("idle", -1, positionKF);
-    let clip;
-    
 
 
     let renderer = new THREE.WebGLRenderer({ antialias: true })
@@ -146,7 +144,7 @@ const ModelViewer = (props) => {
     composer.addPass(effectFXAA);
     // let outlinePass;
     // let composer;
-    loadModelIndex(modelIndex, darkOutlinePass, clip);
+    loadModelIndex(modelIndex, darkOutlinePass);
 
     const render = () => {
       renderer.render(scene, cameraInit);
@@ -277,30 +275,30 @@ const ModelViewer = (props) => {
         let fullModel = loadedGLTF.scene;
         setModelShown(fullModel);
         let body = findBody(loadedGLTF.scene.children);
-  
+
         materials.forEach((material, index) => {
           if (body.isGroup)
             body.children[index].material = material;
           else
             body.material = material;
         });
-  
+
         fullModel.traverse((child) => {
           if (child.isMesh) {
             child.material.specular = 1;
             child.material.metalness = 0;
           }
         });
-  
+
         let scale = 40
         console.log(loadedGLTF)
         fullModel.scale.set(scale, scale, scale);
         fullModel.position.set(...modelData[modelIndex].position);
         fullModel.rotation.set(...modelData[modelIndex].rotation);
-  
+
         scene.add(loadedGLTF.scene);
         // setLoadedModel(loadedGLTF.scene);
-  
+
         // Resolve the Promise with the loadedGLTF.scene
         resolve(loadedGLTF.scene);
       }, undefined, function (error) {
@@ -341,25 +339,27 @@ const ModelViewer = (props) => {
     let materials = loadTextures(modelData, num);
     setModelIndex(num);
 
-    let clip;
-    loadFBXAnim(models)
-    .then((loadedClip) => {
-      clip = loadedClip;
-      console.log(clip); // Log the loaded clip
-    }).catch((error) => { console.error('Failed to load FBX animation:', error); });
-
-    loadGLTF(models, modelData, num, scene, materials).then((loadedModel) => {
+    let clip, model;
+    loadGLTF(models, modelData, num, scene, materials)
+      .then((loadedModel) => {
         console.log("loaded model", loadedModel);
         setLoadedModel(loadedModel);
         setOutline(loadedModel, outlinePass);
-        mixer = new THREE.AnimationMixer(loadedModel);
-        mixer.scale = new THREE.Vector3(40,40,40);
+        model = loadedModel;
+        return loadFBXAnim(models);
+      })
+      .then((loadedClip) => {
+        clip = loadedClip;
+        mixer = new THREE.AnimationMixer(model);
+        mixer.scale = new THREE.Vector3(40, 40, 40);
         action = mixer.clipAction(clip);
+        console.log(clip); // Log the loaded clip
+        console.log(mixer);
+        console.log(action);
         action.play();
         // setMixer(mixer);
-        console.log(action);
-        console.log(mixer);
-    }).catch((error) => {console.log('failed to load gltf model',error)});
+      }).catch((error) => { console.error('Failed to load FBX animation:', error); })
+      .catch((error) => { console.log('failed to load gltf model', error) })
   }
   return (
     <div className={props.darkMode ? 'threegallery threegallery--dark' : 'threegallery'}>
