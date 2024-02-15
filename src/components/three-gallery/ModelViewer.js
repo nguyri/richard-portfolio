@@ -309,13 +309,14 @@ const ModelViewer = (props) => {
     });
   };
 
-  const loadFBXAnim = (models) => {
+  const loadFBXAnim = (models, modelData, num) => {
     return new Promise((resolve, reject) => {
       let loader = new GLTFLoader();
-      loader.load(models["./urban-9-gun-draw.glb"].default, function (fbx) {
-        fbx.name = "./urban-9-gun-draw.glb";
-        console.log(fbx);
-        const clip = fbx.animations.at(0);
+      let animPath = `./${modelData[num].animations[0]}`;
+      loader.load(models[animPath].default, function (anim) {
+        anim.name = animPath;
+        console.log(anim);
+        const clip = anim.animations.at(0);
         resolve(clip);
       }, undefined, function (error) {
         console.error(error);
@@ -346,7 +347,7 @@ const ModelViewer = (props) => {
         setLoadedModel(loadedModel);
         setOutline(loadedModel, outlinePass);
         model = loadedModel;
-        return loadFBXAnim(models);
+        return loadFBXAnim(models, modelData, num);
       })
       .then((loadedClip) => {
         clip = loadedClip;
