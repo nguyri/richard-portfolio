@@ -25,7 +25,7 @@ import './ThreeScene.css'
 import MediaQuery from 'react-responsive'
 
 // import {ThreeMFLoader} from './3MFLoader2'
-import model from '../../models/lamp-base-1.3mf'
+// import model from '../../models/lamp-base-1.3mf'
 
 //https://github.com/technohippy/3MFLoader/blob/master/app/index.html
 
@@ -50,7 +50,7 @@ const ModelViewer = (props) => {
   let [playAnim, setPlayAnim] = React.useState(false);
   let [animNum, setAnimNum] = React.useState(0);
   let mixer;
-  let action;
+  let activeAction;
 
   const models = {};
   importAll(require.context('../../models/', false, /\.(glb|fbx)$/));
@@ -185,8 +185,15 @@ const ModelViewer = (props) => {
 
     const animate = () => {
       const delta = clock.getDelta();
-      mixer && mixer.update(delta);
-      // console.log(mixer);
+      if (mixer) {
+        mixer && mixer.update(delta);
+        activeAction = mixer._actions[animNum];
+        if(activeAction) {
+          console.log(activeAction);
+          activeAction.play();
+        }
+        console.log(mixer);
+      }
       requestAnimationFrame(animate);
       render();
       composer && composer.render();
@@ -311,6 +318,53 @@ const ModelViewer = (props) => {
     });
   };
 
+  const loadAnimations = async (model, models, modelData, num) => {
+    if(!model) {throw new Error('no model to apply animations')}
+    try { setAnimNum( ( animNum + 1 ) % 5 );
+    mixer = new THREE.AnimationMixer(model);
+    console.log('in loaded model', mixer);
+    mixer.scale = new THREE.Vector3(40, 40, 40);
+
+    modelData[num].animations.forEach( async (file) => {
+      let animPath = `./${file}`;
+      let loadedClip = await loadAnimFile(animPath);
+      let action = mixer.clipAction(loadedClip);
+      // console.log(action);
+    } )
+    // console.log('loadedAnim', loadedClip)
+    // loadedModel.animations.push(loadedClip);
+    // console.log('model', loadedModel);
+
+    // action = mixer.clipAction(loadedClip);
+    // console.log(action);
+    // action.play();
+    console.log(mixer);
+    // setMixer(mixer);
+    }
+    catch (err) {
+      console.error('error loading animations', err);
+    }
+      // setMixer(mixer);
+  }
+
+  const loadAnimFile = (animPath) => {
+    return new Promise((resolve, reject) => {
+      let loader;
+      if (animPath.endsWith('glb') || animPath.endsWith('gltf')) { loader = new GLTFLoader();}
+      else {throw new Error("animation file is not gltf")}
+
+      loader.load(models[animPath].default, function (anim) {
+        anim.name = animPath;
+        // console.log(anim);
+        const clip = anim.animations.at(0);
+        resolve(clip);
+      }, undefined, function (error) {
+        console.error(error);
+        reject(error);
+      });
+    });
+  };
+
   const loadGLBAnim = (models, modelData, num) => {
     return new Promise((resolve, reject) => {
       let animPath = `./${modelData[num].animations[0]}`;
@@ -353,19 +407,19 @@ const ModelViewer = (props) => {
         setLoadedModel(loadedModel);
         setOutline(loadedModel, outlinePass);
         model = loadedModel;
-        return loadGLBAnim(models, modelData, num);
+        loadAnimations(model, models, modelData, num);
       })
-      .then((loadedClip) => {
-        clip = loadedClip;
-        mixer = new THREE.AnimationMixer(model);
-        mixer.scale = new THREE.Vector3(40, 40, 40);
-        action = mixer.clipAction(clip);
-        console.log(clip); // Log the loaded clip
-        console.log(mixer);
-        console.log(action);
-        action.play();
+      // .then((loadedClip) => {
+      //   clip = loadedClip;
+      //   mixer = new THREE.AnimationMixer(model);
+      //   mixer.scale = new THREE.Vector3(40, 40, 40);
+      //   action = mixer.clipAction(clip);
+      //   console.log(clip); // Log the loaded clip
+      //   console.log(mixer);
+      //   console.log(action);
+      //   action.play();
         // setMixer(mixer);
-      }).catch((error) => { console.error('Failed to load FBX animation:', error); })
+      // }).catch((error) => { console.error('Failed to load FBX animation:', error); })
       .catch((error) => { console.log('failed to load gltf model', error) })
   }
   return (
