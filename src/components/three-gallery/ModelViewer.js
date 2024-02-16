@@ -309,10 +309,14 @@ const ModelViewer = (props) => {
     });
   };
 
-  const loadFBXAnim = (models, modelData, num) => {
+  const loadGLBAnim = (models, modelData, num) => {
     return new Promise((resolve, reject) => {
-      let loader = new GLTFLoader();
       let animPath = `./${modelData[num].animations[0]}`;
+
+      let loader;
+      if (animPath.endsWith('glb') || animPath.endsWith('gltf')) { loader = new GLTFLoader();}
+      else {throw new Error("animation file is not gltf")}
+
       loader.load(models[animPath].default, function (anim) {
         anim.name = animPath;
         console.log(anim);
@@ -347,7 +351,7 @@ const ModelViewer = (props) => {
         setLoadedModel(loadedModel);
         setOutline(loadedModel, outlinePass);
         model = loadedModel;
-        return loadFBXAnim(models, modelData, num);
+        return loadGLBAnim(models, modelData, num);
       })
       .then((loadedClip) => {
         clip = loadedClip;
