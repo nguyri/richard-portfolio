@@ -47,6 +47,8 @@ const ModelViewer = (props) => {
   let [outlinePass, setOutlinePass] = React.useState();
   // let [mixer, setMixer] = React.useState();
   let clock = new THREE.Clock(true);
+  let [playAnim, setPlayAnim] = React.useState(false);
+  let [animNum, setAnimNum] = React.useState(0);
   let mixer;
   let action;
 
@@ -370,9 +372,11 @@ const ModelViewer = (props) => {
     <div className={props.darkMode ? 'threegallery threegallery--dark' : 'threegallery'}>
       <div className='threegallery--slider-grid'>
         <h1 className='threegallery--title'>{modelData[modelIndex].name}</h1>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <div className='threegallery--desc'> <b>scroll</b> to zoom</div>
-          <div className='threegallery--desc'> <b>drag</b> to orbit</div>
+        <div style={{ display: 'flex', alignItems: 'center' , gridRow: '2 / span 1', gridCol: '1 / span 1'}}>
+          <button className={'threegallery--button'} onClick={() =>
+            modelIndex > 0 && loadModelIndex(modelIndex - 1, outlinePass)}>Prev</button> {' '}
+          <button className={'threegallery--button'} onClick={() =>
+            modelIndex < modelData.length - 1 && loadModelIndex(modelIndex + 1, outlinePass)}>Next Model</button>
         </div>
         <div className='threegallery--slider-div' style={{ gridRow: '1 / span 1' }}>
           <div className='threegallery--slider-title' >Brightness</div>
@@ -382,11 +386,15 @@ const ModelViewer = (props) => {
           <div className='threegallery--slider-title' >Position</div>
           <Slider trackStyle={trackStyle} handleStyle={handleStyle} railStyle={railStyle} onChange={setZPosition} defaultValue={0} min={-5} max={45} />
         </div>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <button className={'threegallery--button'} onClick={() =>
-            modelIndex > 0 && loadModelIndex(modelIndex - 1, outlinePass)}>Prev</button> {' '}
-          <button className={'threegallery--button'} onClick={() =>
-            modelIndex < modelData.length - 1 && loadModelIndex(modelIndex + 1, outlinePass)}>Next Model</button>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <div className='threegallery--desc'> <b>scroll</b> to zoom</div>
+          <div className='threegallery--desc'> <b>drag</b> to orbit</div>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center' , gridRow: '2 / span 1', gridCol: '1 / span 1'}}>
+        <button className={'threegallery--button'} onClick={() =>
+            setPlayAnim(!playAnim)}>{playAnim ? "Play" : "Pause"}</button> 
+        <button className={'threegallery--button'} onClick={() =>
+            setAnimNum( ( animNum + 1 ) % 5 ) }>{animNum}</button> 
         </div>
       </div>
       <MediaQuery minWidth={1224}>
