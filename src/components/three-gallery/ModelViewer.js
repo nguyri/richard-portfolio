@@ -189,10 +189,10 @@ const ModelViewer = (props) => {
         mixer && mixer.update(delta);
         activeAction = mixer._actions[animNum];
         if(activeAction) {
-          console.log(activeAction);
+          // console.log(activeAction);
           activeAction.play();
         }
-        console.log(mixer);
+        // console.log(mixer);
       }
       requestAnimationFrame(animate);
       render();
@@ -395,6 +395,20 @@ const ModelViewer = (props) => {
   }
   const railStyle = { height: 10 }
 
+  const changeAnim = () => {
+    let nextNum = animNum + 1;
+    setAnimNum(( nextNum ) % mixer._actions.length);
+    activeAction.stop();
+    activeAction = mixer._actions[nextNum];
+    activeAction.play();
+  }
+
+  const playPauseAnim = (play) => {
+    if(!activeAction) console.error("No active action in playPauseAnim");
+    setPlayAnim(play);
+    play ? activeAction.stop() : activeAction.play();
+  }
+
   const loadModelIndex = (num, outlinePass) => {
     scene.remove(loadedModel);
     let materials = loadTextures(modelData, num);
@@ -445,10 +459,10 @@ const ModelViewer = (props) => {
           <div className='threegallery--desc'> <b>drag</b> to orbit</div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center' , gridRow: '2 / span 1', gridCol: '1 / span 1'}}>
+        <button className={'threegallery--button'} onClick={() => {
+          playPauseAnim(!playAnim)}}>{playAnim ? "Play" : "Pause"}</button> 
         <button className={'threegallery--button'} onClick={() =>
-            setPlayAnim(!playAnim)}>{playAnim ? "Play" : "Pause"}</button> 
-        <button className={'threegallery--button'} onClick={() =>
-            setAnimNum( ( animNum + 1 ) % 5 ) }>{animNum}</button> 
+            changeAnim() }>{animNum}</button> 
         </div>
       </div>
       <MediaQuery minWidth={1224}>
