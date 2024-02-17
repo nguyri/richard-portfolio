@@ -49,6 +49,7 @@ const ModelViewer = (props) => {
   let clock = new THREE.Clock(true);
   let [playAnim, setPlayAnim] = React.useState(false);
   let [animNum, setAnimNum] = React.useState(0);
+  let [animNames, setAnimNames] = React.useState([]);
   // let mixer;
   // let [mixerState, setMixerState] = React.useState();
   let mixerRef = React.useRef();
@@ -296,16 +297,18 @@ const ModelViewer = (props) => {
 
   const loadAnimations = async (model, models, modelData, num) => {
     if(!model) {throw new Error('no model to apply animations')}
-    try { setAnimNum( ( animNum + 1 ) % 5 );
+    try { 
     // mixer = new THREE.AnimationMixer(model);
     const mixer = new THREE.AnimationMixer(model);
-    console.log('in loaded model', mixer);
+    // console.log('in loaded model', mixer);
     mixer.scale = new THREE.Vector3(40, 40, 40);
 
     modelData[num].animations.forEach( async (file) => {
       let animPath = `./${file}`;
       let loadedClip = await loadAnimFile(animPath);
       let action = mixer.clipAction(loadedClip);
+      action.name = file;
+      loadedClip.name = file;
     } )
     mixerRef.current = mixer;
     }
@@ -341,12 +344,15 @@ const ModelViewer = (props) => {
   }
   const railStyle = { height: 10 }
 
-  const changeAnim = () => {
+  const nextAnim = () => {
     const actions = mixerRef.current._actions;
-    actions[animNum].stop();
-    let nextNum = animNum + 1;
-    setAnimNum(( nextNum ) % actions.length);
-    actions[nextNum].play();
+    mixerRef.current.stopAllAction();
+    let nextNum = ( animNum + 1 )% actions.length;
+    setAnimNum(( nextNum ));
+    const animName = modelData[modelIndex].animations[nextNum];
+    // when I just actions[nextNum].play() it changes the order of actions...
+    mixerRef.current._actions.find((action) => action.name == animName).play();
+    // console.log('playing:' , nextNum, actions.map((action) => action.name));
   }
 
   const playPauseAnim = () => {
@@ -397,7 +403,7 @@ const ModelViewer = (props) => {
         <button className={'threegallery--button'} onClick={() => {
           playPauseAnim()}}>{playAnim ? "Play" : "Pause"}</button> 
         <button className={'threegallery--button'} onClick={() =>
-            changeAnim() }>{animNum}</button> 
+            nextAnim() }>{animNum}</button> 
         </div>
       </div>
       <MediaQuery minWidth={1224}>
