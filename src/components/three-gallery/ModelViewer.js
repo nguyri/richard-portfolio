@@ -61,43 +61,13 @@ const ModelViewer = (props) => {
     r.keys().forEach((key) => models[key] = r(key));
   }
 
-  const setOutline = (loadedModel, outlinePass) => {
-    try {
-      let outlinedModel = loadedModel.children[0];
-      outlinePass.visibleEdgeColor.set(modelData[modelIndex].outlineColor)
-      outlinePass.selectedObjects.push(outlinedModel);
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
-  // React.useEffect(() => {
-  //   if (!loadedModel) return;
-  //   try {
-  //     let outlinedModel = loadedModel.children[0];
-  //     outlinePass.visibleEdgeColor.set(modelData[modelIndex].outlineColor)
-  //     outlinePass.selectedObjects.push(outlinedModel);
-  //     setMixer(new THREE.AnimationMixer());
-  //     console.log('mixer', mixer);
-
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // }, [loadedModel]);
-
-  // console.log(models);
   React.useEffect(() => {
     props.shrinkCallback();
     const width = myRef.current.clientWidth
     const height = myRef.current.clientHeight
-    let cameraInit = new THREE.OrthographicCamera(width / -2, width / 2, height / 2, height / -2, 0, 2000)//( 10, width / height, 50, 800)
-    // this.cameraInit = new THREE.PerspectiveCameraInit( 5, width / height, 50, 2000)
-    cameraInit.zoom = zoom;
-    cameraInit.up.set(0, 0, 1);
-    cameraInit.position.set(50, -200, 100);
-    cameraInit.lookAt(0, 0, 0)
-    cameraInit.updateProjectionMatrix();
+    
 
+    let cameraInit = initCamera(myRef);
     setCamera(cameraInit);
 
     // this.camera = new THREE.PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 1, 500 );
@@ -213,6 +183,29 @@ const ModelViewer = (props) => {
 
     lights.forEach((elem) => (updateLight(elem, brightness)));
   }, [brightness])
+
+  const initCamera = (myRef) => {
+    const width = myRef.current.clientWidth
+    const height = myRef.current.clientHeight
+    let cameraInit = new THREE.OrthographicCamera(width / -2, width / 2, height / 2, height / -2, 0, 2000)//( 10, width / height, 50, 800)
+    // this.cameraInit = new THREE.PerspectiveCameraInit( 5, width / height, 50, 2000)
+    cameraInit.zoom = zoom;
+    cameraInit.up.set(0, 0, 1);
+    cameraInit.position.set(50, -200, 100);
+    cameraInit.lookAt(0, 0, 0)
+    cameraInit.updateProjectionMatrix();
+    return cameraInit;
+  }
+
+  const setOutline = (loadedModel, outlinePass) => {
+    try {
+      let outlinedModel = loadedModel.children[0];
+      outlinePass.visibleEdgeColor.set(modelData[modelIndex].outlineColor)
+      outlinePass.selectedObjects.push(outlinedModel);
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   const updateLight = (light, brightness) => {
     light.intensity = brightness;
@@ -410,17 +403,17 @@ const ModelViewer = (props) => {
   const railStyle = { height: 10 }
 
   const changeAnim = () => {
-    const activeAction = mixerRef.current._actions[animNum];
+    const actions = mixerRef.current._actions;
+    actions[animNum].stop();
     let nextNum = animNum + 1;
-    setAnimNum(( nextNum ) % mixerRef.current._actions.length);
-    activeAction.stop();
-    mixerRef.current._actions[nextNum].play();
+    setAnimNum(( nextNum ) % actions.length);
+    actions[nextNum].play();
   }
 
-  const playPauseAnim = (play) => {
-    const activeAction = mixerRef.current._actions[animNum];
-    setPlayAnim(play);
-    play ? activeAction.stop() : activeAction.play();
+  const playPauseAnim = () => {
+    const action = mixerRef.current._actions[animNum];
+    playAnim ? action.stop() : action.play();
+    setPlayAnim(!playAnim);
   }
 
   const loadModelIndex = (num, outlinePass) => {
@@ -437,17 +430,6 @@ const ModelViewer = (props) => {
         model = loadedModel;
         loadAnimations(model, models, modelData, num);
       })
-      // .then((loadedClip) => {
-      //   clip = loadedClip;
-      //   mixer = new THREE.AnimationMixer(model);
-      //   mixer.scale = new THREE.Vector3(40, 40, 40);
-      //   action = mixer.clipAction(clip);
-      //   console.log(clip); // Log the loaded clip
-      //   console.log(mixer);
-      //   console.log(action);
-      //   action.play();
-        // setMixer(mixer);
-      // }).catch((error) => { console.error('Failed to load FBX animation:', error); })
       .catch((error) => { console.log('failed to load gltf model', error) })
   }
   return (
@@ -474,7 +456,7 @@ const ModelViewer = (props) => {
         </div>
         <div style={{ display: 'flex', alignItems: 'center' , gridRow: '2 / span 1', gridCol: '1 / span 1'}}>
         <button className={'threegallery--button'} onClick={() => {
-          playPauseAnim(!playAnim)}}>{playAnim ? "Play" : "Pause"}</button> 
+          playPauseAnim()}}>{playAnim ? "Play" : "Pause"}</button> 
         <button className={'threegallery--button'} onClick={() =>
             changeAnim() }>{animNum}</button> 
         </div>
