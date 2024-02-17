@@ -159,7 +159,7 @@ const ModelViewer = (props) => {
     composer.addPass(renderPass);
     // const outlinePass = configureOutlinePass(window, scene, cameraInit, 18, 2, "#ffffff");
     // composer.addPass(outlinePass);
-    const darkOutlinePass = configureOutlinePass(window, scene, camera, 3, 6, 0, modelData[modelIndex].outlineColor);
+    const darkOutlinePass = configureOutlinePass(window, scene, camera, 2, 4, 0, modelData[modelIndex].outlineColor);
     composer.addPass(darkOutlinePass);
     setOutlinePass(darkOutlinePass);
     const outputPass = new OutputPass();
@@ -374,7 +374,7 @@ const ModelViewer = (props) => {
     let clip, model;
     loadGLTF(models, modelData, num, scene, materials)
       .then((loadedModel) => {
-        console.log("loaded model", loadedModel);
+        // console.log("loaded model", loadedModel);
         setLoadedModel(loadedModel);
         setOutline(loadedModel, outlinePass);
         model = loadedModel;
@@ -412,7 +412,7 @@ const ModelViewer = (props) => {
       <MediaQuery minWidth={1224}>
         {(smallWidth) => (
           <div style={smallWidth ?
-            { width: '50vw', height: '30vw' } :
+            { width: '50vw', height: '50vw' } :
             { width: '100vw', height: '100vw' }}
             ref={myRef} />
         )}
