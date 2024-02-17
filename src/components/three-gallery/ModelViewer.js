@@ -80,8 +80,8 @@ const ModelViewer = (props) => {
     const composer = initComposer(renderer, width, height, scene, camera)
     loadModelIndex(modelIndex, outlinePass);
     
-    const axesHelper = new THREE.AxesHelper(20);
-    scene.add(axesHelper);
+    // const axesHelper = new THREE.AxesHelper(20);
+    // scene.add(axesHelper);
     
     const controls = initControls(camera, renderer);
     
@@ -406,7 +406,7 @@ const ModelViewer = (props) => {
         </div>
         <div style={{ display: 'flex', alignItems: 'center' , gridRow: '2 / span 1', gridCol: '1 / span 1'}}>
         <button className={'threegallery--button'} onClick={() =>
-            nextAnim() }>Next Anim: {animNum + 1}</button> 
+            nextAnim() }>Next Anim</button> 
         </div>
       </div>
       <MediaQuery minWidth={1224}>
