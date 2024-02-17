@@ -50,6 +50,7 @@ const ModelViewer = (props) => {
   let [playAnim, setPlayAnim] = React.useState(false);
   let [animNum, setAnimNum] = React.useState(0);
   let mixer;
+  let [mixerState, setMixerState] = React.useState();
   let activeAction;
 
   const models = {};
@@ -185,15 +186,9 @@ const ModelViewer = (props) => {
 
     const animate = () => {
       const delta = clock.getDelta();
-      if (mixer) {
-        mixer && mixer.update(delta);
-        activeAction = mixer._actions[animNum];
-        if(activeAction) {
-          // console.log(activeAction);
-          activeAction.play();
-        }
-        // console.log(mixer);
-      }
+      const mixerState = mixer;
+      mixerState && mixerState.update(delta);
+      mixerState && mixerState._actions[0] && mixerState._actions[0].play();
       requestAnimationFrame(animate);
       render();
       composer && composer.render();
@@ -202,6 +197,11 @@ const ModelViewer = (props) => {
     animate();
     return () => myRef.current && myRef.current.removeChild(renderer.domElement);
   }, []);
+
+  React.useEffect(() => {
+    console.log('in use effect', mixer);
+    console.log('in use effect', mixerState);
+  }, [mixer, mixerState])
 
   React.useEffect(() => {
     // console.log(pointLight);
@@ -322,15 +322,22 @@ const ModelViewer = (props) => {
     if(!model) {throw new Error('no model to apply animations')}
     try { setAnimNum( ( animNum + 1 ) % 5 );
     mixer = new THREE.AnimationMixer(model);
+    //const mixer = new THREE.AnimationMixer(model);
     console.log('in loaded model', mixer);
     mixer.scale = new THREE.Vector3(40, 40, 40);
 
-    modelData[num].animations.forEach( async (file) => {
-      let animPath = `./${file}`;
-      let loadedClip = await loadAnimFile(animPath);
-      let action = mixer.clipAction(loadedClip);
-      // console.log(action);
-    } )
+    // modelData[num].animations.forEach( async (file) => {
+    //   let animPath = `./${file}`;
+    //   let loadedClip = await loadAnimFile(animPath);
+    //   let action = mixer.clipAction(loadedClip);
+    //   // console.log(action);
+    // } )
+    let file = modelData[num].animations[0];
+    let animPath = `./${file}`;
+    let loadedClip = await loadAnimFile(animPath);
+    let action = mixer.clipAction(loadedClip);
+    // console.log(action);
+
     // console.log('loadedAnim', loadedClip)
     // loadedModel.animations.push(loadedClip);
     // console.log('model', loadedModel);
@@ -338,7 +345,8 @@ const ModelViewer = (props) => {
     // action = mixer.clipAction(loadedClip);
     // console.log(action);
     // action.play();
-    console.log(mixer);
+    console.log('in load animations', mixer);
+    setMixerState(mixer);
     // setMixer(mixer);
     }
     catch (err) {
