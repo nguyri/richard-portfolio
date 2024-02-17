@@ -187,10 +187,12 @@ const ModelViewer = (props) => {
 
     const animate = () => {
       const delta = clock.getDelta();
-      try {
-        mixerRef.current.update(delta);
-        mixerRef.current._actions[0].play();
-      } catch {console.error()};
+      if (mixerRef.current) {
+        try {
+          mixerRef.current.update(delta);
+          mixerRef.current._actions[0].play();
+        } catch (e) {console.error(e)};
+      }
       requestAnimationFrame(animate);
       render();
       composer && composer.render();
@@ -408,15 +410,15 @@ const ModelViewer = (props) => {
   const railStyle = { height: 10 }
 
   const changeAnim = () => {
+    const activeAction = mixerRef.current._actions[animNum];
     let nextNum = animNum + 1;
-    setAnimNum(( nextNum ) % mixer._actions.length);
+    setAnimNum(( nextNum ) % mixerRef.current._actions.length);
     activeAction.stop();
-    activeAction = mixer._actions[nextNum];
-    activeAction.play();
+    mixerRef.current._actions[nextNum].play();
   }
 
   const playPauseAnim = (play) => {
-    if(!activeAction) console.error("No active action in playPauseAnim");
+    const activeAction = mixerRef.current._actions[animNum];
     setPlayAnim(play);
     play ? activeAction.stop() : activeAction.play();
   }
