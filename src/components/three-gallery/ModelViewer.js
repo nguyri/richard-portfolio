@@ -66,57 +66,35 @@ const ModelViewer = (props) => {
     const width = myRef.current.clientWidth
     const height = myRef.current.clientHeight
     
-    let camera = initCamera(width, height, zoom);
+    const camera = initCamera(width, height, zoom);
     initLights(scene);
+    // scene.add(demoSphere(scene));
 
-    // const sphereGeo = new THREE.SphereGeometry(30, 32, 16);
-    // const sphereMat = new THREE.MeshPhongMaterial({color: '#CA8'});
-    // const mesh = new THREE.Mesh(sphereGeo, materialClothes);
-    // mesh.position.set(-sphereRadius - 1, sphereRadius + 2, 0);
-    // scene.add(mesh);
-
-    let renderer = new THREE.WebGLRenderer({ antialias: true })
+    const renderer = new THREE.WebGLRenderer({ antialias: true })
     renderer.setClearColor('#000000', 0); //#F9F7F0
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(width, height);
     myRef.current.appendChild(renderer.domElement)
 
-    let composer = initComposer(renderer, width, height, scene, camera)
+    const composer = initComposer(renderer, width, height, scene, camera)
     loadModelIndex(modelIndex, outlinePass);
-
-    const render = () => {
-      renderer.render(scene, camera);
-    }
-
+    
     const axesHelper = new THREE.AxesHelper(20);
     scene.add(axesHelper);
-
-    controls = new OrbitControls(camera, renderer.domElement);
-    controls.addEventListener('change', render);
-    controls.target.set(0, 0, 55);
-    controls.minPolarAngle = Math.PI / 3;
-    controls.maxPolarAngle = Math.PI;
-    controls.minAzimuthAngle = - Math.PI / 4;
-    controls.maxAzimuthAngle = Math.PI * 7 / 8;
-    controls.maxZoom = 25;
-    controls.minZoom = 10;
-    // controls.enablePan = true;
-    // controls.panSpeed = 1.0;
-    controls.screenSpacePanning = true;
-
-    controls.enableZoom = true;
-
-    // controls.autoRotate = true;
-
-    controls.update();
-
+    
+    const controls = initControls(camera, renderer);
+    
     let onWindowResize = function () {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     }
-
     window.addEventListener("resize", onWindowResize, false);
+    
+    const render = () => {
+      renderer.render(scene, camera);
+    }
+    controls.addEventListener('change', render);
 
     const animate = () => {
       const delta = clock.getDelta();
@@ -146,6 +124,32 @@ const ModelViewer = (props) => {
 
     lights.forEach((elem) => (updateLight(elem, brightness)));
   }, [brightness])
+
+  const demoSphere = (scene, material) => {
+    const sphereRadius = 30;
+    const sphereGeo = new THREE.SphereGeometry(30, 32, 16);
+    const sphereMat = new THREE.MeshPhongMaterial({color: '#CA8'});
+    const mesh = new THREE.Mesh(sphereGeo, sphereMat);
+    mesh.position.set(-sphereRadius - 1, sphereRadius + 2, 0);
+    scene.add(mesh);
+  }
+  const initControls = (camera, renderer) => {
+    controls = new OrbitControls(camera, renderer.domElement);
+    controls.target.set(0, 0, 55);
+    controls.minPolarAngle = Math.PI / 3;
+    controls.maxPolarAngle = Math.PI;
+    controls.minAzimuthAngle = - Math.PI / 4;
+    controls.maxAzimuthAngle = Math.PI * 7 / 8;
+    controls.maxZoom = 25;
+    controls.minZoom = 10;
+    // controls.enablePan = true;
+    // controls.panSpeed = 1.0;
+    controls.screenSpacePanning = true;
+    controls.enableZoom = true;
+    // controls.autoRotate = true;
+    controls.update();
+    return controls;
+  }
 
   const initComposer = (renderer, width, height, scene, camera) => {
     const composer = new EffectComposer(renderer);
@@ -227,22 +231,6 @@ const ModelViewer = (props) => {
     return outlinePass;
   }
 
-  // React.useEffect(() => {
-  //   // setZoom(zoom);
-  //   if(camera) {
-  //     camera.updateProjectionMatrix();
-  //     camera.zoom = zoom;
-  //     console.log(camera);
-  //   }
-  // }, [zoom])
-
-  // React.useEffect(() => {
-  // // setZoom(zoom);
-  // console.log(controls);
-  // console.log(target);
-  // console.log(targetVec);
-  // setTargetVec(new THREE.Vector3(0,0,target));
-  // }, [target])
   const setZPosition = (num) => {
     // console.log(model)
     modelShown.position.z = num;
@@ -262,6 +250,7 @@ const ModelViewer = (props) => {
     }
     return null;
   }
+
   const loadGLTF = (models, modelData, modelIndex, scene, materials) => {
     return new Promise((resolve, reject) => {
       const path = `./${modelData[modelIndex].files}`;
@@ -317,30 +306,10 @@ const ModelViewer = (props) => {
       let animPath = `./${file}`;
       let loadedClip = await loadAnimFile(animPath);
       let action = mixer.clipAction(loadedClip);
-      console.log(action);
     } )
-    // let file = modelData[num].animations[0];
-    // let animPath = `./${file}`;
-    // let loadedClip = await loadAnimFile(animPath);
-    // let action = mixer.clipAction(loadedClip);
-    // console.log(action);
-
-    // console.log('loadedAnim', loadedClip)
-    // loadedModel.animations.push(loadedClip);
-    // console.log('model', loadedModel);
-
-    // action = mixer.clipAction(loadedClip);
-    // console.log(action);
-    // action.play();
-    console.log('in load animations', mixer);
-    // setMixerState(mixer);
     mixerRef.current = mixer;
-    // setMixer(mixer);
     }
-    catch (err) {
-      console.error('error loading animations', err);
-    }
-      // setMixer(mixer);
+    catch ( err ) { console.error('error loading animations', err); }
   }
 
   const loadAnimFile = (animPath) => {
@@ -361,25 +330,6 @@ const ModelViewer = (props) => {
     });
   };
 
-  const loadGLBAnim = (models, modelData, num) => {
-    return new Promise((resolve, reject) => {
-      let animPath = `./${modelData[num].animations[0]}`;
-
-      let loader;
-      if (animPath.endsWith('glb') || animPath.endsWith('gltf')) { loader = new GLTFLoader();}
-      else {throw new Error("animation file is not gltf")}
-
-      loader.load(models[animPath].default, function (anim) {
-        anim.name = animPath;
-        console.log(anim);
-        const clip = anim.animations.at(0);
-        resolve(clip);
-      }, undefined, function (error) {
-        console.error(error);
-        reject(error);
-      });
-    });
-  };
   const trackStyle = { height: 10 }
   const handleStyle = {
     // borderColor: 'blue',
