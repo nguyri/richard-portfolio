@@ -66,69 +66,32 @@ const ModelViewer = (props) => {
     const width = myRef.current.clientWidth
     const height = myRef.current.clientHeight
     
+    let camera = initCamera(width, height, zoom);
+    initLights(scene);
 
-    let cameraInit = initCamera(myRef);
-    setCamera(cameraInit);
-
-    // this.camera = new THREE.PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 1, 500 );
-
-    rimLight.position.set(-180, 100, 200);
-    dirLight.position.set(200, -90, 200);
-    scene.add(dirLight);
-    scene.add(rimLight);
-    scene.add(ambientLight);
-    THREE.ColorManagement.enabled = true;
-    // scene.add(new THREE.AmbientLight(0xffffff, 2.0));
-    // let [material] = React.useState(new THREE.MeshPhongMaterial({ flatShading: 'false', color: new THREE.Color(0xafafaf) }))
-
-    // const sphereRadius = 30;
-    // const sphereWidthDivisions = 32;
-    // const sphereHeightDivisions = 16;
-    // const sphereGeo = new THREE.SphereGeometry(sphereRadius, sphereWidthDivisions, sphereHeightDivisions);
+    // const sphereGeo = new THREE.SphereGeometry(30, 32, 16);
     // const sphereMat = new THREE.MeshPhongMaterial({color: '#CA8'});
     // const mesh = new THREE.Mesh(sphereGeo, materialClothes);
     // mesh.position.set(-sphereRadius - 1, sphereRadius + 2, 0);
     // scene.add(mesh);
 
-    const times = [0, 3, 6];
-    const values = [0, 0, 0, 2, 2, 2, 0, 0, 0];
-    const positionKF = new THREE.VectorKeyframeTrack(".position", times, values);
-    // const clip = new THREE.AnimationClip("idle", -1, positionKF);
-
-
     let renderer = new THREE.WebGLRenderer({ antialias: true })
-    renderer.setClearColor('#000000', 0) //#F9F7F0
+    renderer.setClearColor('#000000', 0); //#F9F7F0
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(width, height)
+    renderer.setSize(width, height);
     myRef.current.appendChild(renderer.domElement)
 
-    const composer = new EffectComposer(renderer);
-    composer.setSize(window.innerWidth, window.innerHeight);
-    const renderPass = new RenderPass(scene, cameraInit);
-    composer.addPass(renderPass);
-    // const outlinePass = configureOutlinePass(window, scene, cameraInit, 18, 2, "#ffffff");
-    // composer.addPass(outlinePass);
-    const darkOutlinePass = configureOutlinePass(window, scene, cameraInit, 3, 6, 0, modelData[modelIndex].outlineColor);
-    composer.addPass(darkOutlinePass);
-    setOutlinePass(darkOutlinePass);
-    const outputPass = new OutputPass();
-    composer.addPass(outputPass);
-    const effectFXAA = new ShaderPass(FXAAShader);
-    effectFXAA.uniforms['resolution'].value.set(1 / window.innerWidth, 1 / window.innerHeight);
-    composer.addPass(effectFXAA);
-    // let outlinePass;
-    // let composer;
-    loadModelIndex(modelIndex, darkOutlinePass);
+    let composer = initComposer(renderer, width, height, scene, camera)
+    loadModelIndex(modelIndex, outlinePass);
 
     const render = () => {
-      renderer.render(scene, cameraInit);
+      renderer.render(scene, camera);
     }
 
     const axesHelper = new THREE.AxesHelper(20);
     scene.add(axesHelper);
-    // scene.add(cube);
 
-    controls = new OrbitControls(cameraInit, renderer.domElement);
+    controls = new OrbitControls(camera, renderer.domElement);
     controls.addEventListener('change', render);
     controls.target.set(0, 0, 55);
     controls.minPolarAngle = Math.PI / 3;
@@ -148,8 +111,8 @@ const ModelViewer = (props) => {
     controls.update();
 
     let onWindowResize = function () {
-      cameraInit.aspect = window.innerWidth / window.innerHeight;
-      cameraInit.updateProjectionMatrix();
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     }
 
@@ -184,9 +147,34 @@ const ModelViewer = (props) => {
     lights.forEach((elem) => (updateLight(elem, brightness)));
   }, [brightness])
 
-  const initCamera = (myRef) => {
-    const width = myRef.current.clientWidth
-    const height = myRef.current.clientHeight
+  const initComposer = (renderer, width, height, scene, camera) => {
+    const composer = new EffectComposer(renderer);
+    composer.setSize(width, height);
+    const renderPass = new RenderPass(scene, camera);
+    composer.addPass(renderPass);
+    // const outlinePass = configureOutlinePass(window, scene, cameraInit, 18, 2, "#ffffff");
+    // composer.addPass(outlinePass);
+    const darkOutlinePass = configureOutlinePass(window, scene, camera, 3, 6, 0, modelData[modelIndex].outlineColor);
+    composer.addPass(darkOutlinePass);
+    setOutlinePass(darkOutlinePass);
+    const outputPass = new OutputPass();
+    composer.addPass(outputPass);
+    const effectFXAA = new ShaderPass(FXAAShader);
+    effectFXAA.uniforms['resolution'].value.set(1 / window.innerWidth, 1 / window.innerHeight);
+    composer.addPass(effectFXAA);
+    return composer;
+  }
+
+  const initLights = (scene) => {
+    rimLight.position.set(-180, 100, 200);
+    dirLight.position.set(200, -90, 200);
+    scene.add(dirLight);
+    scene.add(rimLight);
+    scene.add(ambientLight);
+    THREE.ColorManagement.enabled = true;
+  }
+
+  const initCamera = (width, height, zoom) => {
     let cameraInit = new THREE.OrthographicCamera(width / -2, width / 2, height / 2, height / -2, 0, 2000)//( 10, width / height, 50, 800)
     // this.cameraInit = new THREE.PerspectiveCameraInit( 5, width / height, 50, 2000)
     cameraInit.zoom = zoom;
@@ -194,6 +182,7 @@ const ModelViewer = (props) => {
     cameraInit.position.set(50, -200, 100);
     cameraInit.lookAt(0, 0, 0)
     cameraInit.updateProjectionMatrix();
+    setCamera(cameraInit);
     return cameraInit;
   }
 
