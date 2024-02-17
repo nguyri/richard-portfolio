@@ -14,6 +14,7 @@ export default [
         key:1,
         name:'Witch',
         files:['deres-13-export-2-weight-fix-2.glb'],
+        animations:[],
         position:[0,0,2],
         rotation:[3.14/2,0,0],
         textures:['Atlas_00001.png'],

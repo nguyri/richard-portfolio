@@ -47,7 +47,7 @@ const ModelViewer = (props) => {
   let [outlinePass, setOutlinePass] = React.useState();
   // let [mixer, setMixer] = React.useState();
   let clock = new THREE.Clock(true);
-  let [playAnim, setPlayAnim] = React.useState(false);
+  let [playAnim, setPlayAnim] = React.useState(true);
   let [animNum, setAnimNum] = React.useState(0);
   let [animNames, setAnimNames] = React.useState([]);
   // let mixer;
@@ -99,7 +99,7 @@ const ModelViewer = (props) => {
 
     const animate = () => {
       const delta = clock.getDelta();
-      if (mixerRef.current) {
+      if (mixerRef.current && mixerRef.current._actions.length) {
         try {
           mixerRef.current.update(delta);
           mixerRef.current._actions[0].play();
@@ -351,20 +351,25 @@ const ModelViewer = (props) => {
     setAnimNum(( nextNum ));
     const animName = modelData[modelIndex].animations[nextNum];
     // when I just actions[nextNum].play() it changes the order of actions...
-    mixerRef.current._actions.find((action) => action.name == animName).play();
+    const action = actions.find((action) => action.name == animName)
+    if(action) action.play();
     // console.log('playing:' , nextNum, actions.map((action) => action.name));
   }
 
-  const playPauseAnim = () => {
-    const action = mixerRef.current._actions[animNum];
-    playAnim ? action.stop() : action.play();
-    setPlayAnim(!playAnim);
-  }
+  // const playPauseAnim = () => {
+  //   const animName = modelData[modelIndex].animations[animNum];
+  //   const action = mixerRef.current._actions.find((action) => action.name == animName);
+  //   // playAnim ? action.play() : mixerRef.current.stopAllAction();
+  //   mixerRef.current._actions.forEach((anim) => anim.stop());
+  //   console.log(playAnim);
+  //   setPlayAnim(playAnim);
+  // }
 
   const loadModelIndex = (num, outlinePass) => {
     scene.remove(loadedModel);
     let materials = loadTextures(modelData, num);
     setModelIndex(num);
+    setAnimNum(0);
 
     let clip, model;
     loadGLTF(models, modelData, num, scene, materials)
@@ -400,10 +405,8 @@ const ModelViewer = (props) => {
           <div className='threegallery--desc'> <b>drag</b> to orbit</div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center' , gridRow: '2 / span 1', gridCol: '1 / span 1'}}>
-        <button className={'threegallery--button'} onClick={() => {
-          playPauseAnim()}}>{playAnim ? "Play" : "Pause"}</button> 
         <button className={'threegallery--button'} onClick={() =>
-            nextAnim() }>{animNum}</button> 
+            nextAnim() }>Next Anim: {animNum + 1}</button> 
         </div>
       </div>
       <MediaQuery minWidth={1224}>
