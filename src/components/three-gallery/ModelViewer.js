@@ -277,7 +277,7 @@ const ModelViewer = (props) => {
         });
 
         let scale = 40
-        console.log(loadedGLTF)
+        // console.log(loadedGLTF)
         fullModel.scale.set(scale, scale, scale);
         fullModel.position.set(...modelData[modelIndex].position);
         fullModel.rotation.set(...modelData[modelIndex].rotation);
@@ -387,10 +387,10 @@ const ModelViewer = (props) => {
       <div className='threegallery--slider-grid'>
         <h1 className='threegallery--title'>{modelData[modelIndex].name}</h1>
         <div style={{ display: 'flex', alignItems: 'center' , gridRow: '2 / span 1', gridCol: '1 / span 1'}}>
-          <button className={'threegallery--button'} onClick={() =>
-            modelIndex > 0 && loadModelIndex(modelIndex - 1, outlinePass)}>Prev</button> {' '}
-          <button className={'threegallery--button'} onClick={() =>
-            modelIndex < modelData.length - 1 && loadModelIndex(modelIndex + 1, outlinePass)}>Next Model</button>
+          <button disabled={modelIndex == 0} className={'threegallery--button'} onClick={() =>
+            modelIndex > 0 && loadModelIndex(modelIndex - 1, outlinePass)}>{modelIndex == modelData.length - 1 ? "Prev Model" : "Prev"}</button> {' '}
+          <button disabled={modelIndex == modelData.length - 1} className={'threegallery--button'} onClick={() =>
+            modelIndex < modelData.length - 1 && loadModelIndex(modelIndex + 1, outlinePass)}>{modelIndex == modelData.length - 1 ? "Next" : "Next Model"}</button>
         </div>
         <div className='threegallery--slider-div' style={{ gridRow: '1 / span 1' }}>
           <div className='threegallery--slider-title' >Brightness</div>

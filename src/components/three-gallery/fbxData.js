@@ -13,7 +13,7 @@ export default [
     {
         key:1,
         name:'Witch',
-        files:['deres-13-model-only-hair.glb'],
+        files:['deres-13-model-only.glb'],
         animations:['deres-13-twist-anim.glb', 'deres-13-wave-anim.glb', 'deres-13-sad-kick-anim.glb'],
         position:[0,0,2],
         rotation:[3.14/2,0,0],
