@@ -30,28 +30,26 @@ import MediaQuery from 'react-responsive'
 //https://github.com/technohippy/3MFLoader/blob/master/app/index.html
 
 const ModelViewer = (props) => {
+  let myRef = React.useRef();
   let [modelIndex, setModelIndex] = React.useState(0);
   let [modelShown, setModelShown] = React.useState();
   let [loadedModel, setLoadedModel] = React.useState();
   let [modelList, setModelList] = React.useState([]);
   let [zoom, setZoom] = React.useState(15);
   let [scene, setScene] = React.useState(new THREE.Scene());
-  let myRef = React.useRef();
   let [camera, setCamera] = React.useState();
+  let controls;
+
   let [brightness, setBrightness] = React.useState(2);
   let [rimLight] = React.useState(new THREE.PointLight(0xffffff));
   let [dirLight] = React.useState(new THREE.DirectionalLight(0xffffff));
   let [ambientLight] = React.useState(new THREE.AmbientLight(0xffffff, 2));
   let lights = [rimLight, dirLight];
-  let controls;
-  let [outlinePass, setOutlinePass] = React.useState();
-  // let [mixer, setMixer] = React.useState();
+  let [outlinePassState, setOutlinePassState] = React.useState();
+
   let clock = new THREE.Clock(true);
   let [playAnim, setPlayAnim] = React.useState(true);
   let [animNum, setAnimNum] = React.useState(0);
-  let [animNames, setAnimNames] = React.useState([]);
-  // let mixer;
-  // let [mixerState, setMixerState] = React.useState();
   let mixerRef = React.useRef();
   let activeAction;
 
@@ -77,7 +75,8 @@ const ModelViewer = (props) => {
     renderer.setSize(width, height);
     myRef.current.appendChild(renderer.domElement)
 
-    const composer = initComposer(renderer, width, height, scene, camera)
+    const outlinePass = initOutlinePass(window, scene, camera, 2, 4, 0, modelData[modelIndex].outlineColor);
+    const composer = initComposer(renderer, width, height, scene, camera, outlinePass)
     loadModelIndex(modelIndex, outlinePass);
     
     // const axesHelper = new THREE.AxesHelper(20);
@@ -156,16 +155,15 @@ const ModelViewer = (props) => {
     return controls;
   }
 
-  const initComposer = (renderer, width, height, scene, camera) => {
+  const initComposer = (renderer, width, height, scene, camera, outlinePass) => {
     const composer = new EffectComposer(renderer);
     composer.setSize(width, height);
     const renderPass = new RenderPass(scene, camera);
     composer.addPass(renderPass);
     // const outlinePass = configureOutlinePass(window, scene, cameraInit, 18, 2, "#ffffff");
     // composer.addPass(outlinePass);
-    const darkOutlinePass = configureOutlinePass(window, scene, camera, 2, 4, 0, modelData[modelIndex].outlineColor);
-    composer.addPass(darkOutlinePass);
-    setOutlinePass(darkOutlinePass);
+    composer.addPass(outlinePass);
+    setOutlinePassState(outlinePass);
     const outputPass = new OutputPass();
     composer.addPass(outputPass);
     const effectFXAA = new ShaderPass(FXAAShader);
@@ -226,7 +224,7 @@ const ModelViewer = (props) => {
     return materials;
   }
 
-  const configureOutlinePass = (window, scene, cameraInit, edgeThickness, edgeStrength, edgeGlow, color) => {
+  const initOutlinePass = (window, scene, cameraInit, edgeThickness, edgeStrength, edgeGlow, color) => {
     const outlinePass = new OutlinePass(new THREE.Vector2(window.innerWidth, window.innerHeight), scene, cameraInit);
     outlinePass.enabled = true; // not enough to disable because the other passes will make a normal looking render
     outlinePass.edgeThickness = edgeThickness ? edgeThickness : 10;
@@ -378,7 +376,7 @@ const ModelViewer = (props) => {
     let clip, model;
     loadGLTF(models, modelData, num, scene, materials)
       .then((loadedModel) => {
-        // console.log("loaded model", loadedModel);
+        console.log("loaded model", loadedModel, 'outline pass', outlinePass);
         setLoadedModel(loadedModel);
         setOutline(loadedModel, outlinePass);
         model = loadedModel;
@@ -392,9 +390,9 @@ const ModelViewer = (props) => {
         <h1 className='threegallery--title'>{modelData[modelIndex].name}</h1>
         <div style={{ display: 'flex', alignItems: 'center' , gridRow: '2 / span 1', gridCol: '1 / span 1'}}>
           <button disabled={modelIndex == 0} className={'threegallery--button'} onClick={() =>
-            modelIndex > 0 && loadModelIndex(modelIndex - 1, outlinePass)}>{modelIndex == modelData.length - 1 ? "Prev Model" : "Prev"}</button> {' '}
+            modelIndex > 0 && loadModelIndex(modelIndex - 1, outlinePassState)}>{modelIndex == modelData.length - 1 ? "Prev Model" : "Prev"}</button> {' '}
           <button disabled={modelIndex == modelData.length - 1} className={'threegallery--button'} onClick={() =>
-            modelIndex < modelData.length - 1 && loadModelIndex(modelIndex + 1, outlinePass)}>{modelIndex == modelData.length - 1 ? "Next" : "Next Model"}</button>
+            modelIndex < modelData.length - 1 && loadModelIndex(modelIndex + 1, outlinePassState)}>{modelIndex == modelData.length - 1 ? "Next" : "Next Model"}</button>
         </div>
         <div className='threegallery--slider-div' style={{ gridRow: '1 / span 1' }}>
           <div className='threegallery--slider-title' >Brightness</div>
