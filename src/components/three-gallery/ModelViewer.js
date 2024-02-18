@@ -102,6 +102,10 @@ const ModelViewer = (props) => {
       if (mixerRef.current && mixerRef.current._actions.length) {
         try {
           mixerRef.current.update(delta);
+          // const actions = mixerRef.current._actions;
+          // const animName = modelData[modelIndex].animations[0];
+          // const action = actions.find((action) => action.name == animName)
+          // action.play();
           mixerRef.current._actions[0].play();
         } catch (e) {console.error(e)};
       }
