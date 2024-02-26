@@ -35,12 +35,12 @@ const ModelViewer = (props) => {
   let [modelShown, setModelShown] = React.useState();
   let [loadedModel, setLoadedModel] = React.useState();
   let [modelList, setModelList] = React.useState([]);
-  let [zoom, setZoom] = React.useState(15);
+  let [zoom, setZoom] = React.useState(20);
   let [scene, setScene] = React.useState(new THREE.Scene());
   let [camera, setCamera] = React.useState();
   let controls;
 
-  let [brightness, setBrightness] = React.useState(2);
+  let [brightness, setBrightness] = React.useState(3);
   let [rimLight] = React.useState(new THREE.PointLight(0xffffff));
   let [dirLight] = React.useState(new THREE.DirectionalLight(0xffffff));
   let [ambientLight] = React.useState(new THREE.AmbientLight(0xffffff, 2));
@@ -186,7 +186,7 @@ const ModelViewer = (props) => {
     // this.cameraInit = new THREE.PerspectiveCameraInit( 5, width / height, 50, 2000)
     cameraInit.zoom = zoom;
     cameraInit.up.set(0, 0, 1);
-    cameraInit.position.set(50, -200, 100);
+    cameraInit.position.set(50, -200, 60);
     cameraInit.lookAt(0, 0, 0)
     cameraInit.updateProjectionMatrix();
     setCamera(cameraInit);

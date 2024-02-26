@@ -1,11 +1,22 @@
 export default [
     {
+        key:2,
+        name:'Tiger Tail',
+        files:['fursona-9-regroup-meshes.glb'],
+        animations:[],
+        position:[0,0,5],
+        rotation:[3.14/2,0,0],
+        // textures:['fursona-tex-skin-1.png', 'fursona-tex-clothes-hair-1.png'],
+        textures:['skin-adjust-10.png','clothes-adjust-2.png'],
+        outlineColor: "#7c3f1b",
+    },
+    {
         key:0,
         name:'Signaller',
         // files:['urban-10-new-export.glb'],
         files:['urban-11-model-only-2.glb'],
         animations:['urban-11-idle-anim.glb','urban-11-wave-anim-2.glb','urban-11-sitting-anim-2.glb','urban-11-walk-anim.glb',],
-        position:[0,0,-1],
+        position:[0,0,0],
         rotation:[3.14/2,0,0],
         textures:['texture-skin.png','texture-clothes.png'],
         outlineColor: "#353434",
@@ -15,9 +26,9 @@ export default [
         name:'Witch',
         files:['deres-13-model-only.glb'],
         animations:['deres-13-twist-anim.glb', 'deres-13-wave-anim.glb', 'deres-13-sad-kick-anim.glb'],
-        position:[0,0,2],
+        position:[0,0,1],
         rotation:[3.14/2,0,0],
         textures:['Atlas_00001.png'],
         outlineColor: "#63403a",
-    }
+    },
 ]
