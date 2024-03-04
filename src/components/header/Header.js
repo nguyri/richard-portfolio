@@ -43,9 +43,9 @@ export default function Header(props) {
     function homeButton() {
         return (
             <div className={`nav--home ${props.darkMode && `nav--home-dark`}`} onClick={() => {window.scrollTo(0,0)}}>
-                <p className={`header--icon material-icons-round ${props.darkMode && `header--icon-dark`}`} >{"electric_bolt"}</p>
-                <h1 className={`header--title ${props.darkMode && `header--title-dark`} ${shrinkHeader && `header--title-shrink`}`} >richard </h1>
-                <h1 className={`header--title ${props.darkMode && `header--title-dark`} ${shrinkHeader && `header--title-shrink`}`} style={{color:"ffffff}"}}> nguyen</h1>
+                <p className={`header--icon header--firsticon material-icons-round ${props.darkMode && `header--icon-dark`}`} >{"electric_bolt"}</p>
+                <h1 className={`header--title header--firstname ${props.darkMode && `header--title-dark`} ${shrinkHeader && `header--title-shrink`}`} >richard </h1>
+                <h1 className={`header--title ${props.darkMode && `header--title-dark`} ${shrinkHeader && `header--title-shrink`}`} > nguyen</h1>
             </div>
         )
     }

@@ -1,4 +1,19 @@
 * {
+    --header-light-text:#d2c8e7;
+    --header-background:#eeebf2;
+    --header-highlight-light-text:#887cca;
+    --header-highlight-dark-text:#5343a2;
+    --header-dark-text:#473a6a;
+    --nav-hover:#a188d7;
+    --slider-color:#da9426;
+    --header-dark-background:#2a2734;
+    --header-icon-color:#fab823;
+    --header-firstname-color:#615d97;
+    --header-firstname-color-dark:#a79fd0 ;
+}
+
+/* green palette 
+ * {
     --header-light-text:#dff1df;
     --header-background:#bedfc5;
     --header-highlight-light-text:#9dbf88;
@@ -7,7 +22,7 @@
     --nav-hover:#37837d;
     --slider-color:#386b63;
     --header-dark-background:#294436;
-}
+} */
 
 .header {
     position:sticky;
@@ -45,6 +60,9 @@
     margin-inline:10px;
 }
 
+.header--firsticon {
+    color:var(--header-icon-color);
+}
 .header--title {
     font-family:'Signika Negative';
     font-weight:600;
@@ -54,6 +72,14 @@
     color:var(--header-dark-text);
     display:flex;
     font-size:2rem;
+}
+
+.header--firstname{
+    color:var(--header-firstname-color);
+}
+
+.header--firstname.header--title-dark {
+    color:var(--header-firstname-color-dark);
 }
 
 .header--title-shrink {
@@ -171,6 +197,7 @@ h2,h3 {
     width: 39px;
     height: 20px;
     background-color:var(--slider-color);
+    border: 1px solid var(--slider-color);
     border-radius: 2rem;
     margin-inline: 7px;
     margin-block:0;
@@ -178,24 +205,24 @@ h2,h3 {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    border: 1px solid var(--slider-color);
     box-sizing: content-box;
 }
 
 .nav--dark .toggler--slider {
-    border-color: var(--header-light-text);
-    background-color: var(--header-light-text);
+    background-color: var(--slider-color);
+    border-color: var(--slider-color);
 }
 
 .toggler--slider--circle {
     height: 19px;
     width: 19px;
-    background-color: var(--header-light-text);
+    background-color: var(--header-background);
     border-radius: 50%;
 }
 
 .nav--dark .toggler--slider--circle {
-    background-color: var(--slider-color);
+    /* background-color: var(--slider-color); */
+    background: var(--header-dark-background);
 }
 
 .toggler--light {
