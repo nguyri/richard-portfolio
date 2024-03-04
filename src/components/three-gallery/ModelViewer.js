@@ -43,7 +43,7 @@ const ModelViewer = (props) => {
   let [brightness, setBrightness] = React.useState(3);
   let [rimLight] = React.useState(new THREE.PointLight(0xffffff));
   let [dirLight] = React.useState(new THREE.DirectionalLight(0xffffff));
-  let [ambientLight] = React.useState(new THREE.AmbientLight(0xffffff, 2));
+  let [ambientLight] = React.useState(new THREE.AmbientLight(0xffffff, 2.5));
   let lights = [rimLight, dirLight];
   let [outlinePassState, setOutlinePassState] = React.useState();
 
@@ -98,6 +98,7 @@ const ModelViewer = (props) => {
 
     const animate = () => {
       const delta = clock.getDelta();
+      controls.update();
       if (mixerRef.current && mixerRef.current._actions.length) {
         try {
           mixerRef.current.update(delta);
@@ -141,16 +142,18 @@ const ModelViewer = (props) => {
     controls = new OrbitControls(camera, renderer.domElement);
     controls.target.set(0, 0, 55);
     controls.minPolarAngle = Math.PI / 3;
-    controls.maxPolarAngle = Math.PI;
-    controls.minAzimuthAngle = - Math.PI / 4;
-    controls.maxAzimuthAngle = Math.PI * 7 / 8;
+    controls.maxPolarAngle = Math.PI * 6 / 8;
+    // controls.minAzimuthAngle = - Math.PI / 4;
+    // controls.maxAzimuthAngle = Math.PI * 7 / 8;
     controls.maxZoom = 25;
     controls.minZoom = 10;
     // controls.enablePan = true;
     // controls.panSpeed = 1.0;
     controls.screenSpacePanning = true;
     controls.enableZoom = true;
-    // controls.autoRotate = true;
+
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 0.5; // default 2
     controls.update();
     return controls;
   }
@@ -218,7 +221,7 @@ const ModelViewer = (props) => {
       let texture = texLoader.load(getImage(`./${texPath}`));
       texture.flipY = false;
       texture.colorSpace = THREE.SRGBColorSpace;
-      materials.push(new THREE.MeshStandardMaterial({ map: texture, metalness: 0 }));
+      materials.push(new THREE.MeshStandardMaterial({ map: texture, metalness: 0, side:THREE.FrontSide }));
       texture.dispose();
     });
     return materials;
@@ -407,7 +410,7 @@ const ModelViewer = (props) => {
           <div className='threegallery--desc'> <b>drag</b> to orbit</div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center' , gridRow: '2 / span 1', gridCol: '1 / span 1'}}>
-        <button className={'threegallery--button'} onClick={() =>
+        <button disabled={modelData[modelIndex].animations.length == 0} className={'threegallery--button'} onClick={() =>
             nextAnim() }>Next Anim</button> 
         </div>
       </div>
