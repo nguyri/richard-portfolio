@@ -7,7 +7,7 @@ export default [
         position:[0,0,5],
         rotation:[3.14/2,0,0],
         // textures:['fursona-tex-skin-1.png', 'fursona-tex-clothes-hair-1.png'],
-        textures:['skin-2-2.png','clothes-2.png'],
+        textures:['skin-2-3.png','clothes-2.png'],
         outlineColor: "#7c3f1b",
     },
     {
