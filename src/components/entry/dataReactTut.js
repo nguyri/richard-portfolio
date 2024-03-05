@@ -1,6 +1,10 @@
 import React from 'react'
 import {Expand} from './Expand'
-import {CodeBlock, Code} from '@atlaskit/code'
+import {CodeBlock} from 'react-code-blocks'
+
+const Code = () => {
+    return <div>Replacement Div</div>;
+}
 
 export let data = [
     <Expand name='Components are independent blocks of code that return HTML.' 

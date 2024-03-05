@@ -34,7 +34,6 @@
     "webpack-merge": "^5.10.0"
   },
   "dependencies": {
-    "@atlaskit/code": "^15.1.0",
     "@react-three/drei": "^9.97.0",
     "@react-three/fiber": "^8.15.16",
     "better-react-mathjax": "^2.0.3",
@@ -45,6 +44,7 @@
     "nanoid": "^5.0.5",
     "rc-slider": "^10.5.0",
     "react": "^18.2.0",
+    "react-code-blocks": "^0.1.6",
     "react-confetti": "^6.1.0",
     "react-dom": "^18.2.0",
     "react-favicon": "^2.0.3",
@@ -54,7 +54,6 @@
     "react-router-dom": "^6.22.0",
     "react-transition-group": "^4.4.5",
     "three": "^0.161.0",
-    "transition-hook": "^1.5.2",
     "url-loader": "^4.1.1",
     "use-image": "^1.1.1",
     "use-react-router-breadcrumbs": "^4.0.1",
