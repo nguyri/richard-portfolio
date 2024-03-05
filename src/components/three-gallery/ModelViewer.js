@@ -64,7 +64,7 @@ const ModelViewer = (props) => {
     props.shrinkCallback();
     const width = myRef.current.clientWidth
     const height = myRef.current.clientHeight
-    
+
     const camera = initCamera(width, height, zoom);
     initLights(scene);
     // scene.add(demoSphere(scene));
@@ -78,19 +78,19 @@ const ModelViewer = (props) => {
     const outlinePass = initOutlinePass(window, scene, camera, 2, 4, 0, modelData[modelIndex].outlineColor);
     const composer = initComposer(renderer, width, height, scene, camera, outlinePass)
     loadModelIndex(modelIndex, outlinePass);
-    
+
     // const axesHelper = new THREE.AxesHelper(20);
     // scene.add(axesHelper);
-    
+
     const controls = initControls(camera, renderer);
-    
+
     let onWindowResize = function () {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     }
     window.addEventListener("resize", onWindowResize, false);
-    
+
     const render = () => {
       renderer.render(scene, camera);
     }
@@ -107,7 +107,7 @@ const ModelViewer = (props) => {
           // const action = actions.find((action) => action.name == animName)
           // action.play();
           mixerRef.current._actions[0].play();
-        } catch (e) {console.error(e)};
+        } catch (e) { console.error(e) };
       }
       requestAnimationFrame(animate);
       render();
@@ -133,7 +133,7 @@ const ModelViewer = (props) => {
   const demoSphere = (scene, material) => {
     const sphereRadius = 30;
     const sphereGeo = new THREE.SphereGeometry(30, 32, 16);
-    const sphereMat = new THREE.MeshPhongMaterial({color: '#CA8'});
+    const sphereMat = new THREE.MeshPhongMaterial({ color: '#CA8' });
     const mesh = new THREE.Mesh(sphereGeo, sphereMat);
     mesh.position.set(-sphereRadius - 1, sphereRadius + 2, 0);
     scene.add(mesh);
@@ -221,7 +221,7 @@ const ModelViewer = (props) => {
       let texture = texLoader.load(getImage(`./${texPath}`));
       texture.flipY = false;
       texture.colorSpace = THREE.SRGBColorSpace;
-      materials.push(new THREE.MeshStandardMaterial({ map: texture, metalness: 0, side:THREE.FrontSide }));
+      materials.push(new THREE.MeshStandardMaterial({ map: texture, metalness: 0, side: THREE.FrontSide }));
       texture.dispose();
     });
     return materials;
@@ -301,30 +301,30 @@ const ModelViewer = (props) => {
   };
 
   const loadAnimations = async (model, models, modelData, num) => {
-    if(!model) {throw new Error('no model to apply animations')}
-    try { 
-    // mixer = new THREE.AnimationMixer(model);
-    const mixer = new THREE.AnimationMixer(model);
-    // console.log('in loaded model', mixer);
-    mixer.scale = new THREE.Vector3(40, 40, 40);
+    if (!model) { throw new Error('no model to apply animations') }
+    try {
+      // mixer = new THREE.AnimationMixer(model);
+      const mixer = new THREE.AnimationMixer(model);
+      // console.log('in loaded model', mixer);
+      mixer.scale = new THREE.Vector3(40, 40, 40);
 
-    modelData[num].animations.forEach( async (file) => {
-      let animPath = `./${file}`;
-      let loadedClip = await loadAnimFile(animPath);
-      let action = mixer.clipAction(loadedClip);
-      action.name = file;
-      loadedClip.name = file;
-    } )
-    mixerRef.current = mixer;
+      modelData[num].animations.forEach(async (file) => {
+        let animPath = `./${file}`;
+        let loadedClip = await loadAnimFile(animPath);
+        let action = mixer.clipAction(loadedClip);
+        action.name = file;
+        loadedClip.name = file;
+      })
+      mixerRef.current = mixer;
     }
-    catch ( err ) { console.error('error loading animations', err); }
+    catch (err) { console.error('error loading animations', err); }
   }
 
   const loadAnimFile = (animPath) => {
     return new Promise((resolve, reject) => {
       let loader;
-      if (animPath.endsWith('glb') || animPath.endsWith('gltf')) { loader = new GLTFLoader();}
-      else {throw new Error("animation file is not gltf")}
+      if (animPath.endsWith('glb') || animPath.endsWith('gltf')) { loader = new GLTFLoader(); }
+      else { throw new Error("animation file is not gltf") }
 
       loader.load(models[animPath].default, function (anim) {
         anim.name = animPath;
@@ -352,12 +352,12 @@ const ModelViewer = (props) => {
   const nextAnim = () => {
     const actions = mixerRef.current._actions;
     mixerRef.current.stopAllAction();
-    let nextNum = ( animNum + 1 )% actions.length;
-    setAnimNum(( nextNum ));
+    let nextNum = (animNum + 1) % actions.length;
+    setAnimNum((nextNum));
     const animName = modelData[modelIndex].animations[nextNum];
     // when I just actions[nextNum].play() it changes the order of actions...
     const action = actions.find((action) => action.name == animName)
-    if(action) action.play();
+    if (action) action.play();
     // console.log('playing:' , nextNum, actions.map((action) => action.name));
   }
 
@@ -390,8 +390,12 @@ const ModelViewer = (props) => {
   return (
     <div className={props.darkMode ? 'threegallery threegallery--dark' : 'threegallery'}>
       <div className='threegallery--slider-grid'>
-        <h1 className='threegallery--title'>{modelData[modelIndex].name}</h1>
-        <div style={{ display: 'flex', alignItems: 'center' , gridRow: '2 / span 1', gridCol: '1 / span 1'}}>
+
+
+        <h1 className='threegallery--title'>
+          {modelData[modelIndex].link ? (<a href="https://vimeo.com/919367044?share=copy">{modelData[modelIndex].name}</a>) : (modelData[modelIndex].name)}
+        </h1>
+        <div style={{ display: 'flex', alignItems: 'center', gridRow: '2 / span 1', gridCol: '1 / span 1' }}>
           <button disabled={modelIndex == 0} className={'threegallery--button'} onClick={() =>
             modelIndex > 0 && loadModelIndex(modelIndex - 1, outlinePassState)}>{modelIndex == modelData.length - 1 ? "Prev Model" : "Prev"}</button> {' '}
           <button disabled={modelIndex == modelData.length - 1} className={'threegallery--button'} onClick={() =>
@@ -409,9 +413,9 @@ const ModelViewer = (props) => {
           <div className='threegallery--desc'> <b>scroll</b> to zoom</div>
           <div className='threegallery--desc'> <b>drag</b> to orbit</div>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center' , gridRow: '2 / span 1', gridCol: '1 / span 1'}}>
-        <button disabled={modelData[modelIndex].animations.length == 0} className={'threegallery--button'} onClick={() =>
-            nextAnim() }>Next Anim</button> 
+        <div style={{ display: 'flex', alignItems: 'center', gridRow: '2 / span 1', gridCol: '1 / span 1' }}>
+          <button disabled={modelData[modelIndex].animations.length == 0} className={'threegallery--button'} onClick={() =>
+            nextAnim()}>Next Anim</button>
         </div>
       </div>
       <MediaQuery minWidth={1224}>

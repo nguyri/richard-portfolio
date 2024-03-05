@@ -9,6 +9,7 @@ export default [
         // textures:['fursona-tex-skin-1.png', 'fursona-tex-clothes-hair-1.png'],
         textures:['skin-2-3.png','clothes-2.png'],
         outlineColor: "#7c3f1b",
+        link:"https://vimeo.com/919367044?share=copy",
     },
     {
         key:0,
