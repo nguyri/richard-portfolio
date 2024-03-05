@@ -102,6 +102,7 @@
     background-color:rgb(29, 136, 244);
     border-radius: 10px;
     border:none;
+    width:auto;
 }
 
 .threegallery--button:disabled{
@@ -145,6 +146,10 @@
 
 .threegallery--slideshow::-webkit-scrollbar {
     display: none;
+}
+
+.threegallery--externallink {
+    grid-column: 1 / span 1;
 }
 
 @media screen and (max-width: 1224px) {

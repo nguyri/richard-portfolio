@@ -35,7 +35,8 @@ const ModelViewer = (props) => {
   let [modelShown, setModelShown] = React.useState();
   let [loadedModel, setLoadedModel] = React.useState();
   let [modelList, setModelList] = React.useState([]);
-  let [zoom, setZoom] = React.useState(20);
+  let [showLink, setShowLink] = React.useState(false);
+  let [zoom, setZoom] = React.useState(16);
   let [scene, setScene] = React.useState(new THREE.Scene());
   let [camera, setCamera] = React.useState();
   let controls;
@@ -390,12 +391,14 @@ const ModelViewer = (props) => {
   return (
     <div className={props.darkMode ? 'threegallery threegallery--dark' : 'threegallery'}>
       <div className='threegallery--slider-grid'>
-
-
-        <h1 className='threegallery--title'>
-          {modelData[modelIndex].link ? (<a href="https://vimeo.com/919367044?share=copy">{modelData[modelIndex].name}</a>) : (modelData[modelIndex].name)}
-        </h1>
-        <div style={{ display: 'flex', alignItems: 'center', gridRow: '2 / span 1', gridCol: '1 / span 1' }}>
+        <div>
+          { modelData[modelIndex].link ? 
+            <h1 className='threegallery--title expand--anchor' onClick={() => setShowLink(!showLink)}>{modelData[modelIndex].name}</h1>
+            : <h1 className='threegallery--title' >{modelData[modelIndex].name}</h1> }
+          { modelData[modelIndex].link && showLink && <a href={modelData[modelIndex].link} target="_blank" style={{gridColumn: '1 / span 1', paddingBottom:'10px'}}>
+            Go to external video link?</a> }
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gridRow: '3 / span 1', gridColumn: '1 / span 1' }}>
           <button disabled={modelIndex == 0} className={'threegallery--button'} onClick={() =>
             modelIndex > 0 && loadModelIndex(modelIndex - 1, outlinePassState)}>{modelIndex == modelData.length - 1 ? "Prev Model" : "Prev"}</button> {' '}
           <button disabled={modelIndex == modelData.length - 1} className={'threegallery--button'} onClick={() =>
@@ -405,17 +408,18 @@ const ModelViewer = (props) => {
           <div className='threegallery--slider-title' >Brightness</div>
           <Slider trackStyle={trackStyle} handleStyle={handleStyle} railStyle={railStyle} onChange={setBrightness} defaultValue={2} min={1} max={4} step={0.25} />
         </div>
-        <div className='threegallery--slider-div' style={{ gridRow: '2 / span 1' }}>
+        <div className='threegallery--slider-div' style={{ gridRow: '3 / span 1' }}>
           <div className='threegallery--slider-title' >Position</div>
           <Slider trackStyle={trackStyle} handleStyle={handleStyle} railStyle={railStyle} onChange={setZPosition} defaultValue={0} min={-5} max={45} />
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <div style={{ display: 'flex', flexDirection: 'column' , gridRow: '1 / span 1', gridColumn: '3 / span 1'}}>
           <div className='threegallery--desc'> <b>scroll</b> to zoom</div>
           <div className='threegallery--desc'> <b>drag</b> to orbit</div>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gridRow: '2 / span 1', gridCol: '1 / span 1' }}>
-          <button disabled={modelData[modelIndex].animations.length == 0} className={'threegallery--button'} onClick={() =>
-            nextAnim()}>Next Anim</button>
+        <div style={{ gridRow: '3 / span 1' , gridColumn: '3 / span 1'}} >
+          <button disabled={modelData[modelIndex].animations.length == 0} 
+          className={'threegallery--button'} onClick={() =>nextAnim()}>
+            Next Anim</button>
         </div>
       </div>
       <MediaQuery minWidth={1224}>
