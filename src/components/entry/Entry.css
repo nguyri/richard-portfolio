@@ -175,6 +175,17 @@
     /* overflow:hidden; */
 }
 
+.entry--vimeo-block {
+    display:block;
+    position: relative;
+    padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720)  */
+    border-radius: 10px;
+    margin:0px 0px;
+    justify-content: left;
+    margin-bottom:20px;
+    /* overflow:hidden; */
+}
+
 .entry--vimeo {
     position: absolute;
     top: 0;

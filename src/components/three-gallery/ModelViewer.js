@@ -14,6 +14,7 @@ import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
 import { OutlinePass } from 'three/examples/jsm/postprocessing/OutlinePass.js';
 import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
 import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader.js';
+const ReactPlayer = React.lazy(() => import('react-player/lazy'));
 
 import { getImage } from '../entry/data'
 
@@ -36,6 +37,8 @@ const ModelViewer = (props) => {
   let [loadedModel, setLoadedModel] = React.useState();
   let [modelList, setModelList] = React.useState([]);
   let [showLink, setShowLink] = React.useState(false);
+  let [showVideo, setShowVideo] = React.useState(false);
+  let [animated, setAnimated] = React.useState(0);
   let [zoom, setZoom] = React.useState(16);
   let [scene, setScene] = React.useState(new THREE.Scene());
   let [camera, setCamera] = React.useState();
@@ -53,6 +56,7 @@ const ModelViewer = (props) => {
   let [animNum, setAnimNum] = React.useState(0);
   let mixerRef = React.useRef();
   let activeAction;
+  let [myReq, setMyReq] = React.useState();
 
   const models = {};
   importAll(require.context('../../models/', false, /\.(glb|fbx)$/));
@@ -62,6 +66,8 @@ const ModelViewer = (props) => {
   }
 
   React.useEffect(() => {
+    if(showVideo) {
+      return;}
     props.shrinkCallback();
     const width = myRef.current.clientWidth
     const height = myRef.current.clientHeight
@@ -110,20 +116,26 @@ const ModelViewer = (props) => {
           mixerRef.current._actions[0].play();
         } catch (e) { console.error(e) };
       }
-      requestAnimationFrame(animate);
+      cancelAnimationFrame(myReq);
+      let tempReq = requestAnimationFrame(animate);
+      setMyReq(tempReq);
+      // let result = 0;
+      // if(!animated) 
+      //   result = requestAnimationFrame(animate);
+      // setAnimated(result);
       render();
       composer && composer.render();
     }
 
     animate();
     return () => myRef.current && myRef.current.removeChild(renderer.domElement);
-  }, []);
+  }, [showVideo]);
 
-  React.useEffect(() => {
-    // console.log('in use effect', mixer);
-    // console.log('in use effect', mixerState);
-    console.log('in use effect', mixerRef);
-  }, [mixerRef])
+  // React.useEffect(() => {
+  //   console.log('in use effect', mixer);
+  //   console.log('in use effect', mixerState);
+  //   console.log('in use effect', mixerRef);
+  // }, [mixerRef])
 
   React.useEffect(() => {
     // console.log(pointLight);
@@ -380,7 +392,7 @@ const ModelViewer = (props) => {
     let clip, model;
     loadGLTF(models, modelData, num, scene, materials)
       .then((loadedModel) => {
-        console.log("loaded model", loadedModel, 'outline pass', outlinePass);
+        // console.log("loaded model", loadedModel, 'outline pass', outlinePass);
         setLoadedModel(loadedModel);
         setOutline(loadedModel, outlinePass);
         model = loadedModel;
@@ -389,48 +401,63 @@ const ModelViewer = (props) => {
       .catch((error) => { console.log('failed to load gltf model', error) })
   }
   return (
-    <div className={props.darkMode ? 'threegallery threegallery--dark' : 'threegallery'}>
-      <div className='threegallery--slider-grid'>
-        <div>
-          { modelData[modelIndex].link ? 
-            <h1 className='threegallery--title expand--anchor' onClick={() => setShowLink(!showLink)}>{modelData[modelIndex].name}</h1>
-            : <h1 className='threegallery--title' >{modelData[modelIndex].name}</h1> }
-          { modelData[modelIndex].link && showLink && <a href={modelData[modelIndex].link} target="_blank" style={{gridColumn: '1 / span 1', paddingBottom:'10px'}}>
-            Go to external video link?</a> }
+      <div className={props.darkMode ? 'threegallery threegallery--dark' : 'threegallery'}>
+      {showVideo ?
+        <div style={{display:'flex', flexDirection:'column',justifyContent:'center', alignItems:'center', gap:'20px'}}>
+        <button className='threegallery--button' style={{display:'block', width:'fit-content'}} onClick={() => setShowVideo(false)}>Return to model viewer</button>
+        < div className='entry--vimeo-block' style={{width:"60vw"}}>
+          <React.Suspense fallback={<div>Loading...</div>}>
+            <ReactPlayer url={modelData[modelIndex].link} className="entry--vimeo" width='100%' height='100%' style={{ justifyContent: 'left', display: 'block' }}
+              volume={0} muted={false} controls={true} playing={false} loop={false}
+            />
+          </React.Suspense>
+        </div> 
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gridRow: '3 / span 1', gridColumn: '1 / span 1' }}>
-          <button disabled={modelIndex == 0} className={'threegallery--button'} onClick={() =>
-            modelIndex > 0 && loadModelIndex(modelIndex - 1, outlinePassState)}>{modelIndex == modelData.length - 1 ? "Prev Model" : "Prev"}</button> {' '}
-          <button disabled={modelIndex == modelData.length - 1} className={'threegallery--button'} onClick={() =>
-            modelIndex < modelData.length - 1 && loadModelIndex(modelIndex + 1, outlinePassState)}>{modelIndex == modelData.length - 1 ? "Next" : "Next Model"}</button>
-        </div>
-        <div className='threegallery--slider-div' style={{ gridRow: '1 / span 1' }}>
-          <div className='threegallery--slider-title' >Brightness</div>
-          <Slider trackStyle={trackStyle} handleStyle={handleStyle} railStyle={railStyle} onChange={setBrightness} defaultValue={2} min={1} max={4} step={0.25} />
-        </div>
-        <div className='threegallery--slider-div' style={{ gridRow: '3 / span 1' }}>
-          <div className='threegallery--slider-title' >Position</div>
-          <Slider trackStyle={trackStyle} handleStyle={handleStyle} railStyle={railStyle} onChange={setZPosition} defaultValue={0} min={-5} max={45} />
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column' , gridRow: '1 / span 1', gridColumn: '3 / span 1'}}>
-          <div className='threegallery--desc'> <b>scroll</b> to zoom</div>
-          <div className='threegallery--desc'> <b>drag</b> to orbit</div>
-        </div>
-        <div style={{ gridRow: '3 / span 1' , gridColumn: '3 / span 1'}} >
-          <button disabled={modelData[modelIndex].animations.length == 0} 
-          className={'threegallery--button'} onClick={() =>nextAnim()}>
-            Next Anim</button>
-        </div>
+        :
+        <div className='threegallery--slider-grid'>
+          <div>
+            {modelData[modelIndex].link ?
+              <h1 className='threegallery--title expand--anchor' onClick={() => setShowLink(!showLink)}>{modelData[modelIndex].name}</h1>
+              : <h1 className='threegallery--title' >{modelData[modelIndex].name}</h1>}
+            {modelData[modelIndex].link && showLink && <h1 className='threegallery--desc expand--anchor' style={{ gridColumn: '1 / span 1', paddingBottom: '10px' }}
+              onClick={() => setShowVideo(true)}>Switch to video player?</h1>}
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gridRow: '3 / span 1', gridColumn: '1 / span 1' }}>
+            <button disabled={modelIndex == 0} className={'threegallery--button'} onClick={() =>
+              modelIndex > 0 && loadModelIndex(modelIndex - 1, outlinePassState)}>{modelIndex == modelData.length - 1 ? "Prev Model" : "Prev"}</button> {' '}
+            <button disabled={modelIndex == modelData.length - 1} className={'threegallery--button'} onClick={() =>
+              modelIndex < modelData.length - 1 && loadModelIndex(modelIndex + 1, outlinePassState)}>{modelIndex == modelData.length - 1 ? "Next" : "Next Model"}</button>
+          </div>
+          <div className='threegallery--slider-div' style={{ gridRow: '1 / span 1' }}>
+            <div className='threegallery--slider-title' >Brightness</div>
+            <Slider trackStyle={trackStyle} handleStyle={handleStyle} railStyle={railStyle} onChange={setBrightness} defaultValue={2} min={1} max={4} step={0.25} />
+          </div>
+          <div className='threegallery--slider-div' style={{ gridRow: '3 / span 1' }}>
+            <div className='threegallery--slider-title' >Position</div>
+            <Slider trackStyle={trackStyle} handleStyle={handleStyle} railStyle={railStyle} onChange={setZPosition} defaultValue={0} min={-5} max={45} />
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gridRow: '1 / span 1', gridColumn: '3 / span 1' }}>
+            <div className='threegallery--desc'> <b>scroll</b> to zoom</div>
+            <div className='threegallery--desc'> <b>drag</b> to orbit</div>
+          </div>
+          <div style={{ gridRow: '3 / span 1', gridColumn: '3 / span 1' }} >
+            <button disabled={modelData[modelIndex].animations.length == 0}
+              className={'threegallery--button'} onClick={() => nextAnim()}>
+              Next Anim</button>
+          </div>
+          </div>
+          }
+        <MediaQuery minWidth={1224}>
+          {!showVideo &&
+          ((smallWidth) => (
+            <div style={smallWidth ?
+              { width: '50vw', height: '50vw' } :
+              { width: '100vw', height: '100vw' }}
+              ref={myRef}>
+                </div>
+              ))}
+        </MediaQuery>
       </div>
-      <MediaQuery minWidth={1224}>
-        {(smallWidth) => (
-          <div style={smallWidth ?
-            { width: '50vw', height: '50vw' } :
-            { width: '100vw', height: '100vw' }}
-            ref={myRef} />
-        )}
-      </MediaQuery>
-    </div>
   );
 }
 export default ModelViewer;
