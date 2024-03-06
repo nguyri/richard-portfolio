@@ -26,9 +26,9 @@ const TOCHeadings = (props) => {
     let nestedHeadings = [];
     let darkMode = props.darkMode;
 
-    for(let i = 0; i < longDescription.length; i++) {
-        if(longDescription[i].title) {
-            nestedHeadings.push({...longDescription[i], subtitles:[]});
+    for (let i = 0; i < longDescription.length; i++) {
+        if (longDescription[i].title) {
+            nestedHeadings.push({ ...longDescription[i], subtitles: [] });
         } else if (longDescription[i].subtitle) {
             nestedHeadings[nestedHeadings.length - 1].subtitles.push(longDescription[i]);
         }
@@ -38,53 +38,52 @@ const TOCHeadings = (props) => {
     // console.log(nestedHeadings);
     return (
         <ul>
-            { nestedHeadings.map((titleItem) => 
-                <li key={titleItem.key} className={"headings-li"}>
-                    <a
-                        href={`#${titleItem.key}`}
-                        className={darkMode ? 
-                            titleItem.key == activeId ? "headings-a-active-dark" : "headings-a-dark" :
-                            titleItem.key == activeId ? "headings-a-active" : "headings-a"}
-                        >{titleItem.title}</a>
-                    { titleItem.subtitles.length > 0 && 
-                        <ul>
-                        {titleItem.subtitles.map((subtitleItem) => 
-                            <li key={subtitleItem.key} className={"headings-li"}>
-                                <a
-                                    href={`#${subtitleItem.key}`}
-                                    className={darkMode ? 
-                                        subtitleItem.key == activeId ? "headings-a-active-dark" : "headings-a-dark":
-                                        subtitleItem.key == activeId ? "headings-a-active" : "headings-a"
-                                        }
-                                    >{subtitleItem.subtitle}</a>
-                            </li>
-                            )}
-                        </ul>
-                        }
-                </li>
-            )}
+        {nestedHeadings.map((titleItem) =>
+            <li key={titleItem.key} className={"headings-li"}>
+                <a href={`#${titleItem.key}`}
+                    className={darkMode ?
+                        titleItem.key == activeId ? "headings-a-active-dark" : "headings-a-dark" :
+                        titleItem.key == activeId ? "headings-a-active" : "headings-a"}
+                    >{titleItem.title}</a>
+                    {titleItem.subtitles.length > 0 &&
+        <ul>
+        {titleItem.subtitles.map((subtitleItem) =>
+            <li key={subtitleItem.key} className={"headings-li"}>
+                <a
+                href={`#${subtitleItem.key}`}
+                className={darkMode ?
+                    subtitleItem.key == activeId ? "headings-a-active-dark" : "headings-a-dark" :
+                    subtitleItem.key == activeId ? "headings-a-active" : "headings-a"
+                    }
+                >{subtitleItem.subtitle}</a>
+            </li>
+        )}
         </ul>
-        );
-    }
+        }
+        </li>
+        )}
+        </ul>
+    );
+}
 
 export default TOCHeadings;
 
-                //children toc headings
-                /* { heading.longdescription.length > 0 && (
-                    <ul>
-                    { heading.longdescription.map((item) => (
-                        item.subtitle ?  
-                            <li key={item.key} className={"headings-li"}> 
-                                <a className={item.key == activeId ? "headings-a-active" : "headings-a" }
-                                    href={`#${item.key}`}
-                                >{item.subtitle}</a> 
-                            </li> :
-                        item.title &&
-                        <li key={item.key} className={"headings-li"}> 
-                            <a className={item.key == activeId ? "headings-a-active" : "headings-a" }
-                                href={`#${item.key}`}
-                            >{item.title}</a> 
-                        </li>
-                    ))}
-                    </ul>
-                )} */
+//children toc headings
+/* { heading.longdescription.length > 0 && (
+    <ul>
+    { heading.longdescription.map((item) => (
+        item.subtitle ?  
+            <li key={item.key} className={"headings-li"}> 
+                <a className={item.key == activeId ? "headings-a-active" : "headings-a" }
+                    href={`#${item.key}`}
+                >{item.subtitle}</a> 
+            </li> :
+        item.title &&
+        <li key={item.key} className={"headings-li"}> 
+            <a className={item.key == activeId ? "headings-a-active" : "headings-a" }
+                href={`#${item.key}`}
+            >{item.title}</a> 
+        </li>
+    ))}
+    </ul>
+)} */
