@@ -1,11 +1,9 @@
 import React from 'react'
 import {Expand} from './Expand'
-import {CodeBlock} from 'react-code-blocks'
+import {CodeBlock, dracula} from 'react-code-blocks'
 
 const Code = (props) => {
-    return (
-        <div className="expand--code">{props.codeString}</div>
-      );
+    return (<div className="expand--code">{props.codeString}</div>);
 }
 
 export let data = [
@@ -14,13 +12,15 @@ export let data = [
     content= 
     {<> Components can import modules they need and export themselves at the bottom of their files. 
         A simple component looks like this: 
-        <CodeBlock language='jsx' text=
-    {`function MyComponent () {
+        <div className='expand--codeblock'>
+        <CodeBlock language='jsx' className='expand--codeblock' text=
+{`function MyComponent () {
     return (
         <div className="App"> 
             <h1> My first React App </h1>
         </div>
-        )}`}/>
+)}`}/>
+        </div>
         </>}>
     </Expand> ,
     
@@ -35,13 +35,13 @@ export let data = [
     content = {
         <> A strength of React is that you can write plain Javascript inside HTML. This is done by adding curly braces. 
         <CodeBlock language='jsx' highlight={"5"} text = 
-        {`function MyComponent (props) {
-    return (
-        <div className="my-component"> 
-            <h1> My first React Component </h1>
-            The value of my props is: {props.value}
-        </div>
-        )}`}
+{`function MyComponent (props) {
+return (
+<div className="my-component"> 
+    <h1> My first React Component </h1>
+    The value of my props is: {props.value}
+</div>
+)}`}
         />
         </>
     }
@@ -58,11 +58,11 @@ export let data = [
     highlight='Props'
     content= {
         <>Give a prop to a component by writing <Code codeString={`<MyComponent myProp={myPropValue}>`}/>. Inside MyComponent it can be used as 
-        <CodeBlock language='jsx' text = {
+<CodeBlock language='jsx' text = {
 `const MyComponent = (props) => {
-    return (
+    return (    
         <h1> My prop value is: {props.myPropValue} </h1>
-    )}`}></CodeBlock> </>
+)}`}></CodeBlock> </>
     }></Expand> ,
 
     <Expand name='Some JSX attributes are different to avoid name conflict' 
@@ -87,12 +87,12 @@ export let data = [
     const [clicked, setClicked] = React.useState(false);
     const handleClick = () => {
         setClicked(!clicked);
-    }
-    return ( <> 
-        <a onClick={handleClick}> Set Clicked </a>
+}
+return ( <> 
+    <a onClick={handleClick}> Set Clicked </a>
         <h1> My state value is: {clicked} </h1> 
-        </>
-    )}`}></CodeBlock> </>
+    </>
+)}`}></CodeBlock> </>
     }></Expand>,
 
     <Expand name='To synchronize two states, useEffect will make an effect occur after a state changes'

@@ -18,4 +18,12 @@
 
 .expand--code {
     font-family: "Source Code Pro", monospace;
+    display:inline-block;
+    background-color: rgb(232, 232, 232);
+    border-radius:4px;
+    padding-inline:6px;
+}
+
+.expand--codeblock {
+    font-family: "Source Code Pro", monospace;
 }

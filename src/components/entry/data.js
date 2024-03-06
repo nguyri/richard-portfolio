@@ -8,8 +8,8 @@ const ThreeFunc = React.lazy(() => import('../threejsdemo/ThreeFunc'));
 const Wordle = React.lazy(() => import('../wordle/Wordle'))
 import {ExpandList} from '../entry/Expand'
 
-const Code = () => {
-    return <div>Replacement Div</div>;
+const Code = (props) => {
+    return (<div className="expand--code">{props.codeString}</div>);
 }
 
 const images = {}
@@ -221,23 +221,23 @@ let entries = [
     reactDescription: {html:<div>Interfaces are easy to make and look great with web tools! Interfaces such as <b>this website</b> and a <b>wordle</b> demo</div>},
     longdescription: [
     {key:'wordle', title:`Wordle`},
-    {key:nanoid(), html: <> React is a JavaScript library for creating user interfaces. It is made up of <b>components</b> manage their own data, called <b>state</b>. 
+    {key:nanoid(), html: <>React is a JavaScript library for creating user interfaces. It is made up of <b>components</b> manage their own data, called <b>state</b>. 
     State can be given to child components to make them <b>react</b>. Components are modular and can be reused. </>},
-    {key: nanoid(), text:`This Wordle demo was one of the first React projects that I completed, and could more or less be copy and pasted wholesale into the website. The entire thing appears simply by putting <Wordle/> into the js.`},
+    {key: nanoid(), html:<>This Wordle demo was one of the first React projects that I completed, and could more or less be copy and pasted wholesale into the website. The entire thing appears by putting <Code codeString={`<Wordle/>`}/> into the JSX.</>},
     {key: nanoid(), component: <Wordle/>},
     {key:'react-basics', title: `React Basics`},
     {key: nanoid(), html:<>
         <ExpandList/>
     </>},
     {key:'react-concepts', title: `React Concepts`},
-    {key: nanoid(), html:<> <b>Conditional Rendering. </b>Showing or hiding a component is often done with the <Code>{`? or &&`}</Code> operators. Showing or hide can be done with <Code>{`&&`}</Code>, while picking between two options easy with <Code>{`?`}</Code> </>},
-    {key: nanoid(), html:<> <b>Inline Styles </b>While traditional CSS inline styles are generally bad style, but react inline styles are excellent due to props and conditional rendering. Add a style with an object containing CSS properties, such as <Code>{`style = {margin: "10px"}`}</Code> to assign an inline style. </>},
-    {key: nanoid(), html: <> <b>Fragments</b>, using <Code>{`<React.Fragment>, or preferably <> </>`}</Code> to combine multiple html objects into a single returnable 
+    {key: nanoid(), html:<> <b>Conditional Rendering. </b>Showing or hiding a component is often done with the <Code codeString={`? or &&`}/> operators. Showing or hide can be done with <Code codeString={`&&`}/>, while picking between two options easy with <Code codeString={`?`}/> </>},
+    {key: nanoid(), html:<> <b>Inline Styles </b>While traditional CSS inline styles are generally bad style, but react inline styles are excellent due to props and conditional rendering. Add a style with an object containing CSS properties, such as <Code codeString={`style = {margin: "10px"}`}/> to assign an inline style. </>},
+    {key: nanoid(), html: <> <b>Fragments</b>, using <Code codeString={`<React.Fragment>, or preferably <> </>`}/> to combine multiple html objects into a single returnable 
     element. In situations where no wrapper element is desired a Fragment can be used rather than a wrapper div. </> },
     {key: nanoid(), html: <> <b>Array map </b> is a powerful but easy to read method to turn a list of data into Components.  
-    <Code>{`Array.map((elem) => {<Component data=elem/>})`}</Code> </>},
-    {key: nanoid(), html: <> <b>Spread syntax</b> is useful when passing props to children. If <Code>{`Array.map((elem) => {<Component props=elem/>})`}</Code> 
-    were used, props would appear as <Code>{`props.props.data`}</Code> in the child. <Code>{`<Component ...data)`}</Code> Spreading can be read as <Code>{`<Component data1=1 data2=2 data3=3)`}</Code>
+    <Code codeString={`Array.map((elem) => {<Component data=elem/>})`}/> </>},
+    {key: nanoid(), html: <> <b>Spread syntax</b> is useful when passing props to children. If <Code codeString={`Array.map((elem) => {<Component props=elem/>})`}/> 
+    were used, props would appear as <Code codeString={`props.props.data`}/> in the child. <Code codeString={`<Component ...data)`}/> Spreading can be read as <Code codeString={`<Component data1=1 data2=2 data3=3)`}/>
     Spreading the data keeps the props pattern organized even with many children. </>},
     {key: nanoid(), html: <> <b>React Classes to Functional Components.</b> Up until React 14 components had to extend the class component. Nowadays functional components 
     are the recommended style due to optimization, and I find them easier to read. Converting class to functional components takes some time but can be done. Often times useRef 

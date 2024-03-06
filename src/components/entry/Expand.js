@@ -11,6 +11,10 @@ export function Expand (props) {
         setShowExpand(!showExpand);
     }
 
+    const ExpandBlock = (props) => {
+        return (<div className='expand--block' style={{}}>{props.content}  </div>);
+    }
+
     const formatName = (name, highlight) => {
         let index = name.indexOf(highlight);
         if( index >= 0) {
@@ -27,13 +31,8 @@ export function Expand (props) {
 
     return (<>
     {props.list ? <li>{formatName(props.name, props.highlight)}</li> : formatName(props.name, props.highlight)}
-    {/* {shouldMount ? <div className='expand--block' 
-        style={{transition: '.3s', 
-            opacity: stage === 'enter' ? 1 : 0,
-            transform: stage === 'enter' ? 'unset' : 'translateY(-10px) scale(1)', }
-            }>{props.content}  </div> : <></>} */} <div className='expand--block' 
-        style={{}}>{props.content}  </div> : <></>
-
+    {showExpand ? <ExpandBlock content={props.content}/> : <></> } 
+    {/* #makes a "0" when && is used.. */}
     </>);
 }
 
