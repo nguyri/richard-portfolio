@@ -2,8 +2,10 @@ import React from 'react'
 import {Expand} from './Expand'
 import {CodeBlock} from 'react-code-blocks'
 
-const Code = () => {
-    return <div>Replacement Div</div>;
+const Code = (props) => {
+    return (
+        <div className="expand--code">{props.codeString}</div>
+      );
 }
 
 export let data = [
@@ -49,13 +51,13 @@ export let data = [
     <Expand name='Some JSX attributes are different to avoid name conflict' 
     highlight='name conflict'
     content= {
-        <>For example, setting a CSS class uses the keyword className: <Code>{`<MyComponent className="my-component-style">`}</Code> </>
+        <>For example, setting a CSS class uses the keyword className: <Code codeString={`<MyComponent className="my-component-style">`}/> </>
     }></Expand>,
 
     <Expand name='Props are written like attributes, directly into the angle brackets and passed into components, often with the name (props)'
     highlight='Props'
     content= {
-        <>Give a prop to a component by writing <Code>{`<MyComponent myProp={myPropValue}>`}</Code>. Inside MyComponent it can be used as 
+        <>Give a prop to a component by writing <Code codeString={`<MyComponent myProp={myPropValue}>`}/>. Inside MyComponent it can be used as 
         <CodeBlock language='jsx' text = {
 `const MyComponent = (props) => {
     return (
@@ -66,20 +68,20 @@ export let data = [
     <Expand name='Some JSX attributes are different to avoid name conflict' 
     highlight='name conflict'
     content= {
-        <>For example, setting a CSS class uses the keyword className: <Code>{`<MyComponent className="my-component-style">`}</Code> </>
+        <>For example, setting a CSS class uses the keyword className: <Code codeString={`<MyComponent className="my-component-style">`}/> </>
     }></Expand>,
 
     <Expand name='Events like onClick are written directly into the elements with JSX'
     highlight='Events'
     content= {
         <>Instead of finding a DOM node, then attaching listeners, React allows you to directly attach a callback function to an event
-         <Code>{`<MyComponent onClick={handleClick}>`}</Code>. </>
+         <Code codeString={`<MyComponent onClick={handleClick}>`}/>. </>
     }></Expand>,
 
     <Expand name='State defines some data that will be tracked. When the state changes the elements tracking it will automatically update.'
     highlight='State'
     content= {
-        <>Give a prop to a component by writing <Code>{`<MyComponent myProp={myPropValue}>`}</Code>. Inside MyComponent it can be used as 
+        <>Give a prop to a component by writing <Code codeString={`<MyComponent myProp={myPropValue}>`}/>. Inside MyComponent it can be used as 
         <CodeBlock language='jsx' text = {
 `const MyComponent = () => {
     const [clicked, setClicked] = React.useState(false);
@@ -111,7 +113,7 @@ export let data = [
     <Expand name='You can avoid DOM queries for the most part. If you need need access to the element, useRef provides a reference.'
     highlight='useRef'
     content= {
-        <>Get a ref by assigning it where the component is created. <Code>{`<Gallery ref={galleryRef}>`}</Code>. The ref can be accessed with .current to get DOM properties.
+        <>Get a ref by assigning it where the component is created. <Code codeString={`<Gallery ref={galleryRef}>`}/>. The ref can be accessed with .current to get DOM properties.
         <CodeBlock language='jsx' text = {
 `const galleryRef = React.useRef();
     export default function Gallery () => {

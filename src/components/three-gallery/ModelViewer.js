@@ -1,6 +1,7 @@
 import React from 'react';
 import { Component, useEffect } from 'react';
 import * as THREE from 'three';
+
 // demo from https://medium.com/@colesayershapiro/using-three-js-in-react-6cb71e87bdf4
 // import {ThreeMFLoader} from './3MFLoader'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
@@ -15,6 +16,8 @@ import { OutlinePass } from 'three/examples/jsm/postprocessing/OutlinePass.js';
 import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
 import { FXAAShader } from 'three/examples/jsm/shaders/FXAAShader.js';
 const ReactPlayer = React.lazy(() => import('react-player/lazy'));
+// const THREE = React.lazy(() => import ('three'));
+
 
 import { getImage } from '../entry/data'
 
