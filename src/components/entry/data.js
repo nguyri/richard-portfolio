@@ -17,7 +17,9 @@ function importAll(r) {
 importAll(require.context('../../imgs/', false, /\.(png|jpe?g|svg)$/));
 
 export function getEntries() {
-    return entries
+    let order = ['Metal Shop', 'Graphics and ThreeJS', 'Additive Lathe', 'Web Development',  '3D Modelling','Mostly Printed CNC', 'Digital Art', 'Wood Shop'];
+    let orderedEntries = order.map((title) => entries.find(entry => entry.title === title));
+    return orderedEntries;
 }
 
 export function getImage(path) {
@@ -212,8 +214,7 @@ let entries = [
     link: "web",
     description: `Interfaces are easy to make and look great with web tools! Interfaces such as this website (it's responsive!)- 
     Inside this section are some more web demonstrations: Wordle! A little card!`,
-    reactDescription: {html:<div>Interfaces are easy to make and look great with web tools! Interfaces such as <b>this website</b>
-    and a <b>wordle</b> demo</div>},
+    reactDescription: {html:<div>Interfaces are easy to make and look great with web tools! Interfaces such as <b>this website</b> and a <b>wordle</b> demo</div>},
     longdescription: [
     {key:'wordle', title:`Wordle`},
     {key:nanoid(), html: <> React is a JavaScript library for creating user interfaces. It is made up of <b>components</b> manage their own data, called <b>state</b>. 
@@ -326,6 +327,39 @@ let entries = [
     ],
     imageName:'./wood10.jpg',
     imageStyle:{style: {objectPosition:'right 0 bottom 200px'}}
+    },
+    {
+    num:8,
+    title: "3D Modelling",
+    link:  "3dart",
+    description:"At the intersection of digital art and 3D graphics lies the rabbit hole of 3D art",
+    longdescription: [
+    {key:'blender', title:'Blender'},
+    {key:nanoid(), text:`Blender has done a tremendous job of making high quality 3D software open source and freely available. The developers and tutorial makers also put in a lot of amazing work to make resources for learning Blender high quality and easy to follow. 
+    `},
+    {key:'tob', title:'First Lessons'},
+    {key:nanoid(), text:`It's easy to get lost in the endless compositor windows and little buttons around the edges of the screen. Getting to the end of any tutorial is an achievement in and of itself. It doesn't hurt to save often.`},
+    {key:nanoid(), text:`As far as recommendations go, stick to the Modelling tab, and once you've gotten your bearings follow a Rendering tutorial. Get accustomed to using the viewport overlay settings in the top right corner. Many beginners end up in a "dazed and confused" state where things that used to work have stopped because of these settings. Getting used to the selection tools saves a lot of time, as well as using basic modifiers like Mirror. Add some colour! It immediately livens up your model. To avoid getting lost in the sauce, stick to vertex colours.`},
+    {key:nanoid(), text:`Once you're ready, pick a direction to move towards. Interested in photorealistic renders? Look into Shader Nodes and Cycles Rendering. Tired of flat vertex colours? Have a go at UV Unwrapping and Texturing. Want something more lively? Try Rigging and Animating. The donut sits at the entrance of an endless rabbit hole. `},
+    {key:'vrc', title:'VR Chat'},
+    {key:nanoid(), text:`VRChat experienced a marked rise in users in 2020 with the release of the Meta Quest 2, a capable and modestly priced standalone headset. If you're interested in making your own models, many guides exist online and the tooling is excellent. I think it provides another great outlet for 3D models other than renders. Uploading your model to VR Chat immediately breathes life into it without becoming an expert keyframe animator. It allows you to get right into the toolchain of 3D modelling without the more painful aspects of making an entire game.`},
+    {key:'topology', title:'Topology'},
+    {key:nanoid(), text:`One of the lesser discussed topics when starting out with 3D modelling is topology: the geometric surface characteristics of the mesh. In general, 3D models used in game engines keep to 4-sided "quad" topology, which allows for easy subdivision. Another benefit is that quads have a clear "loop" direction, sets of parallel ring like faces. Selecting a ring like this is useful to break up a model. For instance, a clean ring can be selected at the wrist to separate the complex hand from the simple forearm. Or, a carefully placed loop around the vertical axis of the body can be used to separate exactly half of the body for mirroring.`},
+    {key:'npoles', subtitle:'n-poles'},
+    {key:nanoid(), text:`Strict quad topology is usually not necessary and sometimes undesirable, and in some cases the change in direction that a 5-pole provides, a point where 5 edges meet, can be useful in separating different mesh areas. This can be especially on the face where many complex muscles pull the face in a huge variety of expressions. Roughly matching the loops of the face to the underlying anatomy helps in animation performance when the faces move and stretch. Admittedly I am no expert at managing topology and usually after some issue occurs I usually have to resort to scorched earth measures to get a pole where I want it to be. `},
+    {key:'uvunwrapping', title:'UV Unwrapping'},
+    {key:nanoid(), text:`UV Unwrapping is famously a pain and nuisance to many artists. It does take a significant amount of effect, especially after some edits have been made to the mesh, it is tiring to redo the unwrapping. If a computer could unwrap a model with a bit more sense than currently available Smart Unwrapping.. I wouldn't complain.`},
+    {key:'texturepainting', title:'Texture Painting'},
+    {key:nanoid(), text:`Your reward for getting through the UV unwrapping is adding new life to you model with texture painting. Even with the basic tools that Blender provides, a little painting goes a long way. Because real-time shadows are so expensive and generally provide flat, machine like results, a tasteful splash of painterly shadows gives depth and flavor to a model. VRC makes eye movement simple. While few hardware configurations support eye tracking, models can be configured to make intermittent eye contact with other avatars and dart around more like real saccades. It makes it worthwhile to add a glossy and colorful eye to your models.`},
+    {key:'rignweightpaint', title:'Rigging and Weight Painting'},
+    {key:nanoid(), text:`The rig provides a skeleton or "armature" that can be moved to animate a mesh. The rig is made up of "bones", which have parent/child relationships with each other and are all descendants from the root. That way, when the upper arm moves, the rest of the arm follows it. Whether by necessity or ingenuity, the controls to control the rig are also made up of bones. In Blender, the positioning of the bones can be used to drive behavior like forward kinematics or inverse kinematics. You have to admire the bootstrapping, but it makes the actual implementation somewhat labour intensive. Automated tools like Auto Rig Pro make rigging and weight painting are excellent and shorten the rigging and weight painting process immensely.`},
+    {key:'animation', title:'Animation'},
+    {key:nanoid(), text:`Animation might be the first thing you think of when it comes to 3D graphics due to the success of many 3D movies. Finally with all the previous layers complete, we can animate. Of all the previous stages, animation is certainly its own art. Although I can't be much help in the actual art of animation, it is useful to dive into the behind the scenes in Blender. When an animation is created, it also creates an "action", which can be edited in the action editor, and layered in the non-linear animation (NLA) editor. Although the action and NLA editor aren't presented by default, they are being used so it's useful to familiarize yourself with them before you dig yourself in too deep.`},
+    {key:'animation', title:'Rendering'},
+    {key:nanoid(), text:`Another endless rabbit hole that I haven't played with much. It is useful to know when to use the different render settings in Blender. Eevee provides great runtime performance with a limited feature set. Cycles is Blender's premiere renderer, with full and experimental features. Some settings like colorspace also have a huge effect on the image. AgX is Blender 4.0's latest colorspace which has improved performance with very bright lights. Using the plain sRGB colorspace can be useful if you're exporting textures to a game engine like Unity which does not use AgX colorspace.`},
+    ],
+    imageName:'./vrc-splash-1.png',
+    imageStyle:{style: {objectPosition:'right 0 bottom 0px'}}
     },
     {
     num:7,

@@ -44,8 +44,8 @@
     /* Give table of contents a scrollbar */
     max-height: calc(100vh - 100px);
     width:20vw;
-    overflow-y: scroll;
-    /* overflow: auto; */
+    /* overflow-y: scroll; */
+    overflow-y: auto;
 }
 
 .headings-li {
