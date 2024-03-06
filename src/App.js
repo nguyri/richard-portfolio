@@ -16,6 +16,7 @@ import {getImage} from './components/entry/data';
 export default function App() {
   const [darkMode, setDarkMode] = React.useState(false);
   const [shrinkHeader, setShrinkHeader] = React.useState(false);
+  const appRef = React.useRef();
 
   function toggleDarkMode() {
     setDarkMode( (prevState) => !prevState)
@@ -30,7 +31,7 @@ export default function App() {
   return(  
     <div className={darkMode? "App App--dark" : "App"}>
         <Favicon url={getImage('./favicon.png')} />
-        <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} shrinkHeader ={shrinkHeader}/>
+        <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} shrinkHeader ={shrinkHeader} appRef={appRef}/>
         <main>
           <React.Suspense fallback={<div>Loading...</div>}>
             <Outlet context={[darkMode, setShrinkHeader]}/>

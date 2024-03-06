@@ -23,7 +23,7 @@ export default function Header(props) {
                     <Link
                         to={breadcrumb.key}
                         className={`nav--item nav--item-shrink ${darkMode && `nav--item-dark`}`}
-                        onClick={() => {window.scrollTo(0,0)}}
+                        onClick={() => {entriesLayout.scrollTo(0,0)}}
                         >
                         {!shrinkHeader ? '' : breadcrumb.props.children.toLowerCase()}
                     </Link>
