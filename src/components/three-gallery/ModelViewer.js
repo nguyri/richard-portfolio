@@ -39,7 +39,7 @@ const ModelViewer = (props) => {
   let [modelShown, setModelShown] = React.useState();
   let [loadedModel, setLoadedModel] = React.useState();
   let [modelList, setModelList] = React.useState([]);
-  let [showLink, setShowLink] = React.useState(false);
+  let [showLink, setShowLink] = React.useState(true);
   let [showVideo, setShowVideo] = React.useState(false);
   let [animated, setAnimated] = React.useState(0);
   let [zoom, setZoom] = React.useState(16);
@@ -419,11 +419,9 @@ const ModelViewer = (props) => {
         :
         <div className='threegallery--slider-grid'>
           <div>
-            {modelData[modelIndex].link ?
-              <h1 className='threegallery--title expand--anchor' onClick={() => setShowLink(!showLink)}>{modelData[modelIndex].name}</h1>
-              : <h1 className='threegallery--title' >{modelData[modelIndex].name}</h1>}
+            {<h1 className='threegallery--title'>{modelData[modelIndex].name}</h1>}
             {modelData[modelIndex].link && showLink && <h1 className='threegallery--desc expand--anchor' style={{ gridColumn: '1 / span 1', paddingBottom: '10px' }}
-              onClick={() => setShowVideo(true)}>Switch to video player?</h1>}
+              onClick={() => setShowVideo(true)}>Switch to video player</h1>}
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gridRow: '3 / span 1', gridColumn: '1 / span 1' }}>
             <button disabled={modelIndex == 0} className={'threegallery--button'} onClick={() =>
