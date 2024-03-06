@@ -36,7 +36,7 @@ const useIntersectionObserver = (setActiveId) => {
     const observer = new IntersectionObserver(callback, {
         // rootMargin: '-110px',
         threshold:1.0,
-        rootMargin: '-110px 0px -60% 0px',
+        rootMargin: '-40px 0px -60% 0px',
     });
 
     const headingElements = Array.from(document.querySelectorAll("h2, h3"));
