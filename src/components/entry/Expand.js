@@ -12,7 +12,9 @@ export function Expand (props) {
     }
 
     const ExpandBlock = (props) => {
-        return (<div className='expand--block' style={{}}>{props.content}  </div>);
+        return (<div className='expand--block' style={{}}>
+            {props.content}  
+        </div>);
     }
 
     const formatName = (name, highlight) => {
