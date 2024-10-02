@@ -34,17 +34,20 @@ const ThreeFunc = (props) => {
     let [scene, setScene] = React.useState();
     let myRef = React.useRef();
     let [camera, setCamera] = React.useState(); 
-    let [material] = React.useState(new THREE.MeshPhongMaterial({ flatShading: false, color: new THREE.Color(0xafafaf), specular: 0x555555, shininess: 30 }))
+    let [material] = React.useState(new THREE.MeshLambertMaterial({ flatShading: false, color: new THREE.Color(0xafafaf), specular: 0xffffff, shininess: 200 }))
+    // let [material] = React.useState(new THREE.MeshStandardMaterial({ color: new THREE.Color(0xefefef), roughness:0.6, metalness:0.7 }))
+    // let [material] = React.useState(new THREE.MeshDepthMaterial({ flatShading: false, color: new THREE.Color(0xafafaf), specular: 0xffffff, shininess: 200 }))
+    // let [material] = React.useState(new THREE.MeshMaterial({ flatShading: false, color: new THREE.Color(0xafafaf), specular: 0xffffff, shininess: 200 }))
     let [controls, setControls] = React.useState();
-    let [pointLight, setPointLight] = React.useState();
+    let [dirLight, setDirLight] = React.useState();
     let [ambientLight] = React.useState(new THREE.AmbientLight(0xffffff, 1));
     let [renderer] = React.useState(new THREE.WebGLRenderer({ antialias: true }));
     let [brightness, setBrightness] = React.useState(1);
 
     //demo box
-    let [geometry] = React.useState(new THREE.BoxGeometry(20, 20, 20));
-    let [cubeMaterial] = React.useState(new THREE.MeshPhongMaterial({ color: 0x00ff00 }));
-    let [cube] = React.useState(new THREE.Mesh(geometry, cubeMaterial));
+    // let [geometry] = React.useState(new THREE.BoxGeometry(20, 20, 20));
+    // let [cubeMaterial] = React.useState(new THREE.MeshLambertMaterial({ color: 0x00ff00 }));
+    // let [cube] = React.useState(new THREE.Mesh(geometry, cubeMaterial));
 
     React.useEffect(() => {
         const width = myRef.current.clientWidth
@@ -54,26 +57,29 @@ const ThreeFunc = (props) => {
         cameraInit.zoom = zoom;
         cameraInit.up.set(0, 0, 1);
         cameraInit.position.set(200, 200, 200);
+        cameraInit.near = 250;
+        cameraInit.far = 400;
         cameraInit.lookAt(0, 0, 0)
         cameraInit.updateProjectionMatrix();
 
         setCamera(cameraInit);
         
         
-        // demo box
         let sceneInit = new THREE.Scene();
-        sceneInit.add(cube);
+        // demo box
+        // sceneInit.add(cube);
+        // cube.position.set(0,0,0);
         
         // this.camera = new THREE.PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 1, 500 );
         
-        let pointLightInit = new THREE.DirectionalLight(0xffffff, 1);
-        pointLightInit.position.set(80, 90, 200);
-        pointLightInit.castShadow = true;
-        cube.castShadow = true;
-        pointLightInit.updateMatrix();
-        cube.position.set(0,0,0);
-        setPointLight(pointLightInit);
-        sceneInit.add(pointLightInit);
+        let dirLightInit = new THREE.DirectionalLight(0xffffff, 2);
+        dirLightInit.position.set(1,2,3);
+        // dirLightInit.position.set(80, 90, 200);
+        // dirLightInit.castShadow = true;
+        // cube.castShadow = true;
+        dirLightInit.updateMatrix();
+        setDirLight(dirLightInit);
+        sceneInit.add(dirLightInit);
         sceneInit.add(ambientLight);
         
         renderer.setClearColor('#FFFFFF', 0) //#F9F7F0
@@ -81,7 +87,7 @@ const ThreeFunc = (props) => {
         myRef.current.appendChild(renderer.domElement)
         
         let loader = new ThreeMFLoader();
-        // loadThreeMF(loader, modelData, modelList, modelShown, sceneInit, material, setModelList)
+        loadThreeMF(loader, modelData, modelList, modelShown, sceneInit, material, setModelList)
         
         const render = () => {
           renderer.render(sceneInit, cameraInit);
@@ -119,18 +125,6 @@ const ThreeFunc = (props) => {
         return () => myRef.current && myRef.current.removeChild(renderer.domElement);
     }, []);
 
-    React.useEffect(() => {
-      // console.log(pointLight);
-      pointLight && updateLight(pointLight, brightness);
-    }, [brightness])
-  
-
-    const updateLight = (light, brightness) => {
-      light.intensity = brightness;
-      light.updateMatrix();
-      light.updateMatrixWorld();
-    }
-
     const loadThreeMF = (loader, modelData, list, modelShown, scene, material, setModelList) => {
         // loader.addExtension( ThreeMFLoader.MaterialsAndPropertiesExtension );
         modelData.forEach((modelGroup, modelIndex) => {
@@ -141,10 +135,11 @@ const ThreeFunc = (props) => {
               loadedGroup[index]=(object3mf);
               object3mf.position.set(...modelGroup.positions[index]);
               object3mf.rotation.set(...modelGroup.rotations[index]);
+              // object3mf.updateMatrixWorld();
               object3mf.traverse((child) => {
                 if (child.isMesh) {
                   child.material = material;
-                  // child.geometry.computeVertexNormals();
+                  child.geometry.computeVertexNormals(); // essential for directional light apparently
                 }
               })
               console.log(object3mf);

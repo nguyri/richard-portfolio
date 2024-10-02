@@ -6,7 +6,6 @@ const ImageTransitionCanvas = React.lazy(() => import('../threefiber/ImageTransi
 const BlendingModes = React.lazy(() => import('../blendingmodes/BlendingModes'));
 const ThreeFunc = React.lazy(() => import('../threejsdemo/ThreeFunc'));
 const ThreeFiber = React.lazy(() => import('../threejsdemo/ThreeFiber'));
-const ThreeFiberDemo = React.lazy(() => import('../threejsdemo/ThreeFiberDemo'));
 const Wordle = React.lazy(() => import('../wordle/Wordle'))
 import {ExpandList} from '../entry/Expand'
 
