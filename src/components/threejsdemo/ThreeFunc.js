@@ -66,7 +66,7 @@ const ThreeFunc = (props) => {
         
         // this.camera = new THREE.PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 1, 500 );
         
-        let pointLightInit = new THREE.PointLight(0xffffff, 1);
+        let pointLightInit = new THREE.DirectionalLight(0xffffff, 1);
         pointLightInit.position.set(80, 90, 200);
         pointLightInit.castShadow = true;
         cube.castShadow = true;

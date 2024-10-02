@@ -5,6 +5,8 @@ const MovingPlaneCanvas = React.lazy(() => import('../threefiber/MovingPlaneCanv
 const ImageTransitionCanvas = React.lazy(() => import('../threefiber/ImageTransition'));
 const BlendingModes = React.lazy(() => import('../blendingmodes/BlendingModes'));
 const ThreeFunc = React.lazy(() => import('../threejsdemo/ThreeFunc'));
+const ThreeFiber = React.lazy(() => import('../threejsdemo/ThreeFiber'));
+const ThreeFiberDemo = React.lazy(() => import('../threejsdemo/ThreeFiberDemo'));
 const Wordle = React.lazy(() => import('../wordle/Wordle'))
 import {ExpandList} from '../entry/Expand'
 
@@ -129,6 +131,7 @@ let entries = [
     {key: 'graphics', title:`Graphics`},
     {key:nanoid(), text:`I've always had an interest in graphics and shaders. I quite like visual thinking and
     the beauty of graphics is apparent even without in-depth knowledge.`},
+    {key:nanoid(), component: <ThreeFunc style={{width:"40vw"}} zoom={4.0} key={nanoid()}/>},
     {key: 'raytracer', title:`Raytracer`},
     {key: 1, text:` One of the classic computer graphics demonstrations is a raytracer. I also wanted to learn a new programming language, Rust.`},
     {key: 2, html:<div>Rust doesn't give any particular advantages in this case, given that there's no finnicky memory management. 
@@ -152,7 +155,6 @@ let entries = [
     I grew up in the era of flash websites so it's pretty satisfying seeing the mathematically perfect graphics that you can do with three.js.`},
     {key:'assembly-viewer', subtitle:`Assembly Viewer`},
     {key: 7, text:`A few models I've drawn up in Fusion360. Slider for exploded-view. Click and drag to pan! `},
-    {key:nanoid(), component: <ThreeFunc style={{width:"40vw"}} zoom={4.0} key={nanoid()}/>},
     {key:'waves', subtitle:`Waves`},
     {key:nanoid(), text: `A little waves demo. The vertex shader moves the points of the plane into a 
     wavey shape, while a stepped color function gives different blues in the fragment shader.`},
