@@ -31,17 +31,26 @@ const ThreeFunc = (props) => {
     let [modelShown, setModelShown] = React.useState(0);
     let [zoom, setZoom] = React.useState(props.zoom);
     let [modelList, setModelList] = React.useState([]);
-    let [scene, setScene] = React.useState(new THREE.Scene());
+    let [scene, setScene] = React.useState();
     let myRef = React.useRef();
     let [camera, setCamera] = React.useState(); 
-    let [material] = React.useState(new THREE.MeshPhongMaterial({ flatShading: 'false', color: new THREE.Color(0xafafaf) }))
-    let controls;
+    let [material] = React.useState(new THREE.MeshPhongMaterial({ flatShading: false, color: new THREE.Color(0xafafaf), specular: 0x555555, shininess: 30 }))
+    let [controls, setControls] = React.useState();
+    let [pointLight, setPointLight] = React.useState();
+    let [ambientLight] = React.useState(new THREE.AmbientLight(0xffffff, 1));
+    let [renderer] = React.useState(new THREE.WebGLRenderer({ antialias: true }));
+    let [brightness, setBrightness] = React.useState(1);
+
+    //demo box
+    let [geometry] = React.useState(new THREE.BoxGeometry(20, 20, 20));
+    let [cubeMaterial] = React.useState(new THREE.MeshPhongMaterial({ color: 0x00ff00 }));
+    let [cube] = React.useState(new THREE.Mesh(geometry, cubeMaterial));
 
     React.useEffect(() => {
         const width = myRef.current.clientWidth
         const height = myRef.current.clientHeight
-        let cameraInit = new THREE.OrthographicCamera(width / -2, width / 2, height / 2, height / -2, 0, 2000)//( 10, width / height, 50, 800)
-        // this.cameraInit = new THREE.PerspectiveCameraInit( 5, width / height, 50, 2000)
+        let cameraInit = new THREE.OrthographicCamera(width / -2, width / 2, height / 2, height / -2, 0, 2000);//( 10, width / height, 50, 800)
+        // let cameraInit = new THREE.PerspectiveCameraInit( 5, width / height, 50, 2000)
         cameraInit.zoom = zoom;
         cameraInit.up.set(0, 0, 1);
         cameraInit.position.set(200, 200, 200);
@@ -49,37 +58,49 @@ const ThreeFunc = (props) => {
         cameraInit.updateProjectionMatrix();
 
         setCamera(cameraInit);
-    
+        
+        
+        // demo box
+        let sceneInit = new THREE.Scene();
+        sceneInit.add(cube);
+        
         // this.camera = new THREE.PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 1, 500 );
-    
-        let pointLight = new THREE.PointLight(0xffffff, 0.6);
-        pointLight.position.set(80, 90, 200);
-        scene.add(pointLight);
-        scene.add(new THREE.AmbientLight(0xffffff, 0.6));
-    
-        let renderer = new THREE.WebGLRenderer({ antialias: true })
+        
+        let pointLightInit = new THREE.PointLight(0xffffff, 1);
+        pointLightInit.position.set(80, 90, 200);
+        pointLightInit.castShadow = true;
+        cube.castShadow = true;
+        pointLightInit.updateMatrix();
+        cube.position.set(0,0,0);
+        setPointLight(pointLightInit);
+        sceneInit.add(pointLightInit);
+        sceneInit.add(ambientLight);
+        
         renderer.setClearColor('#FFFFFF', 0) //#F9F7F0
         renderer.setSize(width, height)
         myRef.current.appendChild(renderer.domElement)
-    
+        
         let loader = new ThreeMFLoader();
-        loadThreeMF(loader, modelData, modelList, modelShown, scene)
-
+        // loadThreeMF(loader, modelData, modelList, modelShown, sceneInit, material, setModelList)
+        
         const render = () => {
-            renderer.render(scene, cameraInit);
+          renderer.render(sceneInit, cameraInit);
         }
-    
-        controls = new OrbitControls(cameraInit, renderer.domElement);
-        controls.addEventListener('change', render);
-        controls.target.set(20, 0, 0);
-        controls.minPolarAngle = Math.PI / 3;
-        controls.maxPolarAngle = controls.minPolarAngle;
-        controls.minAzimuthAngle = Math.PI / 8;
-        controls.maxAzimuthAngle = Math.PI * 7 / 8;
-        controls.enablePan = false;
-        controls.enableZoom = false;
-        controls.autoRotate = true;
-        controls.update();
+        
+        
+        let initControls = new OrbitControls(cameraInit, renderer.domElement);
+        initControls.addEventListener('change', render);
+        initControls.target.set(20, 0, 0);
+        initControls.minPolarAngle = Math.PI / 3;
+        initControls.maxPolarAngle = initControls.minPolarAngle;
+        initControls.minAzimuthAngle = Math.PI / 8;
+        initControls.maxAzimuthAngle = Math.PI * 7 / 8;
+        initControls.enablePan = false;
+        initControls.enableZoom = false;
+        initControls.autoRotate = true;
+        initControls.update();
+        setControls(initControls);
+        setScene(sceneInit);
 
         let onWindowResize = function () {
             cameraInit.aspect = window.innerWidth / window.innerHeight;
@@ -98,7 +119,19 @@ const ThreeFunc = (props) => {
         return () => myRef.current && myRef.current.removeChild(renderer.domElement);
     }, []);
 
-    const loadThreeMF = (loader, modelData, list, modelShown, scene) => {
+    React.useEffect(() => {
+      // console.log(pointLight);
+      pointLight && updateLight(pointLight, brightness);
+    }, [brightness])
+  
+
+    const updateLight = (light, brightness) => {
+      light.intensity = brightness;
+      light.updateMatrix();
+      light.updateMatrixWorld();
+    }
+
+    const loadThreeMF = (loader, modelData, list, modelShown, scene, material, setModelList) => {
         // loader.addExtension( ThreeMFLoader.MaterialsAndPropertiesExtension );
         modelData.forEach((modelGroup, modelIndex) => {
           let loadedGroup = []
@@ -108,7 +141,13 @@ const ThreeFunc = (props) => {
               loadedGroup[index]=(object3mf);
               object3mf.position.set(...modelGroup.positions[index]);
               object3mf.rotation.set(...modelGroup.rotations[index]);
-              object3mf.children[0].children[0].material = material;
+              object3mf.traverse((child) => {
+                if (child.isMesh) {
+                  child.material = material;
+                  // child.geometry.computeVertexNormals();
+                }
+              })
+              console.log(object3mf);
               if (modelIndex == modelShown) {
                 scene.add(object3mf);
               }
