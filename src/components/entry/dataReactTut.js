@@ -65,12 +65,6 @@ return (
 )}`}></CodeBlock> </div></>
     }></Expand> ,
 
-    <Expand name='Some JSX attributes are different to avoid name conflict' 
-    highlight='name conflict'
-    content= {
-        <>For example, setting a CSS class uses the keyword className: <Code codeString={`<MyComponent className="my-component-style">`}/> </>
-    }></Expand>,
-
     <Expand name='Events like onClick are written directly into the elements with JSX'
     highlight='Events'
     content= {

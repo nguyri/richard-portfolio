@@ -169,7 +169,7 @@ const ModelViewer = (props) => {
     controls.enableZoom = true;
 
     controls.autoRotate = true;
-    controls.autoRotateSpeed = 0.5; // default 2
+    controls.autoRotateSpeed = 0.1; // default 2
     controls.update();
     return controls;
   }
