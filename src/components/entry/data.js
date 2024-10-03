@@ -5,6 +5,7 @@ const MovingPlaneCanvas = React.lazy(() => import('../threefiber/MovingPlaneCanv
 const ImageTransitionCanvas = React.lazy(() => import('../threefiber/ImageTransition'));
 const BlendingModes = React.lazy(() => import('../blendingmodes/BlendingModes'));
 const ThreeFunc = React.lazy(() => import('../threejsdemo/ThreeFunc'));
+const ThreeGallery = React.lazy(() => import ('../three-gallery/ThreeGallery'))
 const ThreeFiber = React.lazy(() => import('../threejsdemo/ThreeFiber'));
 const Wordle = React.lazy(() => import('../wordle/Wordle'))
 import {ExpandList} from '../entry/Expand'
@@ -22,7 +23,7 @@ function importAll(r) {
 importAll(require.context('../../imgs/', false, /\.(png|jpe?g|svg)$/));
 
 export function getEntries() {
-    let order = ['Metal Shop', 'Graphics and ThreeJS', 'Additive Lathe', 'Web Development',  '3D Modelling','Mostly Printed CNC', 'Digital Art', 'Wood Shop'];
+    let order = ['Metal Shop', 'Graphics and ThreeJS', 'Additive Lathe', 'Web Development',  '3D Modelling', 'Model Gallery', 'Mostly Printed CNC', 'Digital Art', 'Wood Shop'];
     let orderedEntries = order.map((title) => entries.find(entry => entry.title === title));
     return orderedEntries;
 }
@@ -390,6 +391,17 @@ let entries = [
     ],
     imageName:'./vrc-splash-1.png',
     imageStyle:{style: {objectPosition:'right 0 bottom 0px'}}
+    },
+    {
+        num:nanoid(),
+        title: "Model Gallery",
+        link: "3dmodels",
+        description:"Some models",
+        longdescription: [
+            {key:'three-gallery', needsDark:true, component: <ThreeGallery key={nanoid()} style={{gridColumn:"1 /span 5"}}/>},
+        ],
+        imageName:'./vrc-splash-1.png',
+        imageStyle:{style: {objectPosition:'right 0 bottom 0px'}}
     },
     {
     num:7,

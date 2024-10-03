@@ -55,11 +55,15 @@ const TableOfContents = (props) => {
     // console.log(darkMode);
 
     useIntersectionObserver(setActiveId);
+    console.log(props);
+
+    const hasWriting = props.entrydata.longdescription.some((elem) => elem.text);
 
     return (
-        <div className="table-of-contents">
+        <div className={hasWriting && "table-of-contents"}>
             {/* <TOCHeadings props={data_file}/> */}
-            <TOCHeadings longdescription={props.entrydata.longdescription} activeId={activeId} darkMode={darkMode} />
+            {hasWriting && 
+             <TOCHeadings longdescription={props.entrydata.longdescription} activeId={activeId} darkMode={darkMode} />}
             
         </div>
     );
