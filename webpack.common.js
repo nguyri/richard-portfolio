@@ -1,7 +1,8 @@
 const path = require("path");
 const webpack = require("webpack");
 // const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
-// const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin")
 
 module.exports = {
   entry: "./src/index.js",
@@ -77,15 +78,18 @@ module.exports = {
     filename: "[name].bundle.js",
     // clean: true,
   },
-  // plugins: [
-    // new HtmlWebpackPlugin({
-    //   template: './{dist/template.html',
-    //   favicon: './dist/assets/favicon.png',
-    //   filename: './index.html',
-    // }),
-    // new FaviconsWebpackPlugin({logo:"./src/imgs/favicon.png", inject:true}),
-    // new FaviconsWebpackPlugin()
-  // ],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'public', 'index.html'), // Path to your HTML file
+      filename: 'index.html',
+      inject: 'body', // Injects your bundle at the bottom of the body
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'public/favicon.ico', to: 'favicon.ico' }, // Copy favicon
+      ],
+    }),
+  ],
   optimization: {
     splitChunks: {
       chunks: 'all',
