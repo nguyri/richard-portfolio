@@ -6,13 +6,14 @@ function ExpressDemo (props) {
     const [response, setResponse] = useState('');
   
     // GET request to the Express server
-    useEffect(() => {
-      fetch('http://localhost:3001/api/message')
-        .then((res) => res.json())
-        .then((data) => setMessage(data.message))
-        .catch((err) => console.error('Error fetching message:', err));
-    }, []);
-  
+    const handleClick = (e) => {
+        e.preventDefault();
+            fetch('http://localhost:3001/api/message')
+              .then((res) => res.json())
+              .then((data) => setMessage(data.message))
+              .catch((err) => console.error('Error fetching message:', err));
+          };
+
     // Handle form submission and send a POST request to the Express server
     const handleSubmit = (e) => {
       e.preventDefault();
@@ -31,6 +32,7 @@ function ExpressDemo (props) {
     return (
       <div className="App">
         <h1>{message}</h1> {/* Display message from GET request */}
+        <button onClick={handleClick}>GET request</button>
   
         <form onSubmit={handleSubmit}>
           <label>
