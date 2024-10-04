@@ -57,7 +57,7 @@ const TableOfContents = (props) => {
     useIntersectionObserver(setActiveId);
     // console.log(props);
 
-    const hasWriting = props.entrydata.longdescription.some((elem) => elem.text);
+    const hasWriting = props.entrydata.longdescription.some((elem) => elem.text || elem.html);
 
     return (
         <div className={hasWriting && "table-of-contents"}>
