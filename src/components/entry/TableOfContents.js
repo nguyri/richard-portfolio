@@ -55,7 +55,7 @@ const TableOfContents = (props) => {
     // console.log(darkMode);
 
     useIntersectionObserver(setActiveId);
-    console.log(props);
+    // console.log(props);
 
     const hasWriting = props.entrydata.longdescription.some((elem) => elem.text);
 

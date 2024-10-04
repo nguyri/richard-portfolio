@@ -7,6 +7,7 @@ const BlendingModes = React.lazy(() => import('../blendingmodes/BlendingModes'))
 const ThreeFunc = React.lazy(() => import('../threejsdemo/ThreeFunc'));
 const ThreeGallery = React.lazy(() => import ('../three-gallery/ThreeGallery'))
 const ThreeFiber = React.lazy(() => import('../threejsdemo/ThreeFiber'));
+const ExpressDemo = React.lazy(() => import('../express/ExpressDemo'));
 const Wordle = React.lazy(() => import('../wordle/Wordle'))
 import {ExpandList} from '../entry/Expand'
 
@@ -23,7 +24,7 @@ function importAll(r) {
 importAll(require.context('../../imgs/', false, /\.(png|jpe?g|svg)$/));
 
 export function getEntries() {
-    let order = ['Metal Shop', 'Graphics and ThreeJS', 'Additive Lathe', 'Web Development',  '3D Modelling', 'Model Gallery', 'Mostly Printed CNC', 'Digital Art', 'Wood Shop'];
+    let order = ['Metal Shop', 'Graphics and ThreeJS', 'Additive Lathe', 'Web Development', 'Backend', '3D Modelling', 'Model Gallery', 'Mostly Printed CNC', 'Digital Art', 'Wood Shop'];
     let orderedEntries = order.map((title) => entries.find(entry => entry.title === title));
     return orderedEntries;
 }
@@ -223,6 +224,20 @@ let entries = [
     imageName:'./addlathe1.jpg',
     imageStyle:{style: {objectPosition:'right 0px bottom 200px', objectFit:'cover', scale:'1.0', overflow:'visible'}},
     mobileStyle:{style: {}},
+    },
+    {
+        num: nanoid(),
+        title: "Backend",
+        link: "backend",
+        reactDescription: {html:<div>When you need more processing behind the scenes, you need a backend. </div>},
+        longdescription: [
+            {key:nanoid(), title:`Express`},
+            {key:nanoid(), html: <>Express is a popular web application framework for Node.js used to make server side applications. On this page it serves an API that can check your mahjong hand. </>},
+            {key: nanoid(), component: <ExpressDemo/>},
+            ],
+        imageName:'./addlathe1.jpg',
+        imageStyle:{style: {objectPosition:'right 0px bottom 200px', objectFit:'cover', scale:'1.0', overflow:'visible'}},
+            mobileStyle:{style: {}},
     },
     {
     num: 4,
