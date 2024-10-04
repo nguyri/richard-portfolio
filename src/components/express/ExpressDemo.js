@@ -15,14 +15,14 @@ function ExpressDemo (props) {
           };
 
     // Handle form submission and send a POST request to the Express server
-    const handleSubmit = (e) => {
-      e.preventDefault();
+    const formAction = (formData) => {
+        const query = formData.get("query");
       fetch('http://localhost:3001/api/data', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name }), // Send the name as a JSON object
+        body: JSON.stringify({ query }), // Send the name as a JSON object
       })
         .then((res) => res.json())
         .then((data) => setResponse(data.message))
@@ -34,10 +34,10 @@ function ExpressDemo (props) {
         <h1>{message}</h1> {/* Display message from GET request */}
         <button onClick={handleClick}>GET request</button>
   
-        <form onSubmit={handleSubmit}>
+        <form action={formAction}>
           <label>
-            Enter your name:
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+            Enter your query:
+            <input name="query"/>
           </label>
           <button type="submit">Send Name</button>
         </form>

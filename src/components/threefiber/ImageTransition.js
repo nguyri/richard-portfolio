@@ -41,7 +41,7 @@ shaderMaterial (
         vec4 finalTexture = mix(_boilTex1, _boilTex2, dispFactor);
         gl_FragColor = finalTexture;
         #include <tonemapping_fragment>
-        #include <encodings_fragment>
+        // #include <encodings_fragment>
     }
     `
 )
