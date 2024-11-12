@@ -54,6 +54,13 @@ function ExpressDemo (props) {
             .then((data) => setResponse(data.message))
             .catch((err) => console.error('Error posting data:', err));
     };
+
+    const formatResponse = (response) => {
+      if (!response) return;
+
+      let obj = JSON.parse(response);
+      return <div className="express--response">{obj.query}</div> 
+    }
   
     return (
       <div className="express--main">
@@ -67,8 +74,7 @@ function ExpressDemo (props) {
           </label>
           <button type="submit">Send Hand</button>
         </form>
-  
-        <h2>{response}</h2> {/* Display response from POST request */}
+        {formatResponse(response)}
       </div>
     );
 }
