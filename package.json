@@ -4,7 +4,7 @@
   "description": "projects by richard nguyen",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "server": "./node_modules/.bin/webpack-dev-server --mode development",
     "dev-build": "webpack --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js"
@@ -38,9 +38,11 @@
   "dependencies": {
     "@react-three/drei": "^9.114.0",
     "@react-three/fiber": "^9.0.0-alpha.8",
+    "@types/jest": "^29.5.14",
     "better-react-mathjax": "^2.0.3",
     "drei": "^2.2.21",
     "fflate": "^0.8.1",
+    "jest": "^29.7.0",
     "konva": "^9.3.2",
     "nanoid": "^5.0.5",
     "rc-slider": "^10.5.0",
