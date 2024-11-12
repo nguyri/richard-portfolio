@@ -59,7 +59,11 @@ function ExpressDemo (props) {
       if (!response) return;
 
       let obj = JSON.parse(response);
-      return <div className="express--response">{obj.query}</div> 
+      let tests = []
+      console.log(response);
+      return <div className="express--response">
+        <p>Query: {obj.query}</p>
+        </div> ;
     }
   
     return (
