@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from 'react';
+import './ExpressDemo.css'
+import { nanoid } from 'nanoid';
 
 function validTile (tile) {
   let validSuit = ['b','c','m', 'd', 'w']
@@ -61,6 +63,13 @@ function getMahjongUnicode(tile) {
   return unicode;
 }
 
+function unicodeTiles (handStr) {
+  const split = handStr.split(' ');
+  let unicodeTiles = ''
+  split.forEach((tile) => unicodeTiles+=getMahjongUnicode(tile));
+  return unicodeTiles;
+}
+
 function ExpressDemo (props) {
     const [message, setMessage] = useState('');
     const [name, setName] = useState('');
@@ -77,7 +86,8 @@ function ExpressDemo (props) {
 
     // Handle form submission and send a POST request to the Express server
     const formAction = (formData) => {
-        const query = formData.get("query");
+        let query = formData.get("query");
+        query.replace(' ','').toLowerCase();
         fetch('http://localhost:3001/api/data', {
             method: 'POST',
             headers: {
@@ -98,25 +108,30 @@ function ExpressDemo (props) {
       let tests = obj.tests;
       let results = obj.results;
 
-      let unicodeHand = ''
-      const split = query.split(' ');
-      split.forEach((tile) => unicodeHand+=(getMahjongUnicode(tile)));
-
       console.log(response);
-      return <div className="express--response">
-        <p>Query: {unicodeHand}</p>
-        
-        </div> ;
+      return (
+        <div className="express--response" style={{gridTemplateColumns:`repeat(${tests.length},auto)`}}>
+          <div className="express--response-tiles" style={{gridColumn:`span ${tests.length}`}}>
+            {unicodeTiles(query)}
+          </div>
+          <div className="express--response-tests" >
+            {tests.map((test) => <p key={nanoid()}>{test}</p>)}
+          </div>
+          <div className="express--response-results">
+            {results.map((result) => <p key={nanoid()}>{result}</p>)}
+          </div>
+        </div>
+      );
     }
   
     return (
       <div className="express--main">
-        <h1>{message}</h1> {/* Display message from GET request */}
+        <p>{message}</p> {/* Display message from GET request */}
         <button onClick={handleClick}>GET request</button>
   
         <form action={formAction}>
           <label>
-            Enter your query:
+            Enter your hand:
             <input type="text" name="query"/>
           </label>
           <button type="submit">Send Hand</button>

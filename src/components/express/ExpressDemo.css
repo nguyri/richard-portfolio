@@ -3,5 +3,44 @@
 }
 
 .express--response {
-    color:black;
-}
+    display: grid;
+    /* grid-template-columns: 1fr 1fr 1fr;  */
+    gap: 10px; /* Space between columns and rows */
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .express--response-query {
+    display: flex;
+    flex-direction: column;
+  }
+  .express--response-query::before {
+    content: "Hand";
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  .express--response-tests,
+  .express--response-results {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .express--response-tests::before {
+    content: "Tests";
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .express--response-results::before {
+    content: "Results";
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  /* Styling the individual items */
+  .express--response p {
+    margin: 0;
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+  }
