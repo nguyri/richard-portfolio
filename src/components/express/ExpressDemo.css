@@ -3,6 +3,19 @@
     width:30vw;
 }
 
+.express--main input {
+    grid-column: span 2;
+}
+.express--main label {
+    grid-column: span 2;
+}
+
+.express--main form {
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+    gap:3px;
+}
+
 .express--response {
     display: grid;
     grid-template-columns: repeat(2, auto);
@@ -28,6 +41,7 @@
     font-size: 300%;
     white-space: nowrap;
     width:fit-content;
+    margin: -10px 0 3px 0;
   }
 
   .express--response-tests,

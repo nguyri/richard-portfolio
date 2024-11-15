@@ -112,6 +112,9 @@ function ExpressDemo (props) {
       return (
         // <div className="express--response" style={{gridTemplateColumns:`repeat(${tests.length || 1},auto)`}}>
         <div className="express--response"> 
+          <div className="express--response-query" style={{gridColumn:`span 2`}}>
+              {query}
+            </div>
           <div className="express--response-tiles" style={{gridColumn:`span 2`}}>
             {unicodeTiles(query)}
           </div>
@@ -128,13 +131,13 @@ function ExpressDemo (props) {
     return (
       <div className="express--main">
         <p>{message}</p> {/* Display message from GET request */}
-        <button onClick={handleClick}>GET request</button>
+        {/* <button onClick={handleClick}>GET request</button> */}
   
         <form action={formAction}>
           <label>
             Enter your hand:
-            <input type="text" name="query"/>
           </label>
+          <input type="text" name="query"/>
           <button type="submit">Send Hand</button>
         </form>
         {formatResponse(response)}
