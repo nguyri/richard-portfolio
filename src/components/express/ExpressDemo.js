@@ -110,8 +110,9 @@ function ExpressDemo (props) {
 
       console.log(response);
       return (
-        <div className="express--response" style={{gridTemplateColumns:`repeat(${tests.length},auto)`}}>
-          <div className="express--response-tiles" style={{gridColumn:`span ${tests.length}`}}>
+        // <div className="express--response" style={{gridTemplateColumns:`repeat(${tests.length || 1},auto)`}}>
+        <div className="express--response"> 
+          <div className="express--response-tiles" style={{gridColumn:`span 2`}}>
             {unicodeTiles(query)}
           </div>
           <div className="express--response-tests" >
