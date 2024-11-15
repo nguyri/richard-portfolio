@@ -27,39 +27,22 @@ function validHand (handStr) {
 }
 
 function getMahjongUnicode(tile) {
+  tile = tile.replace('/\s+/g','');
   const suit = tile.charAt(0); 
-  if (!validTile) return;
-  tile = tile.replace('dg', 'd1');
-  tile = tile.replace('dr', 'd2');
-  tile = tile.replace('dw', 'd3');
-  tile = tile.replace('wn', 'w1');
-  tile = tile.replace('we', 'w2');
-  tile = tile.replace('ws', 'w3');
-  tile = tile.replace('ww', 'w4');
-  const tileNumber = parseInt(tile.charAt(1)); 
-  console.log(tile);
-  // Unicode mapping for Mahjong tiles
-  let unicode = '';
+  if (!validTile(tile)) {console.error('invalid tile: ', tile); return; }
 
-  switch (suit) {
-    case 'b': // Bamboo tiles (b1 - b9)
-      unicode = String.fromCodePoint(0x1F000 + (tileNumber - 1)); 
-      break;
-    case 'c': // Character tiles (c1 - c9)
-    unicode = String.fromCodePoint(0x1F00A + (tileNumber - 1));
-      break;
-    case 'm': // Man tiles (m1 - m9)
-    unicode = String.fromCodePoint(0x1F012 + (tileNumber - 1));
-      break;
-    case 'd': // Dragon tiles (d1 - d3)
-      unicode = String.fromCodePoint(0x1F013 + (tileNumber - 1));
-    case 'w': // Wind tiles (w1 - w4)
-      unicode = String.fromCodePoint(0x1F016 + (tileNumber - 1));
-    default:
-      console.error('Invalid tile input');
+  const honors = "grwnesw".split('');
+  const honorNumbers = {g:1,r:2,w:3,n:1,e:2,s:3,w:4}
+  const match = honors.find((honor) => tile.includes(honor));
+  if (match) {
+    tile = tile.replace(tile.charAt(1), honorNumbers[match]);
   }
 
-  // Return the Unicode symbol for the tile
+  const suitsUnicode = {b:0x1F010, c:0x1F019, m: 0x1F007, d:0x1F004, w:0x1F000};
+  if(!suitsUnicode[suit]) {console.error("Invalid suit for suits unicode"); return;}
+  const tileNumber = parseInt(tile.charAt(1)); 
+  const unicode = String.fromCodePoint(suitsUnicode[suit] + (tileNumber - 1));
+
   return unicode;
 }
 
