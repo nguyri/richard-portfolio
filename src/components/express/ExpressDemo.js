@@ -40,22 +40,17 @@ function getMahjongUnicode(tile) {
   if ( !suitsUnicode[suit] ) {console.error("Invalid suit for suits unicode"); return;}
   
   let tileNumber = parseInt(tile.charAt(1)); 
-  console.log(dragon, wind, tile, tileNumber);
   if ( dragon ) { tileNumber = dragonNums[tile.charAt(1)] }
   if ( wind ) { tileNumber = windNums[tile.charAt(1)] }
-
-  console.log(tile, tileNumber);
   
   const unicode = String.fromCodePoint(suitsUnicode[suit] + (tileNumber));
-  console.log(tile, (suitsUnicode[suit] + tileNumber).toString(16));
   if ( tile === 'dr' ) { String.fromCodePoint(0x1F004) + '\uFE0E'} // VS15 text presentation for dragon red
-  console.log(unicode);
   return unicode;
 }
 
 function unicodeTiles (handStr) {
   const split = handStr.split(' ');
-  console.log(split)
+  // console.log(split)
   let unicodeTiles = ''
   split.forEach((tile) => unicodeTiles+=getMahjongUnicode(tile));
   return unicodeTiles;
@@ -100,7 +95,7 @@ function ExpressDemo (props) {
       let tests = obj.tests;
       let results = obj.results;
 
-      console.log(response);
+      // console.log(response);
       return (
         // <div className="express--response" style={{gridTemplateColumns:`repeat(${tests.length || 1},auto)`}}>
         <div className="express--response"> 
