@@ -32,7 +32,7 @@ function getMahjongUnicode(tile) {
   if (!validTile(tile)) {console.error('invalid tile: ', tile); return; }
 
   const honors = "grwnesw".split('');
-  const honorNumbers = {g:1,r:2,w:3,n:1,e:2,s:3,w:4}
+  const honorNumbers = {g:2,r:1,w:3,n:1,e:2,s:3,w:4}
   const match = honors.find((honor) => tile.includes(honor));
   if (match) {
     tile = tile.replace(tile.charAt(1), honorNumbers[match]);
