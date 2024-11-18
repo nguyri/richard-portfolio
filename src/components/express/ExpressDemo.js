@@ -31,23 +31,31 @@ function getMahjongUnicode(tile) {
   const suit = tile.charAt(0); 
   if (!validTile(tile)) {console.error('invalid tile: ', tile); return; }
 
-  const honors = "grwnesw".split('');
-  const honorNumbers = {g:2,r:1,w:3,n:1,e:2,s:3,w:4}
-  const match = honors.find((honor) => tile.includes(honor));
-  if (match) {
-    tile = tile.replace(tile.charAt(1), honorNumbers[match]);
-  }
+  const dragonNums = {g:1,r:0,w:2}
+  const windNums = {n:3,e:0,s:1,w:2}
+  const dragon = tile.charAt(0) === 'd';
+  const wind = tile.charAt(0) === 'w';
 
   const suitsUnicode = {b:0x1F010, c:0x1F019, m: 0x1F007, d:0x1F004, w:0x1F000};
-  if(!suitsUnicode[suit]) {console.error("Invalid suit for suits unicode"); return;}
-  const tileNumber = parseInt(tile.charAt(1)); 
-  const unicode = String.fromCodePoint(suitsUnicode[suit] + (tileNumber - 1));
+  if ( !suitsUnicode[suit] ) {console.error("Invalid suit for suits unicode"); return;}
+  
+  let tileNumber = parseInt(tile.charAt(1)); 
+  console.log(dragon, wind, tile, tileNumber);
+  if ( dragon ) { tileNumber = dragonNums[tile.charAt(1)] }
+  if ( wind ) { tileNumber = windNums[tile.charAt(1)] }
 
+  console.log(tile, tileNumber);
+  
+  const unicode = String.fromCodePoint(suitsUnicode[suit] + (tileNumber));
+  console.log(tile, (suitsUnicode[suit] + tileNumber).toString(16));
+  if ( tile === 'dr' ) { String.fromCodePoint(0x1F004) + '\uFE0E'} // VS15 text presentation for dragon red
+  console.log(unicode);
   return unicode;
 }
 
 function unicodeTiles (handStr) {
   const split = handStr.split(' ');
+  console.log(split)
   let unicodeTiles = ''
   split.forEach((tile) => unicodeTiles+=getMahjongUnicode(tile));
   return unicodeTiles;
@@ -71,6 +79,7 @@ function ExpressDemo (props) {
     const formAction = (formData) => {
         let query = formData.get("query");
         query = query.replace(/[\s.,\/#!$%\^&\*;:{}=\-_`~()]/g, '').toLowerCase();
+
         fetch('http://localhost:3001/api/data', {
             method: 'POST',
             headers: {
