@@ -70,7 +70,7 @@ function ExpressDemo (props) {
     // Handle form submission and send a POST request to the Express server
     const formAction = (formData) => {
         let query = formData.get("query");
-        query.replace(' ','').toLowerCase();
+        query = query.replace(/[\s.,\/#!$%\^&\*;:{}=\-_`~()]/g, '').toLowerCase();
         fetch('http://localhost:3001/api/data', {
             method: 'POST',
             headers: {
