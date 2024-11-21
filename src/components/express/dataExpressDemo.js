@@ -283,10 +283,9 @@ return (
 
 const javascript = [
 <Expand name={`Finally we've arrived at the interface at the top of the page. `}
-highlight='Components'
+highlight='top of the page'
 content= 
-{<> Components can import modules they need and export themselves at the bottom of their files. 
-    A simple component looks like this: 
+{<>
     <div className='expand--codeblock'>
     <div className="expand--codeblock"><CodeBlock language='jsx' className='expand--codeblock' text=
 {`function riichi (handStr, printMelds) {
@@ -302,51 +301,87 @@ content=
     </div>
     </>}>
 </Expand> ,
-<Expand name={`example text`}
-highlight='Components'
+<Expand name={`It's certainly more declarative than previous attempts. Riichi is one of the most common ways of winning mahjong, getting 4 melds and a pair by yourself, or you can steal the last tile. So the function asks, are there melds? Are there 4 melds and 1 pair? Then it's a riichi. But getMelds is hiding something, after all: what really is a meld?`}
+highlight='what really is a meld?'
 content= 
-{<> Components can import modules they need and export themselves at the bottom of their files. 
-    A simple component looks like this: 
+{<> First of all, a meld has to be the same suit, so suitGroup is a single suit. Inside, there are three cases which all eventually feed into validMelds, which is the real workhorse of riichi.
     <div className='expand--codeblock'>
     <div className="expand--codeblock"><CodeBlock language='jsx' className='expand--codeblock' text=
-{`function MyComponent () {
-return (
-    <div className="App"> 
-        <h1> My first React App </h1>
-    </div>
-)}`}/> </div>
+{`function getMelds(suitGroup) {
+    const remainder = suitGroup.length % 3;
+    if (remainder == 1) return; // no valid options if remainder is 1
+    if (remainder == 2) return getMeldsAndPair(suitGroup); // remainder has to be a pair
+    if (remainder == 0) return validMelds(suitGroup);
+}`}/> </div>
     </div>
     </>}>
 </Expand> ,
-<Expand name={`example text`}
-highlight='Components'
+<TextBlock key={nanoid()} text={`The difficulty mostly comes from different interpretations of tiles. A series like 1,2,3,3,3 could be a straight, a pair, or a triple. Similarly, 567,777,888,66 is ideally 2 triples, a pair and a straight, but could be interpreted as 567,678,678,78, missing the pair. `}/>,
+<TextBlock key={nanoid()} text={`The solution I settled on is to remove the pair first and only have validMelds process melds on tile groups that are divisible by 3. Then, make a list of all possible melds, and make combinations of that list that would use all the tiles. These are the "meldsets" towards the end of the validMelds. Finally, confirm that the meldset actually exists by running through the tiles and using splice to take out tiles. `}/>,
+<Expand name={`The last part could be optimized since if the valid meldset isn't as long as the input tiles, i.e. not every tile is used in a meld, then the tiles are already not riichi. Anyways, it works well enough for now. `}
+highlight='it works well enough for now'
 content= 
-{<> Components can import modules they need and export themselves at the bottom of their files. 
-    A simple component looks like this: 
+{<>
     <div className='expand--codeblock'>
     <div className="expand--codeblock"><CodeBlock language='jsx' className='expand--codeblock' text=
-{`function MyComponent () {
-return (
-    <div className="App"> 
-        <h1> My first React App </h1>
-    </div>
-)}`}/> </div>
+{`function validMelds(suitGroup) {
+// make a list of all possible straights and triples
+// make all combinations of melds up to the max amount possible
+// check each combination and return the first (for now) largest combination
+if(suitGroup.length === 0 ) return [];
+const maxMelds = suitGroup.length / 3; // max melds possible
+const straights = getCombinations(suitGroup, 3).filter((combi) => isStraight(combi));
+const triples = getCombinations(suitGroup, 3).filter((combi) => isTriple(combi));
+let uniqueStraights = straights.filter((value, index, self) => 
+    index === self.findIndex((t) => JSON.stringify(t) === JSON.stringify(value)));
+const uniqueTriples = triples.filter((value, index, self) => 
+    index === self.findIndex((t) => JSON.stringify(t) === JSON.stringify(value)));
+
+// straights may be duplicated, but triples cannot (not enough tiles)
+// in this case uniqueStraights will be 1 meld but length is 6. But this is not enough to distinguish 2 identical straights, i.e. straight and triple in the suit
+// confirmMelds already provides functionality to check if melds exist in a hand, so skip a few steps and see if two identical melds exist
+// index starts with checking 2 identical straights
+for(let i = 2; i <= maxMelds; i++) {
+    uniqueStraights.forEach((straight, index) => {
+        const straightsMeldSet = Array(i).fill(straight);
+        if ( confirmMelds(suitGroup, straightsMeldSet)) {
+            // if 1+ identical straights are confirmed, add it to the "unique melds". 
+            // why this way? so that the identical straight is added to all possible combinations
+            for( let j = 0; j < i; j++ )
+                uniqueStraights.push(straight); 
+        }
+    })
+}
+
+const possibleMelds = [...uniqueStraights, ...uniqueTriples];
+const possibleMeldSets = getAllCombinations(possibleMelds, maxMelds);
+const confirmedMeldSets = possibleMeldSets.filter((meldset) => confirmMelds(suitGroup, meldset))
+const orderedMeldSets = confirmedMeldSets.sort((msA, msB) => msA.length < msB.length ? 1: -1);
+
+return orderedMeldSets[0] ? orderedMeldSets[0] : [];
+}`}/> </div>
     </div>
     </>}>
 </Expand> ,
-<Expand name={`example text`}
-highlight='Components'
+<TextBlock key={nanoid()} text={`The form is a bit messy but generally declarative. Find straights or triples, filter unique straights or triples, make a list of possible melds, confirm that the melds exist, then output the best meldset. `}/>,
+<TextBlock key={nanoid()} text={`
+One fault of this approach is that two identical straights might actually exist, and it would get filtered out when finding unique straights. They are sheepishly added back in the center for loop. A smarter meld generator or unique meld filter might be a better solution, but the simple filters used in the first 10 lines effectively use the very powerful JS array functions.`}/>
+,
+<Expand name={`With validMelds and a generous helping of jest unit tests, making this little mahjong API only took a weekend and a bit rather than I think an entire summer in uni to make noten riichi mahjong. Then again, the scopes are very different and I don't provide any UI except for a little React component.  `}
+highlight='helping of jest unit tests'
 content= 
 {<> Components can import modules they need and export themselves at the bottom of their files. 
     A simple component looks like this: 
     <div className='expand--codeblock'>
     <div className="expand--codeblock"><CodeBlock language='jsx' className='expand--codeblock' text=
-{`function MyComponent () {
-return (
-    <div className="App"> 
-        <h1> My first React App </h1>
-    </div>
-)}`}/> </div>
+{`test.only.each(new Array(1000).fill(null))('makeRandomHand x100 and riichi check', () => {
+    const tiles = E.makeRandomHand();
+    const result = tiles.every((tile) => E.validTile(tile));
+    tiles.sort((tileA, tileB) => E.tileOrder(tileA, tileB))
+    
+    const riichi = E.riichi(tiles);
+    expect(riichi, 'riichi failed with tiles: ' + tiles).toBe(true);
+})`}/> </div>
     </div>
     </>}>
 </Expand> ,

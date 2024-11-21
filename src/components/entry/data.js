@@ -243,7 +243,7 @@ let entries = [
     {key: nanoid(), text: `Okay, this is the smelly code that I remember. Big nested if blocks with complicated conditions, big functions with lots of parameters which should be combined in the first place, right? Well, it was a good lesson and the game was finished, but I wouldn't want to maintain it.`},
     {key:nanoid(), subtitle: `2020: C#`},
     {key: nanoid(), component:<ExpandExpress data={dataExpress[1]}/>}, 
-    {key:nanoid(), subtitle: `2024: C#`},
+    {key:nanoid(), subtitle: `2024: JS`},
     {key: nanoid(), component:<ExpandExpress data={dataExpress[2]}/>}, 
     ],
     imageName:'./addlathe1.jpg',
