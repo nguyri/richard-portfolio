@@ -4,7 +4,7 @@ import {CodeBlock, dracula} from 'react-code-blocks'
 import { nanoid } from 'nanoid'
 import {TextBlock} from '../entry/LongEntry'
 
-export const dataExpress = [<Expand name={` Because of gameplay reasons (portentious), the solver focuses on hands with 13 tiles, even though 14 tiles are needed to finish your hand. This is because depending on if you're waiting on a single tile or multiple, the scoring changes. So treating the hand as 13 by default makes the score computation easier. Following the files that deal with game logic you're led to LogicalHand.cs:checkThirteenTenpai.`} 
+const unity = [<Expand name={` Because of gameplay reasons (portentious), the solver focuses on hands with 13 tiles, even though 14 tiles are needed to finish your hand. This is because depending on if you're waiting on a single tile or multiple, the scoring changes. So treating the hand as 13 by default makes the score computation easier. Following the files that deal with game logic you're led to LogicalHand.cs:checkThirteenTenpai.`} 
     highlight='LogicalHand.cs:checkThirteenTenpai'
     content= 
     {<> 
@@ -64,11 +64,10 @@ export const dataExpress = [<Expand name={` Because of gameplay reasons (portent
         </>}>
     </Expand>, 
 
-    <Expand name={`Admittedly, it's not great. But for code I dismissed as legacy code written by an intern, it's organized and somewhat readable. Doesn't state what is returned which is problematic. By inferrence it returns the last set of tiles that are waiting to be finished. It has some funny names like findAndRemoveMaxTriplesAndStraights, let's take a look.. `} 
+    <Expand name={`Admittedly, it's not great. But for code I dismissed as shoddy legacy code, it's organized and somewhat readable. Doesn't state what is returned. By inference it returns the last set of tiles that are waiting to be finished. It has some funny names like findAndRemoveMaxTriplesAndStraights, let's take a look.. `} 
     highlight='findAndRemoveMaxTriplesAndStraights'
     content= 
-    {<> Components can import modules they need and export themselves at the bottom of their files. 
-        A simple component looks like this: 
+    {<>
         <div className='expand--codeblock'>
         <div className="expand--codeblock"><CodeBlock language='jsx' className='expand--codeblock' text=
 {`int findAndRemoveMaxTriplesAndStraights(ref List<MahjongTileData> full_tiles, List<MahjongTileData> suit_tiles, int max_melds)
@@ -123,8 +122,7 @@ export const dataExpress = [<Expand name={` Because of gameplay reasons (portent
 <Expand name={`It takes the approach of trying to remove as many straights or triples as it can from the list of tiles, which is somewhat prone to access faults as a list of the original tiles and the packaged 'melds' has to be maintained. Again, not necessarily bad but could be confusing. But most of the work seems like it's done by findTriplesAndStraights..`}
 highlight='findTriplesAndStraights'
 content= 
-{<> Components can import modules they need and export themselves at the bottom of their files. 
-    A simple component looks like this: 
+{<>
     <div className='expand--codeblock'>
     <div className="expand--codeblock"><CodeBlock language='jsx' className='expand--codeblock' text=
 {`int findTriplesAndStraights(List<MahjongTileData> suit_tiles_temp, int desired_triples, int desired_straights, ref bool pair_remains)
@@ -214,74 +212,144 @@ return melds_found;
 }`}/> </div>
     </div>
     </>}>
-</Expand> ,
-,
-
-<Expand name='test'
-highlight='Components'
-content= 
-{<> Components can import modules they need and export themselves at the bottom of their files. 
-    A simple component looks like this: 
-    <div className='expand--codeblock'>
-    <div className="expand--codeblock"><CodeBlock language='jsx' className='expand--codeblock' text=
-{`function MyComponent () {
-return (
-    <div className="App"> 
-        <h1> My first React App </h1>
-    </div>
-)}`}/> </div>
-    </div>
-    </>}>
-</Expand> ,
-<Expand name={`example text`}
-highlight='Components'
-content= 
-{<> Components can import modules they need and export themselves at the bottom of their files. 
-    A simple component looks like this: 
-    <div className='expand--codeblock'>
-    <div className="expand--codeblock"><CodeBlock language='jsx' className='expand--codeblock' text=
-{`function MyComponent () {
-return (
-    <div className="App"> 
-        <h1> My first React App </h1>
-    </div>
-)}`}/> </div>
-    </div>
-    </>}>
-</Expand> ,
-<Expand name={`example text`}
-highlight='Components'
-content= 
-{<> Components can import modules they need and export themselves at the bottom of their files. 
-    A simple component looks like this: 
-    <div className='expand--codeblock'>
-    <div className="expand--codeblock"><CodeBlock language='jsx' className='expand--codeblock' text=
-{`function MyComponent () {
-return (
-    <div className="App"> 
-        <h1> My first React App </h1>
-    </div>
-)}`}/> </div>
-    </div>
-    </>}>
-</Expand> ,
-<Expand name={`example text`}
-highlight='Components'
-content= 
-{<> Components can import modules they need and export themselves at the bottom of their files. 
-    A simple component looks like this: 
-    <div className='expand--codeblock'>
-    <div className="expand--codeblock"><CodeBlock language='jsx' className='expand--codeblock' text=
-{`function MyComponent () {
-return (
-    <div className="App"> 
-        <h1> My first React App </h1>
-    </div>
-)}`}/> </div>
-    </div>
-    </>}>
-</Expand> ,
-
-    
-
+</Expand> 
 ]
+
+const csharp = [
+<Expand name={`Okay, 2016 was a 10000 line bust but it had many other priorities like game interface, assets, ad and payment integration, and so on. Let's take a look at "simpleMahjong" meant to keep things simple and maintainable.`}
+highlight='simpleMahjong'
+content= 
+{<>
+    <div className='expand--codeblock'>
+    <div className="expand--codeblock"><CodeBlock language='jsx' className='expand--codeblock' text=
+{`function MyComponent () {
+return (
+    <div className="App"> 
+        <h1> My first React App </h1>
+    </div>
+)}`}/> </div>
+    </div>
+    </>}>
+</Expand> ,
+<Expand name={`example text`}
+highlight='Components'
+content= 
+{<> Components can import modules they need and export themselves at the bottom of their files. 
+    A simple component looks like this: 
+    <div className='expand--codeblock'>
+    <div className="expand--codeblock"><CodeBlock language='jsx' className='expand--codeblock' text=
+{`function MyComponent () {
+return (
+    <div className="App"> 
+        <h1> My first React App </h1>
+    </div>
+)}`}/> </div>
+    </div>
+    </>}>
+</Expand> ,
+<Expand name={`example text`}
+highlight='Components'
+content= 
+{<> Components can import modules they need and export themselves at the bottom of their files. 
+    A simple component looks like this: 
+    <div className='expand--codeblock'>
+    <div className="expand--codeblock"><CodeBlock language='jsx' className='expand--codeblock' text=
+{`function MyComponent () {
+return (
+    <div className="App"> 
+        <h1> My first React App </h1>
+    </div>
+)}`}/> </div>
+    </div>
+    </>}>
+</Expand> ,
+<Expand name={`example text`}
+highlight='Components'
+content= 
+{<> Components can import modules they need and export themselves at the bottom of their files. 
+    A simple component looks like this: 
+    <div className='expand--codeblock'>
+    <div className="expand--codeblock"><CodeBlock language='jsx' className='expand--codeblock' text=
+{`function MyComponent () {
+return (
+    <div className="App"> 
+        <h1> My first React App </h1>
+    </div>
+)}`}/> </div>
+    </div>
+    </>}>
+</Expand> ,
+]
+
+const javascript = [
+<Expand name={`Finally we've arrived at the interface at the top of the page. `}
+highlight='Components'
+content= 
+{<> Components can import modules they need and export themselves at the bottom of their files. 
+    A simple component looks like this: 
+    <div className='expand--codeblock'>
+    <div className="expand--codeblock"><CodeBlock language='jsx' className='expand--codeblock' text=
+{`function riichi (handStr, printMelds) {
+    const tiles = Array.isArray(handStr) ? handStr : handTiles(handStr);
+    
+    const suits = suitGroups(tiles);
+    const melds = suits.map((suit) => getMelds(suit))
+
+    printMelds && console.log('melds from riichi: ', melds);
+    if (melds && countMelds(melds) === 4 && countPairs(melds) === 1) return true;
+    return false;
+}`}/> </div>
+    </div>
+    </>}>
+</Expand> ,
+<Expand name={`example text`}
+highlight='Components'
+content= 
+{<> Components can import modules they need and export themselves at the bottom of their files. 
+    A simple component looks like this: 
+    <div className='expand--codeblock'>
+    <div className="expand--codeblock"><CodeBlock language='jsx' className='expand--codeblock' text=
+{`function MyComponent () {
+return (
+    <div className="App"> 
+        <h1> My first React App </h1>
+    </div>
+)}`}/> </div>
+    </div>
+    </>}>
+</Expand> ,
+<Expand name={`example text`}
+highlight='Components'
+content= 
+{<> Components can import modules they need and export themselves at the bottom of their files. 
+    A simple component looks like this: 
+    <div className='expand--codeblock'>
+    <div className="expand--codeblock"><CodeBlock language='jsx' className='expand--codeblock' text=
+{`function MyComponent () {
+return (
+    <div className="App"> 
+        <h1> My first React App </h1>
+    </div>
+)}`}/> </div>
+    </div>
+    </>}>
+</Expand> ,
+<Expand name={`example text`}
+highlight='Components'
+content= 
+{<> Components can import modules they need and export themselves at the bottom of their files. 
+    A simple component looks like this: 
+    <div className='expand--codeblock'>
+    <div className="expand--codeblock"><CodeBlock language='jsx' className='expand--codeblock' text=
+{`function MyComponent () {
+return (
+    <div className="App"> 
+        <h1> My first React App </h1>
+    </div>
+)}`}/> </div>
+    </div>
+    </>}>
+</Expand> ,
+]
+
+export const dataExpress = [unity, csharp, javascript]

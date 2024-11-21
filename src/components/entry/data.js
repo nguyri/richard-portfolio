@@ -10,6 +10,7 @@ const ThreeFiber = React.lazy(() => import('../threejsdemo/ThreeFiber'));
 const ExpressDemo = React.lazy(() => import('../express/ExpressDemo'));
 const Wordle = React.lazy(() => import('../wordle/Wordle'))
 import {ExpandList, ExpandExpress} from '../entry/Expand'
+import { dataExpress } from '../express/dataExpressDemo'
 
 const Code = (props) => {
     return (<div className="expand--code">{props.codeString}</div>);
@@ -236,12 +237,14 @@ let entries = [
     {key: nanoid(), component: <ExpressDemo/>},
     {key:'solver', title:'The Solver', style:{paddingTop:'20px'} },
     {key: nanoid(), text:`Over the years I've written several methods to "solve" mahjong hands, that is, determine if a set of tiles is 4 melds and 1 pair. A meld is either a straight: b1, b2, b3 or triple: b1, b1, b1`},
-    {key: nanoid(), html: <>These started in 2018 with the development of <a href="https://play.google.com/store/apps/details?id=com.MedullaStudios.Maljong&hl=en-US"> Noten Riichi Mahjong, play store link here</a>, with the goal of teaching mahjong to an English audience. Didn't get very far but some kind people left reviews and sent in tailored bug reports. Let's take a look at the code 7 years later.</>},
+    {key: nanoid(), html: <>These started in 2016 with the development of <a href="https://play.google.com/store/apps/details?id=com.MedullaStudios.Maljong&hl=en-US"> Noten Riichi Mahjong, play store link here</a>, with the goal of teaching mahjong to an English audience. Didn't get very far but some kind people left reviews and sent in tailored bug reports. Let's take a look at the code a decade later.</>},
     {key:'unity', subtitle:'2016: Unity'},
-    {key: nanoid(), component:<ExpandExpress/>}, 
+    {key: nanoid(), component:<ExpandExpress data={dataExpress[0]}/>}, 
     {key: nanoid(), text: `Okay, this is the smelly code that I remember. Big nested if blocks with complicated conditions, big functions with lots of parameters which should be combined in the first place, right? Well, it was a good lesson and the game was finished, but I wouldn't want to maintain it.`},
-    {key:nanoid(), subtitle: `2020: C#`}
-
+    {key:nanoid(), subtitle: `2020: C#`},
+    {key: nanoid(), component:<ExpandExpress data={dataExpress[1]}/>}, 
+    {key:nanoid(), subtitle: `2024: C#`},
+    {key: nanoid(), component:<ExpandExpress data={dataExpress[2]}/>}, 
     ],
     imageName:'./addlathe1.jpg',
     },
