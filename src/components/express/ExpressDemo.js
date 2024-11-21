@@ -31,8 +31,8 @@ function getMahjongUnicode(tile) {
   const suit = tile.charAt(0); 
   if (!validTile(tile)) {console.error('invalid tile: ', tile); return; }
 
-  const dragonNums = {g:1,r:0,w:2}
-  const windNums = {n:3,e:0,s:1,w:2}
+  const dragonNums = {g:2,r:1,w:3}
+  const windNums = {n:4,e:1,s:2,w:3}
   const dragon = tile.charAt(0) === 'd';
   const wind = tile.charAt(0) === 'w';
 
@@ -43,7 +43,7 @@ function getMahjongUnicode(tile) {
   if ( dragon ) { tileNumber = dragonNums[tile.charAt(1)] }
   if ( wind ) { tileNumber = windNums[tile.charAt(1)] }
   
-  const unicode = String.fromCodePoint(suitsUnicode[suit] + (tileNumber));
+  const unicode = String.fromCodePoint(suitsUnicode[suit] + (tileNumber - 1));
   if ( tile === 'dr' ) { String.fromCodePoint(0x1F004) + '\uFE0E'} // VS15 text presentation for dragon red
   return unicode;
 }
@@ -74,6 +74,7 @@ function ExpressDemo (props) {
     const formAction = (formData) => {
         let query = formData.get("query");
         query = query.replace(/[\s.,\/#!$%\^&\*;:{}=\-_`~()]/g, '').toLowerCase();
+        console.log(query);
 
         fetch('http://localhost:3001/api/data', {
             method: 'POST',
@@ -95,7 +96,7 @@ function ExpressDemo (props) {
       let tests = obj.tests;
       let results = obj.results;
 
-      // console.log(response);
+      console.log(response);
       return (
         // <div className="express--response" style={{gridTemplateColumns:`repeat(${tests.length || 1},auto)`}}>
         <div className="express--response"> 
@@ -109,7 +110,7 @@ function ExpressDemo (props) {
             {tests.map((test) => <p key={nanoid()}>{test}</p>)}
           </div>
           <div className="express--response-results">
-            {results.map((result) => <p key={nanoid()}>{result}</p>)}
+            {results.map((result) => <p key={nanoid()}>{String(result)}</p>)}
           </div>
         </div>
       );

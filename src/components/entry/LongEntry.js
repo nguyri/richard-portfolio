@@ -17,12 +17,16 @@ import ImageTransitionCanvas from "../threefiber/ImageTransition";
 import BlendingModes from "../blendingmodes/BlendingModes";
 // import ImageTransitionCanvas from "../threefiber/ImageTransition";
 
+export function TextBlock(props) { // use it for long entry.. eventually
+    return <div key={props.key} className={props.darkMode ? "entry--text entry--dark" : "entry--text"} style={props.style}>  {props.text} </div>
+}
+
 export default function LongEntry() {
     const [entryIsSmall, setEntryIsSmall] = React.useState(true);
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' });
     let params = useParams();
     let entryData = {...getEntry(params.projectlink), darkMode:useOutletContext()[0]};
-   
+
     function paragraphBigEntry(paragraphArr) {
         return (paragraphArr.map((elem) => {
             if (elem.imageName) {

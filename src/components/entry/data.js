@@ -9,7 +9,7 @@ const ThreeGallery = React.lazy(() => import ('../three-gallery/ThreeGallery'))
 const ThreeFiber = React.lazy(() => import('../threejsdemo/ThreeFiber'));
 const ExpressDemo = React.lazy(() => import('../express/ExpressDemo'));
 const Wordle = React.lazy(() => import('../wordle/Wordle'))
-import {ExpandList} from '../entry/Expand'
+import {ExpandList, ExpandExpress} from '../entry/Expand'
 
 const Code = (props) => {
     return (<div className="expand--code">{props.codeString}</div>);
@@ -226,18 +226,24 @@ let entries = [
     mobileStyle:{style: {}},
     },
     {
-        num: nanoid(),
-        title: "Backend",
-        link: "backend",
-        reactDescription: {html:<div>When you need more processing behind the scenes, you need a backend. </div>},
-        longdescription: [
-            {key:nanoid(), title:`Express`},
-            {key:nanoid(), html: <>Express is a popular web application framework for Node.js used to make server side applications. On this page it serves an API that can check your mahjong hand. </>},
-            {key: nanoid(), component: <ExpressDemo/>},
-            ],
-        imageName:'./addlathe1.jpg',
-        imageStyle:{style: {objectPosition:'right 0px bottom 200px', objectFit:'cover', scale:'1.0', overflow:'visible'}},
-            mobileStyle:{style: {}},
+    num: nanoid(),
+    title: "Backend",
+    link: "backend",
+    reactDescription: {html:<div>When you need more processing behind the scenes, you need a backend. </div>},
+    longdescription: [
+    {key:nanoid(), title:`Express`},
+    {key:nanoid(), html: <>Express is a popular web application framework for Node.js used to make server side applications. On this page it serves an API that can check your mahjong hand such as: "b1 b2 b3 c1 c2 c3 m1 m2 m3 we we we dw dw"</>},
+    {key: nanoid(), component: <ExpressDemo/>},
+    {key:'solver', title:'The Solver', style:{paddingTop:'20px'} },
+    {key: nanoid(), text:`Over the years I've written several methods to "solve" mahjong hands, that is, determine if a set of tiles is 4 melds and 1 pair. A meld is either a straight: b1, b2, b3 or triple: b1, b1, b1`},
+    {key: nanoid(), html: <>These started in 2018 with the development of <a href="https://play.google.com/store/apps/details?id=com.MedullaStudios.Maljong&hl=en-US"> Noten Riichi Mahjong, play store link here</a>, with the goal of teaching mahjong to an English audience. Didn't get very far but some kind people left reviews and sent in tailored bug reports. Let's take a look at the code 7 years later.</>},
+    {key:'unity', subtitle:'2016: Unity'},
+    {key: nanoid(), component:<ExpandExpress/>}, 
+    {key: nanoid(), text: `Okay, this is the smelly code that I remember. Big nested if blocks with complicated conditions, big functions with lots of parameters which should be combined in the first place, right? Well, it was a good lesson and the game was finished, but I wouldn't want to maintain it.`},
+    {key:nanoid(), subtitle: `2020: C#`}
+
+    ],
+    imageName:'./addlathe1.jpg',
     },
     {
     num: 4,

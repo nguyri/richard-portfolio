@@ -1,6 +1,7 @@
 import React from 'react'
 // import {useTransition} from 'transition-hook'
 import {data} from './dataReactTut'
+import {dataExpress} from '../express/dataExpressDemo'
 import './Expand.css'
 
 export function Expand (props) {
@@ -42,4 +43,10 @@ export function ExpandList () {
     return <ul style={{listStylePosition:"outside"}}>
         {data.map((elem) => <li>{elem}</li>)}
     </ul>;
+}
+
+export function ExpandExpress () {
+    return <>
+    {dataExpress.map((elem) => <div className='expand--collapsed'>{elem}</div>)}
+    </>
 }
