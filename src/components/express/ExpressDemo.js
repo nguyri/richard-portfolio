@@ -75,7 +75,7 @@ function ExpressDemo (props) {
       if( query.length !== 28 ) { setWarning('Invalid length hand'); return; }
       setIsLoading(true);
 
-      fetch('http://localhost:3001/api/riichi', {
+      fetch('http://localhost:3001/api/queries/riichi', {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json',

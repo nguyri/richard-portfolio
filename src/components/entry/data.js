@@ -245,7 +245,7 @@ let entries = [
     {key:nanoid(), subtitle: `2024: JS`},
     {key: nanoid(), component:<ExpandExpress data={dataExpress[2]}/>}, 
     {key:nanoid(), title: `REST`},
-    {key: nanoid(), text:`To make the API more accessible and flexible, it's useful to conform to an API style like REST. `},
+    {key: nanoid(), text:`To make the API more accessible and scalable, it's useful to conform to an API style like REST. That is: statelessness, and uniform resource oriented endpoints. This mahjong API serves queries/riichi and returns a list of test results including the riichi test. Resources are provided as JSON objects. The entire hand string should be sent in the query to maintain statelessness.`},
     ],
     imageName:'./addlathe1.jpg',
     },
