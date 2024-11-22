@@ -46,7 +46,7 @@ export function ExpandList () {
 }
 
 export function ExpandExpress (props) {
-    console.log(props);
+    // console.log(props);
     return <>
     {props.data.map((elem) => <div className='expand--collapsed'>{elem}</div>)}
     </>
