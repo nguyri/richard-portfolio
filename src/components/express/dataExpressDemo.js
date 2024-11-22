@@ -69,7 +69,7 @@ const unity = [<Expand name={` Because of gameplay reasons (portentious), the so
     content= 
     {<>
         <div className='expand--codeblock'>
-        <div className="expand--codeblock"><CodeBlock language='jsx' className='expand--codeblock' text=
+        <div className="expand--codeblock"><CodeBlock language='csharp' className='expand--codeblock' text=
 {`int findAndRemoveMaxTriplesAndStraights(ref List<MahjongTileData> full_tiles, List<MahjongTileData> suit_tiles, int max_melds)
     {
     //this function takes a list of suited tiles and tries to find the maximum number of melds (triples and straights). 
@@ -124,7 +124,7 @@ highlight='findTriplesAndStraights'
 content= 
 {<>
     <div className='expand--codeblock'>
-    <div className="expand--codeblock"><CodeBlock language='jsx' className='expand--codeblock' text=
+    <div className="expand--codeblock"><CodeBlock language='csharp' className='expand--codeblock' text=
 {`int findTriplesAndStraights(List<MahjongTileData> suit_tiles_temp, int desired_triples, int desired_straights, ref bool pair_remains)
 {
 int melds_found = 0;
@@ -212,7 +212,9 @@ return melds_found;
 }`}/> </div>
     </div>
     </>}>
-</Expand> 
+</Expand>, 
+<TextBlock key={nanoid()} text={`
+Okay, this is the questionable code that I remember. Big nested if blocks with complicated conditions, big functions with lots of parameters which should be combined in the first place, right? Well, it was a good lesson and the game was finished, but I wouldn't want to maintain it. `}/>
 ]
 
 const csharp = [
@@ -221,66 +223,117 @@ highlight='simpleMahjong'
 content= 
 {<>
     <div className='expand--codeblock'>
-    <div className="expand--codeblock"><CodeBlock language='jsx' className='expand--codeblock' text=
-{`function MyComponent () {
-return (
-    <div className="App"> 
-        <h1> My first React App </h1>
-    </div>
-)}`}/> </div>
-    </div>
-    </>}>
-</Expand> ,
-<Expand name={`example text`}
-highlight='Components'
-content= 
-{<> Components can import modules they need and export themselves at the bottom of their files. 
-    A simple component looks like this: 
-    <div className='expand--codeblock'>
-    <div className="expand--codeblock"><CodeBlock language='jsx' className='expand--codeblock' text=
-{`function MyComponent () {
-return (
-    <div className="App"> 
-        <h1> My first React App </h1>
-    </div>
-)}`}/> </div>
-    </div>
-    </>}>
-</Expand> ,
-<Expand name={`example text`}
-highlight='Components'
-content= 
-{<> Components can import modules they need and export themselves at the bottom of their files. 
-    A simple component looks like this: 
-    <div className='expand--codeblock'>
-    <div className="expand--codeblock"><CodeBlock language='jsx' className='expand--codeblock' text=
-{`function MyComponent () {
-return (
-    <div className="App"> 
-        <h1> My first React App </h1>
-    </div>
-)}`}/> </div>
-    </div>
-    </>}>
-</Expand> ,
-<Expand name={`example text`}
-highlight='Components'
-content= 
-{<> Components can import modules they need and export themselves at the bottom of their files. 
-    A simple component looks like this: 
-    <div className='expand--codeblock'>
-    <div className="expand--codeblock"><CodeBlock language='jsx' className='expand--codeblock' text=
-{`function MyComponent () {
-return (
-    <div className="App"> 
-        <h1> My first React App </h1>
-    </div>
-)}`}/> </div>
-    </div>
-    </>}>
-</Expand> ,
-]
+    <div className="expand--codeblock"><CodeBlock language='csharp' className='expand--codeblock' text=
+{`public IEnumerable<List<PermuGroup>> solve(bool check_tenpai, bool print_potential_hands = false, bool print_groups = false, bool print_solved_hands = false, bool print_orig = false, bool print_waits = false)
+{
+    //tiles here should be the closed tiles only!
+    var all_groups = PermuGroup.getPermuGroups(tiles);
+    var pruned_groups = PermuGroup.removeStraightPermuDupes(all_groups, tiles);
 
+    foreach (var meld in melds)
+        pruned_groups.Add(meld.toPermuGroup());
+
+
+    var all_hands = PermuGroup.getPermsOfPermuGroups(pruned_groups, check_tenpai);
+    var potential_hands = PermuGroup.removeHandsWithTooManyDuplicateTIles(all_hands);
+
+    IEnumerable<bool> bools;
+    if (check_tenpai)
+    {
+        waits.Clear(); //must clear waits before running tenpai check
+        bools = PermuGroup.isTenpaiMany(potential_hands, tiles, melds, waits);
+    }
+    else 
+        bools = PermuGroup.isValidMany(potential_hands, tiles, melds);
+
+    var temp = bools.ToList();
+    var valid_or_tenpai = PermuGroup.findValidOrTenpai(potential_hands, bools, waits, !check_tenpai, print_potential_hands, print_solved_hands, print_waits);
+
+    return valid_or_tenpai;
+}`}/> </div>
+    </div>
+    </>}>
+</Expand> ,
+<Expand name={`Alright that's a lot of flags for debugging but whatever. It is at least, shorter. I don't exactly know what a PermuGroup is, but I suppose bools contains the information on if the hand is valid or tenpai. Like noten, the solver revolves around figuring out if tenpai is possible, but this time we have a useful WaitTiles object. The solving seems to involve making a list of unique tiles and then permutating to get all groups of 3 and then checking if they are melds. Seems excessive but I suppose it'll eventually work.`}
+highlight='eventually work'
+content= 
+{<> 
+    <div className='expand--codeblock'>
+    <div className="expand--codeblock"><CodeBlock language='csharp' className='expand--codeblock' text=
+{`public static List<PermuGroup> getPermuGroups(List<MahjongTileData> tiles)
+{
+    List<PermuGroup> potential_group = new List<PermuGroup>();
+
+    //only if straights are completely overlapping should you not shorten the list
+    var temp = tiles;
+    if (tiles.Count() - 3 < tiles.Distinct().Count())
+        temp = tiles.Distinct().ToList();
+
+    //so two overlapping straights gives 8 identical copies of a meld (2*2*2) and three everlapping straights gives 27...
+
+    foreach (var permu in Permutate(temp, 3))
+    //foreach (var permu in Permutate(tiles.Distinct().ToList(), 3))   // issues with matching straights
+    {
+        if (MeldData.isStraight(permu))
+            potential_group.Add(new PermuGroup(permu, PermuType.straight));
+    }
+
+    var trips = (tiles.GroupBy(x => x).Where(y => y.Count() > 2).Select(z => z)).ToList();
+    foreach (var permu in trips)
+    {
+        // an undeclared kan cannot actually be a kan, you won't have enough tiles to win
+        potential_group.Add(new PermuGroup(permu.ToList().GetRange(0, 3), PermuType.triple));
+    }
+
+    foreach (var permu in Permutate(tiles, 2))
+    {
+        if (MeldData.isPair(permu))
+            potential_group.Add(new PermuGroup(permu, PermuType.pair));
+    }
+
+    return potential_group;
+}`}/> </div>
+    </div>
+    </>}>
+</Expand> ,
+<Expand name={`Finally isTenpai takes the list of PermuGroups and then checks if all the groups in PermuGroup are either melds or one away from a meld. `}
+highlight='isTenpai'
+content= 
+{<> Components can import modules they need and export themselves at the bottom of their files. 
+    A simple component looks like this: 
+    <div className='expand--codeblock'>
+    <div className="expand--codeblock"><CodeBlock language='jsx' className='expand--codeblock' text=
+{`public static bool isTenpai(List<PermuGroup> groups, List<MahjongTileData> tiles, List<WaitTile> waits)
+{
+    var list = new List<MahjongTileData>(tiles);
+    foreach (var g in groups)
+    {
+        foreach (var tile in g.list)
+        {
+            if (!list.Remove(tile))
+                return false;
+        }
+    }
+
+    //once the tiles are removed, the remaining tiles must either be a partial meld or a partial pair
+    Debug.Assert(list.Count == 3 || list.Count == 2, " isTenpai failed! list.Count was: " + list.Count);
+
+    if (list.Count == 3)
+        if (MeldData.isAlmostMeld(list, waits))
+            return true;
+        else return false;
+    else
+    {
+        waits.Add(new WaitTile(list[0], list[1], WaitTile.WaitType.pair));
+        waits.Add(new WaitTile(list[1], list[0], WaitTile.WaitType.pair));
+        return true; // turns out literally any two tiles are an almost pair
+    }
+}`}/> </div>
+    </div>
+    </>}
+    />,
+<TextBlock key={nanoid()} text={`I believe this approach did work better than the overly restrictive method of attempting to remove every different pattern of straights and triples, but takes combinations a little too literally. Also PermuGroup is a misnomer. The real strength of this project is the state machine behind the game which breaks every player action into appropriate types like: chi (steal a tile) left, chi-middle, chi-right to completely determine the game state from the player action instead of having to also convey tile data. `}/>,
+]
 const javascript = [
 <Expand name={`Finally we've arrived at the interface at the top of the page. `}
 highlight='top of the page'

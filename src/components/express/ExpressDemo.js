@@ -70,13 +70,13 @@ function ExpressDemo (props) {
               .catch((err) => console.error('Error fetching message:', err));
           };
 
-    // Handle form submission and send a POST request to the Express server
+    // Handle form submission and send a GET request to the Express server
     const formAction = (formData) => {
         let query = formData.get("query");
         query = query.replace(/[\s.,\/#!$%\^&\*;:{}=\-_`~()]/g, '').toLowerCase();
         console.log(query);
 
-        fetch('http://localhost:3001/api/data', {
+        fetch('http://localhost:3001/api/riichi', {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json',
@@ -84,19 +84,20 @@ function ExpressDemo (props) {
             body: JSON.stringify({ query }), // Send the name as a JSON object
         })
             .then((res) => res.json())
-            .then((data) => setResponse(data.message))
-            .catch((err) => console.error('Error posting data:', err));
+            .then((data) => setResponse(data))
+            .catch((err) => console.error('Error getting tiles:', err));
     };
 
     const formatResponse = (response) => {
       if (!response) return;
 
-      let obj = JSON.parse(response);
-      let query = obj.query;
-      let tests = obj.tests;
-      let results = obj.results;
+      // let obj = JSON.parse(response); // response is already a json object
 
-      console.log(response);
+      let query = response.query;
+      let tests = response.tests;
+      let results = response.results;
+
+      console.log('response', response);
       return (
         // <div className="express--response" style={{gridTemplateColumns:`repeat(${tests.length || 1},auto)`}}>
         <div className="express--response"> 
