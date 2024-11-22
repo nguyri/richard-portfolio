@@ -3,6 +3,7 @@ import './ExpressDemo.css'
 import { nanoid } from 'nanoid';
 
 function validTile (tile) {
+  //dg or d1 acceptable..
   let validSuit = ['b','c','m', 'd', 'w']
   let validDragon = ['r','w','g']
   let validWind = ['n','e','s','w']
@@ -10,6 +11,10 @@ function validTile (tile) {
   let suit = tile.at(0);
   let value = tile.at(1);
   if (!validSuit.some(valid => valid === suit)) return false;
+  
+  const parsed = parseInt(value)
+  if( parsed && suit === 'd') return ( parsed >= 1 && parsed <=3 )
+  if( parsed && suit === 'w' ) return ( parsed >= 1 && parsed <=4 )
 
   if ( suit === 'd' ) return (validDragon.some(valid => valid === value))
   if ( suit === 'w' ) return (validWind.some(valid => valid === value))
@@ -17,19 +22,10 @@ function validTile (tile) {
   return 0 < value && value < 10;
 }
 
-function validHand (handStr) {
-  // valid format is b1b2b3c1c2c3m1m2m3drdrdrdgdg, 4 melds one pair. Start with making sure tiles are valid
-  if (handStr.length != 28) return false;
-  const tiles = hand(handStr);
-  console.log(tiles);
-  let allValid = tiles.every(tile => validTile(tile));
-  return allValid;
-}
-
 function getMahjongUnicode(tile) {
   tile = tile.replace('/\s+/g','');
   const suit = tile.charAt(0); 
-  if (!validTile(tile)) {console.error('invalid tile: ', tile); return; }
+  if (!validTile(tile)) { return 'x'; }
 
   const dragonNums = {g:2,r:1,w:3}
   const windNums = {n:4,e:1,s:2,w:3}
@@ -60,6 +56,8 @@ function ExpressDemo (props) {
     const [message, setMessage] = useState('');
     const [name, setName] = useState('');
     const [response, setResponse] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const [warning, setWarning] = useState('');
   
     // GET request to the Express server
     const handleClick = (e) => {
@@ -72,32 +70,39 @@ function ExpressDemo (props) {
 
     // Handle form submission and send a GET request to the Express server
     const formAction = (formData) => {
-        let query = formData.get("query");
-        query = query.replace(/[\s.,\/#!$%\^&\*;:{}=\-_`~()]/g, '').toLowerCase();
-        console.log(query);
+      let query = formData.get("query").replace(/[\s.,\/#!$%\^&\*;:{}=\-_`~()]/g, '').toLowerCase();
+      if( !query || query.trim() === '' ) { setWarning('No input'); return;}
+      if( query.length !== 28 ) { setWarning('Invalid length hand'); return; }
+      setIsLoading(true);
 
-        fetch('http://localhost:3001/api/riichi', {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ query }), // Send the name as a JSON object
-        })
-            .then((res) => res.json())
-            .then((data) => setResponse(data))
-            .catch((err) => console.error('Error getting tiles:', err));
+      fetch('http://localhost:3001/api/riichi', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ query }), // Send the name as a JSON object
+      })
+        .then((res) => {
+          if (!res.ok) {
+            return res.json().then((error) => {
+              throw new Error(error.message || 'Bad response');
+            });
+          }
+          return res.json()})
+        .then((data) => setResponse(data))
+        .catch((err) => setWarning('An unexpected error occurred :', err))
+        .finally(() => {setIsLoading(false); setWarning('');});
     };
 
     const formatResponse = (response) => {
+      // console.log('response', response);
       if (!response) return;
 
       // let obj = JSON.parse(response); // response is already a json object
-
       let query = response.query;
       let tests = response.tests;
       let results = response.results;
 
-      console.log('response', response);
       return (
         // <div className="express--response" style={{gridTemplateColumns:`repeat(${tests.length || 1},auto)`}}>
         <div className="express--response"> 
@@ -128,6 +133,7 @@ function ExpressDemo (props) {
           </label>
           <input type="text" name="query"/>
           <button type="submit">Send Hand</button>
+          <label> {warning && warning} </label>
         </form>
         {formatResponse(response)}
       </div>
