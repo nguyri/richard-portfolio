@@ -60,55 +60,54 @@ const unityFormat = [{
     return null;
     }`
 },
-
 {
-    key: nanoid(),
-    text:`Admittedly, it's not great. But for code I dismissed as shoddy legacy code, it's organized and somewhat readable. Doesn't state what is returned. By inference it returns the last set of tiles that are waiting to be finished. It has some funny names like findAndRemoveMaxTriplesAndStraights, let's take a look..`,
-    highlight:`findAndRemoveMaxTriplesAndStraights`,
-    language:`csharp`,
-    code:`int findAndRemoveMaxTriplesAndStraights(ref List<MahjongTileData> full_tiles, List<MahjongTileData> suit_tiles, int max_melds)
+key: nanoid(),
+text:`Admittedly, it's not great. But for code I dismissed as shoddy legacy code, it's organized and somewhat readable. Doesn't state what is returned. By inference it returns the last set of tiles that are waiting to be finished. It has some funny names like findAndRemoveMaxTriplesAndStraights, let's take a look..`,
+highlight:`findAndRemoveMaxTriplesAndStraights`,
+language:`csharp`,
+code:`int findAndRemoveMaxTriplesAndStraights(ref List<MahjongTileData> full_tiles, List<MahjongTileData> suit_tiles, int max_melds)
+{
+//this function takes a list of suited tiles and tries to find the maximum number of melds (triples and straights). 
+//it also removes the maximum number of melds from a list of tiles provided, tiles_temp.
+int desired_triples = 0;
+int desired_straights = 0;
+int maximum_melds_found = 0;
+bool old_pair_remains = false;
+bool pair_remains = false;
+
+//Debug.Log("looking for " + max_melds + "max_melds in " + direction + " " + suit_tiles_temp.FirstOrDefault().suit.ToString() );
+
+
+List<MahjongTileData> full_tiles_temp = new List<MahjongTileData>(full_tiles);
+
+for(int i = 0; i <= max_melds; i++)
+{
+    desired_triples = i;
+    desired_straights = max_melds - i;
+    int melds_found = 0;
+
+    List<MahjongTileData> suit_tiles_temp = new List<MahjongTileData> (suit_tiles);
+
+    melds_found = findTriplesAndStraights(suit_tiles_temp, desired_triples, desired_straights, ref pair_remains);
+
+    if(melds_found > maximum_melds_found || (melds_found == maximum_melds_found && old_pair_remains == false && pair_remains == true))
     {
-    //this function takes a list of suited tiles and tries to find the maximum number of melds (triples and straights). 
-    //it also removes the maximum number of melds from a list of tiles provided, tiles_temp.
-    int desired_triples = 0;
-    int desired_straights = 0;
-    int maximum_melds_found = 0;
-    bool old_pair_remains = false;
-    bool pair_remains = false;
-
-    //Debug.Log("looking for " + max_melds + "max_melds in " + direction + " " + suit_tiles_temp.FirstOrDefault().suit.ToString() );
-
-
-    List<MahjongTileData> full_tiles_temp = new List<MahjongTileData>(full_tiles);
-
-    for(int i = 0; i <= max_melds; i++)
-    {
-        desired_triples = i;
-        desired_straights = max_melds - i;
-        int melds_found = 0;
-
-        List<MahjongTileData> suit_tiles_temp = new List<MahjongTileData> (suit_tiles);
-
-        melds_found = findTriplesAndStraights(suit_tiles_temp, desired_triples, desired_straights, ref pair_remains);
-
-        if(melds_found > maximum_melds_found || (melds_found == maximum_melds_found && old_pair_remains == false && pair_remains == true))
-        {
-            maximum_melds_found = melds_found;
-            full_tiles_temp = new List<MahjongTileData>(full_tiles);
-            suit_tiles_temp = new List<MahjongTileData>(suit_tiles);
-            //Debug.Log("full_tiles_temp length: " + full_tiles_temp.Count());
-            findAndRemoveTriplesAndStraightsFromTiles(ref full_tiles_temp, suit_tiles_temp, desired_triples, desired_straights);
-            old_pair_remains = pair_remains;
-            pair_remains = false;
-            //Debug.Log("full_tiles_temp length after: " + full_tiles_temp.Count());
-        }
+        maximum_melds_found = melds_found;
+        full_tiles_temp = new List<MahjongTileData>(full_tiles);
+        suit_tiles_temp = new List<MahjongTileData>(suit_tiles);
+        //Debug.Log("full_tiles_temp length: " + full_tiles_temp.Count());
+        findAndRemoveTriplesAndStraightsFromTiles(ref full_tiles_temp, suit_tiles_temp, desired_triples, desired_straights);
+        old_pair_remains = pair_remains;
+        pair_remains = false;
+        //Debug.Log("full_tiles_temp length after: " + full_tiles_temp.Count());
     }
+}
 
 
-    full_tiles = full_tiles_temp;
+full_tiles = full_tiles_temp;
 
-    //Debug.Log("found " + suited maximum_melds_found);
-    return maximum_melds_found;`
+//Debug.Log("found " + suited maximum_melds_found);
+return maximum_melds_found;`
 },
 
 {
@@ -205,66 +204,10 @@ return melds_found;
 ];
 
 const csFormat = [ {
-    text:``,
-    highlight:``,
-    language:``,
-    code:``
-},
-{
-    text:``,
-    highlight:``,
-    language:``,
-    code:``
-},
-{
-    text:``,
-    highlight:``,
-    language:``,
-    code:``
-},
-{
-    text:``,
-    highlight:``,
-    language:``,
-    code:``
-},
-];
-
-const jsFormat = [ {
-    text:``,
-    highlight:``,
-    language:``,
-    code:``
-},
-{
-    text:``,
-    highlight:``,
-    language:``,
-    code:``
-},
-{
-    text:``,
-    highlight:``,
-    language:``,
-    code:``
-},
-{
-    text:``,
-    highlight:``,
-    language:``,
-    code:``
-},
-];
-
-
-const csharp = [
-<Expand name={`Okay, 2016 was a 10000 line bust but it had many other priorities like game interface, assets, ad and payment integration, and so on. Let's take a look at "simpleMahjong" meant to keep things simple and maintainable.`}
-highlight='simpleMahjong'
-content= 
-{<>
-    <div className='expand--codeblock'>
-    <div className="expand--codeblock"><CodeBlock language='csharp' className='expand--codeblock' text=
-{`public IEnumerable<List<PermuGroup>> solve(bool check_tenpai, bool print_potential_hands = false, bool print_groups = false, bool print_solved_hands = false, bool print_orig = false, bool print_waits = false)
+    text:`Okay, 2016 was a 10000 line bust but it had many other priorities like game interface, assets, ad and payment integration, and so on. Let's take a look at "simpleMahjong" meant to keep things simple and maintainable.`,
+    highlight:`simpleMahjong`,
+    language:`csharp`,
+    code:`public IEnumerable<List<PermuGroup>> solve(bool check_tenpai, bool print_potential_hands = false, bool print_groups = false, bool print_solved_hands = false, bool print_orig = false, bool print_waits = false)
 {
     //tiles here should be the closed tiles only!
     var all_groups = PermuGroup.getPermuGroups(tiles);
@@ -290,17 +233,13 @@ content=
     var valid_or_tenpai = PermuGroup.findValidOrTenpai(potential_hands, bools, waits, !check_tenpai, print_potential_hands, print_solved_hands, print_waits);
 
     return valid_or_tenpai;
-}`}/> </div>
-    </div>
-    </>}>
-</Expand> ,
-<Expand name={`Alright that's a lot of flags for debugging but whatever. It is at least, shorter. I don't exactly know what a PermuGroup is, but I suppose bools contains the information on if the hand is valid or tenpai. Like noten, the solver revolves around figuring out if tenpai is possible, but this time we have a useful WaitTiles object. The solving seems to involve making a list of unique tiles and then permutating to get all groups of 3 and then checking if they are melds. Seems excessive but I suppose it'll eventually work.`}
-highlight='eventually work'
-content= 
-{<> 
-    <div className='expand--codeblock'>
-    <div className="expand--codeblock"><CodeBlock language='csharp' className='expand--codeblock' text=
-{`public static List<PermuGroup> getPermuGroups(List<MahjongTileData> tiles)
+}`
+},
+{
+    text:`Alright that's a lot of flags for debugging but whatever. It is at least, shorter. I don't exactly know what a PermuGroup is, but I suppose bools contains the information on if the hand is valid or tenpai. Like noten, the solver revolves around figuring out if tenpai is possible, but this time we have a useful WaitTiles object. The solving seems to involve making a list of unique tiles and then permutating to get all groups of 3 and then checking if they are melds. Seems excessive but I suppose it'll eventually work.`,
+    highlight:`eventually work`,
+    language:`csharp`,
+    code:`public static List<PermuGroup> getPermuGroups(List<MahjongTileData> tiles)
 {
     List<PermuGroup> potential_group = new List<PermuGroup>();
 
@@ -332,18 +271,13 @@ content=
     }
 
     return potential_group;
-}`}/> </div>
-    </div>
-    </>}>
-</Expand> ,
-<Expand name={`Finally isTenpai takes the list of PermuGroups and then checks if all the groups in PermuGroup are either melds or one away from a meld. `}
-highlight='isTenpai'
-content= 
-{<> Components can import modules they need and export themselves at the bottom of their files. 
-    A simple component looks like this: 
-    <div className='expand--codeblock'>
-    <div className="expand--codeblock"><CodeBlock language='jsx' className='expand--codeblock' text=
-{`public static bool isTenpai(List<PermuGroup> groups, List<MahjongTileData> tiles, List<WaitTile> waits)
+}`
+},
+{
+    text:`Finally isTenpai takes the list of PermuGroups and then checks if all the groups in PermuGroup are either melds or one away from a meld. `,
+    highlight:`isTenpai`,
+    language:`csharp`,
+    code:`public static bool isTenpai(List<PermuGroup> groups, List<MahjongTileData> tiles, List<WaitTile> waits)
 {
     var list = new List<MahjongTileData>(tiles);
     foreach (var g in groups)
@@ -368,20 +302,21 @@ content=
         waits.Add(new WaitTile(list[1], list[0], WaitTile.WaitType.pair));
         return true; // turns out literally any two tiles are an almost pair
     }
-}`}/> </div>
-    </div>
-    </>}
-    />,
-<TextBlock key={nanoid()} text={`I believe this approach did work better than the overly restrictive method of attempting to remove every different pattern of straights and triples, but takes combinations a little too literally. Also PermuGroup is a misnomer. The real strength of this project is the state machine behind the game which breaks every player action into appropriate types like: chi (steal a tile) left, chi-middle, chi-right to completely determine the game state from the player action instead of having to also convey tile data. `}/>,
-]
-const javascript = [
-<Expand name={`Finally we've arrived at the interface at the top of the page. `}
-highlight='top of the page'
-content= 
-{<>
-    <div className='expand--codeblock'>
-    <div className="expand--codeblock"><CodeBlock language='jsx' className='expand--codeblock' text=
-{`function riichi (handStr, printMelds) {
+}`
+},
+{
+    text:`I believe this approach did work better than the overly restrictive method of attempting to remove every different pattern of straights and triples, but takes combinations a little too literally. Also PermuGroup is a misnomer. The real strength of this project is the state machine behind the game which breaks every player action into appropriate types like: chi (steal a tile) left, chi-middle, chi-right to completely determine the game state from the player action instead of having to also convey tile data. `,
+    highlight:``,
+    language:``,
+    code:``
+},
+];
+
+const jsFormat = [ {
+    text:`Finally we've arrived at the interface at the top of the page. `,
+    highlight:`top of the page`,
+    language:`javascript`,
+    code:`function riichi (handStr, printMelds) {
     const tiles = Array.isArray(handStr) ? handStr : handTiles(handStr);
     
     const suits = suitGroups(tiles);
@@ -390,34 +325,36 @@ content=
     printMelds && console.log('melds from riichi: ', melds);
     if (melds && countMelds(melds) === 4 && countPairs(melds) === 1) return true;
     return false;
-}`}/> </div>
-    </div>
-    </>}>
-</Expand> ,
-<Expand name={`It's certainly more declarative than previous attempts. Riichi is one of the most common ways of winning mahjong, getting 4 melds and a pair by yourself, or you can steal the last tile. So the function asks, are there melds? Are there 4 melds and 1 pair? Then it's a riichi. But getMelds is hiding something, after all: what really is a meld?`}
-highlight='what really is a meld?'
-content= 
-{<> First of all, a meld has to be the same suit, so suitGroup is a single suit. Inside, there are three cases which all eventually feed into validMelds, which is the real workhorse of riichi.
-    <div className='expand--codeblock'>
-    <div className="expand--codeblock"><CodeBlock language='jsx' className='expand--codeblock' text=
-{`function getMelds(suitGroup) {
+}`
+},
+{
+    text:`It's certainly more declarative than previous attempts. Riichi is one of the most common ways of winning mahjong, getting 4 melds and a pair by yourself, or you can steal the last tile. So the function asks, are there melds? Are there 4 melds and 1 pair? Then it's a riichi. But getMelds is hiding something, after all: what really is a meld?`,
+    highlight:`what really is a meld?`,
+    language:`javascript`,
+    code:`function getMelds(suitGroup) {
     const remainder = suitGroup.length % 3;
     if (remainder == 1) return; // no valid options if remainder is 1
     if (remainder == 2) return getMeldsAndPair(suitGroup); // remainder has to be a pair
     if (remainder == 0) return validMelds(suitGroup);
-}`}/> </div>
-    </div>
-    </>}>
-</Expand> ,
-<TextBlock key={nanoid()} text={`The difficulty mostly comes from different interpretations of tiles. A series like 1,2,3,3,3 could be a straight, a pair, or a triple. Similarly, 567,777,888,66 is ideally 2 triples, a pair and a straight, but could be interpreted as 567,678,678,78, missing the pair. `}/>,
-<TextBlock key={nanoid()} text={`The solution I settled on is to remove the pair first and only have validMelds process melds on tile groups that are divisible by 3. Then, make a list of all possible melds, and make combinations of that list that would use all the tiles. These are the "meldsets" towards the end of the validMelds. Finally, confirm that the meldset actually exists by running through the tiles and using splice to take out tiles. `}/>,
-<Expand name={`The last part could be optimized since if the valid meldset isn't as long as the input tiles, i.e. not every tile is used in a meld, then the tiles are already not riichi. Anyways, it works well enough for now. `}
-highlight='it works well enough for now'
-content= 
-{<>
-    <div className='expand--codeblock'>
-    <div className="expand--codeblock"><CodeBlock language='jsx' className='expand--codeblock' text=
-{`function validMelds(suitGroup) {
+}`
+},
+{
+    text:`The difficulty mostly comes from different interpretations of tiles. A series like 1,2,3,3,3 could be a straight, a pair, or a triple. Similarly, 567,777,888,66 is ideally 2 triples, a pair and a straight, but could be interpreted as 567,678,678,78, missing the pair. `,
+    highlight:``,
+    language:``,
+    code:``
+},
+{
+    text:`The solution I settled on is to remove the pair first and only have validMelds process melds on tile groups that are divisible by 3. Then, make a list of all possible melds, and make combinations of that list that would use all the tiles. These are the "meldsets" towards the end of the validMelds. Finally, confirm that the meldset actually exists by running through the tiles and using splice to take out tiles.`,
+    highlight:``,
+    language:``,
+    code:``
+},
+{
+    text:`The last part could be optimized since if the valid meldset isn't as long as the input tiles, i.e. not every tile is used in a meld, then the tiles are already not riichi. Anyways, it works well enough for now.`,
+    highlight:`it works well enough for now`,
+    language:`javascript`,
+    code:`function validMelds(suitGroup) {
 // make a list of all possible straights and triples
 // make all combinations of melds up to the max amount possible
 // check each combination and return the first (for now) largest combination
@@ -452,35 +389,46 @@ const confirmedMeldSets = possibleMeldSets.filter((meldset) => confirmMelds(suit
 const orderedMeldSets = confirmedMeldSets.sort((msA, msB) => msA.length < msB.length ? 1: -1);
 
 return orderedMeldSets[0] ? orderedMeldSets[0] : [];
-}`}/> </div>
-    </div>
-    </>}>
-</Expand> ,
-<TextBlock key={nanoid()} text={`The form is a bit messy but generally declarative. Find straights or triples, filter unique straights or triples, make a list of possible melds, confirm that the melds exist, then output the best meldset. `}/>,
-<TextBlock key={nanoid()} text={`
-One fault of this approach is that two identical straights might actually exist, and it would get filtered out when finding unique straights. They are sheepishly added back in the center for loop. A smarter meld generator or unique meld filter might be a better solution, but the simple filters used in the first 10 lines effectively use the very powerful JS array functions.`}/>
-,
-<Expand name={`With validMelds and a generous helping of jest unit tests, making this little mahjong API only took a weekend and a bit rather than I think an entire summer in uni to make noten riichi mahjong. Then again, the scopes are very different and I don't provide any UI except for a little React component.  `}
-highlight='helping of jest unit tests'
-content= 
-{<> Components can import modules they need and export themselves at the bottom of their files. 
-    A simple component looks like this: 
-    <div className='expand--codeblock'>
-    <div className="expand--codeblock"><CodeBlock language='jsx' className='expand--codeblock' text=
-{`test.only.each(new Array(1000).fill(null))('makeRandomHand x100 and riichi check', () => {
+}`
+},
+{
+    text:`The form is a bit messy but generally declarative. Find straights or triples, filter unique straights or triples, make a list of possible melds, confirm that the melds exist, then output the best meldset. `,
+    highlight:``,
+    language:``,
+    code:``
+},
+{
+    text:`One fault of this approach is that two identical straights might actually exist, and it would get filtered out when finding unique straights. They are sheepishly added back in the center for loop. A smarter meld generator or unique meld filter might be a better solution, but the simple filters used in the first 10 lines effectively use the very powerful JS array functions.`,
+    highlight:``,
+    language:``,
+    code:``
+},
+{
+    text:`With validMelds and a generous helping of jest unit tests, making this little mahjong API only took a weekend and a bit rather than I think an entire summer in uni to make noten riichi mahjong. Then again, the scopes are very different and I don't provide any UI except for a little React component. `,
+    highlight:`helping of jest unit tests`,
+    language:`javascript`,
+    code:`test.only.each(new Array(1000).fill(null))('makeRandomHand x100 and riichi check', () => {
     const tiles = E.makeRandomHand();
     const result = tiles.every((tile) => E.validTile(tile));
     tiles.sort((tileA, tileB) => E.tileOrder(tileA, tileB))
     
     const riichi = E.riichi(tiles);
     expect(riichi, 'riichi failed with tiles: ' + tiles).toBe(true);
-})`}/> </div>
-    </div>
-    </>}>
-</Expand> ,
-]
-
-// export const UnityHtml = () => <div>Test</div>;
+})`
+},
+{
+    text:``,
+    highlight:``,
+    language:``,
+    code:``
+},
+{
+    text:``,
+    highlight:``,
+    language:``,
+    code:``
+},
+];
 
 export const UnityHtml = (props) => {
     return (
