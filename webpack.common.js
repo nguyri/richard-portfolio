@@ -2,7 +2,8 @@ const path = require("path");
 const webpack = require("webpack");
 // const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin")
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   entry: "./src/index.js",
@@ -113,11 +114,6 @@ module.exports = {
       },
     },
   },
-};
-
-const TerserPlugin = require('terser-webpack-plugin');
-
-module.exports = {
   optimization: {
     minimize: true,
     minimizer: [
