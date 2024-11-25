@@ -83,16 +83,16 @@ function ExpressDemo (props) {
         body: JSON.stringify({ query }), // Send the name as a JSON object
       })
         .then((res) => {
+          setWarning('');
           if (!res.ok) {
-            return res.json().then((error) => {
-              throw new Error(error.message || 'Bad response');
-            });
+            throw new Error('Server responded with an error');
           }
-          return res.json()})
+          return res.json();})
         .then((data) => setResponse(data))
-        .catch((err) => setWarning('An unexpected error occurred :', err))
-        .finally(() => {setIsLoading(false); setWarning('');});
+        .catch((err) => setWarning('An unexpected error occurred: ' + err.message))
+        .finally(() => {setIsLoading(false);});
     };
+  
 
     const formatResponse = (response) => {
       // console.log('response', response);
