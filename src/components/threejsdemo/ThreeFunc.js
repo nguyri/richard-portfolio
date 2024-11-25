@@ -142,7 +142,7 @@ const ThreeFunc = (props) => {
                   child.geometry.computeVertexNormals(); // essential for directional light apparently
                 }
               })
-              console.log(object3mf);
+              // console.log(object3mf);
               if (modelIndex == modelShown) {
                 scene.add(object3mf);
               }
