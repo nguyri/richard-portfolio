@@ -3,7 +3,6 @@ const webpack = require("webpack");
 // const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   entry: "./src/index.js",
@@ -113,13 +112,5 @@ module.exports = {
         }
       },
     },
-  },
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new TerserPlugin({
-        parallel: true, // Enable multi-threaded processing
-      }),
-    ],
   },
 };
