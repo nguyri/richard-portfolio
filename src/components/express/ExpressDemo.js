@@ -75,8 +75,11 @@ function ExpressDemo (props) {
       if( query.length !== 28 ) { setWarning('Invalid length hand'); return; }
       setIsLoading(true);
 
-      fetch('https://api.nguyr.com/api/queries/riichi', {
-      // fetch('http://localhost:3001/api/queries/riichi', {
+      let riichiLink = 'http://localhost:3001/api/queries/riichi';
+      if(process.env.NODE_ENV === 'production')
+        riichiLink = 'https://api.nguyr.com/api/queries/riichi';
+
+      fetch(riichiLink, {
         method: 'POST',
         headers: {
         'Content-Type': 'application/json',
