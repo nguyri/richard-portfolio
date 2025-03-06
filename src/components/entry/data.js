@@ -161,12 +161,48 @@ let entries = [
     {key: 7, text:`A few models I've drawn up in Fusion360. Slider for exploded-view. Click and drag to pan! `},
     {key:nanoid(), component: <ThreeFunc style={{width:"40vw"}} zoom={4.0} key={nanoid()}/>},
     {key:'waves', subtitle:`Waves`},
-    {key:nanoid(), text: `A little waves demo. The vertex shader moves the points of the plane into a 
-    wavey shape, while a stepped color function gives different blues in the fragment shader.`},
+    {key:nanoid(), text: ``},
+    {key:nanoid(), html: <UnityHtml data={[{
+        text:`A little waves demo. The vertex shader moves the points of the plane into a 
+    wavey shape, while a stepped color function gives different blues in the fragment shader.`,
+        highlight:`stepped color function`,
+        language:`glsl`,
+        code:`uniform float u_time;
+uniform vec3 u_colorA; 
+uniform vec3 u_colorB;
+varying float vZ; 
+
+uniform vec2 u_resolution;
+void main() {
+    vec3 color = mix(u_colorA, u_colorB, floor((vZ * 2.0 + 0.5)*8.0)/8.0);
+    gl_FragColor = vec4(color, 1.0);
+}
+`
+    }]}/>},
     {key:nanoid(), component: <MovingPlaneCanvas key={nanoid()}/> },
     {key:'fluid-transition', subtitle:`Fluid Transition`},
-    {key:nanoid(), text: `A fun math trick creates the smooth transition animation with a single lerp. Add in a 
-    little displacement and the effect is very fluid.`},
+
+    {key:nanoid(), html: <UnityHtml data={[{
+        text:`A fun math trick creates the smooth transition animation with a single lerp. Add in a 
+    little displacement and the effect is very fluid.`,
+        highlight:`fun math trick`,
+        language:`glsl`,
+        code:`void main() {
+    vec2 uv = vUv;
+    vec4 disp = texture(noise, uv);
+    vec4 disp2 = texture(noise2, uv);
+    vec2 distortedPosition = vec2(uv.x + dispFactor * (disp.r*1.0) , uv.y);
+    vec2 distortedPosition2 = vec2(uv.x + (1.0 - dispFactor) * (disp.r*1.0) , uv.y);
+    vec4 _tex1 = texture(tex1, distortedPosition);
+    vec4 _tex2 = texture(tex2, distortedPosition2);
+    vec2 _boilPos1 = vec2(uv.x + (sin(u_time * 0.2) + 0.5 ) * 0.3 * (1.0 - dispFactor) * (disp2.r*0.8) , uv.y);
+    vec2 _boilPos2 = vec2(uv.x + (sin(u_time * 0.2) + 0.5 ) * 0.3 * (dispFactor) * (disp2.r*0.8) , uv.y);
+    vec4 _boilTex1 = texture(tex1, mix(_boilPos1, distortedPosition, dispFactor));
+    vec4 _boilTex2 = texture(tex2, mix(_boilPos2, distortedPosition2, (1.0 - dispFactor)));
+    vec4 finalTexture = mix(_boilTex1, _boilTex2, dispFactor);
+    gl_FragColor = finalTexture;
+    #include <tonemapping_fragment>
+}`}]}/>},
     {key:nanoid(), component: <ImageTransitionCanvas key={nanoid()}/>},
     {key: nanoid(), threejs: true,},
     ],
