@@ -8,7 +8,7 @@ import AboutCard from "./components/about-card/AboutCard"
 import Header from "./components/header/Header"
 
 import { Outlet } from "react-router-dom";
-import { Analytics } from '@vercel/analytics/next';
+import { Analytics } from '@vercel/analytics/react';
 // import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 export default function App() {
