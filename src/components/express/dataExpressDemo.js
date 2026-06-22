@@ -1,6 +1,6 @@
 import React from 'react'
 import {Expand} from '../entry/Expand'
-import {CodeBlock, dracula} from 'react-code-blocks'
+import CodeBlock from '../entry/CodeBlock'
 import { nanoid } from 'nanoid'
 import {TextBlock} from '../entry/LongEntry'
 

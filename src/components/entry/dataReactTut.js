@@ -1,6 +1,6 @@
 import React from 'react'
 import {Expand} from './Expand'
-import {CodeBlock, dracula} from 'react-code-blocks'
+import CodeBlock from './CodeBlock'
 
 const Code = (props) => {
     return (<div className="expand--code">{props.codeString}</div>);

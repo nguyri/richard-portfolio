@@ -1,35 +1,36 @@
 import React from "react"
 import "./Header.css"
 import { useMediaQuery } from 'react-responsive'
-import { Link, useOutletContext } from "react-router-dom";
-import useBreadcrumbs from 'use-react-router-breadcrumbs';
+import { Link, useLocation } from "react-router-dom";
 
 export default function Header(props) {
     const entriesLayout = document.querySelector(".entries-layout");
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1450px)' });
     const shrinkHeader = props.shrinkHeader;
 
-    // const handleScroll = () => {
-    //     const position = entriesLayout.scrollTop;
-    //     console.log(position);
-    //     setShrinkHeader(position > 10);
-    // };
+    const Breadcrumbs = () => {
+        const location = useLocation();
+        const pathnames = location.pathname.split('/').filter((path) => path.length > 0);
 
-    const Breadcrumbs = (darkMode) => {
-        const breadcrumbs = useBreadcrumbs();
-        return ( <>
-                {breadcrumbs.map(({ breadcrumb }) => {
-                    return <React.Fragment key={breadcrumb.key}> {!shrinkHeader ? '' : '/'} 
-                    <Link
-                        to={breadcrumb.key}
-                        className={`nav--item nav--item-shrink ${darkMode && `nav--item-dark`}`}
-                        onClick={() => {entriesLayout.scrollTo(0,0)}}
-                        >
-                        {!shrinkHeader ? '' : breadcrumb.props.children.toLowerCase()}
-                    </Link>
-                    </React.Fragment>
-                })}  </>
-        );
+        return (
+            <>
+                {pathnames.map((segment, index) => {
+                    const to = '/' + pathnames.slice(0, index + 1).join('/');
+                    return (
+                        <React.Fragment key={to}>
+                            {!shrinkHeader ? '' : '/'}
+                            <Link
+                                to={to}
+                                className={`nav--item nav--item-shrink ${props.darkMode ? 'nav--item-dark' : ''}`}
+                                onClick={() => { entriesLayout.scrollTo(0, 0) }}
+                            >
+                                {!shrinkHeader ? '' : segment.toLowerCase()}
+                            </Link>
+                        </React.Fragment>
+                    )
+                })}
+            </>
+        )
     }
     // React.useEffect(() => {}, [shrinkHeader]);
     // React.useEffect(() => {
@@ -71,7 +72,7 @@ export default function Header(props) {
                     </div></div>
                 )}
                 {/* h_mobiledata */} 
-                {Breadcrumbs(props.darkMode)}
+                <Breadcrumbs />
             </h2>
 
             <nav className={props.darkMode ? "nav--dark" : ""}>

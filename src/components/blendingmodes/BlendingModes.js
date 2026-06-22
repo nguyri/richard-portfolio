@@ -4,7 +4,6 @@ import { Stage, Layer, Rect, Circle, Text, Image } from 'react-konva';
 import { MathJax, MathJaxContext } from 'better-react-mathjax'
 import Konva from 'konva';
 import { getEntry, getImage } from '../entry/data'
-import useImage from 'use-image';
 import './BlendingModes.css'
 
 export default function BlendingModes(props) {
@@ -96,9 +95,18 @@ export default function BlendingModes(props) {
       filter: DodgeFilter
     },
   }
-  const [image] = useImage(getImage(modes[props.mode].image));
+  const [image, setImage] = React.useState(null);
   const imageRef = React.useRef();
   const layerRef = React.useRef();
+
+  React.useEffect(() => {
+    const img = new window.Image();
+    img.src = getImage(modes[props.mode].image);
+    img.onload = () => {
+      setImage(img);
+    };
+  }, [props.mode]);
+
   const config = {
     loader: { load: ["input/asciimath"] },
     asciimath: {
@@ -112,16 +120,17 @@ export default function BlendingModes(props) {
   const width = 400, height = 200, heightFraction = 5, radius = 30;
 
   React.useEffect(() => {
-    if(image){
+    if (image && imageRef.current) {
       imageRef.current.cache();
     }
     // const canvas = layerRef.current.getCanvas()._canvas;
     // canvas.style.filter = `brightness(${(slider /256) * 100}%)`;
 
-  }, [slider])
+  }, [slider, image])
 
 
   const BlendingLayer = () => {
+    if (!image) return null;
     return (
       <Layer ref={layerRef}>
         <Rect x={0} y={0} width={width} height={height} cornerRadius={0} fillPatternImage={image}

@@ -6,12 +6,9 @@ import data_file from "./components/entry/data"
 import AboutCard from "./components/about-card/AboutCard"
 
 import Header from "./components/header/Header"
-import img from "./imgs/assiniboine.jpg"
 
-import { Outlet, Link, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 // import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import Favicon from "react-favicon";
-import {getImage} from './components/entry/data';
 
 export default function App() {
   const [darkMode, setDarkMode] = React.useState(false);
