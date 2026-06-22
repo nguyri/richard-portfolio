@@ -73,11 +73,11 @@ module.exports = {
   //   clean: true,
   // },
   output: {
-    path: path.resolve(__dirname, "dist"),
-    publicPath: "/dist/",
-    filename: "[name].bundle.js",
-    // clean: true,
-  },
+  filename: '[name].bundle.js',
+  path: path.resolve(__dirname, 'dist'),
+  publicPath: '/',
+  clean: true,
+},
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public', 'index.html'), // Path to your HTML file
