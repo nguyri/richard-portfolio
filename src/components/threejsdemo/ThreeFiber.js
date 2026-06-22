@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, useGLTF, OrthographicCamera } from '@react-three/drei'; 
-import Slider from 'rc-slider';
-import 'rc-slider/assets/index.css';
 import modelData from './modelData';
 import './ThreeScene.css';
 import MediaQuery from 'react-responsive';
@@ -61,7 +59,14 @@ const ThreeFiber = (props) => {
     <div className='threescene--div'>
       <h1 className='threescene--title'>{modelData[modelShown].name}</h1>
       <div className='threescene--slider-div'>
-        <Slider onChange={setTranslation} min={1} max={30} />
+        <input
+          type="range"
+          min={1}
+          max={30}
+          defaultValue={1}
+          onChange={(e) => setTranslation(Number(e.target.value))}
+          style={{ width: '100%' }}
+        />
       </div>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <button

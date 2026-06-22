@@ -6,8 +6,6 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { ThreeMFLoader } from 'three/examples/jsm/loaders/3MFLoader.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
-import Slider, { Range } from 'rc-slider';
-import 'rc-slider/assets/index.css';
 import modelData from './modelData'
 // import Button from 'react-bootstrap/Button'
 import './ThreeScene.css'
@@ -164,7 +162,14 @@ export default class ThreeScene extends Component {
       <div className='threescene--div'>
         <h1 className='threescene--title'>{this.state && modelData[this.state.modelShown].name}</h1>
         <div className='threescene--slider-div'>
-          <Slider onChange={this.setTranslation} min={1} max={30} />
+          <input
+            type="range"
+            min={1}
+            max={30}
+            defaultValue={1}
+            onChange={(e) => this.setTranslation(Number(e.target.value))}
+            style={{ width: '100%' }}
+          />
         </div>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <button variant="primary" size='lg' className={'threescene--button'} onClick={() =>

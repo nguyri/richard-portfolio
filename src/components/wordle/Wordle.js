@@ -1,5 +1,4 @@
 import React from "react"
-import Confetti from "react-confetti"
 import Keyboard from "./Keyboard"
 import Grid from "./Grid"
 import dictionary from './dictionary'
@@ -143,7 +142,7 @@ export default function Wordle() {
             <h1> Wordle </h1>
             {endOfGame && 
                 <div className="reset">
-                    {wordle ? <p>Wordle!<Confetti /></p> : <p> Try again </p>}
+                    {wordle ? <p className="wordle-success">Wordle!</p> : <p> Try again </p>}
                     <button className="reset--button" onClick={resetGame}> Retry </button>
                 </div>
             }

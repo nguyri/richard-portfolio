@@ -1,6 +1,5 @@
 import React from "react"
 // import { Container, Button, Alert } from 'react-bootstrap';
-import { CSSTransition } from 'react-transition-group';
 import "./Entry.css"
 const ReactPlayer = React.lazy(() => import('react-player/lazy'));
 import ThreeScene from "../threejsdemo/ThreeScene"

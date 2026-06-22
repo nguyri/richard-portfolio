@@ -21,8 +21,6 @@ const ReactPlayer = React.lazy(() => import('react-player/lazy'));
 
 import { getImage } from '../entry/data'
 
-import Slider, { Range } from 'rc-slider';
-import 'rc-slider/assets/index.css';
 import modelData from './fbxData'
 // import Button from 'react-bootstrap/Button'
 import './ThreeScene.css'
@@ -431,11 +429,26 @@ const ModelViewer = (props) => {
           </div>
           <div className='threegallery--slider-div' style={{ gridRow: '1 / span 1' }}>
             <div className='threegallery--slider-title' >Brightness</div>
-            <Slider trackStyle={trackStyle} handleStyle={handleStyle} railStyle={railStyle} onChange={setBrightness} defaultValue={2} min={1} max={4} step={0.25} />
+            <input
+              type="range"
+              min={1}
+              max={4}
+              step={0.25}
+              value={brightness}
+              onChange={(e) => setBrightness(Number(e.target.value))}
+              style={{ width: '100%' }}
+            />
           </div>
           <div className='threegallery--slider-div' style={{ gridRow: '3 / span 1' }}>
             <div className='threegallery--slider-title' >Position</div>
-            <Slider trackStyle={trackStyle} handleStyle={handleStyle} railStyle={railStyle} onChange={setZPosition} defaultValue={0} min={-5} max={45} />
+            <input
+              type="range"
+              min={-5}
+              max={45}
+              value={modelShown?.position?.z ?? 0}
+              onChange={(e) => setZPosition(Number(e.target.value))}
+              style={{ width: '100%' }}
+            />
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gridRow: '1 / span 1', gridColumn: '3 / span 1' }}>
             <div className='threegallery--desc'> <b>scroll</b> to zoom</div>

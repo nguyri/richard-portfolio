@@ -1,9 +1,6 @@
 import React from 'react'
-import Slider from 'rc-slider'
-import { Stage, Layer, Rect, Circle, Text, Image } from 'react-konva';
-import { MathJax, MathJaxContext } from 'better-react-mathjax'
-import Konva from 'konva';
-import { getEntry, getImage } from '../entry/data'
+import { Stage, Layer, Rect, Circle } from 'react-konva';
+import { getImage } from '../entry/data'
 import './BlendingModes.css'
 
 export default function BlendingModes(props) {
@@ -56,8 +53,8 @@ export default function BlendingModes(props) {
       filtPatternOffsetY: 50,
       sliderReverse: true,
       sliderDefault: 256,
-      staticFormula:`$f(a,b) = a * b//256 = a * hat b$`,
-      dynamicFormula:`$f(a,\color{${color}}${slider}) = a * \color{${color}} ${((slider) / 256).toFixed(2)}$`,
+      staticFormula: 'f(a,b) = a * b / 256 = a * ^ b',
+      dynamicFormula: `f(a, ${slider}) = a * ${((slider) / 256).toFixed(2)}`,
       filter: MultiplyFilter
     },
     screen: {
@@ -67,8 +64,8 @@ export default function BlendingModes(props) {
       filtPatternOffsetY: 800,
       sliderReverse:false,
       sliderDefault:1,
-      staticFormula: `$f(a,b) = 1 - (1 - a) * (1 - hat b)$`,
-      dynamicFormula: `$f(a,\color{${color}}${slider}) = a * \color{${color}} ${((slider) / 256).toFixed(2)}$`,    
+      staticFormula: 'f(a,b) = 1 - (1 - a) * (1 - b)',
+      dynamicFormula: `f(a, ${slider}) = a * ${((slider) / 256).toFixed(2)}`,
       filter: ScreenFilter
     },
     overlay: {
@@ -78,9 +75,8 @@ export default function BlendingModes(props) {
       filtPatternOffsetY: 80,
       sliderReverse:false,
       sliderDefault:128,
-      staticFormula:`$f(a,b) = {(text(screen), hat b > 0.5), (text(multiply), hat b < 0.5):}$`,
-      // staticFormula: `$f(a,b) = {(a hat b, hat b > 0.5), (1 - (1 - a) * (1 - hat b), hat b < 0.5):}$`,
-      dynamicFormula: `$f(a,\color{${color}}${slider}) = a * \color{${color}} ${((slider) / 256).toFixed(2)}$`,    
+      staticFormula: 'f(a,b) = screen(a,b) if b > 0.5, multiply(a,b) if b < 0.5',
+      dynamicFormula: `f(a, ${slider}) = a * ${((slider) / 256).toFixed(2)}`,
       filter: OverlayFilter
     },
     dodge: {
@@ -90,8 +86,8 @@ export default function BlendingModes(props) {
       filtPatternOffsetY: 40,
       sliderReverse:false,
       sliderDefault:1,
-      staticFormula: `$f(a,b) = a / ( 1 - hat b ) $`,
-      dynamicFormula: `$f(a,\color{${color}}${slider}) = a * \color{${color}} ${((slider) / 256).toFixed(2)}$`,    
+      staticFormula: 'f(a,b) = a / (1 - b)',
+      dynamicFormula: `f(a, ${slider}) = a * ${((slider) / 256).toFixed(2)}`,
       filter: DodgeFilter
     },
   }
@@ -107,25 +103,13 @@ export default function BlendingModes(props) {
     };
   }, [props.mode]);
 
-  const config = {
-    loader: { load: ["input/asciimath"] },
-    asciimath: {
-      displaystyle: true,
-      delimiters: [
-        ["$", "$"],
-        ["`", "`"]
-      ]
-    }
-  };
   const width = 400, height = 200, heightFraction = 5, radius = 30;
+  const sliderDirection = modes[props.mode].sliderReverse ? 'rtl' : 'ltr';
 
   React.useEffect(() => {
     if (image && imageRef.current) {
       imageRef.current.cache();
     }
-    // const canvas = layerRef.current.getCanvas()._canvas;
-    // canvas.style.filter = `brightness(${(slider /256) * 100}%)`;
-
   }, [slider, image])
 
 
@@ -149,22 +133,26 @@ export default function BlendingModes(props) {
   return (
     <div style={props.style}>
       <div style={{ paddingBottom: "0px", display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems:"flex-start" }}>
-        <MathJaxContext config={config}>
-          <MathJax className={props.darkMode ? "formula dark" : "formula"}>
-            <span>{modes[props.mode].staticFormula}</span>
-          </MathJax>
-          <div style={{ display: "block", }}>
-            <Stage width={width} height={height} cornerRadius={20} style={{ marginTop: "10px", overflow: "hidden", borderRadius: "10px" }}>
-              <BlendingLayer/>
-            </Stage>
-          </div>
-          <MathJax inline dynamic className={props.darkMode ? "formula dark" : "formula"}>
-            <span >{modes[props.mode].dynamicFormula}</span>
-          </MathJax>{" "}
-        </MathJaxContext>
-        <Slider onChange={setSlider} min={1} max={255}  step={1}
-        reverse={modes[props.mode].sliderReverse} defaultValue={modes[props.mode].sliderDefault} 
-         style={{ paddingBlock: '10px', scale: "2", transformOrigin: "left top", width: "25%" }} />
+        <div className={props.darkMode ? "formula dark" : "formula"}>
+          {modes[props.mode].staticFormula}
+        </div>
+        <div style={{ display: "block", }}>
+          <Stage width={width} height={height} cornerRadius={20} style={{ marginTop: "10px", overflow: "hidden", borderRadius: "10px" }}>
+            <BlendingLayer/>
+          </Stage>
+        </div>
+        <div className={props.darkMode ? "formula dark" : "formula"}>
+          {modes[props.mode].dynamicFormula}
+        </div>
+        <input
+          type="range"
+          min={1}
+          max={255}
+          value={slider}
+          onChange={(e) => setSlider(Number(e.target.value))}
+          step={1}
+          style={{ paddingBlock: '10px', width: "25%", direction: sliderDirection }}
+        />
       </div>
     </div>
   )

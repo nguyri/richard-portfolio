@@ -1,6 +1,5 @@
 import React from 'react';
 import {getImage} from '../entry/data'
-import Slider from 'rc-slider'
 import './Gallery.css'
 import {ProgressBar} from './ProgressBar';
 
