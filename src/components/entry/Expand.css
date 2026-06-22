@@ -32,3 +32,53 @@
 .expand--codeblock {
     font-family: "Source Code Pro", monospace;
 }
+
+.code-block {
+    font-family: "Source Code Pro", monospace;
+    color: var(--code-text);
+    background-color: var(--code-bg);
+    border: 1px solid var(--code-border);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    margin: 0.75rem 0;
+    overflow: auto;
+    line-height: 1.55;
+    font-size: 0.95rem;
+    tab-size: 4;
+    white-space: pre;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.App {
+    --code-bg: #f8fafc;
+    --code-text: #111827;
+    --code-border: rgba(15, 23, 42, 0.12);
+    --code-comment: #6b7280;
+    --code-keyword: #7c3aed;
+    --code-string: #047857;
+    --code-number: #b45309;
+    --code-boolean: #0f766e;
+}
+
+.App--dark {
+    --code-bg: #111827;
+    --code-text: #e5e7eb;
+    --code-border: rgba(255, 255, 255, 0.12);
+    --code-comment: #9ca3af;
+    --code-keyword: #8b5cf6;
+    --code-string: #34d399;
+    --code-number: #fbbf24;
+    --code-boolean: #2dd4bf;
+}
+
+.code-block code {
+    display: block;
+    color: inherit;
+    white-space: inherit;
+}
+
+.token.comment { color: var(--code-comment); }
+.token.keyword { color: var(--code-keyword); font-weight: 600; }
+.token.string { color: var(--code-string); }
+.token.number { color: var(--code-number); }
+.token.boolean { color: var(--code-boolean); }
