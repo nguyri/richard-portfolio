@@ -95,10 +95,21 @@ export default class ThreeScene extends Component {
     this.scene.add(this.pointLight);
     this.scene.add(new THREE.AmbientLight(0xffffff, 0.6));
 
-    this.renderer = new THREE.WebGLRenderer({ antialias: true })
-    this.renderer.setClearColor('#FFFFFF', 0) //#F9F7F0
-    this.renderer.setSize(width, height)
-    this.mount.appendChild(this.renderer.domElement)
+        if (!isWebGLAvailable()) {
+        console.error('WebGL not available in this environment');
+        this.setState({ webgl: false });
+        return;
+      }
+      try {
+        this.renderer = new THREE.WebGLRenderer({ antialias: true })
+        this.renderer.setClearColor('#FFFFFF', 0) //#F9F7F0
+        this.renderer.setSize(width, height)
+        this.mount.appendChild(this.renderer.domElement)
+      } catch (e) {
+        console.error('Failed to create WebGLRenderer', e);
+        this.setState({ webgl: false });
+        return;
+      }
 
     let loader = new ThreeMFLoader();
     this.modelList = [];

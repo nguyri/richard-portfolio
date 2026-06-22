@@ -1,6 +1,7 @@
 import React from 'react';
 import { Component, useEffect } from 'react';
 import * as THREE from 'three';
+import { isWebGLAvailable } from '../../utils/webgl';
 // demo from https://medium.com/@colesayershapiro/using-three-js-in-react-6cb71e87bdf4
 // import {ThreeMFLoader} from './3MFLoader'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
@@ -40,7 +41,7 @@ const ThreeFunc = (props) => {
     let [controls, setControls] = React.useState();
     let [dirLight, setDirLight] = React.useState();
     let [ambientLight] = React.useState(new THREE.AmbientLight(0xffffff, 1));
-    let [renderer] = React.useState(new THREE.WebGLRenderer({ antialias: true }));
+    const rendererRef = React.useRef();
     let [brightness, setBrightness] = React.useState(1);
 
     //demo box
@@ -81,19 +82,32 @@ const ThreeFunc = (props) => {
         sceneInit.add(dirLightInit);
         sceneInit.add(ambientLight);
         
-        renderer.setClearColor('#FFFFFF', 0) //#F9F7F0
-        renderer.setSize(width, height)
-        myRef.current.appendChild(renderer.domElement)
+        if (!isWebGLAvailable()) {
+          console.error('WebGL not available in this environment');
+          return;
+        }
+        try {
+          const renderer = new THREE.WebGLRenderer({ antialias: true });
+          renderer.setClearColor('#FFFFFF', 0) //#F9F7F0
+          renderer.setSize(width, height)
+          myRef.current.appendChild(renderer.domElement)
+          rendererRef.current = renderer;
+        } catch (e) {
+          console.error('Failed to create WebGLRenderer', e);
+          return;
+        }
         
         let loader = new ThreeMFLoader();
         loadThreeMF(loader, modelData, modelList, modelShown, sceneInit, material, setModelList)
         
         const render = () => {
+          const renderer = rendererRef.current;
+          if (!renderer) return;
           renderer.render(sceneInit, cameraInit);
         }
         
         
-        let initControls = new OrbitControls(cameraInit, renderer.domElement);
+        let initControls = new OrbitControls(cameraInit, rendererRef.current?.domElement);
         initControls.addEventListener('change', render);
         initControls.target.set(20, 0, 0);
         initControls.minPolarAngle = Math.PI / 3;
@@ -110,7 +124,7 @@ const ThreeFunc = (props) => {
         let onWindowResize = function () {
             cameraInit.aspect = window.innerWidth / window.innerHeight;
             cameraInit.updateProjectionMatrix();
-            renderer.setSize( window.innerWidth, window.innerHeight );
+            if (rendererRef.current) rendererRef.current.setSize(window.innerWidth, window.innerHeight);
           }
       
         window.addEventListener("resize", onWindowResize, false);
@@ -121,7 +135,7 @@ const ThreeFunc = (props) => {
         }
 
         animate();
-        return () => myRef.current && myRef.current.removeChild(renderer.domElement);
+        return () => myRef.current && rendererRef.current && myRef.current.removeChild(rendererRef.current.domElement);
     }, []);
 
     const loadThreeMF = (loader, modelData, list, modelShown, scene, material, setModelList) => {

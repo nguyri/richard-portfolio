@@ -1,6 +1,7 @@
 import React from 'react';
 import { Component, useEffect } from 'react';
 import * as THREE from 'three';
+import { isWebGLAvailable } from '../../utils/webgl';
 
 // demo from https://medium.com/@colesayershapiro/using-three-js-in-react-6cb71e87bdf4
 // import {ThreeMFLoader} from './3MFLoader'
@@ -77,11 +78,21 @@ const ModelViewer = (props) => {
     initLights(scene);
     // scene.add(demoSphere(scene));
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true })
-    renderer.setClearColor('#000000', 0); //#F9F7F0
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(width, height);
-    myRef.current.appendChild(renderer.domElement)
+    if (!isWebGLAvailable()) {
+      console.error('WebGL not available in this environment');
+      return;
+    }
+    let renderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ antialias: true })
+      renderer.setClearColor('#000000', 0); //#F9F7F0
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setSize(width, height);
+      myRef.current.appendChild(renderer.domElement)
+    } catch (e) {
+      console.error('Failed to create WebGLRenderer', e);
+      return;
+    }
 
     const outlinePass = initOutlinePass(window, scene, camera, 2, 4, 0, modelData[modelIndex].outlineColor);
     const composer = initComposer(renderer, width, height, scene, camera, outlinePass)
