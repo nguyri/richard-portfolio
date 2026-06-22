@@ -4,7 +4,7 @@ import ShortEntry from "./ShortEntry";
 import { getEntries } from "./data"
 import TableOfContents from "./TableOfContents";
 import { Link, Outlet, useOutletContext } from "react-router-dom";
-import ThreeScene from "../threejsdemo/ThreeScene"
+const ThreeScene = React.lazy(() => import('../threejsdemo/ThreeScene'))
 
 const images = {}
 

@@ -2,18 +2,16 @@ import React from "react"
 // import { Container, Button, Alert } from 'react-bootstrap';
 import "./Entry.css"
 const ReactPlayer = React.lazy(() => import('react-player/lazy'));
-import ThreeScene from "../threejsdemo/ThreeScene"
+const ThreeScene = React.lazy(() => import('../threejsdemo/ThreeScene'))
 const Wordle = React.lazy(() => import("../wordle/Wordle"));
 import NotFound from "../errordocs/NotFound"
 import { useMediaQuery } from 'react-responsive'
 import { useParams, useOutletContext } from "react-router-dom";
 import { getEntry, getImage } from './data'
 import TableOfContents from "./TableOfContents"
-import MovingPlaneCanvas from "../threefiber/MovingPlaneCanvas";
-import { Canvas } from "@react-three/fiber";
-
-import ImageTransitionCanvas from "../threefiber/ImageTransition";
-import BlendingModes from "../blendingmodes/BlendingModes";
+const MovingPlaneCanvas = React.lazy(() => import('../threefiber/MovingPlaneCanvas'));
+const ImageTransitionCanvas = React.lazy(() => import('../threefiber/ImageTransition'));
+const BlendingModes = React.lazy(() => import('../blendingmodes/BlendingModes'));
 // import ImageTransitionCanvas from "../threefiber/ImageTransition";
 
 export function TextBlock(props) { // use it for long entry.. eventually
