@@ -5,28 +5,35 @@ import {getImage} from "./data"
 import { Link, Outlet, useOutlet, useOutletContext } from "react-router-dom";
 
 export default function EntriesLayout(props) {
-    const [darkMode, setShrinkHeader] = useOutletContext();
+    const context = useOutletContext();
+    const darkMode = context[0];
+    const setShrinkHeader = context[3]; // Assuming layout sent: [darkMode, setDarkMode, shrinkHeader, setShrinkHeader]
+
     const entriesRef = React.useRef();
 
     const handleScroll = () => {
-        setShrinkHeader(entriesRef.current.scrollTop > 50) ;
+        if (setShrinkHeader) {
+            setShrinkHeader(entriesRef.current.scrollTop > 50);
+        }
     };
 
     const scrollToTop = () => {
-        entriesRef.current.scrollTo(0,0);
-    }
+        entriesRef.current.scrollTo(0, 0);
+    };
+
     React.useEffect(() => {
-        setShrinkHeader(false);
-    }, [])
+        if (setShrinkHeader) {
+            setShrinkHeader(false);
+        }
+    }, [setShrinkHeader]);
+
+    // Apply the CSS scope dynamically right here
+    const themeClass = darkMode ? 'code-theme--dark' : 'code-theme--light';
 
     return (
-        
-        <div className="entries-layout" ref={entriesRef} onScroll={handleScroll}>
-            {/* <link rel="icon" type="image/x-icon" src={getImage('./favicon.png') ? getImage('./favicon.png') : ""}></link>
-            {console.log(getImage('./favicon.png'))} */}
-            {/* <TableOfContents /> */}
-            <Outlet context={[...useOutletContext(), scrollToTop]}/>
-            {/* <Entries /> */}
+        <div className={`entries-layout ${themeClass}`} ref={entriesRef} onScroll={handleScroll}>
+            {/* Pass everything down cleanly along with your layout scroll controller */}
+            <Outlet context={[...context, scrollToTop]}/>
         </div>
-    )
+    );
 }

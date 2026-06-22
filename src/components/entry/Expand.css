@@ -70,15 +70,3 @@
     --code-number: #fbbf24;
     --code-boolean: #2dd4bf;
 }
-
-.code-block code {
-    display: block;
-    color: inherit;
-    white-space: inherit;
-}
-
-.token.comment { color: var(--code-comment); }
-.token.keyword { color: var(--code-keyword); font-weight: 600; }
-.token.string { color: var(--code-string); }
-.token.number { color: var(--code-number); }
-.token.boolean { color: var(--code-boolean); }

@@ -1,49 +1,70 @@
 import React from 'react';
+import './CodeBlock.css';
 
-const escapeHtml = (value) =>
-  value
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
+const jsKeywords = ['const', 'let', 'var', 'function', 'return', 'if', 'else', 'for', 'while', 'import', 'export', 'true', 'false', 'null', 'undefined'];
+const csharpKeywords = ['public', 'private', 'static', 'void', 'string', 'int', 'bool', 'class', 'new', 'return', 'if', 'else', 'foreach', 'true', 'false', 'null'];
 
-const jsKeywords = [
-  'const', 'let', 'var', 'function', 'return', 'if', 'else', 'for', 'while',
-  'switch', 'case', 'default', 'break', 'continue', 'new', 'class', 'extends',
-  'import', 'from', 'export', 'async', 'await', 'try', 'catch', 'throw', 'typeof',
-  'instanceof', 'this', 'super', 'null', 'undefined', 'true', 'false', 'in', 'of'
-].join('|');
+const tokenizeCode = (text, language) => {
+  const keywords = language === 'csharp' ? csharpKeywords : jsKeywords;
 
-const csharpKeywords = [
-  'public', 'private', 'protected', 'internal', 'static', 'void', 'string',
-  'int', 'bool', 'float', 'double', 'decimal', 'class', 'namespace', 'using',
-  'new', 'return', 'var', 'if', 'else', 'switch', 'case', 'default', 'break',
-  'continue', 'foreach', 'for', 'while', 'do', 'try', 'catch', 'finally', 'throw',
-  'true', 'false', 'null', 'this', 'base', 'override', 'virtual', 'sealed'
-].join('|');
+  const regex = new RegExp(
+    `(\\/\\/[^\\n]*|\\/\\*[\\s\\S]*?\\*\\/)|` + // 1: Comments
+    `("(?:\\\\.|[^"\\\\])*"|'(?:\\\\.|[^'\\\\])*'|\`(?:\\\\.|[^\`])*\`)|` + // 2: Strings
+    `\\b(${keywords.join('|')})\\b|` + // 3: Keywords
+    `\\b(\\d+)\\b|` + // 4: Numbers
+    `\\b(\\w+)(?=\\s*\\()|` + // 5: Function Calls
+    `([\\+\\-\\*/=<>!&\\|\\{\\}\\(\\)\\[\\]\\.,;])`, // 6: Operators / Punctuation
+    'g'
+  );
 
-const highlightText = (text, language) => {
-  const keywordPattern = new RegExp(`\\b(${language === 'csharp' ? csharpKeywords : jsKeywords})\\b`, 'g');
-  return text
-    .replace(/(\/\/[^\n]*)/g, '<span class="token comment">$1</span>')
-    .replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="token comment">$1</span>')
-    .replace(/(`(?:\\.|[^`])*`)/g, '<span class="token string">$1</span>')
-    .replace(/("(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*')/g, '<span class="token string">$1</span>')
-    .replace(/\b(0x[0-9a-fA-F]+|\d+\.?\d*|\.\d+)\b/g, '<span class="token number">$1</span>')
-    .replace(keywordPattern, '<span class="token keyword">$1</span>')
-    .replace(/\b(true|false|null|undefined)\b/g, '<span class="token boolean">$1</span>');
+  const nodes = [];
+  let lastIndex = 0;
+  let keyCounter = 0;
+
+  text.replace(regex, (match, comment, string, keyword, number, func, punctuation, offset) => {
+    if (offset > lastIndex) {
+      nodes.push(text.slice(lastIndex, offset));
+    }
+
+    if (comment) {
+      nodes.push(<span key={keyCounter++} className="token comment">{match}</span>);
+    } else if (string) {
+      nodes.push(<span key={keyCounter++} className="token string">{match}</span>);
+    } else if (keyword) {
+      const isBoolOrNull = ['true', 'false', 'null', 'undefined'].includes(keyword);
+      nodes.push(
+        <span key={keyCounter++} className={`token ${isBoolOrNull ? 'boolean' : 'keyword'}`}>
+          {match}
+        </span>
+      );
+    } else if (number) {
+      nodes.push(<span key={keyCounter++} className="token number">{match}</span>);
+    } else if (func) {
+      nodes.push(<span key={keyCounter++} className="token function">{match}</span>);
+    } else if (punctuation) {
+      nodes.push(<span key={keyCounter++} className="token punctuation">{match}</span>);
+    }
+
+    lastIndex = offset + match.length;
+    return match;
+  });
+
+  if (lastIndex < text.length) {
+    nodes.push(text.slice(lastIndex));
+  }
+
+  return nodes;
 };
 
-const formatCode = (text, language) => {
-  const escaped = escapeHtml(text);
-  return highlightText(escaped, language);
-};
+export default function CodeBlock({ language = 'js', text, className, darkMode }) {
+  // Use explicit theme modifiers for the code blocks
+  const themeClass = darkMode ? 'code-block--dark' : 'code-block--light';
 
-export default function CodeBlock({ language = 'js', text, className }) {
   return (
-    <pre className={className ? `code-block ${className}` : 'code-block'}>
-      <code className={`language-${language}`} dangerouslySetInnerHTML={{ __html: formatCode(text, language) }} />
+    <pre className={`code-block ${themeClass} ${className || ''}`}>
+      <code className={`language-${language}`}>
+        {tokenizeCode(text, language)}
+      </code>
     </pre>
   );
 }
