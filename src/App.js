@@ -8,6 +8,7 @@ import AboutCard from "./components/about-card/AboutCard"
 import Header from "./components/header/Header"
 
 import { Outlet } from "react-router-dom";
+import { Analytics } from '@vercel/analytics/next';
 // import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 export default function App() {
@@ -31,6 +32,7 @@ export default function App() {
         <main>
           <React.Suspense fallback={<div>Loading...</div>}>
             <Outlet context={[darkMode, setShrinkHeader]}/>
+            <Analytics />
           </React.Suspense>
         </main>
       </div>
