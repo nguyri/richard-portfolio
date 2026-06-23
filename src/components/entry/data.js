@@ -25,7 +25,7 @@ function importAll(r) {
 importAll(require.context('../../imgs/', false, /\.(png|jpe?g|svg)$/));
 
 export function getEntries() {
-    let order = ['Metal Shop', 'Graphics and ThreeJS', 'Additive Lathe', 'Web Development', 'Backend',  'Wood Shop', '3D Modelling', 'Mostly Printed CNC', 'Model Gallery', 'Digital Art',];
+    let order = ['Metal Shop', 'Graphics and ThreeJS', 'Additive Lathe', 'Web Development', 'Backend',  'Wood Shop', 'Climbing', '3D Modelling', 'Mostly Printed CNC', 'Model Gallery', 'Digital Art',];
     let orderedEntries = order.map((title) => entries.find(entry => entry.title === title));
     return orderedEntries;
 }
@@ -358,13 +358,12 @@ void main() {
     description: "Wood is great for making furniture and other objects that need a less industrial feel.",
     longdescription: [
     {key:'woodshop', title:`Woodshop`},
-    {key: nanoid(), text:`I’ve been using wood tools for a very long time. 
-    I started off rather bad at making stuff out of wood, but everyone has to start somewhere. It is an approachable and easily available medium for many people. The only downside is the risk of harm from tooling.`},
+    {key: nanoid(), text:`Wood is an approachable and easily available medium for many people. I was young when I started and concepts like workholding and operations were lost on me. Still, everyone has to start somewhere, and I have a better understanding of the process now. The main downside of wood is the risk of harm from tooling.`},
     {key: 'safety', subtitle:`Safety`},
     {key:nanoid(), text:`Making things out of wood requires a healthy fear of wood tooling. Wood tools move faster and store more energy than (equivalently sized) metal ones due to the higher RPM needed to sever wood fibers. The chisel is razor sharp and is often improperly controlled.`},
     {key:nanoid(), html:<div>The table saw is a workhorse tool that can do it all, but is also the most dangerous. A 2011 report by the CPSC, <a href="https://cpsc.gov/s3fs-public/statsaws.pdf" target="_blank" rel="noreferrer noopener">available at this link</a>, states that nearly 80% of 100,000 stationary saw injuries in 2007 to 2009 involved a table saw. </div>},
     {key:nanoid(), text:`Use as many safety devices as possible with a table saw. An unstable workpiece may jump, resist cutting or expose the user to the blade. When in doubt, stop moving and turn off the saw until it fully stops.`},
-    {key:nanoid(), text:`The most common dangerous incident is kickback. Kickback occurs when the cutter enters the material in an uncontrolled manner, causing the material to catch and be thrown or destroyed. Safety devices like the riving saw, fence, or blade guard, aim to control the material to reduce the risk of kickback. Actual contact with the blade is a rare occurence when push sticks are used properly. Saws with touch protection will not protect against kickback.`},
+    {key:nanoid(), text:`The most common dangerous incident is kickback. Kickback occurs when the cutter enters the material in an uncontrolled manner, causing the material to catch and be thrown or destroyed. Safety devices like the riving saw, fence, or blade guard, aim to control the material to reduce the risk of kickback. Actual contact with the blade is a rare occurence when push sticks are used properly. Saws with touch protection will not protect against kickback. Still, if kickback occurs the sudden dispersal of energy can cause the workpiece, your hand, and even the entire saw to move unpredictably.`},
     {key: 'wood-grain', subtitle:`Wood Grain`},
     {key:nanoid(), text:`The next fundametal of wood is working with the grain. Most people start off with a mitre or table saw which are fairly grain agnostic.`},
     {key:nanoid(), text:`The jointer and planer prefer going with the grain however. Going against the grain with a hand planer immediately feels much worse and sometimes you'll be punished when a group of fibers tears out. `},
@@ -380,19 +379,19 @@ void main() {
     <li>For bowed pieces, it will also reduce the amount of bowing from end to end. A heavily bowed 8' piece of wood might be so bowed that there is no 'flat wood' inside of there. Reduce it to 2 feet and you'll have to do only a quarter of the flattening.</li>
     </ul>
     </div>},
-    {key:nanoid(), text:`Final size is often subjective. Most of the time I cut wood to the width of another piece of wood, without any special care to the exact size. Wood also bends and warps over time. Finishes like flush or smooth can be accomplished with planing or sanding instead of precise cutting.`},
+    {key:nanoid(), text: `It is also useful to have your speed square and tape measure handy. A rectangle has equal diagonal dimensions, and even a small difference produces a large error. In reality, wood furniture is not very flat or square in the grand scheme of things. Still, tolerance stackup does occur and you'll get bitten at a crucial assembly moment if you don't take care to control your dimensions. `},
+    {key:nanoid(), text:`Final size is often subjective. Many times I cut wood to the width of another piece of wood, without any special care to the exact size. Too much calculating invites human error. Trying to hold too many dimensions in your head also invites a careless cut wasting material. Often your tolerance is unilateral, so take advantage of that and only measure carefully when needed.`},
     {key: 'tools', title:`Tools`},
     {key:'mitresaw', subtitle:`Mitre Saw`},
-    {key:nanoid(), text:`It tends to be the case that the first tool you'll buy is a mitre saw. It makes sense, no one would even think about rip cutting an 8' piece of wood by hand nowadays but cut a few 2x4s to size and you get tired of hand sawing quickly. A mitre saw is a cheap and reliable saw. Putting an adjustable fence with measurement marks on it greatly improves the speed of cuts. I tend to not use the eponymous function and leave it calibrated square all of the time.`},
+    {key:nanoid(), text:`It tends to be the case that the first tool you'll buy is a mitre saw. It makes sense, no one would even think about rip sawing an 8' piece of wood by hand nowadays but cut a few 2x4s to size and you get tired of hand sawing quickly. A mitre saw is a cheap and reliable saw. Putting an adjustable fence with measurement marks on it greatly improves the speed of cuts. I tend to not use the eponymous function and leave it calibrated square all of the time.`},
     {key:'tablesaw', subtitle:`Table Saw`},
     {key:nanoid(), html:<div>Everything can be accomplished on a table saw, for better or for worse. Okay, <i>almost</i> everything. It is an indispensable workhorse for ripping. With a few jigs, it is also the most versatile. Cut quality and material removal rate are both excellent. The huge variety of simple jigs for it make almost any process possible on the table saw: mitreing, cross cutting, dadoing, corner slotting, to name a few. The only downsides are it's quite messy, loud, and dangerous. </div>},
     {key:'bandsaw', subtitle:`Bandsaw`},
     {key:nanoid(), text:`In 2024 I decided to get the last of the big tools for my home woodshop, a bandsaw. It does require a lot more setup than the other tools, with 6 bearings, wheel tracking and blade tension that all usually need tuning when the blade changes. It quickly became one of my go-to tools, and I soon set up a blast gate for it since I switch between it so often. `},
-    {key:nanoid(), text:`The best feature of the bandsaw in my opinion is cutting lumber to size easily. Often you want a smaller section than 2x4, but it's quite messy to cut on the table saw and you lose a lot of material. Cutting vertically into a 1x4 sets off mental table saw warning sirens. Such a cut is peaceful on a bandsaw. `},
+    {key:nanoid(), html:<div>The best feature of the bandsaw in my opinion is <b>resawing</b>. Often you want a smaller section than 2x4, but it's quite messy to cut on the table saw and you lose a lot of material. A deep 3.5" cut to split a 2x4 like a book sets off mental table saw warning sirens. Such a cut is peaceful on a bandsaw. </div>},
     {key:nanoid(), text:`The blade on a bandsaw is 0.025" compared to 0.093" on a narrow blade tablesaw. The kerf is somewhat wider due to the blade set on bandsaw, but between half and three quarters more material is saved per cut. `},
     {key:nanoid(), text:`Dust collection is simpler on the bandsaw where most of the dust comes out below the table and a simple vacuum fitting with a blade slot is enough to reduce the dust immensely, and almost no very fine dust escapes. A table saw requires both the underbody and above table collectors to reduce dust.` , style: {gridColumn:"1 / span 3"}, },
     {key:5, img:'bandsaw sled', style: {gridColumn:"4 / span 2",  marginBottom:"30px"}, className:"entry--img-inline",  imageName:'./wood12.jpg'},
-    {key:'bandsawtips', subtitle:`Bandsaw Tips`},
     {key:nanoid(), html:<div>The bandsaw blade being so flexible has pros and cons. While it's excellent at cutting curves, it is a soft carbon blade rather than the much harder carbide on rotary saws. Going through a hidden staple will immediately dull the blade. I noticed after sharpening, <a href="https://woodgears.ca/bandsaw/sharpening.html">guide available here, </a> my blade started to pinch the material very strongly. For rough sizing cuts it's fine to use a <b>pivoting fence</b>, but losing the convenience of the fence ticks is frustrating. </div>},
     {key: 'box', title:`The Box`},
     {key:nanoid(), html:<div>At some point my shop has made more drawers than anything else, that is to say, boxes. A drawer is a big box with little boxes inside. Once you learn to make some drawers, you'll realize how many drawers (boxes) you need in your life. The answer is always more than you have. </div>},
@@ -430,6 +429,65 @@ void main() {
     ],
     imageName:'./wood10.jpg',
     imageStyle:{style: {objectPosition:'right 0 bottom 200px'}}
+    },
+    {
+    num:nanoid(), 
+    title: "Climbing",
+    link: "climbing",
+    description: "Climbing is a great way to get excercise and enjoy nature.",
+    longdescription: [
+    {key:'climbing', title:`Climbing`},
+    {key:nanoid(), text:`Climbing is a great way to get exercise and enjoy nature. It fills in the awkward season between winter and summer when the snow is not gone from the hiking trails but is not good enough to ski on. Fill in this awkward season with enough climbing and you may never go back to hiking.. `},
+    {key:nanoid(), title:`Safety`},
+    {key:nanoid(), text:`Climbing is inherently dangerous. So is driving, eating (choking and food poisoning), skiing, and many other activities. Still, if you didn't climb up the wall and come crashing down you wouldn't get injured, right? But you also wouldn't have any fun.`},
+    {key:nanoid(), html:<>From a risk management framework perspective, the <b>objective</b> risks are putting yourself into a risk of a fall. There are also smaller ones like abrasions and cuts, and general outdoor exposure, but these tend to be smaller risks than hiking, except on multi-pitches. <b>Subjective</b> risks end up being a huge factor in climbing accidents, things like belayer distraction, improper attachment to rope, degraded decision making from exhaustion, etc. </>},
+    {key:nanoid(), subtitle: `High Risks`},
+    {key:nanoid(), html:<>High likelihood risks may happen every climb: <ul><li>Ground fall from a low height</li><li>Rope behind leg</li></ul></>},
+    {key:nanoid(), html:<>High likelihood risks must be addressed: <ul><li>Use a stick clip when the first clip is out of reach and belay vigilantly until your belayer climbs out of ground fall height.</li><li>When climbing above the clip, always place the rope on the shoelace side of the foot.</li></ul></>},
+    {key:nanoid(), subtitle: `Medium Risks`},
+    {key:nanoid(), html:<>Medium likelihood risks happen often, but not all the time: <ul><li>Improper tie in or system setup (cleaning or rappelling)</li><li>Belayer inattention</li><li>Collision swinging into the wall after falling</li></ul></>},
+    {key:nanoid(), html:<><b>Always</b> check your system before loading it. Better yet, load your new system before removing the old one. That is, after threading the rope to clean and lower, load the new knot before removing your personal anchor. On top rope, leave one draw in at the end and take it out as you lower. </>},
+    {key:nanoid(), html:<>You need to have some sense when your climber is struggling or about to fall. If they're above the bolt, be prepared to jump to lower the peak force on the rope and reduce the likelihood of a sudden jolt and swing into the wall (ankle breaker). </>},
+    {key:nanoid(), html:<>When your climber climbs up and out of view, it's easy to get too relaxed. It's not really possible to pay as much attention when you cannot see them, but keep in mind that they are still there and you still need to belay. </>},
+    {key:nanoid(), subtitle: `Low Risks`},
+    {key:nanoid(), html:<>Rope failure is extremely rare with modern rope, but repeated loading over a sharp edge can cut the strands like a knife. As well, cleaning your rope regularly removes the abrasive dirt and sand that can wear out climbing hardware and the rope itself.</>},
+    {key:nanoid(), html:<>Bolt or anchor failure does happen, but there are signs that your bolt is looking sketchy before it fails. Bolts that move freely in the hole, or improperly set epoxy give you a warning. Hangers that spin are generally fine, tighten them with your ATC just enough that they don't spin. At seaside crags the risks of salt water corrosion are significant and care must be taken not to load old, corroded bolts.</>},
+    {key:nanoid(), html:<>Rockfall also happens, it's a risk for your belayer and any other hikers that may be around. Mostly small rocks, but the occasional reports of microwaves or larger coming off will give you pause.</>},
+    {key:nanoid(), subtitle: `Hierarchy of Controls`},
+    {key:nanoid(), html:<>As with many outdoor activities, the option to <b>eliminate</b> is often forgotten, but when you push too far past your risk tolerance you could end up in a dangerous situation. Remember to eliminate when things get sketchy. </>},
+    {key:nanoid(), html:<>Engineering controls are mostly built into the equipment you use and modern climbing equipment is very good. The belay loop ties in to three redundant points on your body, show signs of wear before breaking, and the rope itself can support your entire weight on one strand (it has twelve). Anchors also follow a redundant design and two isolated attachment points are used when lowering or rappelling.</>},
+    {key:nanoid(), html:<>Administrative controls include partner check, and also making sure your partner has enough material on them to finish the climb (easy to forget a cleaning carabiner).</>},
+    {key:nanoid(), html:<>PPE: your helmet, shoes and harness are essential and are easy to forget. </>},
+    {key:nanoid(), html:<>Luckily with a little mindfulness all of these risks can be managed and the greatest risk is becoming complacent and forgetting to check your gear. There are few things like rockfall or sudden weather changes that are out of your control. Most accidents are within your control. Don't trust advice you hear (or read) without verifying it first.</>},
+    {key:nanoid(), title: `Crags`},
+    {key:nanoid(), subtitle: `Home`},
+    {key:nanoid(), text:`Moose Mountain is certainly my home crag. It's a short drive with a wide variety of climbs. It seems to appeal more to mountain bikers which keeps the climbing crowds down. The approach requires a bike or a long walk which also helps. The rock is a little crumbly, but many sections are quite solid and a wide selection of routes means you'll never be bored.`},
+    {key:nanoid(), img:'moose-spider', className:"entry--img-inline", style:{gridColumn:"1 / span 5", marginBottom:"20px"},picStyle: {objectFit: "cover", height:"300px", objectPosition:"50% 60%"},  imageName:'./climbing-3.jpg' },
+    {key:nanoid(), subtitle: `Circuit`},
+    {key:nanoid(), text:`Cougar Canyon, Grassi, Heart Creek, Grotto and Sunshine. These are all great crags that are a little farther than Moose. They have a wide variety of climbs, and the rock is solid. The approach is a little longer than Moose Mountain, but the climbing is worth it. Barrier is a little smaller being an older crag but the climbs are also excellent.`},
+    {key:nanoid(), img:'sunshine-corner', className:"entry--img-inline", style:{gridColumn:"1 / span 5", marginBottom:"20px"},picStyle: {objectFit: "cover", height:"400px", objectPosition:"50% 60%"},  imageName:'./climbing-5.jpg' },
+    {key:nanoid(), subtitle: `Utility`},
+    {key:nanoid(), text:`Wasootch, Baldy and Quaite Valley. These crags are smaller but also very close. Wasootch is an excellent crag for getting your outdoor feet sorted. It requires a special mindset to remember how good your shoes are on rock and it's best to shock the system early on by climbing some ruthless Wasootch slab. Baldy is a little climbing snack when you are looking for something easier. Quaite Valley is kind of too easy for anything other than multipitch practice and you spend more time descending than climbing.`},
+    {key:nanoid(), img:'lakelouise', className:"entry--img-inline", style:{gridColumn:"1 / span 5", marginBottom:"20px"},picStyle: {objectFit: "cover", height:"300px", objectPosition:"50% 70%"},  imageName:'./climbing-2.jpg' },
+    {key:nanoid(), subtitle: `Special Occasion`},
+    {key:nanoid(), text:`Lake Louise, Spillimacheen and Skaha. These are special occasion crags, where the logistics and travel time require a daytrip or more. Lake Louise and Skaha are both very popular and you will struggle to park. Spillimacheen is somewhat out of the way but a great place to enjoy lots of easier climbs. There is also Smokehouse 93 nearby which makes for a guaranteed great day.`},
+    {key:nanoid(), img:'spillimacheen', className:"entry--img-inline", style:{gridColumn:"1 / span 5", marginBottom:"20px"},picStyle: {objectFit: "cover", height:"300px", objectPosition:"50% 45%"},  imageName:'./climbing-4.jpg' },
+    {key:nanoid(), subtitle: `Dubious`},
+    {key:nanoid(), text:`Something about these crags adds a sting that the climbing doesn't soothe. Black Feather's approach is a little too long and the crags are very small. Birdwatchers has a very steep and crumbly approach. Echo, Bataan, and Acephale are very hard with a long approach, but if you climb at the grade it's certainly worth it. `},
+    ],
+    imageName:'./climbing-1.jpg',
+    imageStyle:{style: {objectPosition:'right 0 bottom 450px'}}
+    },
+    {
+    num:nanoid(), 
+    title: "Motorcycles",
+    link: "motorcycles",
+    description: "Motorcycles are a thrilling way to experience the open road.",
+    longdescription: [
+    {key:'motorcycles', title:`Motorcycles`},
+    ],
+    imageName:'./climbing-1.jpg',
+    imageStyle:{style: {objectPosition:'right 0 bottom 400px'}}
     },
     {
     num:8,
