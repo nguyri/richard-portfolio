@@ -8,7 +8,8 @@ const ThreeFunc = React.lazy(() => import('../threejsdemo/ThreeFunc'));
 const ThreeGallery = React.lazy(() => import ('../three-gallery/ThreeGallery'))
 const ThreeFiber = React.lazy(() => import('../threejsdemo/ThreeFiber'));
 const ExpressDemo = React.lazy(() => import('../express/ExpressDemo'));
-const Wordle = React.lazy(() => import('../wordle/Wordle'))
+const Wordle = React.lazy(() => import('../wordle/Wordle'));
+const MapDashboard = React.lazy(() => import('../map/MapDashboard'));
 import {ExpandList, ExpandExpress} from '../entry/Expand'
 import { dataExpress, dataExpressFormat, UnityHtml } from '../express/dataExpressDemo'
 
@@ -437,6 +438,8 @@ void main() {
     description: "Climbing is a great way get some exercise and enjoy nature.",
     longdescription: [
     {key:'climbing', title:`Climbing`},
+    
+    {key:nanoid(), html:<><MapDashboard /></>},
     {key:nanoid(), text:`Climbing is a great way to get exercise and enjoy nature. It fills in the awkward season between winter and summer when the snow is not gone from the hiking trails but is not good enough to ski on. Fill in this awkward season with enough climbing and you may never go back to hiking.. `},
     {key:nanoid(), title:`Safety`},
     {key:nanoid(), text:`Climbing is inherently dangerous. So is driving, eating (choking and food poisoning), skiing, and many other activities. Still, if you didn't climb up the wall and come crashing down you wouldn't get injured, right? But you also wouldn't have any fun.`},
@@ -474,6 +477,7 @@ void main() {
     {key:nanoid(), img:'spillimacheen', className:"entry--img-inline", style:{gridColumn:"1 / span 5", marginBottom:"20px"},picStyle: {objectFit: "cover", height:"300px", objectPosition:"50% 45%"},  imageName:'./climbing-4.jpg' },
     {key:nanoid(), subtitle: `Dubious`},
     {key:nanoid(), text:`Something about these crags adds a sting that the climbing doesn't soothe. Black Feather's approach is a little too long and the crags are very small. Birdwatchers has a very steep and crumbly approach. Echo, Bataan, and Acephale are very hard with a long approach, but if you climb at the grade it's certainly worth it. `},
+    {key:nanoid(), subtitle: `Map`},
     {key:nanoid(), title: `Gear`},
     {key:nanoid(), subtitle: `What's in the bag?`},
     {key:nanoid(), text:`One of the great joys of climbing is jangling your gear around. There is a simple build-up as you progress through the sports, but you inevitably get sidelined with a strange piece of gear you grabbed on sale and now your collection is a 5-legged spiders web of bits and pieces. `},
