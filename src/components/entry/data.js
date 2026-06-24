@@ -434,7 +434,7 @@ void main() {
     num:nanoid(), 
     title: "Climbing",
     link: "climbing",
-    description: "Climbing is a great way to get excercise and enjoy nature.",
+    description: "Climbing is a great way get some exercise and enjoy nature.",
     longdescription: [
     {key:'climbing', title:`Climbing`},
     {key:nanoid(), text:`Climbing is a great way to get exercise and enjoy nature. It fills in the awkward season between winter and summer when the snow is not gone from the hiking trails but is not good enough to ski on. Fill in this awkward season with enough climbing and you may never go back to hiking.. `},
@@ -474,6 +474,27 @@ void main() {
     {key:nanoid(), img:'spillimacheen', className:"entry--img-inline", style:{gridColumn:"1 / span 5", marginBottom:"20px"},picStyle: {objectFit: "cover", height:"300px", objectPosition:"50% 45%"},  imageName:'./climbing-4.jpg' },
     {key:nanoid(), subtitle: `Dubious`},
     {key:nanoid(), text:`Something about these crags adds a sting that the climbing doesn't soothe. Black Feather's approach is a little too long and the crags are very small. Birdwatchers has a very steep and crumbly approach. Echo, Bataan, and Acephale are very hard with a long approach, but if you climb at the grade it's certainly worth it. `},
+    {key:nanoid(), title: `Gear`},
+    {key:nanoid(), subtitle: `What's in the bag?`},
+    {key:nanoid(), text:`One of the great joys of climbing is jangling your gear around. There is a simple build-up as you progress through the sports, but you inevitably get sidelined with a strange piece of gear you grabbed on sale and now your collection is a 5-legged spiders web of bits and pieces. `},
+    {key:nanoid(), subtitle: `Progression`},
+    {key:nanoid(), html:<>Luckily each category of gear builds on the last and you can have quite a lot of fun in each previous section before itching to get some new gear. It's also essential to build up your skills in the next section before attempting a full climb.
+    <div class="table-container">
+    <table class="climbing-table">
+        <thead>
+        <tr><th></th><th>Climb Indoors</th><th>Sport Climbing</th><th>Multipitch</th><th>Trad</th><th>Ice</th></tr>
+        </thead>
+        <tbody>
+        <tr><td><strong>Skills</strong></td><td>Tie a figure 8<br></br> Belay<br></br> Wear and check harness</td><td>Climb & place quickdraws<br></br> Make and clean anchor<br></br>Lead Belay</td><td>Belay from above<br></br>Changeover<br></br>Rappel (if not walking off)<br></br>Rope management<br></br>Routefinding</td><td>Place and assess gear<br></br>Routefinding</td><td>Place and assess ice screws<br></br>Routefinding</td></tr>
+        <tr><td><strong>Gear</strong></td><td>Harness<br></br> Shoes<br></br> Chalk<br></br> Belay device</td><td>Rope<br></br> Quickdraws<br></br> Personal Anchor<br></br> Anchor material<br></br> cleaning locker<br></br> Helmet</td><td>Belay device w/ lockers each<br></br>Anchor and PAS (clove hitch)<br></br> Rappel kit</td><td>
+        <details class="expanding-section">
+        <summary>Standard Trad Rack</summary>
+        <p>3-4 micro wires<br></br> 10-12 wire nuts<br></br> 8-10 cams<br></br> 10-15 alpine draws<br></br> 1 double sling (120cm)<br></br> cordelette<br></br> and a nut tool.</p>
+        </details></td><td>Ice screws<br></br> Ice tools<br></br> Crampons <br></br>Boots <br></br> Warm clothing</td></tr>
+        <tr><td><strong>Nice to Have</strong></td><td>Belay Glasses<br></br></td><td>Rope tarp<br></br> Stick clip<br></br> Belay Glasses</td><td> Extra pockets for phone/wallet<br></br> Lightweight bag for food/water/biners<br></br> Gloves<br></br></td><td>If rappelling: rappel kit</td><td>If rappelling: rappel kit</td></tr>
+        </tbody>
+    </table>
+    </div></>},
     ],
     imageName:'./climbing-1.jpg',
     imageStyle:{style: {objectPosition:'right 0 bottom 450px'}}
@@ -484,9 +505,17 @@ void main() {
     link: "motorcycles",
     description: "Motorcycles are a thrilling way to experience the open road.",
     longdescription: [
-    {key:'motorcycles', title:`Motorcycles`},
+    {key:nanoid(), title:`Safety`},
+    {key:nanoid(), html:<> <a href="https://crashstats.nhtsa.dot.gov/Api/Public/ViewPublication/813732">NHTSA data from 2023-2024</a> says motorcyclists are 27-28x more likely to die in a crash than car occupants. Unfortunately, you can do everything right and still get into an accident. The best you can do is understand frequent types of accidents and how to avoid them. </>},
+    {key:nanoid(), html:<> 34% of fatal crashes were by an unlicensed driver. 26% of fatal crashes involved alcohol impairment (24% for passenger cars). 36% of fatal crashes were single-vehicle collisions. Still, this means 30% of fatal crashes were licensed, sober, and the driver did not swerve off the road by themselves. </>},
+    {key:nanoid(), subtitle:`Mechanical Risks`},
+    {key:nanoid(), html:<> While cars have seat belts, airbags and crumple zones to absorb impact, the entirety of the force of a collision is absorbed by the rider's body. They may get luckily and slide freely or collide directly. It is essential to wear a helmet and airbag to replace protections provided by a car. Traumatic brain injury remains the leading cause of death in motorcycle collisions.</>},
+    {key:nanoid(), html:<> Cars are stable when stopped, motorcycles are not. They are more susceptible to traction loss, causing low-siding (slipping in a corner and sliding), high-siding (much more dangerous launch from low-siding and suddenly regaining traction) and steering wobble. While they are lighter and can stop faster, skidding is easier and practice is required to stop safely. </>},
+    {key:nanoid(), subtitle:`Human Factors`},
+    {key:nanoid(), html:<>Cars are mostly paying attention to other cars. Left turn "SMIDSY" crashes are common due to drivers not seeing or not understanding a motorcycle is incoming and suddenly turning left in front of them. </>},
+     {key:nanoid(), html:<>Driving a motorcycle requires practice and skill, and all four limbs can be operating a control at once. A significant portion of accidents occur with riders with less than 5 months of experience. </>},
     ],
-    imageName:'./climbing-1.jpg',
+    imageName:'./motorcycle-1.jpg',
     imageStyle:{style: {objectPosition:'right 0 bottom 400px'}}
     },
     {
@@ -526,7 +555,7 @@ void main() {
     {key:'rendering', title:'Rendering'},
     {key:nanoid(), text:`Another rabbit hole that I haven't played with much. It is useful to know when to use the different render settings in Blender. Eevee provides great runtime performance with a limited feature set. Cycles is Blender's premiere renderer, with full and experimental features. Some settings like colorspace also have a huge effect on the image. AgX is Blender 4.0's latest colorspace which has improved performance with very bright lights. Using the plain sRGB colorspace can be useful if you're exporting textures to a game engine like Unity which does not use AgX colorspace.`},
     ],
-    imageName:'./vrc-splash-1.png',
+    imageName:'./model-splash-2.png',
     imageStyle:{style: {objectPosition:'right 0 bottom 0px'}}
     },
     {
@@ -537,7 +566,7 @@ void main() {
         longdescription: [
             {key:'three-gallery', needsDark:true, component: <ThreeGallery key={nanoid()} style={{gridColumn:"1 /span 5"}}/>},
         ],
-        imageName:'./model-splash-2.png',
+        imageName:'./vrc-splash-1.png',
         imageStyle:{style: {objectPosition:'right 0 bottom 0px'}}
     },
     {

@@ -1,6 +1,7 @@
 import React from "react"
 // import { Container, Button, Alert } from 'react-bootstrap';
 import "./Entry.css"
+import "./Table.css"
 const ReactPlayer = React.lazy(() => import('react-player/lazy'));
 const ThreeScene = React.lazy(() => import('../threejsdemo/ThreeScene'))
 const Wordle = React.lazy(() => import("../wordle/Wordle"));

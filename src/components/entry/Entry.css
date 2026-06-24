@@ -35,17 +35,17 @@
 }
 
 .table-of-contents {
-    display:block;
+    display: block;
     position: sticky;
     position: -webkit-sticky; /* For Safari */
-    top: 0px; 
-    /* margin: 10px 50px 10px 5vw; */
+    top: 20px; /* Give it a little breathing room from the exact top */
     padding: 10px;
-    /* Give table of contents a scrollbar */
-    max-height: calc(100vh - 100px);
-    width:20vw;
-    /* overflow-y: scroll; */
-    overflow-y: auto;
+    width: 20vw;
+    
+    /* Forces the container to strictly obey the viewport limits */
+    max-height: calc(100vh - 40px); 
+    overflow-y: auto; 
+    flex-shrink: 0; /* Prevents a Flexbox parent from stretching/compressing it abnormally */
 }
 
 .headings-li {
@@ -213,6 +213,7 @@
     grid-column-gap: 20px;
     /* padding:20px 20px 0 0; */
     padding-top:20px;
+    padding-bottom:40vh;
     justify-content: space-evenly;
     grid-auto-flow: row;
     height:auto;

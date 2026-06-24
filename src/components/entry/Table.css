@@ -1,0 +1,31 @@
+  /* Responsive scroll wrapper */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin: 25px 0;
+    -webkit-overflow-scrolling: touch;
+}
+
+.climbing-table {
+    width: 100%;
+    min-width: 1000px;
+    border-collapse: collapse;
+    font-size: 1.0rem;
+    text-align: left;
+    table-layout: fixed;
+}
+
+.climbing-table th, 
+.climbing-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #e2e8f0;
+    border-right: 1px solid #e2e8f0;
+    vertical-align: top;
+    word-wrap: break-word;
+}
+
+.climbing-table th:first-child, 
+.climbing-table td:first-child {
+    font-weight: bold;
+    width: 12%;
+}
