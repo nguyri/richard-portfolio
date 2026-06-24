@@ -68,7 +68,7 @@ export default function Header(props) {
                         code 
                         <div className="material-icons-round header--icon" style={{ width: '25px' }}>terminal</div>
                         steel 
-                        <div className="material-icons-round header--icon" style={{ width: '20px' }}> precision_manufacturing</div>
+                        <div className="material-icons-round header--icon" style={{ width: '20px' }}> construction</div>
                     </div></div>
                 )}
                 {/* h_mobiledata */} 

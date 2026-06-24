@@ -485,8 +485,8 @@ void main() {
         <tr><th></th><th>Climb Indoors</th><th>Sport Climbing</th><th>Multipitch</th><th>Trad</th><th>Ice</th></tr>
         </thead>
         <tbody>
-        <tr><td><strong>Skills</strong></td><td>Tie a figure 8<br></br> Belay<br></br> Wear and check harness</td><td>Climb & place quickdraws<br></br> Make and clean anchor<br></br>Lead Belay</td><td>Belay from above<br></br>Changeover<br></br>Rappel (if not walking off)<br></br>Rope management<br></br>Routefinding</td><td>Place and assess gear<br></br>Routefinding</td><td>Place and assess ice screws<br></br>Routefinding</td></tr>
-        <tr><td><strong>Gear</strong></td><td>Harness<br></br> Shoes<br></br> Chalk<br></br> Belay device</td><td>Rope<br></br> Quickdraws<br></br> Personal Anchor<br></br> Anchor material<br></br> cleaning locker<br></br> Helmet</td><td>Belay device w/ lockers each<br></br>Anchor and PAS (clove hitch)<br></br> Rappel kit</td><td>
+        <tr><td><strong>Skills</strong></td><td>Tie a figure 8<br></br> Belay<br></br> Wear and check harness</td><td>Climb & place quickdraws<br></br> Make and clean anchor<br></br>Lead Belay</td><td>Belay from above<br></br>Changeover<br></br>Rappel (if not walking off)<br></br>Rope management<br></br>Routefinding</td><td>Place and assess gear<br></br>Routefinding</td><td>Place ice screws<br></br>Climbing steadily (no falling)</td></tr>
+        <tr><td><strong>Gear</strong></td><td>Harness<br></br> Shoes<br></br> Chalk<br></br> Belay device</td><td>Rope<br></br> Quickdraws<br></br> Personal Anchor<br></br> Anchor material<br></br> Cleaning locker<br></br> Helmet</td><td>Belay device w/ lockers each<br></br>Anchor and PAS (clove hitch)<br></br> Rappel kit</td><td>
         <details class="expanding-section">
         <summary>Standard Trad Rack</summary>
         <p>3-4 micro wires<br></br> 10-12 wire nuts<br></br> 8-10 cams<br></br> 10-15 alpine draws<br></br> 1 double sling (120cm)<br></br> cordelette<br></br> and a nut tool.</p>
